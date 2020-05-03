@@ -1,19 +1,37 @@
+from cryptography.fernet import Fernet
 import pymysql
+import cryptography
+import json
+import os
+
+security_path = './security'
+security_key_path = './security/key.key'
+config_path = './config.json'
 
 def setup():
 
-    print('Please enter the URL of the database (default: 127.0.0.1): ')
-    db_url = input() or '127.0.0.1'
-    print('Please enter the username of the database (default: root): ')
-    db_username = input() or 'root'
-    print('Please enter the password of the database (default: None): ')
-    db_password = input() or ''
-    print('Please enter the name of the database (default: mooli): ')
-    db_name = input() or 'mooli'
+    if os.path.exists(config_path):
+        print('A configuration is detected, are you sure to continue?')
+        print('[WARNING] DOING SO WILL RESULT IN THE LOST OF PREVIOUS CONFIGURATION!')
+        choice = input('Do you want to continue? [Y/n] ')
+        if not (choice == 'Y' or choice == 'y'):
+            exit()
 
+    # Promopt the adminstrator for db info
+    print('Please enter the URL of the database')
+    db_url = input('(Default: 127.0.0.1): ') or '127.0.0.1'
+    print('Please enter the username of the database')
+    db_username = input('(Default: root): ') or 'root'
+    print('Please enter the password of the database')
+    db_password = input('(Default: None): ') or ''
+    print('Please enter the name of the database')
+    db_name = input('(Default: mooli):') or 'mooli'
+
+    # Attempt to connect to the database
     try:
         connection = pymysql.connect(db_url, db_username, db_password)
     except:
+        # Incorrect db credential or internal error
         print('Unable to connect to database.')
         exit()
 
@@ -23,11 +41,33 @@ def setup():
     print('Connection with database established.')
     init_db_tables(connection)
     connection.close()
-    print('Done')
+
+    if not os.path.exists(security_path):
+        os.mkdir(security_path)
+
+    # Generate a random key for config encryption
+    key = Fernet.generate_key()
+    key_file = open(security_key_path, 'wb')
+    key_file.write(key)
+    key_file.close()
+
+    # Write config
+    profile = {
+        'db_url': db_url,
+        'db_username': db_username,
+        'db_password': db_password,
+        'db_name': db_name,
+        'secret_key': str(Fernet.generate_key())
+    }
+    with open('config.json', 'wb') as encrypted_profile:
+        f = Fernet(key)
+        encrypted_profile.write(f.encrypt(json.dumps(profile).encode()))
+
+    print('Setup complted.')
 
 def init_db_tables(connection):
 
-    print('Initiaizing database tables')
+    print('Initiaizing database tables...')
     cursor = connection.cursor()
 
     sqls = [
