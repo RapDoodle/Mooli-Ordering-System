@@ -1,2 +1,3 @@
 Flask==1.1.2
 PyMySQL==0.9.3
+cryptography==2.9.2
