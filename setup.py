@@ -168,7 +168,7 @@ def init_db_tables(connection):
         )
         """,
     ]
-
+    print('=====================================')
     for sql in sqls:
         cursor.execute(sql)
 
@@ -178,11 +178,14 @@ def init_test_db():
 
     config_manager.set_temp('DB_NAME', config_manager.get('DB_NAME') + '_test')
     config_manager.set_temp('UNIT_TESTING_MODE', True)
-    from models.DAO import DAO
 
-    dao = DAO()
+    connection = pymysql.connect(config_manager.get('DB_URL'), config_manager.get('DB_USERNAME'), config_manager.get('DB_PASSWORD'))
 
-    init_db_tables(dao.connection())
+    connection.cursor().execute('DROP DATABASE IF EXISTS {}'.format(config_manager.get('DB_NAME')))
+    connection.cursor().execute('CREATE DATABASE IF NOT EXISTS {}'.format(config_manager.get('DB_NAME')))
+    connection.cursor().execute('USE {}'.format(config_manager.get('DB_NAME')))
+    init_db_tables(connection)
+    connection.close()
 
 if __name__ == '__main__':
     setup()

@@ -15,11 +15,7 @@ class DAO():
     def db_connect(self):
         try:
             self.__db = pymysql.connect(self.__db_url, self.__db_username,
-                                        self.__db_password)
-            if config.get('UNIT_TESTING_MODE') == True:
-                self.__db.cursor().execute('DROP DATABASE IF EXISTS {}'.format(self.__db_name))
-                self.__db.cursor().execute('CREATE DATABASE IF NOT EXISTS {}'.format(self.__db_name))
-            self.__db.cursor().execute('USE {}'.format(self.__db_name))
+                                        self.__db_password, self.__db_name)
             return self.__db
         except:
             raise Exception('Unable to connect')
@@ -29,6 +25,10 @@ class DAO():
 
     def cursor(self):
         return self.__db.cursor()
+
+
+    def commit(self):
+        self.__db.commit()
 
     def __del__(self):
         if self.__db is not None:
