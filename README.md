@@ -7,7 +7,7 @@
 Install dependencies
 - Install python (Ubuntu)
   ```bash
-  sudo add-apt-repository ppa:jonathonf/python-3.6
+  sudo add-apt-repository ppa:jonathonf/python-3.8
   ```
   For other Linux distribution or other operating system, just Google it ;)
 - Install required Python packages
