@@ -96,21 +96,24 @@ def init_db_tables(connection):
         """,
         """ALTER TABLE customer AUTO_INCREMENT=1000000""",
         """CREATE TABLE IF NOT EXISTS category (
+            category_id INT AUTO_INCREMENT,
             category_name VARCHAR(32),
             priority INT,
-            PRIMARY KEY (category_name)
+            PRIMARY KEY (category_id),
+            UNIQUE(category_name)
             )
         """,
         """CREATE TABLE IF NOT EXISTS product (
             product_id INT UNSIGNED AUTO_INCREMENT,
-            name VARCHAR(255) NOT NULL,
-            description TEXT,
-            category VARCHAR(32) NOT NULL,
+            product_name VARCHAR(64) NOT NULL,
+            description VARCHAR(140),
             price DECIMAL(8,2) DEFAULT 0.0,
             rating DECIMAL(2,1),
-            picture VARCHAR(255),
-            priority INT,
-            PRIMARY KEY (product_id)
+            thumbnail_uuid CHAR(36),
+            picture_uuid CHAR(36),
+            priority INT NOT NULL,
+            PRIMARY KEY (product_id),
+            UNIQUE (product_name)
             )
         """,
         """CREATE TABLE IF NOT EXISTS product_category (
@@ -178,11 +181,14 @@ def init_test_db():
 
     config_manager.set_temp('DB_NAME', config_manager.get('DB_NAME') + '_test')
     config_manager.set_temp('UNIT_TESTING_MODE', True)
-    from models.DAO import DAO
 
-    dao = DAO()
+    connection = pymysql.connect(config_manager.get('DB_URL'), config_manager.get('DB_USERNAME'), config_manager.get('DB_PASSWORD'))
 
-    init_db_tables(dao.connection())
+    connection.cursor().execute('DROP DATABASE IF EXISTS {}'.format(config_manager.get('DB_NAME')))
+    connection.cursor().execute('CREATE DATABASE IF NOT EXISTS {}'.format(config_manager.get('DB_NAME')))
+    connection.cursor().execute('USE {}'.format(config_manager.get('DB_NAME')))
+    init_db_tables(connection)
+    connection.close()
 
 if __name__ == '__main__':
     setup()

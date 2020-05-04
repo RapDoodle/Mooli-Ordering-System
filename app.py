@@ -9,4 +9,4 @@ from views.customer_home import customer_home_view
 app.register_blueprint(customer_home_view)
 
 if __name__ == '__main__':
-	app.run(port=8000, debug=True)
+	app.run(port = 8000, debug = True)
