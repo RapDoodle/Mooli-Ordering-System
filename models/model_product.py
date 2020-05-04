@@ -1,5 +1,8 @@
 # Admin side
 
+from models.DAO import DAO
+
+
 def add_product():
     pass
 
