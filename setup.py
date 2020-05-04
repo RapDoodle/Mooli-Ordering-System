@@ -10,6 +10,7 @@ config_path = './config.json'
 
 def setup():
 
+    # Check if the system has been initialized
     if os.path.exists(config_path):
         print('A configuration is detected, are you sure to continue?')
         print('[WARNING] DOING SO WILL RESULT IN THE LOST OF PREVIOUS CONFIGURATION!')
@@ -53,11 +54,11 @@ def setup():
 
     # Write config
     profile = {
-        'db_url': db_url,
-        'db_username': db_username,
-        'db_password': db_password,
-        'db_name': db_name,
-        'secret_key': str(Fernet.generate_key())
+        'DB_URL': db_url,
+        'DB_USERNAME': db_username,
+        'DB_PASSWORD': db_password,
+        'DB_NAME': db_name,
+        'SECRET_KEY': str(Fernet.generate_key())
     }
     with open('config.json', 'wb') as encrypted_profile:
         f = Fernet(key)
@@ -164,4 +165,17 @@ def init_db_tables(connection):
     for sql in sqls:
         cursor.execute(sql)
 
-setup()
+def init_test_db():
+
+    import utils.config_manager as config_manager
+
+    config_manager.set_temp('DB_NAME', config_manager.get('DB_NAME') + '_test')
+    config_manager.set_temp('UNIT_TESTING_MODE', True)
+    from models.DAO import DAO
+
+    dao = DAO()
+
+    init_db_tables(dao.connection())
+
+if __name__ == '__main__':
+    setup()
