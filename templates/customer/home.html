@@ -3,9 +3,26 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-<h1>Hello World</h1>
-{{ super() }}
-{% endblock%}
+<div>
+    <img src="/static/customer/HomePagePic.png" class="col col-12 col-sm-12">
+</div>
+<div class="row">
+    <div class="col col-3 col-sm-3">
+        <button class="btn btn-success" type="button" value="">Category</button>
+    </div>
+    <div class="col col-3 col-sm-3">
+        <button class="btn btn-success" type="button" value="">Category</button>
+    </div>
+    <div class="col col-3 col-sm-3">
+        <button class="btn btn-success" type="button" value="">Category</button>
+    </div>
+    <div class="col col-3 col-sm-3">
+        <button class="btn btn-success" type="button" value="">Category</button>
+    </div>
+</div>
+<!-- {{ super() }} -->
+{% endblock %}
+
 <!-- <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <head>
