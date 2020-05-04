@@ -96,21 +96,24 @@ def init_db_tables(connection):
         """,
         """ALTER TABLE customer AUTO_INCREMENT=1000000""",
         """CREATE TABLE IF NOT EXISTS category (
+            category_id INT AUTO_INCREMENT,
             category_name VARCHAR(32),
             priority INT,
-            PRIMARY KEY (category_name)
+            PRIMARY KEY (category_id),
+            UNIQUE(category_name)
             )
         """,
         """CREATE TABLE IF NOT EXISTS product (
             product_id INT UNSIGNED AUTO_INCREMENT,
-            name VARCHAR(255) NOT NULL,
-            description TEXT,
-            category VARCHAR(32) NOT NULL,
+            product_name VARCHAR(64) NOT NULL,
+            description VARCHAR(140),
             price DECIMAL(8,2) DEFAULT 0.0,
             rating DECIMAL(2,1),
-            picture VARCHAR(255),
-            priority INT,
-            PRIMARY KEY (product_id)
+            thumbnail_uuid CHAR(36),
+            picture_uuid CHAR(36),
+            priority INT NOT NULL,
+            PRIMARY KEY (product_id),
+            UNIQUE (product_name)
             )
         """,
         """CREATE TABLE IF NOT EXISTS product_category (
@@ -168,7 +171,7 @@ def init_db_tables(connection):
         )
         """,
     ]
-    print('=====================================')
+
     for sql in sqls:
         cursor.execute(sql)
 
