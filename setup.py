@@ -75,28 +75,31 @@ def init_db_tables(connection):
         """CREATE TABLE IF NOT EXISTS permission (permission_name VARCHAR(32), group_name VARCHAR(32))""",
         """CREATE TABLE IF NOT EXISTS staff (
             staff_id INT(5) UNSIGNED AUTO_INCREMENT,
-            username VARCHAR(30) NOT NULL,
-            password_hash BINARY(64) NOT NULL,
+            username VARCHAR(24) NOT NULL,
+            password_hash BINARY(60) NOT NULL,
             permission_group_name VARCHAR(32),
-            PRIMARY KEY (staff_id)
+            PRIMARY KEY (staff_id),
+            UNIQUE (username)
             )
         """,
         """ALTER TABLE staff AUTO_INCREMENT=10000""",
         """CREATE TABLE IF NOT EXISTS customer (
             customer_id INT(8) UNSIGNED AUTO_INCREMENT,
-            username VARCHAR(30) NOT NULL,
-            password_hash BINARY(64) NOT NULL,
+            username VARCHAR(24) NOT NULL,
+            email VARCHAR(254) NOT NULL,
+            password_hash BINARY(60) NOT NULL,
             first_name VARCHAR(35),
             last_name VARCHAR(35),
             gender BINARY(1),
             phone VARCHAR(32),
-            balance DECIMAL(8,2),
-            PRIMARY KEY (customer_id)
+            balance DECIMAL(8,2) DEFAULT 0.0,
+            PRIMARY KEY (customer_id),
+            UNIQUE (username)
             )
         """,
         """ALTER TABLE customer AUTO_INCREMENT=1000000""",
         """CREATE TABLE IF NOT EXISTS category (
-            category_id INT AUTO_INCREMENT,
+            category_id INT UNSIGNED AUTO_INCREMENT,
             category_name VARCHAR(32),
             priority INT,
             PRIMARY KEY (category_id),
@@ -118,9 +121,9 @@ def init_db_tables(connection):
         """,
         """CREATE TABLE IF NOT EXISTS product_category (
             product_id INT UNSIGNED,
-            category_name VARCHAR(32),
+            category_id INT UNSIGNED,
             FOREIGN KEY (product_id) REFERENCES product(product_id),
-            FOREIGN KEY (category_name) REFERENCES category(category_name)
+            FOREIGN KEY (category_id) REFERENCES category(category_id)
             )
         """,
         """CREATE TABLE IF NOT EXISTS `order`(
