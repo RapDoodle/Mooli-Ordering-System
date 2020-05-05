@@ -1,17 +1,18 @@
 import models.model_product as m
+import controllers.controller_product as c
 from decimal import Decimal
 
 print('[UNIT TESTING] Testing: Product...')
 
 # The list of products should be empty
 # assert len(c.list_categories()) == 0
-m.add_product(product_name = 'Milk Tea',
+assert c.add_product(product_name = 'Milk Tea',
                 description = 'The original flavor of milk tea.',
                 categories = [1, 2],
                 price = '9.99',
                 priority = '10',
                 picture_uuid = '6cbb04d1-0215-469d-b107-6a45e0ffebbf',
-                thumbnail_uuid = 'f6d6ba20-52dd-418e-9071-dfd93d62dd76')
+                thumbnail_uuid = 'f6d6ba20-52dd-418e-9071-dfd93d62dd76') ==  {'message': 'The product has been added successfully.'}
 m.add_product(product_name = 'Green Milk Tea',
                 description = 'Also known as the golden milk green.',
                 categories = [2],
@@ -77,15 +78,16 @@ m.update_product(product_id = '9',
                 picture_uuid = '4f192478-78b9-4f4c-bebd-196ccfa2cd67',
                 thumbnail_uuid = '927f24b3-dca8-413e-be17-639f995c785c'
                 )
-assert m.find_product('product_name', 'Jasmine Green Tea') == {'product_id': 9, 'product_name': 'Jasmine Green Tea', 'description': 'With Jasmine Green Tea, enjoy your afternoon.', 'price': Decimal('25.99'), 'rating': None, 'thumbnail_uuid': '927f24b3-dca8-413e-be17-639f995c785c', 'picture_uuid': '4f192478-78b9-4f4c-bebd-196ccfa2cd67', 'priority': 2}
-m.add_product(product_name = 'Dummy',
+assert c.get_product_by_name('Jasmine Green Tea') == {'product_id': 9, 'product_name': 'Jasmine Green Tea', 'description': 'With Jasmine Green Tea, enjoy your afternoon.', 'price': Decimal('25.99'), 'rating': None, 'thumbnail_uuid': '927f24b3-dca8-413e-be17-639f995c785c', 'picture_uuid': '4f192478-78b9-4f4c-bebd-196ccfa2cd67', 'priority': 2}
+assert c.get_product_by_product_id('9') == {'product_id': 9, 'product_name': 'Jasmine Green Tea', 'description': 'With Jasmine Green Tea, enjoy your afternoon.', 'price': Decimal('25.99'), 'rating': None, 'thumbnail_uuid': '927f24b3-dca8-413e-be17-639f995c785c', 'picture_uuid': '4f192478-78b9-4f4c-bebd-196ccfa2cd67', 'priority': 2}
+assert c.add_product(product_name = 'Dummy',
                 description = 'Dummy',
                 categories = [1],
                 price = '24.99',
-                priority = '12')
+                priority = '12') == {'message': 'The product has been added successfully.'}
 assert m.find_product(method='product_name', param='Dummy') == {'product_id': 10, 'product_name': 'Dummy', 'description': 'Dummy', 'price': Decimal('24.99'), 'rating': None, 'thumbnail_uuid': '', 'picture_uuid': '', 'priority': 12}
-assert len(m.get_products('all')) == 10
-m.remove_product('10')
-assert len(m.get_products('all')) == 9
+assert len(c.get_all_products()) == 10
+assert c.remove_product('10') == {'message': 'The product has been removed successfully.'}
+assert len(c.get_all_products()) == 9
 
 print('[UNIT TESTING] Product has passed all the tests')

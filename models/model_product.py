@@ -6,6 +6,10 @@ def add_product(product_name, categories, price, priority, description = '', pic
     product_name = product_name.strip()
     description = description.strip()
     price = price.strip()
+    priority = priority.strip()
+    description = description.strip()
+    picture_uuid = picture_uuid.strip()
+    thumbnail_uuid = thumbnail_uuid.strip()
 
     # Check is the input valid
     if (not product_name) or (not description) or (not priority.isdecimal()) or (type(categories) is not list):
