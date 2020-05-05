@@ -1,0 +1,605 @@
+{% extends "/shared/base.html" %}
+
+{% block title %}Cart{% endblock %}
+
+{% block content %}
+<style>
+      html {
+        height: 100%;
+        width: 100%;
+      }
+
+      body {
+        font-family: 'Open Sans', serif;
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        width: 100%;
+        -webkit-font-smoothing: antialiased;
+        overflow: -moz-scrollbars-none;
+        -ms-overflow-style: none;
+      }
+
+      
+
+      .accountInfo {
+      display: block;
+      position: absolute;
+      box-sizing: content-box;
+      opacity: 1;
+      cursor: default;
+      overflow-x: auto;
+      overflow-y: auto;
+      background-color: rgba(255, 255, 255, 1);
+      width: 375.00px;
+        height: 812.00px;
+        left: 0px;
+        top: 0px;
+
+}
+
+.accountInfo .pathb2b613ab {
+    position: absolute;
+      box-sizing: content-box;
+      opacity: 1;
+      cursor: default;
+      fill: rgba(0, 0, 0, 0.5411764705882353);
+      stroke: rgba(0, 0, 0, 0);
+          stroke-width: 1.00px;
+          stroke-linecap: butt;
+      box-shadow: none;
+      width: 12.74px;
+    height: 20.77px;
+    left: 25.63px;
+    top: 53.62px;
+
+}
+
+.accountInfo .save {
+    position: absolute;
+      box-sizing: content-box;
+      opacity: 1;
+      cursor: default;
+      background-color: rgba(255, 255, 255, 0);
+      text-align: left;
+      letter-spacing: 0.00px;
+      color: rgba(66, 202, 71, 1);
+      -webkit-text-stroke: 1.00px rgba(0, 0, 0, 0);
+      font-size: 16.00px;
+      font-weight: 500;
+    font-style: normal;
+      font-family: Avenir, Arial;
+      text-decoration: none;
+      box-shadow: none;
+      overflow-x: unset;
+      overflow-y: unset;
+      white-space: pre;
+      width: 5.00px;
+    height: 21.00px;
+    left: 290.00px;
+    top: 45.00px;
+
+}
+
+.accountInfo .changeAvatar {
+    position: absolute;
+      box-sizing: content-box;
+      opacity: 1;
+      background-color: rgba(255, 255, 255, 0);
+      text-align: center;
+      letter-spacing: 0.00px;
+      color: rgba(66, 202, 71, 1);
+      -webkit-text-stroke: 1.00px rgba(0, 0, 0, 0);
+      font-size: 14.00px;
+      font-weight: 600;
+    font-style: normal;
+      font-family: Avenir, Arial;
+      text-decoration: none;
+      box-shadow: none;
+      overflow-x: unset;
+      overflow-y: unset;
+      white-space: pre;
+      width: 90.00px;
+    height: 19.00px;
+    left: 142.00px;
+    top: 212.00px;
+
+}
+
+.accountInfo .name {
+    position: absolute;
+      box-sizing: content-box;
+      opacity: 1;
+      cursor: default;
+      background-color: rgba(255, 255, 255, 0);
+      text-align: left;
+      letter-spacing: 0.00px;
+      color: rgba(27, 32, 43, 1);
+      -webkit-text-stroke: 1.00px rgba(0, 0, 0, 0);
+      font-size: 16.00px;
+      font-weight: 600;
+    font-style: normal;
+      font-family: Avenir, Arial;
+      text-decoration: none;
+      box-shadow: none;
+      overflow-x: unset;
+      overflow-y: unset;
+      white-space: pre;
+      width: 350.00px;
+    height: 21.00px;
+    left: 15.00px;
+    top: 261.00px;
+
+}
+
+.accountInfo .female {
+    position: absolute;
+      box-sizing: content-box;
+      opacity: 1;
+      cursor: default;
+      background-color: rgba(255, 255, 255, 0);
+      text-align: left;
+      letter-spacing: 0.00px;
+      color: rgba(112, 115, 120, 1);
+      -webkit-text-stroke: 1.00px rgba(0, 0, 0, 0);
+      font-size: 16.00px;
+      font-weight: 200;
+    font-style: normal;
+      font-family: Avenir, Arial;
+      text-decoration: none;
+      box-shadow: none;
+      overflow-x: unset;
+      overflow-y: unset;
+      white-space: pre;
+      width: 50.00px;
+    height: 21.00px;
+    left: 152.00px;
+    top: 566.00px;
+
+}
+
+.accountInfo .email {
+    position: absolute;
+      box-sizing: content-box;
+      opacity: 1;
+      cursor: default;
+      background-color: rgba(255, 255, 255, 0);
+      text-align: left;
+      letter-spacing: 0.00px;
+      color: rgba(27, 32, 43, 1);
+      -webkit-text-stroke: 1.00px rgba(0, 0, 0, 0);
+      font-size: 16.00px;
+      font-weight: 600;
+    font-style: normal;
+      font-family: Avenir, Arial;
+      text-decoration: none;
+      box-shadow: none;
+      overflow-x: unset;
+      overflow-y: unset;
+      white-space: pre;
+      width: 350.00px;
+    height: 21.00px;
+    left: 15.00px;
+    top: 422.00px;
+
+}
+
+.accountInfo .userName {
+    position: absolute;
+      box-sizing: content-box;
+      opacity: 1;
+      cursor: default;
+      background-color: rgba(255, 255, 255, 0);
+      text-align: left;
+      letter-spacing: 0.00px;
+      color: rgba(27, 32, 43, 1);
+      -webkit-text-stroke: 1.00px rgba(0, 0, 0, 0);
+      font-size: 16.00px;
+      font-weight: 600;
+    font-style: normal;
+      font-family: Avenir, Arial;
+      text-decoration: none;
+      box-shadow: none;
+      overflow-x: unset;
+      overflow-y: unset;
+      white-space: pre;
+      width: 350.00px;
+    height: 21.00px;
+    left: 15.00px;
+    top: 309.00px;
+
+}
+
+.accountInfo .address {
+    position: absolute;
+      box-sizing: content-box;
+      opacity: 1;
+      background-color: rgba(255, 255, 255, 0);
+      text-align: left;
+      letter-spacing: 0.00px;
+      color: rgba(27, 32, 43, 1);
+      -webkit-text-stroke: 1.00px rgba(0, 0, 0, 0);
+      font-size: 16.00px;
+      font-weight: 600;
+    font-style: normal;
+      font-family: Avenir, Arial;
+      text-decoration: none;
+      box-shadow: none;
+      overflow-x: unset;
+      overflow-y: unset;
+      white-space: pre;
+      width: 350.00px;
+    height: 21.00px;
+    left: 15.00px;
+    top:470.00px;
+
+}
+
+.accountInfo .phone {
+    position: absolute;
+      box-sizing: content-box;
+      opacity: 1;
+      background-color: rgba(255, 255, 255, 0);
+      text-align: left;
+      letter-spacing: 0.00px;
+      color: rgba(27, 32, 43, 1);
+      -webkit-text-stroke: 1.00px rgba(0, 0, 0, 0);
+      font-size: 16.00px;
+      font-weight: 600;
+    font-style: normal;
+      font-family: Avenir, Arial;
+      text-decoration: none;
+      box-shadow: none;
+      overflow-x: unset;
+      overflow-y: unset;
+      white-space: pre;
+      width: 350.00px;
+    height: 21.00px;
+    left: 15.00px;
+    top: 518.00px;
+
+}
+
+.accountInfo .privateInformation {
+    position: absolute;
+      box-sizing: content-box;
+      opacity: 1;
+      background-color: rgba(255, 255, 255, 0);
+      text-align: left;
+      letter-spacing: 0.00px;
+      color: rgba(27, 32, 43, 1);
+      -webkit-text-stroke: 1.00px rgba(0, 0, 0, 0);
+      font-size: 18.00px;
+      font-weight: 700;
+    font-style: normal;
+      font-family: 'Open Sans', Arial;
+      text-decoration: none;
+      box-shadow: none;
+      overflow-x: unset;
+      overflow-y: unset;
+      white-space: pre;
+      width: 166.00px;
+    height: 24.00px;
+    left: 24.00px;
+    top: 375.00px;
+
+}
+
+.accountInfo .gender {
+    position: absolute;
+      box-sizing: content-box;
+      opacity: 1;
+      cursor: default;
+      background-color: rgba(255, 255, 255, 0);
+      text-align: left;
+      letter-spacing: 0.00px;
+      color: rgba(27, 32, 43, 1);
+      -webkit-text-stroke: 1.00px rgba(0, 0, 0, 0);
+      font-size: 16.00px;
+      font-weight: 600;
+    font-style: normal;
+      font-family: Avenir, Arial;
+      text-decoration: none;
+      box-shadow: none;
+      overflow-x: unset;
+      overflow-y: unset;
+      white-space: pre;
+      width: 350.00px;
+    height: 21.00px;
+    left: 15.00px;
+    top: 566.00px;
+
+}
+
+.accountInfo .path04562113 {
+    position: absolute;
+      box-sizing: content-box;
+      opacity: 1;
+      cursor: default;
+      fill: transparent;
+      stroke: rgba(237, 238, 239, 1);
+          stroke-width: 1.00px;
+          stroke-linecap: butt;
+      box-shadow: none;
+      width: 353.00px;
+    height: 2.00px;
+    left: 23.00px;
+    top: 295.50px;
+
+}
+
+.accountInfo .pathaf715a6c {
+    position: absolute;
+      box-sizing: content-box;
+      opacity: 1;
+      cursor: default;
+      fill: transparent;
+      stroke: rgba(237, 238, 239, 1);
+          stroke-width: 1.00px;
+          stroke-linecap: butt;
+      box-shadow: none;
+      width: 353.00px;
+    height: 2.00px;
+    left: 23.00px;
+    top: 343.50px;
+
+}
+
+.accountInfo .path85d2085f {
+    position: absolute;
+      box-sizing: content-box;
+      opacity: 1;
+      cursor: default;
+      margin-top: 0.00px;
+      margin-right: 0.00px;
+      margin-bottom: 0.00px;
+      margin-left: 0.00px;
+      padding-top: 0.00px;
+      padding-right: 0.00px;
+      padding-bottom: 0.00px;
+      padding-left: 0.00px;
+      fill: transparent;
+      stroke: rgba(237, 238, 239, 1);
+          stroke-width: 1.00px;
+          stroke-linecap: butt;
+      box-shadow: none;
+      width: 353.00px;
+    height: 2.00px;
+    left: 23.00px;
+    top: 456.50px;
+
+}
+
+.accountInfo .path9bfbf1a6 {
+    position: absolute;
+      box-sizing: content-box;
+      opacity: 1;
+      cursor: default;
+      fill: transparent;
+      stroke: rgba(237, 238, 239, 1);
+          stroke-width: 1.00px;
+          stroke-linecap: butt;
+      box-shadow: none;
+      width: 353.00px;
+    height: 2.00px;
+    left: 23.00px;
+    top: 504.50px;
+
+}
+
+.accountInfo .path1f243765 {
+    position: absolute;
+      box-sizing: content-box;
+      opacity: 1;
+      cursor: default;
+      fill: transparent;
+      stroke: rgba(237, 238, 239, 1);
+          stroke-width: 1.00px;
+          stroke-linecap: butt;
+      box-shadow: none;
+      width: 353.00px;
+    height: 2.00px;
+    left: 23.00px;
+    top: 552.50px;
+
+}
+
+.accountInfo .path {
+    position: absolute;
+      box-sizing: content-box;
+      opacity: 1;
+      cursor: default;
+      fill: transparent;
+      stroke: rgba(237, 238, 239, 1);
+          stroke-width: 1.00px;
+          stroke-linecap: butt;
+      box-shadow: none;
+      width: 353.00px;
+    height: 2.00px;
+    left: 23.00px;
+    top: 600.50px;
+
+}
+
+.accountInfo .clipped535a2e8a {
+
+      display: block;
+      position: absolute;
+      box-sizing: content-box;
+      opacity: 1;
+      cursor: default;
+      overflow-x: unset;
+      overflow-y: unset;
+      background-color: transparent;
+      width: 100.00px;
+    height: 100.00px;
+    left: 138.00px;
+    top: 100.00px;
+
+}
+
+.accountInfo .clipped535a2e8a .oval670b1701 {
+    position: absolute;
+      box-sizing: content-box;
+      opacity: 1;
+      cursor: default;
+      fill: rgba(255, 255, 255, 0);
+      stroke: rgba(0, 0, 0, 0);
+          stroke-width: 1.00px;
+          stroke-linecap: butt;
+      box-shadow: none;
+      width: 102.00px;
+    height: 102.00px;
+    left: -1.00px;
+    top: -1.00px;
+
+}
+
+.accountInfo .clipped535a2e8a .clipped {
+
+      display: block;
+      position: absolute;
+      box-sizing: content-box;
+      background-image: url("assets/clipped.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+      opacity: 1;
+      cursor: default;
+      overflow-x: unset;
+      overflow-y: unset;
+      background-color: transparent;
+      width: 100.00px;
+    height: 100.00px;
+    left: 0.00px;
+    top: 0.00px;
+
+}
+
+.accountInfo .clipped535a2e8a .clipped .rectangle {
+    position: absolute;
+      box-sizing: content-box;
+      opacity: 1;
+      cursor: default;
+      background-color: rgba(255, 255, 255, 0);
+      border-bottom-color: rgba(0, 0, 0, 0);
+      border-bottom-style: solid;
+      border-bottom-width: 1.00px;
+      border-left-color: rgba(0, 0, 0, 0);
+      border-left-style: solid;
+      border-left-width: 1.00px;
+      border-right-color: rgba(0, 0, 0, 0);
+      border-right-style: solid;
+      border-right-width: 1.00px;
+      border-top-color: rgba(0, 0, 0, 0);
+      border-top-style: solid;
+      border-top-width: 1.00px;
+      border-top-left-radius: 0.00px;
+      border-top-right-radius: 0.00px;
+      border-bottom-left-radius: 0.00px;
+      border-bottom-right-radius: 0.00px;
+      box-shadow: none;
+      width: 173.00px;
+    height: 116.00px;
+    left: -47.50px;
+    top: -0.50px;
+
+}
+
+.accountInfo .clipped535a2e8a .clipped .oval {
+    position: absolute;
+      box-sizing: content-box;
+      opacity: 1;
+      fill: transparent;
+      stroke: rgba(0, 0, 0, 0);
+          stroke-width: 1.00px;
+          stroke-linecap: butt;
+      box-shadow: none;
+      width: 102.00px;
+    height: 102.00px;
+    left: -1.00px;
+    top: -1.00px;
+
+}
+
+.accountInfo .title {
+    position: absolute;
+      box-sizing: content-box;
+      opacity: 1;
+      background-color: rgba(255, 255, 255, 0);
+      text-align: center;
+      line-height: 22.00px;
+      letter-spacing: -0.48px;
+      color: rgba(45, 64, 87, 1);
+      -webkit-text-stroke: 1.00px rgba(0, 0, 0, 0);
+      font-size: 20.00px;
+      font-weight: 400;
+    font-style: normal;
+      font-family: 'SF Pro Text', Arial;
+      text-decoration: none;
+      box-shadow: none;
+      overflow-x: unset;
+      overflow-y: unset;
+      white-space: pre;
+      width: 106.00px;
+    height: 49.00px;
+    left: 135.00px;
+    top: 51.50px;
+
+}
+ 
+
+</style>
+<body>
+    <div class="accountInfo">        <svg preserveAspectRatio="none" viewBox="-0.75 -0.75 12.2412109375 20.2650146484375" class="pathb2b613ab"><path d="M 10.3725004196167 0.3675000071525574 C 9.882499694824219 -0.1225000023841858 9.092499732971191 -0.1225000023841858 8.602499961853027 0.3675000071525574 L 0.2924999892711639 8.677499771118164 C -0.09749999642372131 9.067500114440918 -0.09749999642372131 9.697500228881836 0.2924999892711639 10.08749961853027 L 8.602499961853027 18.39749908447266 C 9.092499732971191 18.88750076293945 9.882499694824219 18.88750076293945 10.3725004196167 18.39749908447266 C 10.86250019073486 17.90749931335449 10.86250019073486 17.11750030517578 10.3725004196167 16.62750053405762 L 3.132499933242798 9.377499580383301 L 10.38249969482422 2.127500057220459 C 10.86250019073486 1.647500038146973 10.86250019073486 0.8475000262260437 10.3725004196167 0.3675000071525574 Z"  /></svg>
+        <div class="save"><button type="button" class="btn btn-outline-sucess"><font color="green">save<svg class="bi bi-check" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" clip-rule="evenodd"/>
+          </svg></font> </button></div>
+        <div class="changeAvatar">Change Avatar</div>
+        <div class="name"><div class="input-group flex-nowrap">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="addon-wrapping">Name</span>
+            </div>
+            <input type="text" class="form-control" placeholder="Name" aria-label="Username" aria-describedby="addon-wrapping">
+          </div></div>
+        <div class="email"><div class="input-group flex-nowrap">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="addon-wrapping">Email</span>
+            </div>
+            <input type="text" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="addon-wrapping">
+          </div></div>
+        <div class="userName"><div class="input-group flex-nowrap">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="addon-wrapping">User name</span>
+            </div>
+            <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping">
+          </div></div>
+        <div class="address"><div class="input-group flex-nowrap">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="addon-wrapping">address</span>
+            </div>
+            <input type="text" class="form-control" placeholder="address" aria-label="address" aria-describedby="addon-wrapping">
+          </div></div>
+        <div class="phone"><div class="input-group flex-nowrap">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="addon-wrapping">Phone</span>
+            </div>
+            <input type="text" class="form-control" placeholder="phone number" aria-label="phone" aria-describedby="addon-wrapping">
+          </div></div>
+        <div class="privateInformation">Private information</div>
+        <div class="gender"><div class="input-group flex-nowrap">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="addon-wrapping">Gender</span>
+            </div>
+            <input type="text" class="form-control" placeholder="gender" aria-label="gender" aria-describedby="addon-wrapping">
+          </div></div>
+        <div class="clipped535a2e8a">            <svg preserveAspectRatio="none" viewBox="-0.75 -0.75 101.5 101.5" class="oval670b1701"><defs><pattern id="img-oval670b1701" patternContentUnits="userSpaceOnUse" width="100%" height="100%"><image xlink:href="assets/oval670b1701.png" x="0" y="0" width="100.00px" height="100.00px" /></pattern></defs><path d="M 50 0 C 77.61423492431641 0 100 22.38576507568359 100 50 C 100 77.61423492431641 77.61423492431641 100 50 100 C 22.38576507568359 100 0 77.61423492431641 0 50 C 0 22.38576507568359 22.38576507568359 0 50 0 Z" fill="url(#img-oval670b1701)" /></svg>
+            <div class="clipped"></div>
+</div>
+        <div class="title">Account info<br /></div>
+</div>
+
+</body>
+
+{{ super() }}
+{% endblock %}
