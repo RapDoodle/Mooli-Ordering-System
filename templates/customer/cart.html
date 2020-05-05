@@ -1,8 +1,497 @@
-{% extends "/shared/base.html" %}
+{% extends "/shared/navbar.html" %}
 
 {% block title %}Cart{% endblock %}
 
+{% block custom_css %}
+<style>
+    .title {
+    
+    text-align: center;
+    line-height: 22.00px;
+    letter-spacing: -0.48px;
+    color: rgba(45, 64, 87, 1);
+    -webkit-text-stroke: 1.00px rgba(0, 0, 0, 0);
+    font-size: 20.00px;
+    font-weight: 400;
+    font-style: normal;
+    font-family: 'SF Pro Text', Arial;
+    white-space: pre;
+  
+    
+}
+.leftArrow {
+    
+
+    height: 15.47px;
+
+}
+.backArrow {
+    display: block;
+    position: absolute;
+    box-sizing: content-box;
+    -ms-transform: rotate(0.00deg);
+    -webkit-transform: rotate(0.00deg);
+    transform: rotate(0.00deg);
+    -ms-transform-origin: center;
+    -webkit-transform-origin: center;
+    transform-origin: center;
+    opacity: 1;
+    cursor: default;
+    margin-top: 0.00px;
+    margin-right: 0.00px;
+    margin-bottom: 0.00px;
+    margin-left: 0.00px;
+    padding-top: 0.00px;
+    padding-right: 0.00px;
+    padding-bottom: 0.00px;
+    padding-left: 0.00px;
+    overflow-x: unset;
+    overflow-y: unset;
+    background-color: transparent;
+    width: 22.00px;
+    height: 15.47px;
+    left: 16.00px;
+    top: 57.00px;
+
+}
+
+
+
+
+
+.cardTextBox {
+
+display: block;
+
+transform: rotate(0.00deg);
+
+background-color: transparent;
+
+
+}
+
+.bubbleMilkTea {
+    color: rgba(45, 64, 87, 1);
+      -webkit-text-stroke: 1.00px rgba(0, 0, 0, 0);
+      font-size: 14.00px;
+      font-weight: 500;
+    font-style: normal;
+      font-family: 'SF Pro Text', Arial;
+    white-space: pre;
+}
+
+.xd5bb8192 {
+transform: rotate(0.00deg);
+transform-origin: center;
+opacity: 0.6000000238418579;
+text-align: left;
+line-height: 5.00px;
+color: rgba(45, 64, 87, 1);
+font-size: 11.00px;
+font-weight: 300;
+font-style: normal;
+font-family: 'SF Pro Text', Arial;
+}
+
+
+
+.x414e9323 {
+
+color: rgba(249, 60, 100, 1);
+font-size: 13.00px;
+font-weight: 500;
+font-style: normal;
+font-family: 'SF Pro Text', Arial;
+white-space: pre;
+}
+
+
+
+.x2 {
+position: absolute;
+box-sizing: content-box;
+-ms-transform: rotate(0.00deg);
+-webkit-transform: rotate(0.00deg);
+transform: rotate(0.00deg);
+-ms-transform-origin: center;
+-webkit-transform-origin: center;
+transform-origin: center;
+opacity: 1;
+cursor: default;
+margin-top: 0.00px;
+margin-right: 0.00px;
+margin-bottom: 0.00px;
+margin-left: 0.00px;
+padding-top: 0.00px;
+padding-right: 0.00px;
+padding-bottom: 0.00px;
+padding-left: 0.00px;
+background-color: rgba(255, 255, 255, 0);
+text-align: left;
+letter-spacing: 0.00px;
+color: rgba(45, 64, 87, 1);
+-webkit-text-stroke: unset;
+font-size: 15.00px;
+font-weight: 500;
+font-style: normal;
+font-family: 'SF Pro Text', Arial;
+text-decoration: none;
+box-shadow: none;
+overflow-x: unset;
+overflow-y: unset;
+white-space: pre;
+width: 8.00px;
+height: 20.00px;
+left: 37.82px;
+top: 0.00px;
+
+}
+
+.group2548 {
+
+display: block;
+position: absolute;
+box-sizing: content-box;
+-ms-transform: rotate(0.00deg);
+-webkit-transform: rotate(0.00deg);
+transform: rotate(0.00deg);
+-ms-transform-origin: center;
+-webkit-transform-origin: center;
+transform-origin: center;
+opacity: 1;
+cursor: default;
+margin-top: 0.00px;
+margin-right: 0.00px;
+margin-bottom: 0.00px;
+margin-left: 0.00px;
+padding-top: 0.00px;
+padding-right: 0.00px;
+padding-bottom: 0.00px;
+padding-left: 0.00px;
+overflow-x: unset;
+overflow-y: unset;
+background-color: transparent;
+width: 25.00px;
+height: 20.83px;
+left: 60.00px;
+top: 1.00px;
+
+}
+
+.rectangle689 {
+opacity: 0.699999988079071;
+border-bottom-color: rgba(45, 64, 87, 1);
+border-bottom-style: solid;
+border-bottom-width: 0.50px;
+border-left-color: rgba(45, 64, 87, 1);
+border-left-style: solid;
+border-left-width: 0.50px;
+border-right-color: rgba(45, 64, 87, 1);
+border-right-style: solid;
+border-right-width: 0.50px;
+border-top-color: rgba(45, 64, 87, 1);
+border-top-style: solid;
+border-top-width: 0.50px;
+border-top-left-radius: 6.00px;
+border-top-right-radius: 6.00px;
+border-bottom-left-radius: 6.00px;
+border-bottom-right-radius: 6.00px;
+width: 25.00px;
+height: 20.83px;
+}
+
+.path1157 {
+position: absolute;
+box-sizing: content-box;
+-ms-transform: rotate(0.00deg);
+-webkit-transform: rotate(0.00deg);
+transform: rotate(0.00deg);
+-ms-transform-origin: center;
+-webkit-transform-origin: center;
+transform-origin: center;
+opacity: 0.800000011920929;
+cursor: default;
+margin-top: 0.00px;
+margin-right: 0.00px;
+margin-bottom: 0.00px;
+margin-left: 0.00px;
+padding-top: 0.00px;
+padding-right: 0.00px;
+padding-bottom: 0.00px;
+padding-left: 0.00px;
+fill: rgba(45, 64, 87, 1);
+box-shadow: none;
+width: 9.00px;
+height: 9.00px;
+left: 8.38px;
+top: 5.92px;
+
+}
+
+.group2547 {
+
+display: block;
+position: absolute;
+box-sizing: content-box;
+-ms-transform: rotate(0.00deg);
+-webkit-transform: rotate(0.00deg);
+transform: rotate(0.00deg);
+-ms-transform-origin: center;
+-webkit-transform-origin: center;
+transform-origin: center;
+opacity: 1;
+cursor: default;
+margin-top: 0.00px;
+margin-right: 0.00px;
+margin-bottom: 0.00px;
+margin-left: 0.00px;
+padding-top: 0.00px;
+padding-right: 0.00px;
+padding-bottom: 0.00px;
+padding-left: 0.00px;
+overflow-x: unset;
+overflow-y: unset;
+background-color: transparent;
+width: 25.00px;
+height: 20.83px;
+left: 0.00px;
+top: 1.00px;
+
+}
+
+.rectangle688 {
+opacity: 0.699999988079071;
+border-bottom-color: rgba(45, 64, 87, 1);
+border-bottom-style: solid;
+border-bottom-width: 0.50px;
+border-left-color: rgba(45, 64, 87, 1);
+border-left-style: solid;
+border-left-width: 0.50px;
+border-right-color: rgba(45, 64, 87, 1);
+border-right-style: solid;
+border-right-width: 0.50px;
+border-top-color: rgba(45, 64, 87, 1);
+border-top-style: solid;
+border-top-width: 0.50px;
+border-top-left-radius: 6.00px;
+border-top-right-radius: 6.00px;
+border-bottom-left-radius: 6.00px;
+border-bottom-right-radius: 6.00px;
+width: 25.00px;
+height: 20.83px;
+}
+
+.path1626 {
+position: absolute;
+box-sizing: content-box;
+-ms-transform: rotate(0.00deg);
+-webkit-transform: rotate(0.00deg);
+transform: rotate(0.00deg);
+-ms-transform-origin: center;
+-webkit-transform-origin: center;
+transform-origin: center;
+opacity: 0.800000011920929;
+cursor: default;
+margin-top: 0.00px;
+margin-right: 0.00px;
+margin-bottom: 0.00px;
+margin-left: 0.00px;
+padding-top: 0.00px;
+padding-right: 0.00px;
+padding-bottom: 0.00px;
+padding-left: 0.00px;
+fill: rgba(45, 64, 87, 1);
+box-shadow: none;
+width: 12.00px;
+height: 0.80px;
+left: 6.50px;
+top: 9.93px;
+
+}
+
+.path1620 {
+transform: rotate(45.00deg);
+transform-origin: center;
+fill: rgba(45, 64, 87, 1);
+width: 14.14px;
+height: 14.14px;
+}
+
+
+
+.line{
+
+    stroke: rgba(56, 56, 56, 1);
+    stroke-width: 0.10px;
+    stroke-linecap: butt;
+    box-shadow: none;
+    width: ;
+}
+
+</style>
+{% endblock %}
+
 {% block content %}
-<h1>你好</h1>
+<div class="row" style="height: 30px;"></div>
+<div class="row" style="height: 50px;">
+    <div class="col-3" style="text-align: left;">
+        
+        <a href="#" class=>
+            <svg  preserveAspectRatio="none" viewBox="-0.0007499605417251587 4.675998687744141 22 15.466133117675781" class="leftArrow"><path d="M 7.175763130187988 4.908608913421631 C 7.485910892486572 4.598462104797363 7.97418212890625 4.598462104797363 8.284329414367676 4.908608913421631 C 8.58399772644043 5.208277225494385 8.58399772644043 5.707026958465576 8.284329414367676 6.005998134613037 L 2.663265466690063 11.62706184387207 L 21.21200752258301 11.62706184387207 C 21.64439582824707 11.62706184387207 21.9992504119873 11.97073745727539 21.9992504119873 12.40312767028809 C 21.9992504119873 12.83551788330078 21.6443977355957 13.19036865234375 21.21200752258301 13.19036865234375 L 2.663265705108643 13.19036865234375 L 8.284329414367676 18.80095672607422 C 8.58399772644043 19.11110305786133 8.58399772644043 19.61054992675781 8.284329414367676 19.90952301025391 C 7.97418212890625 20.21966934204102 7.485910892486572 20.21966934204102 7.175763130187988 19.90952301025391 L 0.2240017652511597 12.95775985717773 C -0.07566721737384796 12.65809059143066 -0.07566721737384796 12.15934181213379 0.2240017652511597 11.86037063598633 L 7.175763130187988 4.908608913421631 Z"  /></svg>
+        </a>
+        
+    </div>
+    <div class="col-6">
+        <div class="title text-center" style="text-align: center;">Cart</div>
+    </div>
+    <div class="col-3"></div>
+
+</div>
+
+
+<div class="row" style="height:100px;text-align: center;">
+    <div class="card w-75" style="background-color: rgba(249, 250, 251, 1);filter: drop-shadow(0px 10px 15px rgba(27, 28, 32, 0.10196078431372549));left: 12.5%;border: 0px;">
+        <div class="card-body">
+            <div class="row" style="height: 50px;">
+                <div class="col-5" style="text-align: left;">
+                    <div><img src="../../static/customer/card.png" alt="pic lost" style="width: 100px;height: 75px; filter: drop-shadow(0px 10px 15px rgba(27, 28, 32, 0.050980392156862744));background-size: cover;"></div>
+                </div>
+                <div class="col-4" >
+                    <div class="cardTextBox">                
+                        <div class="bubbleMilkTea" style="text-align:left;">Bubble Milk Tea</div>
+                        <div class="xd5bb8192">&nbsp;$12.99</div>
+                    </div> 
+                </div>
+                <div class="col-3" style="text-align: right;top: -6px;right: -16px;">
+                    <a href="#">
+                        <svg preserveAspectRatio="none" viewBox="8.212240487637246e-8 9.800834277484682e-8 14.142127990722656 14.142135620117188" class="path1620"><path d="M 13.61834812164307 6.285390377044678 L 7.594848155975342 6.285391807556152 L 7.594849109649658 0.5237828493118286 C 7.594849109649658 0.2341323494911194 7.36019229888916 5.799610747203587e-08 7.071069717407227 9.800834277484682e-08 C 6.781937599182129 1.380216758661845e-07 6.547280788421631 0.2341305166482925 6.547280788421631 0.5237830281257629 L 6.547279357910156 6.285391807556152 L 0.5237830281257629 6.285393238067627 C 0.2346556931734085 6.285393238067627 1.222062735450891e-07 6.519528388977051 8.212241198179981e-08 6.809170246124268 C 4.203617010034577e-08 7.098827362060547 0.2346555143594742 7.332961082458496 0.5237829089164734 7.332961082458496 L 6.547279357910156 7.332959651947021 L 6.547278881072998 13.6183443069458 C 6.547278881072998 13.90800189971924 6.78193473815918 14.14213943481445 7.071065902709961 14.14213943481445 C 7.360189437866211 14.14213943481445 7.594848155975342 13.90800189971924 7.594848155975342 13.6183443069458 L 7.594848155975342 7.332959651947021 L 13.61834812164307 7.332959175109863 C 13.90746974945068 7.332959175109863 14.14213085174561 7.098824501037598 14.14213085174561 6.809167385101318 C 14.14213085174561 6.51952600479126 13.90746974945068 6.285390377044678 13.61834812164307 6.285390377044678 Z"  /></svg>
+                    </a>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-6">
+                </div>
+                <div class="col-4">
+                    <div class="x2">2</div>
+                    <div class="group2548">    
+                        <a href="#">
+                            <div class="rectangle689"></div>
+                            <svg preserveAspectRatio="none" viewBox="12.50000286102295 13 9 8.998001098632812" class="path1157"><path d="M 21.16667175292969 16.99911308288574 L 17.33333778381348 16.99911308288574 L 17.33333778381348 13.33326053619385 C 17.33333778381348 13.14897060394287 17.18400192260742 13 17.00000381469727 13 C 16.81600189208984 13 16.66666793823242 13.14896869659424 16.66666793823242 13.33326053619385 L 16.66666793823242 16.99911308288574 L 12.83333683013916 16.99911308288574 C 12.64933586120605 16.99911308288574 12.50000286102295 17.14808082580566 12.50000286102295 17.33236694335938 C 12.50000286102295 17.51666450500488 12.64933586120605 17.6656322479248 12.83333683013916 17.6656322479248 L 16.66666793823242 17.6656322479248 L 16.66666793823242 21.66473770141602 C 16.66666793823242 21.84903526306152 16.81600189208984 21.99800109863281 17.00000381469727 21.99800109863281 C 17.18400192260742 21.99800109863281 17.33333778381348 21.84903526306152 17.33333778381348 21.66473770141602 L 17.33333778381348 17.6656322479248 L 21.16667175292969 17.6656322479248 C 21.35066795349121 17.6656322479248 21.50000381469727 17.51666450500488 21.50000381469727 17.33236694335938 C 21.50000381469727 17.14808082580566 21.35066795349121 16.99911308288574 21.16667175292969 16.99911308288574 Z"  /></svg>
+                        </a>
+                    </div>
+                    <div class="group2547">
+                        <a href="#">
+                            <div class="rectangle688"></div>
+                            <svg preserveAspectRatio="none" viewBox="12 25.00000762939453 12 0.8000030517578125" class="path1626"><path d="M 23.57143020629883 25.00000762939453 L 12.42857456207275 25.00000762939453 C 12.19200325012207 25.00000762939453 12 25.17881011962891 12 25.40000534057617 C 12 25.62120819091797 12.19200325012207 25.80000686645508 12.42857456207275 25.80000686645508 L 23.57143020629883 25.80000686645508 C 23.80799674987793 25.80000686645508 24 25.62120819091797 24 25.40000534057617 C 24 25.17881011962891 23.80799674987793 25.00000762939453 23.57143020629883 25.00000762939453 Z"  /></svg>
+                        </a>                    
+                    </div>
+                </div>
+                <div class="col-2" style="left:-10px">
+                    <div class="x414e9323">$25.98</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card fixed-bottom" style="
+background-color: rgba(249, 250, 251, 1);
+filter: drop-shadow(10px 0px 15px rgba(0, 0, 0, 0.10196078431372549));
+height: 333.00px;">
+    <div class="card-body">
+        <div class="row" style="height: 20px;"></div>
+        <div class="row" >
+            <div class="col-12" style="text-align: left;
+            letter-spacing: 0.07px;
+            color: rgba(45, 64, 87, 1);
+            -webkit-text-stroke: 1.00px rgba(0, 0, 0, 0);
+            font-size: 15.00px;
+            font-weight: 700;
+            font-style: normal;
+            font-family: Roboto, Arial;">
+                Your Orders
+            </div>
+            
+        </div>
+        <div class="row" style="height: 20px;"></div>
+        <div class="row" style="height: 20px;">
+            <div class="col-6" style="
+                opacity: 0.800000011920929;
+                color: rgba(45, 64, 87, 1);
+                font-size: 15.00px;
+                font-weight: 400;
+                font-style: normal;
+                font-family: Roboto, Arial;">
+                Bill Total
+            </div>
+            <div class="col-6" style="
+                opacity: 0.800000011920929;
+                color: rgba(45, 64, 87, 1);
+                font-size: 15.00px;
+                font-weight: 500;
+                font-style: normal;
+                font-family: Roboto, Arial;
+                text-align:right;">
+                $25.98
+            </div>
+        </div>
+        <div class="row" style="height: 15px;"></div>
+        <div class="row">
+            <div class="col-12" style="height: 1px;text-align: center;">
+                <svg class="line" viewBox="0 -0.04998779296875 326.49993896484375 0.0999755859375"><path d="M 0 0 L 326.4999389648438 0"></path></svg>
+            </div>
+        </div>
+        <div class="row" style="height: 30px;"></div>
+        <div class="row">
+            <div class="col-6" style="font-size: 15.00px;
+            font-weight: 500;
+            font-style: normal;
+            font-family: Roboto, Arial;
+            color: rgba(45, 64, 87, 1);
+            text-align: left;">
+                Grand Total
+            </div>
+            <div class="col-6" style="font-size: 15.00px;
+            font-weight: 700;
+            font-style: normal;
+            font-family: Roboto, Arial;
+            color: rgba(45, 64, 87, 1);
+            text-align: right;">
+                $25.98
+            </div>
+        </div>
+        <div class="row" style="height: 20px;"></div>
+        <div class="row">
+            <div class="col-3"></div>
+            
+            <div class="col-6" style="background-color: rgba(238, 219, 185, 1);
+                border-top-style: none;
+                border-top-width: 1.00px;
+                border-top-left-radius: 50.00px;
+                border-top-right-radius: 50.00px;
+                border-bottom-left-radius: 50.00px;
+                border-bottom-right-radius: 50.00px;
+                filter: drop-shadow(0px 3px 20px rgba(0, 0, 0, 0.08235294117647059));
+                height: 41.96px;">
+
+                <div style="text-align: center;line-height: 41.96px;
+                    filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.1607843137254902));
+                    font-size: 14.00px;
+                    font-weight: 400;
+                    font-style: normal;
+                    font-family: 'SF Pro Text', Arial;
+                    color: rgba(255, 255, 255, 1);">
+                    <a href="#">Proceed to Pay</a>
+                </div>
+            </div>
+            <div class="col-3"></div>
+        </div>
+    </div>
+
+</div>
+
+
+
 {{ super() }}
 {% endblock %}
