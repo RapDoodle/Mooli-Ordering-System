@@ -96,7 +96,7 @@ def init_db_tables(connection):
         """,
         """ALTER TABLE customer AUTO_INCREMENT=1000000""",
         """CREATE TABLE IF NOT EXISTS category (
-            category_id INT AUTO_INCREMENT,
+            category_id INT UNSIGNED AUTO_INCREMENT,
             category_name VARCHAR(32),
             priority INT,
             PRIMARY KEY (category_id),
@@ -118,9 +118,9 @@ def init_db_tables(connection):
         """,
         """CREATE TABLE IF NOT EXISTS product_category (
             product_id INT UNSIGNED,
-            category_name VARCHAR(32),
+            category_id INT UNSIGNED,
             FOREIGN KEY (product_id) REFERENCES product(product_id),
-            FOREIGN KEY (category_name) REFERENCES category(category_name)
+            FOREIGN KEY (category_id) REFERENCES category(category_id)
             )
         """,
         """CREATE TABLE IF NOT EXISTS `order`(
