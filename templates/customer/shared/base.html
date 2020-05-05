@@ -8,20 +8,26 @@
         {% block custom_css %}{% endblock %}
         <title>{% block title %}{% endblock %} - Mooli</title>
         <style media="screen">
-            a { color: inherit; } 
+            a { color: inherit; }
         </style>
         {% block custom_style %}{% endblock %}
     </head>
     <body data-gr-c-s-loaded="true">
+        {% block top %}
+
+        {% endblock %}
         <div class="container-fluid">
             <div class="row">
-                <div class="col col-sm-12 col-md-6 offset-md-3 col-lg-4 offset-lg-4">
+                <div class="col col-sm-12">
                     {% block content %}
 
                     {% endblock %}
                 </div>
             </div>
         </div>
+        {% block bottom %}
+
+        {% endblock %}
         <script src="/static/bootstrap-4.4.1/js/jquery-3.4.1.slim.min.js"></script>
         <script src="/static/bootstrap-4.4.1/js/popper.min.js"></script>
         <script src="/static/bootstrap-4.4.1/js/bootstrap.min.js"></script>
