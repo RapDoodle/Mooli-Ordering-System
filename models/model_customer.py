@@ -63,11 +63,52 @@ def add_customer(username, email, password, first_name = '', last_name = '', gen
     dao.commit()
 
 def change_password(customer_id, password):
-    pass
+    password = password.strip()
 
-def verify_password(username, password):
-    pass
+    if not validator.is_valid_password(password):
+        raise Exception('Invalid password.')
 
+    # Establish db connection
+    dao = DAO()
+    cursor = dao.cursor()
+
+    sql = """SELECT * FROM customer WHERE customer_id = %(customer_id)s"""
+    cursor.execute(sql, {'customer_id': customer_id})
+    result = cursor.fetchone()
+
+    if result is None:
+        raise Exception('User not found.')
+
+    password_hash = user_common.hash_password(password)
+
+    sql = """UPDATE customer SET password_hash = %(password_hash)s
+             WHERE customer_id = %(customer_id)s"""
+    cursor.execute(sql, {'password_hash': password_hash,
+                         'customer_id': customer_id})
+    dao.commit()
+
+def verify_credential(username, password):
+    # The function takes in username and password from user input
+    # If the verification succeeded, the user's id will be returned
+    # Otherwise, None will be returned
+
+    # Clean the data
+    username = username.strip()
+    password = password.strip()
+
+    # Establish db connection
+    dao = DAO()
+    cursor = dao.cursor()
+
+    # Query the database for password and customer_id
+    sql = """SELECT customer_id, password_hash FROM customer WHERE username = %(username)s ORDER BY customer_id"""
+    cursor.execute(sql, {'username': username})
+    result = cursor.fetchone()
+    if result is None:
+        raise Exception('Invalid username or password')
+    if not user_common.verify_password(password, result['password_hash']):
+        raise Exception('Invalid username or password')
+    return result['customer_id']
 
 def find_user(method, param):
     if method not in ['username', 'id']:

@@ -76,7 +76,7 @@ def init_db_tables(connection):
         """CREATE TABLE IF NOT EXISTS staff (
             staff_id INT(5) UNSIGNED AUTO_INCREMENT,
             username VARCHAR(24) NOT NULL,
-            password_hash BINARY(64) NOT NULL,
+            password_hash BINARY(60) NOT NULL,
             permission_group_name VARCHAR(32),
             PRIMARY KEY (staff_id),
             UNIQUE (username)
@@ -87,7 +87,7 @@ def init_db_tables(connection):
             customer_id INT(8) UNSIGNED AUTO_INCREMENT,
             username VARCHAR(24) NOT NULL,
             email VARCHAR(254) NOT NULL,
-            password_hash BINARY(64) NOT NULL,
+            password_hash BINARY(60) NOT NULL,
             first_name VARCHAR(35),
             last_name VARCHAR(35),
             gender BINARY(1),
