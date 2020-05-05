@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
     <head>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0 ">
         <link rel="stylesheet" href="/static/bootstrap-4.4.1/css/bootstrap.min.css">
         <link rel="stylesheet" href="/static/customer/navbar.css">
         {% block custom_css %}{% endblock %}
@@ -13,6 +13,9 @@
         {% block custom_style %}{% endblock %}
     </head>
     <body data-gr-c-s-loaded="true">
+        {% block top %}
+
+        {% endblock %}
         <div class="container-fluid">
             <div class="row">
                 <div class="col col-sm-12 col-md-6 offset-md-3 col-lg-4 offset-lg-4">
@@ -22,6 +25,9 @@
                 </div>
             </div>
         </div>
+        {% block bottom %}
+
+        {% endblock %}
         <script src="/static/bootstrap-4.4.1/js/jquery-3.4.1.slim.min.js"></script>
         <script src="/static/bootstrap-4.4.1/js/popper.min.js"></script>
         <script src="/static/bootstrap-4.4.1/js/bootstrap.min.js"></script>
