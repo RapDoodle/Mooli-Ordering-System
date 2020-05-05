@@ -75,23 +75,26 @@ def init_db_tables(connection):
         """CREATE TABLE IF NOT EXISTS permission (permission_name VARCHAR(32), group_name VARCHAR(32))""",
         """CREATE TABLE IF NOT EXISTS staff (
             staff_id INT(5) UNSIGNED AUTO_INCREMENT,
-            username VARCHAR(30) NOT NULL,
+            username VARCHAR(24) NOT NULL,
             password_hash BINARY(64) NOT NULL,
             permission_group_name VARCHAR(32),
-            PRIMARY KEY (staff_id)
+            PRIMARY KEY (staff_id),
+            UNIQUE (username)
             )
         """,
         """ALTER TABLE staff AUTO_INCREMENT=10000""",
         """CREATE TABLE IF NOT EXISTS customer (
             customer_id INT(8) UNSIGNED AUTO_INCREMENT,
-            username VARCHAR(30) NOT NULL,
+            username VARCHAR(24) NOT NULL,
+            email VARCHAR(254) NOT NULL,
             password_hash BINARY(64) NOT NULL,
             first_name VARCHAR(35),
             last_name VARCHAR(35),
             gender BINARY(1),
             phone VARCHAR(32),
-            balance DECIMAL(8,2),
-            PRIMARY KEY (customer_id)
+            balance DECIMAL(8,2) DEFAULT 0.0,
+            PRIMARY KEY (customer_id),
+            UNIQUE (username)
             )
         """,
         """ALTER TABLE customer AUTO_INCREMENT=1000000""",

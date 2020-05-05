@@ -1,4 +1,4 @@
-import re
+import utils.validation as validator
 from models.DAO import DAO
 
 def add_product(product_name, categories, price, priority, description = '', picture_uuid = '', thumbnail_uuid = ''):
@@ -15,8 +15,7 @@ def add_product(product_name, categories, price, priority, description = '', pic
     if (not product_name) or (not description) or (not priority.isdecimal()) or (type(categories) is not list):
         raise Exception('Invalid input type.')
 
-    verify_price_regex = re.compile('^[0-9]+(\.[0-9]{1,2})?$')
-    if verify_price_regex.match(price) is None:
+    if not validator.is_money(price):
         raise Exception('Invalid pricing.')
 
     if len(categories) == 0:
@@ -81,8 +80,7 @@ def update_product(product_id, product_name, categories, price, priority, descri
     if (not product_id) or (not product_name) or (not description) or (not priority.isdecimal()) or (type(categories) is not list):
         raise Exception('Invalid input type.')
 
-    verify_price_regex = re.compile('^[0-9]+(\.[0-9]{1,2})?$')
-    if verify_price_regex.match(price) is None:
+    if not validator.is_money(price):
         raise Exception('Invalid pricing.')
 
     if len(categories) == 0:
