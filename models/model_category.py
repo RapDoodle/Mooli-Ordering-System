@@ -2,8 +2,8 @@ from models.DAO import DAO
 
 def add_category(category_name, priority):
     # Clean the input data
-    category_name = category_name.strip()
-    priority = priority.strip()
+    category_name = str(category_name.strip())
+    priority = str(priority.strip())
 
     # Check is the input valid
     if not category_name or not priority.isdecimal():
