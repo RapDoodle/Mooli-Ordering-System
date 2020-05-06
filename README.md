@@ -8,7 +8,7 @@
 
 ## Current Progress
 
-- Finished all UI design for customer
+- Finished all UI design for customer (Only compatible with iPhone X using Chrome at the stage)
 - A user can add / remove / update categories in the dashboard via http://localhost:8000/admin/dashboard/category (Logged is not required at the stage of development)
 - Controllers and models for category, customer, product
 - Unit testing on the models and controllers mentioned above via `python test.py`
