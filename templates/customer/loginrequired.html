@@ -1,0 +1,82 @@
+{% extends "/customer/shared/navbar.html" %}
+
+{% block title %}Please Login{% endblock %}
+
+{% block custom_css %}
+<style>
+
+
+.path663e31f9ba {
+      fill: rgba(238, 219, 185, 1);
+    filter: drop-shadow(0px 30px 40px rgba(0, 0, 0, 0.03137254901960784));
+    height: 50.00px;
+}
+
+
+
+
+.path66 {
+    
+      fill: transparent;
+      stroke: rgba(249, 60, 100, 1);
+          stroke-width: 0.50px;
+          stroke-linecap: butt;
+      -webkit-filter: drop-shadow(0px 30px 40px rgba(0, 0, 0, 0.03137254901960784));
+    filter: drop-shadow(0px 30px 40px rgba(0, 0, 0, 0.03137254901960784));
+
+    height: 50.00px;
+
+
+}
+
+
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="row" style="height: 135px;"></div>
+<div class="row">
+    <div class="col-12" style="text-align: center;">
+        <img src="../../static/customer/logo11.png" alt="pic lost" style="width:192px;height:222px;">
+    </div>
+</div>
+<div class="row" style="height: 70px;"></div>
+
+<div class="row" style="text-align: center;">
+    <div class="col-12" style="text-align: center;">
+        <a href="#">            
+        <svg preserveAspectRatio="none" viewBox="0 0 280 50" class="path663e31f9ba"><path d="M 26.64974212646484 0 L 253.3502349853516 0 C 268.0685119628906 0 280 11.1928825378418 280 25 C 280 38.8071174621582 268.0685119628906 50 253.3502349853516 50 L 26.64974212646484 50 C 11.93149757385254 50 0 38.8071174621582 0 25 C 0 11.1928825378418 11.93149757385254 0 26.64974212646484 0 Z"></path></svg>
+        <div style="position: relative; top: -45px;">
+            <div style="line-height: 35.00px;
+            letter-spacing: 1.40px;
+            color: rgba(255, 255, 255, 1); 
+            font-size: 14.00px;
+            font-weight: 300;
+            font-style: normal;
+            font-family: 'SF Pro Text', Arial;
+            white-space: pre;">SIGN IN</div>
+        </div>
+        </a>
+    </div>
+</div>
+
+<div class="row" style="text-align: center;">
+    <div class="col-12" style="text-align: center;">
+        <a href="#">
+            <svg preserveAspectRatio="none" viewBox="0 0 280 50" class="path66"><path d="M 26.64974212646484 0 L 253.3502349853516 0 C 268.0685119628906 0 280 11.1928825378418 280 25 C 280 38.8071174621582 268.0685119628906 50 253.3502349853516 50 L 26.64974212646484 50 C 11.93149757385254 50 0 38.8071174621582 0 25 C 0 11.1928825378418 11.93149757385254 0 26.64974212646484 0 Z"></path></svg>
+            <div style="position: relative; top: -45px;">
+                <div style="line-height: 35.00px;
+                letter-spacing: 1.40px;
+                color: rgba(249, 60, 100, 1); 
+                font-size: 14.00px;
+                font-weight: 300;
+                font-style: normal;
+                font-family: 'SF Pro Text', Arial;
+                white-space: pre;">SIGN UP</div>
+            </div>
+        </a>
+    </div>
+</div>
+
+{{ super() }}
+{% endblock %}
