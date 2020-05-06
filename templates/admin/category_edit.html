@@ -1,0 +1,31 @@
+{% extends "/staff/shared/base.html" %}
+
+{% block content %}
+<p><a href="#">Dashboard</a> / Categories </p>
+<button class="btn btn-primary" type="button" name="button"> <span class="glyphicon glyphicon-plus"></span> Add</button> <br><br>
+
+<table class="table table-bordered table-striped table-hover">
+    <tr>
+        <th>Category Name</th>
+        <th>Priority</th>
+        <th>Manage</th>
+    </tr>
+    <tr>
+        <td>Trending</td>
+        <td>6</td>
+        <td>
+            <div class="dropdown">
+              <button class="btn btn-sm dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                <span class="glyphicon glyphicon-cog"></span>
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                <li><a href="#"><span class="glyphicon glyphicon-pencil"></span> Edit</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="#"><span class="glyphicon glyphicon-remove"></span> Delete</a></li>
+              </ul>
+            </div>
+        </td>
+    </tr>
+</table>
+{% endblock %}

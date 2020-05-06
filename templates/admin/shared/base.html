@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <link href="/static/bootstrap-3.4.1/css/bootstrap.min.css" rel="stylesheet">
+        <style media="screen">
+            .list-group > .list-group {
+                display: none;
+                margin-bottom: 0;
+                }
+            .list-group-item:focus-within + .list-group {
+                display: block;
+            }
+
+            .list-group > .list-group-item {
+                border-radius: 0;
+                border-width: 1px 0 0 0;
+            }
+
+            .list-group > .list-group-item:first-child {
+                border-top-width: 0;
+            }
+
+            .list-group  > .list-group > .list-group-item {
+                padding-left: 2.5rem;
+            }
+        </style>
+    </head>
+    <body>
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <p class="navbar-text">Mooli Milk Tea Management System</p>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <li class="dropdown">
+                          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span>Staff <span class="caret"></span> </a>
+                          <ul class="dropdown-menu">
+                            <li><a href="#">Users</a></li>
+                            <li><a href="#">Apps</a></li>
+                            <li><a href="#">Settings</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">Logout</a></li>
+                          </ul>
+                        </li>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="list-group">
+                      <a href="#" class="list-group-item"><span class="glyphicon glyphicon-stats"></span>&nbsp&nbspDashboard</a>
+                      <a href="#" class="list-group-item"><span class="glyphicon glyphicon-tags"></span>&nbsp&nbspProducts</a>
+                      <a href="#" class="list-group-item"><span class="glyphicon glyphicon-th-list"></span>&nbsp&nbspCategories</a>
+                      <a href="#" class="list-group-item">Orders</a>
+                      <a href="#" class="list-group-item">Coupon</a>
+                      <a href="#" class="list-group-item">Redeem</a>
+                      <a href="#" class="list-group-item">Deposite</a>
+
+                    </div>
+                </div>
+                <div class="col-md-10">
+                    {% block content %}
+
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="/static/bootstrap-3.4.1/js/jquery.min.js"></script>
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="/static/bootstrap-3.4.1/js/bootstrap.min.js"></script>
+    </body>
+</html>
