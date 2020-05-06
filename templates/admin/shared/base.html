@@ -2,8 +2,12 @@
 <html lang="en" dir="ltr">
     <head>
         <meta charset="utf-8">
-        <title></title>
-        <link href="/static/bootstrap-3.4.1/css/bootstrap.min.css" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0 ">
+        <link rel="stylesheet" href="/static/bootstrap-4.4.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/static/customer/navbar.css">
+        {% block custom_css %}{% endblock %}
+        <title>{% block title %}{% endblock %} - Mooli</title>
+        {% block custom_style %}{% endblock %}
         <style media="screen">
             .list-group > .list-group {
                 display: none;
@@ -69,9 +73,8 @@
                 </div>
             </div>
         </div>
-        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-        <script src="/static/bootstrap-3.4.1/js/jquery.min.js"></script>
-        <!-- Include all compiled plugins (below), or include individual files as needed -->
-        <script src="/static/bootstrap-3.4.1/js/bootstrap.min.js"></script>
+        <script src="/static/bootstrap-4.4.1/js/jquery-3.4.1.slim.min.js"></script>
+        <script src="/static/bootstrap-4.4.1/js/popper.min.js"></script>
+        <script src="/static/bootstrap-4.4.1/js/bootstrap.min.js"></script>
     </body>
 </html>
