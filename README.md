@@ -11,7 +11,7 @@
 - Finished all UI design for customer
 - A user can add / remove / update categories in the dashboard via http://localhost:8000/admin/dashboard/category (Logged is not required at the stage of development)
 - Controllers and models for category, customer, product
-- Unit testing on the models and controllers mentioned above
+- Unit testing on the models and controllers mentioned above via `python test.py`
 - Some views for the admin
 
 ## Instructions
