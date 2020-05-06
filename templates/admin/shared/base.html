@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0 ">
+        <link rel="stylesheet" href="/static/bootstrap-4.4.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/static/customer/navbar.css">
+        {% block custom_css %}{% endblock %}
+        <title>{% block title %}{% endblock %} - Mooli</title>
+        {% block custom_style %}{% endblock %}
+        <style media="screen">
+            .list-group > .list-group {
+                display: none;
+                margin-bottom: 0;
+                }
+            .list-group-item:focus-within + .list-group {
+                display: block;
+            }
+
+            .list-group > .list-group-item {
+                border-radius: 0;
+                border-width: 1px 0 0 0;
+            }
+
+            .list-group > .list-group-item:first-child {
+                border-top-width: 0;
+            }
+
+            .list-group  > .list-group > .list-group-item {
+                padding-left: 2.5rem;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+              <a class="navbar-brand" href="#">Mooli</a>
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+
+              <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                  <li class="nav-item active">
+                    <a class="nav-link" href="#">Dashboard <span class="sr-only">(current)</span></a>
+                  </li>
+                </ul>
+                <ul class="nav navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Logout</a>
+                    </li>
+                </ul>
+              </div>
+            </nav>
+        </header>
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="sidebar-sticky">
+                        <ul class="nav flex-column">
+                          <li class="nav-item">
+                            <a class="nav-link active" href="#">
+                              Dashboard <span class="sr-only">(current)</span>
+                            </a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" href="#">
+                              Orders
+                            </a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" href="#">
+                              Products
+                            </a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" href="#">
+                              Categories
+                            </a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" href="#">
+                              Customers
+                            </a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" href="#">
+                              Reports
+                            </a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" href="#">
+                              Integrations
+                            </a>
+                          </li>
+                        </ul>
+
+                        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                          <span>Reports</span>
+                          <a class="d-flex align-items-center text-muted" href="#">
+                          </a>
+                        </h6>
+                        <ul class="nav flex-column mb-2">
+                          <li class="nav-item">
+                            <a class="nav-link" href="#">
+                              Current month
+                            </a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" href="#">
+                              Last quarter
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                <div class="col-md-10">
+                    {% block content %}
+
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+        <script src="/static/bootstrap-4.4.1/js/jquery-3.4.1.slim.min.js"></script>
+        <script src="/static/bootstrap-4.4.1/js/popper.min.js"></script>
+        <script src="/static/bootstrap-4.4.1/js/bootstrap.min.js"></script>
+    </body>
+</html>
