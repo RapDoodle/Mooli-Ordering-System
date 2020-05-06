@@ -1,8 +1,105 @@
-{% extends "/shared/base.html" %}
+{% extends "/customer/shared/base.html" %}
 
 {% block title %}Redeem{% endblock %}
 
 {% block content %}
-<h1>Click here to redeem</h1>
+<style type="text/css">
+    html {
+        height: 100%;
+        width: 100%;
+      }
+
+    body {
+        font-family: 'Open Sans', serif;
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        width: 100%;
+        -webkit-font-smoothing: antialiased;
+        overflow: -moz-scrollbars-none;
+        -ms-overflow-style: none;
+      }
+</style>
+
+<body>
+    <div class="">
+        <div class="row row-cols-3" style="height: 30px;">
+        </div>
+        <div class="row row-cols-3" style="height: 25px;">
+            <div class="col-3">
+                <span class="align-middle"><svg  viewBox="-0.75 -0.75 12.2412109375 20.2650146484375" style="height: 20px; fill: rgba(0, 0, 0, 0.5411764705882353);"><path d="M 10.3725004196167 0.3675000071525574 C 9.882499694824219 -0.1225000023841858 9.092499732971191 -0.1225000023841858 8.602499961853027 0.3675000071525574 L 0.2924999892711639 8.677499771118164 C -0.09749999642372131 9.067500114440918 -0.09749999642372131 9.697500228881836 0.2924999892711639 10.08749961853027 L 8.602499961853027 18.39749908447266 C 9.092499732971191 18.88750076293945 9.882499694824219 18.88750076293945 10.3725004196167 18.39749908447266 C 10.86250019073486 17.90749931335449 10.86250019073486 17.11750030517578 10.3725004196167 16.62750053405762 L 3.132499933242798 9.377499580383301 L 10.38249969482422 2.127500057220459 C 10.86250019073486 1.647500038146973 10.86250019073486 0.8475000262260437 10.3725004196167 0.3675000071525574 Z"  /></svg></span>
+            </div>
+            <div class="col-6">
+                <div class="title" style="background-color: rgba(255, 255, 255, 0);
+                color: rgba(45, 64, 87, 1);
+                text-align: center;
+                -webkit-text-stroke: 1.00px rgba(0, 0, 0, 0);
+                font-size: 25.00px;
+                font-style: normal;
+                font-family: 'SF Pro Text', Arial;">Redeem</div>
+            </div>
+            <div class="col-3">
+                <button type="button" class="btn btn-outline-sucess" style="background-color: rgba(255, 255, 255, 0);
+                color: green;
+                padding:0px;
+                padding-top:5px;
+                text-align: left;
+                font-size:18.00px;
+                font-style: normal;
+                font-family: 'SF Pro Text', Arial;">Confirm</button>
+            </div>
+        </div>
+
+        <div class="row row-cols-3" style="height: 30px;">
+        </div>
+
+        <div class="row">
+            <div class="col-2"></div>
+            <div class="col-8" style="background-color: rgba(255, 255, 255, 0);
+            color: rgba(45, 64, 87, 1);
+            text-align: center;
+            -webkit-text-stroke: 1.00px rgba(0, 0, 0, 0);
+            font-size: 18.00px;
+            font-style: normal;
+            font-family: 'SF Pro Text', Arial;">
+                Redeem your gift card
+            </div>
+            <div class="col-2"></div>
+        </div>
+
+        <div class="row row-cols-3" style="height: 20px;">
+        </div>
+
+        <div class="row">
+            <div class="col-1"></div>
+            <div class="col-10" style="background-color: rgba(255, 255, 255, 0);
+            color: gray;
+            text-align: center;
+            -webkit-text-stroke: 1.00px rgba(0, 0, 0, 0);
+            font-size: 15.00px;
+            font-style: normal;
+            font-family: 'SF Pro Text', Arial;">
+                Please input the code of your gift card
+            </div>
+            <div class="col-1"></div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <hr>
+            </div>
+        </div>
+
+        <div class="row" style="height: 30px;">
+            <div class="col">
+                <input type="text" class="form-control" placeholder="Gift card code" aria-label="code" aria-describedby="addon-wrapping" style="font-style: normal;
+                font-family: 'SF Pro Text', Arial;">
+                <hr>
+            </div>
+        </div>
+
+    </div>
+</body>
+
 {{ super() }}
 {% endblock %}
