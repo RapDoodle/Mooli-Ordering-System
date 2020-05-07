@@ -64,7 +64,7 @@ def setup():
         f = Fernet(key)
         encrypted_profile.write(f.encrypt(json.dumps(security_profile).encode()))
 
-    print('Would you like to enable HTTPS on your server?')
+    print('\nWould you like to enable HTTPS on your server?')
     print('NOTE: You will need a SSL certificate to use HTTPS.')
     print('WARNING: Certain function will be disabled without HTTPS for')
     print('         security concerns.')
@@ -123,7 +123,7 @@ def init_db(connection, db_name):
 
 def init_db_tables(connection):
 
-    print('Initiaizing database tables...\n')
+    print('\nInitiaizing database tables...\n')
     cursor = connection.cursor()
 
     sqls = [
@@ -233,7 +233,7 @@ def init_db_tables(connection):
     for sql in sqls:
         cursor.execute(sql)
 
-    print('All tables has been correctly initialized.\n')
+    print('All tables has been correctly initialized.')
     connection.commit()
 
 def init_test_db():
