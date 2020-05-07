@@ -1,8 +1,12 @@
 from flask import Flask
+from flask_wtf.csrf import CSRFProtect
 import utils.config_manager as config
 
 app = Flask(__name__)
 app.secret_key = config.get_secret_key()
+
+# Configure CSRF
+csrf = CSRFProtect(app)
 
 from views.customer_home import customer_home_view
 from views.admin_view import admin_view
