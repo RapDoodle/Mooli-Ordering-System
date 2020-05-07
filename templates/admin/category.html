@@ -21,6 +21,7 @@
           </div>
           <div class="modal-body">
             <form action="/admin/dashboard/category/new" method="post" id="add-form">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
               <div class="form-group">
                 <label for="category-name" class="col-form-label">Category name:</label>
                 <input type="text" class="form-control" id="category-name" name="category-name">
@@ -51,6 +52,7 @@
           </div>
           <div class="modal-body">
             <form action="/admin/dashboard/category/edit" method="post" id="edit-form">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
               <input type="hidden" id="category-id" name="category-id">
               <div class="form-group">
                 <label for="category-name" class="col-form-label">Category name:</label>
@@ -83,6 +85,7 @@
       <div class="modal-body">
         <p id="delete-confirm-message"></p>
         <form action="/admin/dashboard/category/delete" method="post" id="delete-form">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
             <input type="hidden" name="category-id" id="category-id">
         </form>
       </div>

@@ -85,7 +85,7 @@ def setup():
     print('NOTE: Keep it disabled in production mode.')
     debug = not y_n_choice('Your choice ')
     config = {
-        'db_url': db_url,
+        'DB_URL': db_url,
         'port': port,
         'enable_https': enable_https,
         'cert_path': './security/cert.pem',
@@ -246,7 +246,7 @@ def init_test_db():
     config_manager.set_security_temp('DB_NAME', config_manager.get_security('DB_NAME') + '_test')
     config_manager.set_security_temp('UNIT_TESTING_MODE', True)
 
-    connection = pymysql.connect(config_manager.get_security('DB_URL'),
+    connection = pymysql.connect(config_manager.get('DB_URL'),
                                 config_manager.get_security('DB_USERNAME'),
                                 config_manager.get_security('DB_PASSWORD'))
 
