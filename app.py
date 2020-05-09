@@ -19,7 +19,6 @@ if __name__ == '__main__':
 	debug = config.get('debug')
 	if config.get('enable_https'):
 		ssl_context = (config.get('cert_path'), config.get('private_key_path'))
-		print(ssl_context)
 		app.run(port = port, debug = debug, ssl_context = ssl_context)
 	else:
-		app.run(port = port, debug = debug)
+		app.run(host = '0.0.0.0', port = port, debug = debug)
