@@ -1,8 +1,8 @@
 import models.model_category as model_category
 
-def add_category(name, priorty):
+def add_category(name, priority):
     try:
-        model_category.add_category(name, priorty)
+        model_category.add_category(name, priority)
     except Exception as e:
         return {'error': str(e)}
     return {'message': 'The category has been added successfully.'}
