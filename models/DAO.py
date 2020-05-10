@@ -4,9 +4,9 @@ import pymysql
 class DAO():
 
     __db_url = config.get('DB_URL')
-    __db_username = config.get('DB_USERNAME')
-    __db_password = config.get('DB_PASSWORD')
-    __db_name = config.get('DB_NAME')
+    __db_username = config.get_security('DB_USERNAME')
+    __db_password = config.get_security('DB_PASSWORD')
+    __db_name = config.get_security('DB_NAME')
     __db = None
 
     def __init__(self):
