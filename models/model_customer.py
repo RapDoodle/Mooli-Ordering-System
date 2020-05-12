@@ -4,13 +4,13 @@ import models.model_user as user_common
 
 def add_customer(username, email, password, first_name = '', last_name = '', gender = '', phone = ''):
     # clean the data
-    username = str(username.strip())
-    email = str(email.strip())
-    password = str(password.strip())
-    first_name = str(first_name.strip())
-    last_name = str(last_name.strip())
-    gender = str(gender.strip())
-    phone = str(phone.strip())
+    username = str(username).strip()
+    email = str(email).strip()
+    password = str(password).strip()
+    first_name = str(first_name).strip()
+    last_name = str(last_name).strip()
+    gender = str(gender).strip()
+    phone = str(phone).strip()
 
     # Verify user input
     if not validator.is_valid_username(username):
@@ -30,7 +30,7 @@ def add_customer(username, email, password, first_name = '', last_name = '', gen
     dao = DAO()
     cursor = dao.cursor()
 
-    if find_user('username', username) is not None:
+    if find_customer('username', username) is not None:
         raise Exception('The username was taken already.')
 
     password_hash = user_common.hash_password(password)
@@ -64,10 +64,10 @@ def add_customer(username, email, password, first_name = '', last_name = '', gen
 
 def update_customer_info(customer_id, first_name = '', last_name = '', gender = '', phone = ''):
     # Clean user input
-    first_name = str(first_name.strip())
-    last_name = str(last_name.strip())
-    gender = str(gender.strip())
-    phone = str(phone.strip())
+    first_name = str(first_name).strip()
+    last_name = str(last_name).strip()
+    gender = str(gender).strip()
+    phone = str(phone).strip()
 
     if not validator.is_valid_length(first_name, 0, 24):
         raise Exception('Invalid first name')
@@ -104,7 +104,7 @@ def update_customer_info(customer_id, first_name = '', last_name = '', gender = 
     dao.commit()
 
 def change_password(customer_id, password):
-    password = password.strip()
+    password = str(password).strip()
 
     if not validator.is_valid_password(password):
         raise Exception('Invalid password.')
@@ -138,8 +138,8 @@ def verify_credential(param, password, method = 'username'):
         raise Exception('Method not allowed.')
 
     # Clean the data
-    param = param.strip()
-    password = password.strip()
+    param = str(param).strip()
+    password = str(password).strip()
 
     # Establish db connection
     dao = DAO()
@@ -160,11 +160,12 @@ def verify_credential(param, password, method = 'username'):
         raise Exception('Invalid password')
     return result['customer_id']
 
-def find_user(method, param):
+def find_customer(method, param):
     if method not in ['username', 'id']:
         raise Exception('Invalid method.')
+
     # Clean the input data
-    param = param.strip()
+    param = str(param).strip()
 
     # Establish db connection
     dao = DAO()

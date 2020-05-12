@@ -3,13 +3,13 @@ from models.DAO import DAO
 
 def add_product(product_name, categories, price, priority, description = '', picture_uuid = '', thumbnail_uuid = ''):
     # Clean the input data
-    product_name = str(product_name.strip())
-    description = str(description.strip())
-    price = str(price.strip())
-    priority = str(priority.strip())
-    description = str(description.strip())
-    picture_uuid = str(picture_uuid.strip())
-    thumbnail_uuid = str(thumbnail_uuid.strip())
+    product_name = str(product_name).strip()
+    description = str(description).strip()
+    price = str(price).strip()
+    priority = str(priority).strip()
+    description = str(description).strip()
+    picture_uuid = str(picture_uuid).strip()
+    thumbnail_uuid = str(thumbnail_uuid).strip()
 
     # Check is the input valid
     if (not product_name) or (not description) or (not priority.isdecimal()) or (type(categories) is not list):
@@ -67,14 +67,14 @@ def add_product(product_name, categories, price, priority, description = '', pic
 
 def update_product(product_id, product_name, categories, price, priority, description, picture_uuid, thumbnail_uuid):
     # Clean the input data
-    product_id = product_id.strip()
-    product_name = product_name.strip()
-    description = description.strip()
-    price = price.strip()
-    priority = priority.strip()
-    description = description.strip()
-    picture_uuid = picture_uuid.strip()
-    thumbnail_uuid = thumbnail_uuid.strip()
+    product_id = str(product_id).strip()
+    product_name = str(product_name).strip()
+    description = str(description).strip()
+    price = str(price).strip()
+    priority = str(priority).strip()
+    description = str(description).strip()
+    picture_uuid = str(picture_uuid).strip()
+    thumbnail_uuid = str(thumbnail_uuid).strip()
 
     # Check is the input valid
     if (not product_id) or (not product_name) or (not description) or (not priority.isdecimal()) or (type(categories) is not list):
@@ -126,7 +126,7 @@ def update_product(product_id, product_name, categories, price, priority, descri
 
 def remove_product(product_id):
     # Clean the input data
-    product_id = product_id.strip()
+    product_id = str(product_id).strip()
 
     # Establish db connection
     dao = DAO()
@@ -145,7 +145,7 @@ def get_products(method, param = ''):
     if method not in ['category_name', 'all']:
         raise Exception('Invalid method')
     # Clean the input data
-    param = param.strip()
+    param = str(param).strip()
 
     # Establish db connection
     dao = DAO()
@@ -172,7 +172,7 @@ def find_product(method, param):
     if method not in ['product_name', 'product_id']:
         raise Exception('Invalid method.')
     # Clean the input data
-    param = param.strip()
+    param = str(param).strip()
 
     # Establish db connection
     dao = DAO()
