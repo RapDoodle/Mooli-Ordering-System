@@ -205,7 +205,7 @@ def init_db_tables(connection):
         """,
         """CREATE TABLE IF NOT EXISTS coupon (
             coupon_code VARCHAR(32),
-            amount DECIMAL(8, 2),
+            value DECIMAL(8, 2),
             threshold DECIMAL(3, 2),
             percentage DECIMAL (3, 2),
             PRIMARY KEY (coupon_code)
@@ -213,7 +213,7 @@ def init_db_tables(connection):
         """,
         """CREATE TABLE IF NOT EXISTS redeem_card (
             redeem_code CHAR(16),
-            amount DECIMAL(8, 2),
+            value DECIMAL(8, 2),
             PRIMARY KEY (redeem_code)
         )
         """,

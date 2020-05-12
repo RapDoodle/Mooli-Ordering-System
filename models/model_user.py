@@ -1,11 +1,13 @@
 import bcrypt
 
 def verify_password(password, hashed_password):
+    passwprd = str(password).strip()
     if bcrypt.checkpw(password.encode('utf-8'), hashed_password):
         return True
     return False
 
 def hash_password(password):
+    passwprd = str(password).strip()
     return bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
 
 # hashed = bcrypt.hashpw('testpass'.encode('utf-8'), bcrypt.gensalt())

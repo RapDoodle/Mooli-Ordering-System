@@ -2,8 +2,8 @@ from models.DAO import DAO
 
 def add_category(category_name, priority):
     # Clean the input data
-    category_name = str(category_name.strip())
-    priority = str(priority.strip())
+    category_name = str(category_name).strip()
+    priority = str(priority).strip()
 
     # Check is the input valid
     if not category_name or not priority.isdecimal():
@@ -53,7 +53,7 @@ def update_category(category_id, category_name, priority):
 
 def remove_category(category_id):
     # Clean the input data
-    category_id = category_id.strip()
+    category_id = str(category_id).strip()
 
     # Check is the input valid
     if not category_id.isdecimal():
@@ -77,7 +77,7 @@ def find_category(method, param):
         raise Exception('Invalid method')
 
     # Clean the input data
-    param = param.strip()
+    param = str(param).strip()
 
     # Establish db connection
     dao = DAO()

@@ -5,3 +5,4 @@ init_test_db()
 import tests.test_category
 import tests.test_product
 import tests.test_customer
+import tests.test_redeem_card
