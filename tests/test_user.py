@@ -17,5 +17,7 @@ assert c.change_password('1000001', 'Testpassword12345', 'Testpassword123', 'Tes
 # When the new password and verify password don't match
 c.change_password('1000001', 'Testpassword123', 'Testpassword1234', 'Testpassword123') == {'error': 'Passwords do not match.'}
 
+# Create an admin
+assert c.sign_up('mooliadmin', 'admin@repo.ink', 'Testpassword123', '', '', 'M') == {'message': 'You account has been created successfully.'}
 
 print('[UNIT TESTING] User has passed all the tests')

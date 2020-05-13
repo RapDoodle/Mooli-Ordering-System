@@ -2,7 +2,7 @@ import bcrypt
 from models.DAO import DAO
 import utils.validation as validator
 
-def add_user(username, email, password, first_name = '', last_name = '', gender = '', phone = ''):
+def add_user(username, email, password, first_name = '', last_name = '', gender = '', phone = '', is_staff = False):
     # clean the data
     username = str(username).strip()
     email = str(email).strip()
@@ -25,6 +25,8 @@ def add_user(username, email, password, first_name = '', last_name = '', gender 
         raise Exception('Invalid last name')
     if gender not in ['M', 'F', '']:
         raise Exception('Invalid gender')
+    if not isinstance(is_staff, bool):
+        raise Exception('Invalid user type (customer or staff).')
 
     # Establish db connection
     dao = DAO()
@@ -42,7 +44,8 @@ def add_user(username, email, password, first_name = '', last_name = '', gender 
                 first_name,
                 last_name,
                 gender,
-                phone
+                phone,
+                is_staff
             ) VALUES (
                 %(username)s,
                 %(email)s,
@@ -50,7 +53,8 @@ def add_user(username, email, password, first_name = '', last_name = '', gender 
                 %(first_name)s,
                 %(last_name)s,
                 %(gender)s,
-                %(phone)s
+                %(phone)s,
+                %(is_staff)s
             )"""
     cursor.execute(sql, {'username': username,
                     'email': email,
@@ -58,7 +62,8 @@ def add_user(username, email, password, first_name = '', last_name = '', gender 
                     'first_name': first_name,
                     'last_name': last_name,
                     'gender': gender,
-                    'phone': phone
+                    'phone': phone,
+                    'is_staff': is_staff
                     })
     dao.commit()
 

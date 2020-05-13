@@ -1,3 +1,7 @@
+"""
+This module serves as a gateway to other models while avoiding intricate import 
+"""
+
 import models.model_user as model_user
 import models.model_redeem_card as model_redeem_card
 import models.model_product as model_product

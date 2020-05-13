@@ -1,15 +1,15 @@
 import models.model_user as m
 
-def sign_up(username, email, password, first_name = '', last_name = '', gender = '', phone = ''):
+def sign_up(*args, **kwargs):
     try:
-        m.add_user(username, email, password, first_name, last_name, gender, phone)
+        m.add_user(*args, **kwargs)
     except Exception as e:
         return {'error': str(e)}
     return {'message': 'You account has been created successfully.'}
 
-def update_user_info(user_id, first_name = '', last_name = '', gender = '', phone = ''):
+def update_user_info(*args, **kwargs):
     try:
-        m.update_user_info(user_id, first_name, last_name, gender, phone)
+        m.update_user_info(*args, **kwargs)
     except Exception as e:
         return {'error': str(e)}
     return {'message': 'You account info has been updated successfully.'}
