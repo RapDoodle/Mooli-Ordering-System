@@ -1,6 +1,6 @@
 from models.DAO import DAO
 from utils.validation import is_money
-from models.shared import find_customer
+from models.shared import find_user
 
 import string
 from random import randint
@@ -93,9 +93,9 @@ def get_redeem_cards(limit = 0, offset = 0):
     result = cursor.fetchall()
     return result
 
-def redeem(customer_id, redeem_code):
+def redeem(user_id, redeem_code):
     # Clean the input data
-    customer_id = str(customer_id).strip()
+    user_id = str(user_id).strip()
     redeem_code = str(redeem_code).strip()
 
     # Find redeem card
@@ -104,17 +104,17 @@ def redeem(customer_id, redeem_code):
         raise Exception('Invalid redeen code.')
 
     # Find user
-    customer = find_customer(method = 'id', param = customer_id)
-    if customer is None:
-        raise Exception('Customer not found.')
+    user = find_user(method = 'id', param = user_id)
+    if user is None:
+        raise Exception('user not found.')
 
     # Establish db connection
     dao = DAO()
     cursor = dao.cursor()
 
-    sql = """UPDATE customer SET balance = %(new_balance)s WHERE customer_id = %(customer_id)s"""
-    new_balance = customer['balance'] + redeem_card['value']
-    cursor.execute(sql, {'new_balance': new_balance, 'customer_id': customer_id})
+    sql = """UPDATE user SET balance = %(new_balance)s WHERE user_id = %(user_id)s"""
+    new_balance = user['balance'] + redeem_card['value']
+    cursor.execute(sql, {'new_balance': new_balance, 'user_id': user_id})
     sql = """DELETE FROM redeem_card WHERE redeem_code = %(redeem_code)s"""
     cursor.execute(sql, {'redeem_code': redeem_code})
     dao.commit()
