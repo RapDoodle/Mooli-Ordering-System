@@ -148,7 +148,7 @@ def init_db_tables(connection):
             gender BINARY(1),
             phone VARCHAR(32),
             balance DECIMAL(8,2) DEFAULT 0.0,
-            is_staff BOOLEAN DEFAULT FALSE,
+            is_staff BOOLEAN DEFAULT FALSE NOT NULL,
             PRIMARY KEY (user_id),
             UNIQUE (username)
             )
@@ -185,10 +185,9 @@ def init_db_tables(connection):
         """CREATE TABLE IF NOT EXISTS `order`(
             order_id INT UNSIGNED AUTO_INCREMENT,
             total DECIMAL(8, 2),
-            discount DECIMAL(8, 2),
             actual_paid DECIMAL(8, 2),
             status INT,
-            purchased_date TIMESTAMP,
+            purchased_date DATETIME DEFAULT CURRENT_TIMESTAMP,
             PRIMARY KEY (order_id)
             )
         """,
@@ -198,6 +197,7 @@ def init_db_tables(connection):
             product_id INT UNSIGNED,
             order_id INT UNSIGNED,
             amount INT,
+            created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
             PRIMARY KEY (item_id),
             FOREIGN KEY (user_id) REFERENCES user(user_id),
             FOREIGN KEY (product_id) REFERENCES product(product_id),
