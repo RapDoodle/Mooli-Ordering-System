@@ -1,4 +1,4 @@
-import datetime
+import datetime as dt
 from models.DAO import DAO
 from utils.validation import is_money
 
@@ -60,7 +60,6 @@ def delete_coupon(coupon_code):
     dao.commit()
 
 def find_coupon(coupon_code):
-
     # Clean the input data
     coupon_code = str(coupon_code).strip()
 
@@ -93,3 +92,19 @@ def get_coupons(limit = 0, offset = 0):
     cursor.execute(sql)
     result = cursor.fetchall()
     return result
+
+def find_coupon_and_check_validity(coupon_code):
+    # Data clearning is guaranteened to happen within find_coupon
+    coupon = find_coupon(coupon_code)
+
+    if coupon is not None:
+        # Check if the coupon is active or has expired
+        current_time = dt.datetime.now()
+        activate_date = coupon['activate_date'] if coupon['activate_date'] is not None else dt.datetime(1970, 1, 1)
+        expire_date = coupon['expire_date'] if coupon['expire_date'] is not None else dt.datetime(9999, 12, 31)
+        if (current_time - activate_date).total_seconds() < 0:
+            raise Exception('The coupon is not activate yet.')
+        elif (expire_date - current_time).total_seconds() < 0:
+            raise Exception('The coupon has expired.')
+
+    return coupon

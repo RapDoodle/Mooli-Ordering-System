@@ -8,3 +8,5 @@ import tests.test_user
 import tests.test_redeem_card
 import tests.test_comment
 import tests.test_coupon
+import tests.test_item
+import tests.test_order
