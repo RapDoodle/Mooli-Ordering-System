@@ -5,7 +5,6 @@ from decimal import Decimal
 print('[UNIT TESTING] Testing: Product...')
 
 # The list of products should be empty
-# assert len(c.list_categories()) == 0
 assert c.add_product(product_name = 'Milk Tea',
                 description = 'The original flavor of milk tea.',
                 categories = [1, 2],

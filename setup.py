@@ -148,6 +148,7 @@ def init_db_tables(connection):
             gender BINARY(1),
             phone VARCHAR(32),
             balance DECIMAL(8,2) DEFAULT 0.0,
+            is_staff BOOLEAN DEFAULT FALSE,
             PRIMARY KEY (user_id),
             UNIQUE (username)
             )
