@@ -1,10 +1,10 @@
 from models.DAO import DAO
 from utils.validation import is_rating, is_valid_length
-from models.shared import find_customer, find_product
+from models.shared import find_user, find_product
 
-def add_comment(customer_id, product_id, rating, body = ''):
+def add_comment(user_id, product_id, rating, body = ''):
     # Clean input data
-    customer_id = str(customer_id).strip()
+    user_id = str(user_id).strip()
     product_id = str(product_id).strip()
     rating = str(rating).strip()
     body = str(body).strip()
@@ -19,10 +19,10 @@ def add_comment(customer_id, product_id, rating, body = ''):
     if not is_valid_length(body, 0, 140):
         raise Exception('Invalid body length.')
 
-    # Verify the validity of the customer_id
-    customer = find_customer(method = 'id', param = customer_id)
-    if customer is None:
-        raise Exception('Customer not found.')
+    # Verify the validity of the user_id
+    user = find_user(method = 'id', param = user_id)
+    if user is None:
+        raise Exception('user not found.')
 
     # Verify the product_id
     product = find_product('product_id', product_id)
@@ -34,17 +34,17 @@ def add_comment(customer_id, product_id, rating, body = ''):
     cursor = dao.cursor()
 
     sql = """INSERT INTO comment (
-        customer_id,
+        user_id,
         product_id,
         rating,
         body
     ) VALUES (
-        %(customer_id)s,
+        %(user_id)s,
         %(product_id)s,
         %(rating)s,
         %(body)s
     )"""
-    cursor.execute(sql, {'customer_id': customer_id,
+    cursor.execute(sql, {'user_id': user_id,
                         'product_id': product_id,
                         'rating': rating,
                         'body': body})

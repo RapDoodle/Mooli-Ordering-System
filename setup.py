@@ -138,8 +138,8 @@ def init_db_tables(connection):
             )
         """,
         """ALTER TABLE staff AUTO_INCREMENT=10000""",
-        """CREATE TABLE IF NOT EXISTS customer (
-            customer_id INT(8) UNSIGNED AUTO_INCREMENT,
+        """CREATE TABLE IF NOT EXISTS user (
+            user_id INT(8) UNSIGNED AUTO_INCREMENT,
             username VARCHAR(24) NOT NULL,
             email VARCHAR(254) NOT NULL,
             password_hash BINARY(60) NOT NULL,
@@ -148,11 +148,11 @@ def init_db_tables(connection):
             gender BINARY(1),
             phone VARCHAR(32),
             balance DECIMAL(8,2) DEFAULT 0.0,
-            PRIMARY KEY (customer_id),
+            PRIMARY KEY (user_id),
             UNIQUE (username)
             )
         """,
-        """ALTER TABLE customer AUTO_INCREMENT=1000000""",
+        """ALTER TABLE user AUTO_INCREMENT=1000000""",
         """CREATE TABLE IF NOT EXISTS category (
             category_id INT UNSIGNED AUTO_INCREMENT,
             category_name VARCHAR(32),
@@ -193,12 +193,12 @@ def init_db_tables(connection):
         """,
         """CREATE TABLE IF NOT EXISTS item (
             item_id INT UNSIGNED AUTO_INCREMENT,
-            customer_id INT(8) UNSIGNED,
+            user_id INT(8) UNSIGNED,
             product_id INT UNSIGNED,
             order_id INT UNSIGNED,
             amount INT,
             PRIMARY KEY (item_id),
-            FOREIGN KEY (customer_id) REFERENCES customer(customer_id),
+            FOREIGN KEY (user_id) REFERENCES user(user_id),
             FOREIGN KEY (product_id) REFERENCES product(product_id),
             FOREIGN KEY (order_id) REFERENCES `order`(order_id)
         )
@@ -220,13 +220,13 @@ def init_db_tables(connection):
         """,
         """CREATE TABLE IF NOT EXISTS comment (
             comment_id INT AUTO_INCREMENT,
-            customer_id INT(8) UNSIGNED,
+            user_id INT(8) UNSIGNED,
             product_id INT UNSIGNED,
             rating INT(1),
             body VARCHAR(140),
             created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
             PRIMARY KEY (comment_id),
-            FOREIGN KEY (customer_id) REFERENCES customer(customer_id),
+            FOREIGN KEY (user_id) REFERENCES user(user_id),
             FOREIGN KEY (product_id) REFERENCES product(product_id)
         )
         """,
