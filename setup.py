@@ -205,9 +205,10 @@ def init_db_tables(connection):
         """,
         """CREATE TABLE IF NOT EXISTS coupon (
             coupon_code VARCHAR(32),
-            value DECIMAL(8, 2),
-            threshold DECIMAL(3, 2),
-            percentage DECIMAL (3, 2),
+            value DECIMAL(8, 2) NOT NULL,
+            threshold DECIMAL(8, 2) NOT NULL,
+            activate_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+            expire_date DATETIME,
             PRIMARY KEY (coupon_code)
         )
         """,
@@ -221,8 +222,9 @@ def init_db_tables(connection):
             comment_id INT AUTO_INCREMENT,
             customer_id INT(8) UNSIGNED,
             product_id INT UNSIGNED,
-            rating DECIMAL(2,1),
+            rating INT(1),
             body VARCHAR(140),
+            created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
             PRIMARY KEY (comment_id),
             FOREIGN KEY (customer_id) REFERENCES customer(customer_id),
             FOREIGN KEY (product_id) REFERENCES product(product_id)

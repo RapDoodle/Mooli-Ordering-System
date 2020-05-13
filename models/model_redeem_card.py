@@ -105,7 +105,6 @@ def redeem(customer_id, redeem_code):
 
     # Find user
     customer = find_customer(method = 'id', param = customer_id)
-    print(customer)
     if customer is None:
         raise Exception('Customer not found.')
 

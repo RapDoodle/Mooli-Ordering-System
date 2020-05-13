@@ -11,6 +11,10 @@ def verify_regex(regex, d):
 def is_money(d):
     return verify_regex('^[0-9]+(\.[0-9]{1,2})?$', d)
 
+def is_rating(d):
+    # A rating should be an integer between 1 and 5
+    return verify_regex('^[1-5]$', d)
+
 def is_valid_email(d):
     return validate_email(d)
 
@@ -38,3 +42,4 @@ if __name__ == '__main__':
     print(is_valid_password('Testpassword123'))
     print(is_valid_username('1234567812345678123456789'))
     print(is_valid_email('bowenwu@gmail.com'))
+    print(is_rating(0))
