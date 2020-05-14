@@ -1,8 +1,8 @@
 import models.model_order as m
 import models.model_coupon as m_coupon
 
-print('[UNIT TESTING] Testing: Order...')
+print(' * Testing: Order...')
 
-m.place_order(1000000, 'MOOLI')
+m.place_order(10000, 'MOOLI')
 
-print('[UNIT TESTING] Order has passed all the tests')
+print(' ✓ Order has passed all the tests')
