@@ -25,3 +25,11 @@ def find_coupon(*args, **kwargs):
 def find_coupon_and_check_validity(*args, **kwargs):
     import models.model_coupon as model_coupon
     return model_coupon.find_coupon_and_check_validity(*args, **kwargs)
+
+def get_items_by_user_id(*args, **kwargs):
+    from models.model_item import get_items_by_user_id
+    return get_items_by_user_id(*args, **kwargs)
+
+def get_archive_index(*args, **kwargs):
+    from models.model_archive import get_archive_index
+    return get_archive_index(*args, **kwargs)

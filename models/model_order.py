@@ -1,6 +1,6 @@
 from utils.validation import is_money
 from models.DAO import DAO
-from models.shared import get_items_by_user_id, find_user, find_coupon_and_check_validity
+from models.shared import get_items_by_user_id, find_user, find_coupon_and_check_validity, get_items_by_user_id, get_archive_index
 
 def place_order(user_id, coupon_code = ''):
     # Clean the input data
@@ -37,6 +37,7 @@ def place_order(user_id, coupon_code = ''):
     dao = DAO()
     cursor = dao.cursor()
 
+    # Create new order
     sql = """INSERT INTO `order` (
         user_id,
         total,
@@ -52,6 +53,19 @@ def place_order(user_id, coupon_code = ''):
                         'total': total,
                         'actual_paid': actual_paid,
                         'status': 200})
+    # Retrive the newly inserted row
+    cursor.execute('SELECT LAST_INSERT_ID()')
+    order_id = cursor.fetchone()['LAST_INSERT_ID()']
+    cart_items = get_items_by_user_id(user_id = user_id, scope = 'cart')
+    update_sql = """UPDATE item SET
+                    product_id = NULL,
+                    product_name_snapshot = %(product_name_snapshot)s,
+                    product_price_snapshot = %(product_price_snapshot)s
+                    WHERE item_id = %(item_id)s"""
+    for item in cart_items:
+        cursor.execute(update_sql, {'product_name_snapshot': get_archive_index(item['product_name']),
+                                    'product_price_snapshot': get_archive_index(item['price']),
+                                    'item_id': item['item_id']})
     dao.commit()
 
 def place_redeem(user_id, amount):
@@ -157,7 +171,7 @@ def get_user_transaction_history(user_id):
     return result
 
 def get_order_details(order_id):
-    # Return 
+    # Return
     # Clean the input data
     user_id = str(user_id).strip()
 
