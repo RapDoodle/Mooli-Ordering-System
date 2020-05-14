@@ -129,7 +129,7 @@ def init_db_tables(connection):
     sqls = [
         """CREATE TABLE IF NOT EXISTS permission (permission_name VARCHAR(32), group_name VARCHAR(32))""",
         """CREATE TABLE IF NOT EXISTS staff (
-            staff_id INT(5) UNSIGNED AUTO_INCREMENT,
+            staff_id INT(5) AUTO_INCREMENT,
             username VARCHAR(24) NOT NULL,
             password_hash BINARY(60) NOT NULL,
             permission_group_name VARCHAR(32),
@@ -139,7 +139,7 @@ def init_db_tables(connection):
         """,
         """ALTER TABLE staff AUTO_INCREMENT=10000""",
         """CREATE TABLE IF NOT EXISTS user (
-            user_id INT(8) UNSIGNED AUTO_INCREMENT,
+            user_id INT AUTO_INCREMENT,
             username VARCHAR(24) NOT NULL,
             email VARCHAR(254) NOT NULL,
             password_hash BINARY(60) NOT NULL,
@@ -153,9 +153,9 @@ def init_db_tables(connection):
             UNIQUE (username)
             )
         """,
-        """ALTER TABLE user AUTO_INCREMENT=1000000""",
+        """ALTER TABLE user AUTO_INCREMENT=10000""",
         """CREATE TABLE IF NOT EXISTS category (
-            category_id INT UNSIGNED AUTO_INCREMENT,
+            category_id INT AUTO_INCREMENT,
             category_name VARCHAR(32),
             priority INT,
             PRIMARY KEY (category_id),
@@ -163,7 +163,7 @@ def init_db_tables(connection):
             )
         """,
         """CREATE TABLE IF NOT EXISTS product (
-            product_id INT UNSIGNED AUTO_INCREMENT,
+            product_id INT AUTO_INCREMENT,
             product_name VARCHAR(64) NOT NULL,
             description VARCHAR(140),
             price DECIMAL(8,2) DEFAULT 0.0,
@@ -176,26 +176,28 @@ def init_db_tables(connection):
             )
         """,
         """CREATE TABLE IF NOT EXISTS product_category (
-            product_id INT UNSIGNED,
-            category_id INT UNSIGNED,
+            product_id INT,
+            category_id INT,
             FOREIGN KEY (product_id) REFERENCES product(product_id),
             FOREIGN KEY (category_id) REFERENCES category(category_id)
             )
         """,
         """CREATE TABLE IF NOT EXISTS `order`(
-            order_id INT UNSIGNED AUTO_INCREMENT,
+            order_id INT AUTO_INCREMENT,
+            user_id INT NOT NULL,
             total DECIMAL(8, 2),
             actual_paid DECIMAL(8, 2),
             status INT,
-            purchased_date DATETIME DEFAULT CURRENT_TIMESTAMP,
-            PRIMARY KEY (order_id)
+            created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+            PRIMARY KEY (order_id),
+            FOREIGN KEY (user_id) REFERENCES user(user_id)
             )
         """,
         """CREATE TABLE IF NOT EXISTS item (
-            item_id INT UNSIGNED AUTO_INCREMENT,
-            user_id INT(8) UNSIGNED,
-            product_id INT UNSIGNED,
-            order_id INT UNSIGNED,
+            item_id INT AUTO_INCREMENT,
+            user_id INT NOT NULL,
+            product_id INT,
+            order_id INT,
             amount INT,
             created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
             PRIMARY KEY (item_id),
@@ -221,8 +223,8 @@ def init_db_tables(connection):
         """,
         """CREATE TABLE IF NOT EXISTS comment (
             comment_id INT AUTO_INCREMENT,
-            user_id INT(8) UNSIGNED,
-            product_id INT UNSIGNED,
+            user_id INT,
+            product_id INT,
             rating INT(1),
             body VARCHAR(140),
             created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -231,12 +233,19 @@ def init_db_tables(connection):
             FOREIGN KEY (product_id) REFERENCES product(product_id)
         )
         """,
+        """CREATE TABLE IF NOT EXISTS archive (
+            archive_index INT AUTO_INCREMENT,
+            value VARCHAR(255) UNIQUE,
+            PRIMARY KEY (archive_index)
+        )
+        """,
+        """CREATE INDEX idx_arvchive_value ON archive(value)""",
     ]
 
     for sql in sqls:
         cursor.execute(sql)
 
-    print('All tables has been correctly initialized.')
+    print('All tables have been correctly initialized.')
     connection.commit()
 
 def init_test_db():

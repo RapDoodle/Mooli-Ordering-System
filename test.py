@@ -10,3 +10,4 @@ import tests.test_comment
 import tests.test_coupon
 import tests.test_item
 import tests.test_order
+import tests.test_archive

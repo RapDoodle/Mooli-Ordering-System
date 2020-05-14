@@ -2,7 +2,7 @@ import models.model_product as m
 import controllers.controller_product as c
 from decimal import Decimal
 
-print('[UNIT TESTING] Testing: Product...')
+print(' * Testing: Product...')
 
 # The list of products should be empty
 assert c.add_product(product_name = 'Milk Tea',
@@ -89,4 +89,4 @@ assert len(c.get_all_products()) == 10
 assert c.remove_product('10') == {'message': 'The product has been removed successfully.'}
 assert len(c.get_all_products()) == 9
 
-print('[UNIT TESTING] Product has passed all the tests')
+print(' ✓ Product has passed all the tests')

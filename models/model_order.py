@@ -1,3 +1,4 @@
+from utils.validation import is_money
 from models.DAO import DAO
 from models.shared import get_items_by_user_id, find_user, find_coupon_and_check_validity
 
@@ -37,131 +38,156 @@ def place_order(user_id, coupon_code = ''):
     cursor = dao.cursor()
 
     sql = """INSERT INTO `order` (
+        user_id,
         total,
         actual_paid,
         status
     ) VALUES (
+        %(user_id)s,
         %(total)s,
         %(actual_paid)s,
         %(status)s
     )"""
-    cursor.execute(sql, {'total': total,
+    cursor.execute(sql, {'user_id':user_id,
+                        'total': total,
                         'actual_paid': actual_paid,
-                        'status': 0})
+                        'status': 200})
     dao.commit()
 
-# def update_item_amount(item_id, amount):
-#     # The function only changes the amount, not the item_id and product_id!!
-#     # Clean the input data
-#     item_id = str(item_id).strip()
-#     amount = str(amount).strip()
-#
-#     # Check is the input valid
-#     if not amount.isdecimal():
-#         raise Exception('Invalid input type.')
-#
-#     # Check for the existence of item
-#     cart_item = find_item_by_id(item_id)
-#     if cart_item is None:
-#         raise Exception('Cart item not found.')
-#     if cart_item['order_id'] is not None:
-#         raise Exception('Orderd item can not be altered.')
-#
-#     # Establish db connection
-#     dao = DAO()
-#     cursor = dao.cursor()
-#
-#     sql = """UPDATE item SET
-#             amount = %(amount)s
-#             WHERE item_id = %(item_id)s"""
-#     cursor.execute(sql, {'amount': amount,
-#                         'item_id': item_id})
-#     dao.commit()
-#
-# def remove_item(item_id):
-#     # Clean the input data
-#     item_id = str(item_id).strip()
-#
-#     # Check for existence
-#     if find_item_by_id(item_id) is None:
-#         raise Exception('Item not found.')
-#
-#     # Establish db connection
-#     dao = DAO()
-#     cursor = dao.cursor()
-#
-#     sql = """DELETE FROM item WHERE item_id = %(item_id)s"""
-#     cursor.execute(sql, {'item_id': item_id})
-#
-#     dao.commit()
-#
-# def get_items_by_user_id(user_id, scope):
-#     if scope not in ['cart', 'purchased', 'all']:
-#         raise Exception('Unknown method.')
-#
-#     # Clean the input data
-#     user_id = str(user_id).strip()
-#
-#     # Check for the existence of user
-#     if find_user(method = 'id', param = user_id) is None:
-#         raise Exception('Invalid user id.')
-#
-#     # Establish db connection
-#     dao = DAO()
-#     cursor = dao.cursor()
-#
-#     # Query database
-#     sql = ''
-#     if scope == 'cart':
-#         sql = """SELECT * FROM item WHERE
-#                 user_id = %(user_id)s AND
-#                 order_id IS NULL
-#                 ORDER BY created_at DESC"""
-#     elif scope == 'purchased':
-#         sql = """SELECT * FROM item WHERE
-#                 user_id = %(user_id)s AND
-#                 order_id IS NOT NULL
-#                 ORDER BY created_at DESC"""
-#     else:
-#         # Case: all
-#         sql = """SELECT * FROM item WHERE
-#                 user_id = %(user_id)s
-#                 ORDER BY created_at DESC"""
-#     cursor.execute(sql, {'user_id': user_id})
-#     result = cursor.fetchall()
-#     return result
-#
-# def find_cart_item_id(user_id, product_id):
-#     # NOTE: Cart items are items that are not purchased (without order_id)
-#     # Clean the input data
-#     user_id = str(user_id).strip()
-#     product_id = str(product_id).strip()
-#
-#     # Establish db connection
-#     dao = DAO()
-#     cursor = dao.cursor()
-#
-#     # Query database
-#     sql = """SELECT * FROM item WHERE
-#                 user_id = %(user_id)s AND
-#                 product_id = %(product_id)s AND
-#                 order_id IS NULL"""
-#     cursor.execute(sql, {'user_id': user_id,
-#                         'product_id': product_id})
-#     result = cursor.fetchone()
-#     return result
-#
-# def find_item_by_id(item_id):
-#     # Clean the input data
-#     item_id = str(item_id).strip()
-#
-#     # Establish db connection
-#     dao = DAO()
-#     cursor = dao.cursor()
-#
-#     # Query database
-#     sql = """SELECT * FROM item WHERE
-#                 item_id = %(item_id)s"""
-#     cursor.execute(sql, {'item_id': item_id})
-#     result = cursor.fetchone()
-#     return result
+def place_redeem(user_id, amount):
+    # Clean the input data
+    user_id = str(user_id).strip()
+    amount = str(amount).strip()
+
+    # Verify the amount
+    if not is_money(amount):
+        raise Exception('Invalid amount.')
+
+    # Verify the user_id
+    if find_user(method = 'id', param = user_id) is None:
+        raise Exception('Invalid user id.')
+
+    # Insert into order
+    # Establish db connection
+    dao = DAO()
+    cursor = dao.cursor()
+
+    sql = """INSERT INTO `order` (
+        user_id,
+        total,
+        actual_paid,
+        status
+    ) VALUES (
+        %(user_id)s,
+        %(total)s,
+        %(actual_paid)s,
+        %(status)s
+    )"""
+    # A status code of 100 means it is a desposite
+    cursor.execute(sql, {'user_id':user_id,
+                        'total': -amount,
+                        'actual_paid': 0,
+                        'status': 100})
+    dao.commit()
+
+
+def update_order_status(order_id, status):
+    # Clean the input data
+    order_id = str(order_id).strip()
+    status = str(status).strip()
+
+    # Check is the input valid
+    if not status.isdecimal():
+        raise Exception('Invalid input type.')
+
+    # Check for the existence of order
+    order = find_order_by_id(order_id)
+    if order is None:
+        raise Exception('Order not found.')
+
+    # Status code above or equal to 200 are normal orders
+    # Status code below 200 are for deposites
+    if (order['status'] - 200) * (int(status) - 200) < 0:
+        raise Exception('Invalid status update.')
+
+    # Establish db connection
+    dao = DAO()
+    cursor = dao.cursor()
+
+    sql = """UPDATE `order` SET
+            status = %(status)s
+            WHERE order_id = %(order_id)s"""
+    cursor.execute(sql, {'status': status,
+                        'order_id': order_id})
+    dao.commit()
+
+def delete_order(order_id):
+    # Clean the input data
+    order_id = str(order_id).strip()
+
+    # Check for existence
+    if find_order_by_id(order_id) is None:
+        raise Exception('Order not found.')
+
+    # Establish db connection
+    dao = DAO()
+    cursor = dao.cursor()
+
+    sql = """DELETE FROM `order` WHERE order_id = %(order_id)s"""
+    cursor.execute(sql, {'order_id': order_id})
+
+    dao.commit()
+
+def get_user_transaction_history(user_id):
+    # Clean the input data
+    user_id = str(user_id).strip()
+
+    # Check for the existence of user
+    if find_user(method = 'id', param = user_id) is None:
+        raise Exception('Invalid user id.')
+
+    # Establish db connection
+    dao = DAO()
+    cursor = dao.cursor()
+
+    # Query database
+    sql = """SELECT * FROM `order` WHERE user_id = %(user_id)s ORDER BY created_at DESC"""
+    cursor.execute(sql, {'user_id': user_id})
+    result = cursor.fetchall()
+    return result
+
+def get_order_details(order_id):
+    # Return 
+    # Clean the input data
+    user_id = str(user_id).strip()
+
+    # Check for the existence of order
+    order = find_order_by_id(order_id)
+    if order is None:
+        raise Exception('Order not found.')
+
+    # Establish db connection
+    dao = DAO()
+    cursor = dao.cursor()
+
+    # Query database
+    sql = """SELECT order.order_id, product.product_name,
+                FROM `order` WHERE user_id = %(user_id)s ORDER BY created_at DESC"""
+    cursor.execute(sql, {'user_id': user_id})
+    result = cursor.fetchall()
+    return result
+
+def find_order_by_id(order_id):
+    # Clean the input data
+    order_id = str(order_id).strip()
+
+    # Establish db connection
+    dao = DAO()
+    cursor = dao.cursor()
+
+    # Query database
+    sql = """SELECT * FROM `order` WHERE
+                order_id = %(order_id)s"""
+    cursor.execute(sql, {'order_id': item_id})
+    result = cursor.fetchone()
+    return result

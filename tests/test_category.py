@@ -1,6 +1,6 @@
 import controllers.controller_category as c
 
-print('[UNIT TESTING] Testing: Category...')
+print(' * Testing: Category...')
 
 # The list of category should be empty
 assert len(c.list_categories()) == 0
@@ -36,4 +36,4 @@ assert c.add_category('Dummy', '0') == {'message': 'The category has been added 
 assert c.remove_category('7') == {'message': 'The category has been removed successfully.'}
 assert c.remove_category('8') == {'error': 'The category does not exists.'}
 
-print('[UNIT TESTING] Category has passed all the tests')
+print(' ✓ Category has passed all the tests')
