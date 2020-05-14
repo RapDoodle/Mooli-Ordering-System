@@ -182,6 +182,13 @@ def init_db_tables(connection):
             FOREIGN KEY (category_id) REFERENCES category(category_id)
             )
         """,
+        """CREATE TABLE IF NOT EXISTS archive (
+            archive_index INT AUTO_INCREMENT,
+            value VARCHAR(255) UNIQUE,
+            PRIMARY KEY (archive_index)
+        )
+        """,
+        """CREATE INDEX idx_arvchive_value ON archive(value)""",
         """CREATE TABLE IF NOT EXISTS `order`(
             order_id INT AUTO_INCREMENT,
             user_id INT NOT NULL,
@@ -199,10 +206,14 @@ def init_db_tables(connection):
             product_id INT,
             order_id INT,
             amount INT,
+            product_name_snapshot INT,
+            product_price_snapshot INT,
             created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
             PRIMARY KEY (item_id),
             FOREIGN KEY (user_id) REFERENCES user(user_id),
             FOREIGN KEY (product_id) REFERENCES product(product_id),
+            FOREIGN KEY (product_name_snapshot) REFERENCES archive(archive_index),
+            FOREIGN KEY (product_price_snapshot) REFERENCES archive(archive_index),
             FOREIGN KEY (order_id) REFERENCES `order`(order_id)
         )
         """,
@@ -233,13 +244,6 @@ def init_db_tables(connection):
             FOREIGN KEY (product_id) REFERENCES product(product_id)
         )
         """,
-        """CREATE TABLE IF NOT EXISTS archive (
-            archive_index INT AUTO_INCREMENT,
-            value VARCHAR(255) UNIQUE,
-            PRIMARY KEY (archive_index)
-        )
-        """,
-        """CREATE INDEX idx_arvchive_value ON archive(value)""",
     ]
 
     for sql in sqls:
