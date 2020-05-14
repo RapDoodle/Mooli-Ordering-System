@@ -97,28 +97,6 @@
   </div>
 </div>
 
-<!-- Modal for message -->
-<div class="modal fade" id="messageModal" tabindex="-1" role="dialog" aria-labelledby="messageModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Message</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        {% for message in messages %}
-            <p id="returned-message">{{ message }}</p>
-        {% endfor %}
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-dismiss="modal">Confirm</button>
-      </div>
-    </div>
-  </div>
-</div>
-
 <table class="table table-bordered table-striped table-hover">
     <tr>
         <th>Category Name</th>
@@ -136,16 +114,14 @@
                         data-target="#editCategoryModal"
                         data-category-id="{{ category['category_id'] }}"
                         data-category-name="{{ category['category_name'] }}"
-                        data-category-priority="{{ category['priority'] }}"
-                        >Edit
+                        data-category-priority="{{ category['priority'] }}">Edit
                 </button>
                 <button type="button" class="btn btn-danger"
                         name="button-delete"
                         data-toggle="modal"
                         data-target="#deleteCategoryModal"
                         data-category-id="{{ category['category_id'] }}"
-                        data-category-name="{{ category['category_name'] }}"
-                        >Delete</button>
+                        data-category-name="{{ category['category_name'] }}">Delete</button>
             </td>
         </tr>
         {% endfor %}
@@ -170,9 +146,5 @@
         modal.find('#delete-confirm-message').text('Are you sure to delete the category named ' + button.data('category-name') + ' ?')
         modal.find('#category-id').val(button.data('category-id'))
     })
-
-    if ($('#returned-message').text().length > 0) {
-        $('#messageModal').modal('show')
-    }
 </script>
 {% endblock %}

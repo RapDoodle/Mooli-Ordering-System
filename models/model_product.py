@@ -27,7 +27,7 @@ def add_product(product_name, categories, price, priority, description = '', pic
 
     # Check if the item already exists
     if find_product('product_name', product_name) is not None:
-        raise Exception('The category already exists.')
+        raise Exception('The product already exists.')
 
     sql = """INSERT INTO product (
         product_name,
@@ -65,7 +65,7 @@ def add_product(product_name, categories, price, priority, description = '', pic
 
     dao.commit()
 
-def update_product(product_id, product_name, categories, price, priority, description, picture_uuid, thumbnail_uuid):
+def update_product(product_id, product_name, categories, price, priority, description='', picture_uuid='', thumbnail_uuid=''):
     # Clean the input data
     product_id = str(product_id).strip()
     product_name = str(product_name).strip()

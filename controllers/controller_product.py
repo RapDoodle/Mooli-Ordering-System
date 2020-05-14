@@ -1,15 +1,15 @@
 import models.model_product as m
 
-def add_product(product_name, categories, price, priority, description = '', picture_uuid = '', thumbnail_uuid = ''):
+def add_product(*args, **kwargs):
     try:
-        m.add_product(product_name, categories, price, priority, description, picture_uuid, thumbnail_uuid)
+        m.add_product(*args, **kwargs)
     except Exception as e:
         return {'error': str(e)}
     return {'message': 'The product has been added successfully.'}
 
-def update_product(product_id, product_name, categories, price, priority, description, picture_uuid, thumbnail_uuid):
+def edit_product(*args, **kwargs):
     try:
-        m.update_product(product_id, product_name, priority)
+        m.update_product(*args, **kwargs)
     except Exception as e:
         return {'error': str(e)}
     return {'message': 'The product information has been updated.'}

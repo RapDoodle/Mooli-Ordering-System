@@ -83,7 +83,7 @@ def setup():
         port = input('(Default: 80): ') or '80'
     print('\nWould you like to disable debugging on your server?')
     print('NOTE: Keep it disabled in production mode.')
-    debug = not y_n_choice('Your choice ')
+    debug = not y_n_choice('Your choice')
     config = {
         'DB_URL': db_url,
         'port': port,
@@ -95,6 +95,27 @@ def setup():
 
     with open(CONFIG_PATH, 'w') as profile:
         profile.write(json.dumps(config))
+
+    print('\nWould you like to setup superuser?')
+    if y_n_choice('Your choice'):
+        finish = False
+        while not finish:
+            print('\nPlease enter the username of the superuser.')
+            username = input()
+            print('\nPlease enter an email for the superuser.')
+            email = input()
+            print('\nPlease enter the password for the superuser.')
+            password_1 = input()
+            print('\nPlease enter the password for the superuser again.')
+            password_2 = input()
+            if password_1 != password_2:
+                print('\nPasswords do not match.')
+                continue
+            result = create_superuser(username, email, password_1)
+            if 'error' in result:
+                print('ERROR: ' + result['error'])
+                continue
+            finish = True
 
     print('\nSetup complted.')
 
@@ -251,6 +272,12 @@ def init_db_tables(connection):
 
     print('All tables have been correctly initialized.')
     connection.commit()
+
+def create_superuser(username, email, password):
+    # For the initialization of database
+    import utils.config_manager
+    from controllers.controller_user import sign_up
+    return sign_up(username = username, email = email, password = password, is_staff = True)
 
 def init_test_db():
     # Codes for performing unit testing
