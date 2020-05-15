@@ -49,3 +49,7 @@
 }
 
 a { color: inherit; } 
+
+.mainBodyPart{
+    margin-bottom: 65px;
+}
