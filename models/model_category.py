@@ -1,13 +1,14 @@
 from models.DAO import DAO
+from utils.exception import ValidationError
 
 def add_category(category_name, priority):
     # Clean the input data
-    category_name = str(category_name.strip())
-    priority = str(priority.strip())
+    category_name = str(category_name).strip()
+    priority = str(priority).strip()
 
     # Check is the input valid
     if not category_name or not priority.isdecimal():
-        raise Exception('Invalid input type.')
+        raise ValidationError('Invalid input type.')
 
     # Establish db connection
     dao = DAO()
@@ -15,7 +16,7 @@ def add_category(category_name, priority):
 
     # Check if the category already exists
     if find_category('category_name', category_name) is not None:
-        raise Exception('The category already exists.')
+        raise ValidationError('The category already exists.')
 
     sql = """INSERT INTO category (
         category_name,
@@ -35,14 +36,14 @@ def update_category(category_id, category_name, priority):
 
     # Check is the input valid
     if not category_name or not category_id or not priority.isdecimal():
-        raise Exception('Invalid input type.')
+        raise ValidationError('Invalid input type.')
 
     # Establish db connection
     dao = DAO()
     cursor = dao.cursor()
 
     if find_category('category_id', category_id) is None:
-        raise Exception('The category does not exists.')
+        raise ValidationError('The category does not exists.')
 
     sql = """UPDATE category SET category_name = %(category_name)s,
             priority = %(priority)s WHERE category_id = %(category_id)s"""
@@ -53,11 +54,11 @@ def update_category(category_id, category_name, priority):
 
 def remove_category(category_id):
     # Clean the input data
-    category_id = category_id.strip()
+    category_id = str(category_id).strip()
 
     # Check is the input valid
     if not category_id.isdecimal():
-        raise Exception('Invalid input type.')
+        raise ValidationError('Invalid input type.')
 
     # Establish db connection
     dao = DAO()
@@ -65,7 +66,7 @@ def remove_category(category_id):
 
     # Check if the category exists
     if find_category('category_id', category_id) is None:
-        raise Exception('The category does not exists.')
+        raise ValidationError('The category does not exists.')
 
     sql = """DELETE FROM category WHERE category_id = %(category_id)s"""
     cursor.execute(sql, {'category_id': category_id})
@@ -74,10 +75,10 @@ def remove_category(category_id):
 def find_category(method, param):
     # Check if the method is valid
     if method not in ['category_name', 'category_id']:
-        raise Exception('Invalid method')
+        raise ValidationError('Invalid method')
 
     # Clean the input data
-    param = param.strip()
+    param = str(param).strip()
 
     # Establish db connection
     dao = DAO()
