@@ -11,3 +11,5 @@ import tests.test_coupon
 import tests.test_item
 import tests.test_order
 import tests.test_archive
+import tests.test_role_permission
+import tests.test_staff

@@ -3,7 +3,7 @@ from models.DAO import DAO
 from utils.exception import ValidationError
 import utils.validation as validator
 
-def add_user(username, email, password, first_name = '', last_name = '', gender = '', phone = '', is_staff = False):
+def add_user(username, email, password, first_name = '', last_name = '', gender = '', phone = ''):
     """The function creates a user based on the information provided
     It retuns the user_id if the user if created successfully.
     """
@@ -29,8 +29,6 @@ def add_user(username, email, password, first_name = '', last_name = '', gender 
         raise ValidationError('Invalid last name')
     if gender not in ['M', 'F', '']:
         raise ValidationError('Invalid gender')
-    if not isinstance(is_staff, bool):
-        raise ValidationError('Invalid user type (customer or staff).')
 
     # Establish db connection
     dao = DAO()
@@ -48,8 +46,7 @@ def add_user(username, email, password, first_name = '', last_name = '', gender 
                 first_name,
                 last_name,
                 gender,
-                phone,
-                is_staff
+                phone
             ) VALUES (
                 %(username)s,
                 %(email)s,
@@ -57,8 +54,7 @@ def add_user(username, email, password, first_name = '', last_name = '', gender 
                 %(first_name)s,
                 %(last_name)s,
                 %(gender)s,
-                %(phone)s,
-                %(is_staff)s
+                %(phone)s
             )"""
     cursor.execute(sql, {'username': username,
                     'email': email,
@@ -66,10 +62,13 @@ def add_user(username, email, password, first_name = '', last_name = '', gender 
                     'first_name': first_name,
                     'last_name': last_name,
                     'gender': gender,
-                    'phone': phone,
-                    'is_staff': is_staff
+                    'phone': phone
                     })
+    cursor.execute('SELECT LAST_INSERT_ID()')
+    user_id = cursor.fetchone()['LAST_INSERT_ID()']
     dao.commit()
+
+    return user_id
 
 def update_user_info(user_id, first_name = '', last_name = '', gender = '', phone = ''):
     # Clean user input
