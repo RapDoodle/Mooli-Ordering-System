@@ -37,3 +37,7 @@ def get_items_by_user_id(*args, **kwargs):
 def get_archive_index(*args, **kwargs):
     from models.model_archive import get_archive_index
     return get_archive_index(*args, **kwargs)
+
+def find_role(*args, **kwargs):
+    from models.model_role import find_role
+    return find_role(*args, **kwargs)

@@ -52,10 +52,13 @@ def add_product(product_name, categories, price, priority, description = '', pic
                         'thumbnail_uuid': thumbnail_uuid,
                         'picture_uuid': picture_uuid,
                         })
+
     # Fetch the newly added id
     cursor.execute("""SELECT product_id FROM product WHERE product_name = %(product_name)s""",
             {'product_name': product_name})
-    product_id = cursor.fetchone()['product_id']
+    cursor.execute('SELECT LAST_INSERT_ID()')
+    product_id = cursor.fetchone()['LAST_INSERT_ID()']
+    
     # Create relationship between product and category
     sql = """INSERT INTO product_category(product_id, category_id) VALUES (
             %(product_id)s,
