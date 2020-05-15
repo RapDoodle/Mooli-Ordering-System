@@ -11,7 +11,7 @@ assert c.add_product(product_name = 'Milk Tea',
                 price = '9.99',
                 priority = '10',
                 picture_uuid = '6cbb04d1-0215-469d-b107-6a45e0ffebbf',
-                thumbnail_uuid = 'f6d6ba20-52dd-418e-9071-dfd93d62dd76') ==  {'message': 'The product has been added successfully.'}
+                thumbnail_uuid = 'f6d6ba20-52dd-418e-9071-dfd93d62dd76') ==  {'status': 200}
 m.add_product(product_name = 'Green Milk Tea',
                 description = 'Also known as the golden milk green.',
                 categories = [2],
@@ -83,10 +83,10 @@ assert c.add_product(product_name = 'Dummy',
                 description = 'Dummy',
                 categories = [1],
                 price = '24.99',
-                priority = '12') == {'message': 'The product has been added successfully.'}
+                priority = '12') == {'status': 200}
 assert m.find_product(method='product_name', param='Dummy') == {'product_id': 10, 'product_name': 'Dummy', 'description': 'Dummy', 'price': Decimal('24.99'), 'rating': None, 'thumbnail_uuid': '', 'picture_uuid': '', 'priority': 12}
 assert len(c.get_all_products()) == 10
-assert c.remove_product('10') == {'message': 'The product has been removed successfully.'}
+assert c.remove_product('10') == {'status': 200}
 assert len(c.get_all_products()) == 9
 
 print(' ✓ Product has passed all the tests')

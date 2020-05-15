@@ -1,4 +1,5 @@
 from models.DAO import DAO
+from utils.exception import ValidationError
 
 from utils.validation import is_rating, is_valid_length
 
@@ -9,7 +10,7 @@ def get_archive_index(value):
     # Verift the input data
     # Archive only support string of length 1 to 255
     if not is_valid_length(value, 1, 255):
-        raise Exception('Invalid length.')
+        raise ValidationError('Invalid length.')
 
     # Establish db connection
     dao = DAO()

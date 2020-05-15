@@ -1,8 +1,12 @@
 import bcrypt
 from models.DAO import DAO
+from utils.exception import ValidationError
 import utils.validation as validator
 
 def add_user(username, email, password, first_name = '', last_name = '', gender = '', phone = '', is_staff = False):
+    """The function creates a user based on the information provided
+    It retuns the user_id if the user if created successfully.
+    """
     # clean the data
     username = str(username).strip()
     email = str(email).strip()
@@ -14,26 +18,26 @@ def add_user(username, email, password, first_name = '', last_name = '', gender 
 
     # Verify user input
     if not validator.is_valid_username(username):
-        raise Exception('Invalid username.')
+        raise ValidationError('Invalid username.')
     if not validator.is_valid_email(email):
-        raise Exception('Invalid email.')
+        raise ValidationError('Invalid email.')
     if not validator.is_valid_password(password):
-        raise Exception('Invalid password.')
+        raise ValidationError('Invalid password.')
     if not validator.is_valid_length(first_name, 0, 24):
-        raise Exception('Invalid first name')
+        raise ValidationError('Invalid first name')
     if not validator.is_valid_length(last_name, 0, 24):
-        raise Exception('Invalid last name')
+        raise ValidationError('Invalid last name')
     if gender not in ['M', 'F', '']:
-        raise Exception('Invalid gender')
+        raise ValidationError('Invalid gender')
     if not isinstance(is_staff, bool):
-        raise Exception('Invalid user type (customer or staff).')
+        raise ValidationError('Invalid user type (customer or staff).')
 
     # Establish db connection
     dao = DAO()
     cursor = dao.cursor()
 
     if find_user('username', username) is not None:
-        raise Exception('The username was taken already.')
+        raise ValidationError('The username was taken already.')
 
     password_hash = hash_password(password)
 
@@ -75,11 +79,11 @@ def update_user_info(user_id, first_name = '', last_name = '', gender = '', phon
     phone = str(phone).strip()
 
     if not validator.is_valid_length(first_name, 0, 24):
-        raise Exception('Invalid first name')
+        raise ValidationError('Invalid first name')
     if not validator.is_valid_length(last_name, 0, 24):
-        raise Exception('Invalid last name')
+        raise ValidationError('Invalid last name')
     if gender not in ['M', 'F', '']:
-        raise Exception('Invalid gender')
+        raise ValidationError('Invalid gender')
 
     # Establish db connection
     dao = DAO()
@@ -91,7 +95,7 @@ def update_user_info(user_id, first_name = '', last_name = '', gender = '', phon
     result = cursor.fetchone()
 
     if result is None:
-        raise Exception('User not found.')
+        raise ValidationError('User not found.')
 
     # Update information in the database
     sql = """UPDATE user SET
@@ -112,7 +116,7 @@ def change_password(user_id, password):
     password = str(password).strip()
 
     if not validator.is_valid_password(password):
-        raise Exception('Invalid password.')
+        raise ValidationError('Invalid password.')
 
     # Establish db connection
     dao = DAO()
@@ -123,7 +127,7 @@ def change_password(user_id, password):
     result = cursor.fetchone()
 
     if result is None:
-        raise Exception('User not found.')
+        raise ValidationError('User not found.')
 
     password_hash = hash_password(password)
 
@@ -140,7 +144,7 @@ def verify_credential(param, password, method = 'username'):
 
     # Check type of verification
     if method not in ['username', 'user_id']:
-        raise Exception('Method not allowed.')
+        raise ValidationError('Method not allowed.')
 
     # Clean the data
     param = str(param).strip()
@@ -160,14 +164,14 @@ def verify_credential(param, password, method = 'username'):
     result = cursor.fetchone()
 
     if result is None:
-        raise Exception('Invalid username')
+        raise ValidationError('Invalid username')
     if not verify_password(password, result['password_hash']):
-        raise Exception('Invalid password')
+        raise ValidationError('Invalid password')
     return result['user_id']
 
 def find_user(method, param):
     if method not in ['username', 'id']:
-        raise Exception('Invalid method.')
+        raise ValidationError('Invalid method.')
 
     # Clean the input data
     param = str(param).strip()

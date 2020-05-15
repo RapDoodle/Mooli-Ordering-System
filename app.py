@@ -1,4 +1,5 @@
 from flask import Flask
+import utils.logger
 from flask_wtf.csrf import CSRFProtect
 import utils.config_manager as config
 

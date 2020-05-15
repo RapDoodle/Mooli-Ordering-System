@@ -1,5 +1,6 @@
 from utils.validation import is_money
 from models.DAO import DAO
+from utils.exception import ValidationError
 from models.shared import get_items_by_user_id, find_user, find_coupon_and_check_validity, get_items_by_user_id, get_archive_index
 
 def place_order(user_id, coupon_code = ''):
@@ -12,16 +13,16 @@ def place_order(user_id, coupon_code = ''):
 
     # If the user did input a coupon but the coupon is invalid
     if len(coupon_code) > 0 and coupon is None:
-        raise Exception('Invalid coupon code.')
+        raise ValidationError('Invalid coupon code.')
 
     # Check for the existence of user
     if find_user(method = 'id', param = user_id) is None:
-        raise Exception('Invalid user id.')
+        raise ValidationError('Invalid user id.')
 
     # Check the user's cart. If the item already exists, perform update instead of amount
     items = get_items_by_user_id(user_id = user_id, scope = 'cart')
     if len(items) == 0:
-        raise Exception('No item found in cart.')
+        raise ValidationError('No item found in cart.')
 
     # Calculate the total in the user's cart
     total = 0
@@ -75,11 +76,11 @@ def place_redeem(user_id, amount):
 
     # Verify the amount
     if not is_money(amount):
-        raise Exception('Invalid amount.')
+        raise ValidationError('Invalid amount.')
 
     # Verify the user_id
     if find_user(method = 'id', param = user_id) is None:
-        raise Exception('Invalid user id.')
+        raise ValidationError('Invalid user id.')
 
     # Insert into order
     # Establish db connection
@@ -112,17 +113,17 @@ def update_order_status(order_id, status):
 
     # Check is the input valid
     if not status.isdecimal():
-        raise Exception('Invalid input type.')
+        raise ValidationError('Invalid input type.')
 
     # Check for the existence of order
     order = find_order_by_id(order_id)
     if order is None:
-        raise Exception('Order not found.')
+        raise ValidationError('Order not found.')
 
     # Status code above or equal to 200 are normal orders
     # Status code below 200 are for deposites
     if (order['status'] - 200) * (int(status) - 200) < 0:
-        raise Exception('Invalid status update.')
+        raise ValidationError('Invalid status update.')
 
     # Establish db connection
     dao = DAO()
@@ -141,7 +142,7 @@ def delete_order(order_id):
 
     # Check for existence
     if find_order_by_id(order_id) is None:
-        raise Exception('Order not found.')
+        raise ValidationError('Order not found.')
 
     # Establish db connection
     dao = DAO()
@@ -158,7 +159,7 @@ def get_user_transaction_history(user_id):
 
     # Check for the existence of user
     if find_user(method = 'id', param = user_id) is None:
-        raise Exception('Invalid user id.')
+        raise ValidationError('Invalid user id.')
 
     # Establish db connection
     dao = DAO()
@@ -178,7 +179,7 @@ def get_order_details(order_id):
     # Check for the existence of order
     order = find_order_by_id(order_id)
     if order is None:
-        raise Exception('Order not found.')
+        raise ValidationError('Order not found.')
 
     # Establish db connection
     dao = DAO()

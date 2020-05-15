@@ -1,5 +1,6 @@
 # Software specific
 security/
+log/
 config.json
 
 # Byte-compiled / optimized / DLL files

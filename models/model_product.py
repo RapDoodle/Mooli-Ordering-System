@@ -1,5 +1,6 @@
 import utils.validation as validator
 from models.DAO import DAO
+from utils.exception import ValidationError
 
 def add_product(product_name, categories, price, priority, description = '', picture_uuid = '', thumbnail_uuid = ''):
     # Clean the input data
@@ -13,13 +14,13 @@ def add_product(product_name, categories, price, priority, description = '', pic
 
     # Check is the input valid
     if (not product_name) or (not description) or (not priority.isdecimal()) or (type(categories) is not list):
-        raise Exception('Invalid input type.')
+        raise ValidationError('Invalid input type.')
 
     if not validator.is_money(price):
-        raise Exception('Invalid pricing.')
+        raise ValidationError('Invalid pricing.')
 
     if len(categories) == 0:
-        raise Exception('The product should belong to at least one category.')
+        raise ValidationError('The product should belong to at least one category.')
 
     # Establish db connection
     dao = DAO()
@@ -27,7 +28,7 @@ def add_product(product_name, categories, price, priority, description = '', pic
 
     # Check if the item already exists
     if find_product('product_name', product_name) is not None:
-        raise Exception('The product already exists.')
+        raise ValidationError('The product already exists.')
 
     sql = """INSERT INTO product (
         product_name,
@@ -78,13 +79,13 @@ def update_product(product_id, product_name, categories, price, priority, descri
 
     # Check is the input valid
     if (not product_id) or (not product_name) or (not description) or (not priority.isdecimal()) or (type(categories) is not list):
-        raise Exception('Invalid input type.')
+        raise ValidationError('Invalid input type.')
 
     if not validator.is_money(price):
-        raise Exception('Invalid pricing.')
+        raise ValidationError('Invalid pricing.')
 
     if len(categories) == 0:
-        raise Exception('The product should belong to at least one category.')
+        raise ValidationError('The product should belong to at least one category.')
 
     # Establish db connection
     dao = DAO()
@@ -92,7 +93,7 @@ def update_product(product_id, product_name, categories, price, priority, descri
 
     # Check if the item exists
     if find_product('product_name', product_name) is None:
-        raise Exception('The category does not exists.')
+        raise ValidationError('The category does not exists.')
 
     sql = """UPDATE product SET
             product_name = %(product_name)s,
@@ -143,7 +144,7 @@ def remove_product(product_id):
 
 def get_products(method, param = ''):
     if method not in ['category_name', 'all']:
-        raise Exception('Invalid method')
+        raise ValidationError('Invalid method')
     # Clean the input data
     param = str(param).strip()
 
@@ -155,7 +156,7 @@ def get_products(method, param = ''):
     sql = ''
     if method == 'category_name':
         if not param:
-            raise Exception('The parameter can not be empty.')
+            raise ValidationError('The parameter can not be empty.')
         sql = """SELECT * FROM product, product_category, category
                  WHERE product.product_id = product_category.product_id
                     AND product_category.category_id = category.category_id
@@ -170,7 +171,7 @@ def get_products(method, param = ''):
 
 def find_product(method, param):
     if method not in ['product_name', 'product_id']:
-        raise Exception('Invalid method.')
+        raise ValidationError('Invalid method.')
     # Clean the input data
     param = str(param).strip()
 

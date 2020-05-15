@@ -8,6 +8,7 @@ SECURITY_PATH = './security'
 SECURITY_KEY_PATH = './security/key.key'
 SECURITY_CONFIG_PATH = './security/config.obj'
 CONFIG_PATH = './config.json'
+LOG_PATH = './log'
 
 def y_n_choice(msg = 'Do you want to continue?'):
     choice = input(msg + ' [Y/n] ')
@@ -46,6 +47,9 @@ def setup():
 
     if not os.path.exists(SECURITY_PATH):
         os.mkdir(SECURITY_PATH)
+
+    # Create the path for logging
+    os.mkdir(LOG_PATH)
 
     # Generate a random key for config encryption
     key = Fernet.generate_key()
