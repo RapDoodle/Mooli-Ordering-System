@@ -21,7 +21,7 @@
       }
 
 </style>
-<body>
+
 <div class="">
   <div class="row row-cols-3" style="height: 30px;">
   </div>
@@ -39,26 +39,98 @@
           font-family: 'SF Pro Text', Arial;">Account info</div>
       </div>
       <div class="col-3">
-        <button type="button" style="background-color: transparent;border: 1px solid transparent;"><font color="green" style="font-size: 20px;">save</font> </button>
+        <button type="button" style="background-color: transparent;border: 1px solid transparent;"><font color="green" style="font-size: 20px;font-family: 'SF Pro Text', Arial;">save</font> </button>
       </div>
   </div>
 
   <div class="row row-cols-3" style="height: 30px;">
   </div>
 
-  <div class="row row-cols-3" style="height: 120px;">
+  <div class="row row-cols-3" style="height: 80px;">
     <div class="col-3"></div>
-    <div class="col-6">
-      <img class="mb-4" src="/static/customer/test.jpg" alt="" width="158px" height="158px" style="border-radius:100%">
+    <div class="col-6" style="text-align: center;">
+      <img class="mb-4" src="/static/customer/test.jpg" alt="" width="130px" height="130px" style="border-radius:100%">
     </div>
     <div class="col-3"></div>
   </div>
 
-  </div> 
+  <div class="row row-cols-3" style="height: 60px;">
+  </div>
 
-    
-</div>
-</body>
+  <div class="row row-cols-3" style="height:50px;">
+    <div class="col-3"></div>
+    <div class="col-6" style="text-align: center;">
+      <button type="button" style="background-color: transparent;border: 1px solid transparent;font-family: Avenir, Arial;font-size: 14.00px;color: rgba(66, 202, 71, 1);">Change Avatar</button>
+    </div>
+    <div class="col-3"></div>
+  </div>
 
+<form action="/admin/dashboard/category/edit" method="post" id="edit-form">
+  <div class="row row-cols-3" style="height: 50px;">
+    <div class="col-3" style="text-align: right;font-size: 18.00px;padding-left: 25px;padding-top:5px;font-family: 'Open Sans', Arial;">
+      Name
+    </div>
+    <div class="col-9">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+      <input type="text" class="form-control" placeholder="Name" aria-label="Name" aria-describedby="addon-wrapping" style="font-family: Avenir, Arial;">
+    </div>
+  </div>
+
+  <div class="row row-cols-3" style="height: 50px;">
+    <div class="col-3" style="text-align: right;font-size: 18.00px;padding-left: 25px;padding-top:5px;font-family: 'Open Sans', Arial;">
+
+    </div>
+    <div class="col-9">
+      <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping" style="font-family: Avenir, Arial;">
+    </div>
+  </div>
+ 
+  <div class="row row-cols-3" style="height: 20px;"></div>
+
+  <div class="row row-cols-3" style="height: 50px;text-align: center;">
+    <div class="col-8" style="font-size: 18.00px;font-family: 'Open Sans', Arial;">
+      <b>Private information</b>
+    </div>
+    <div class="col-4"></div>
+  </div>
+
+  <div class="row row-cols-3" style="height: 50px;">
+    <div class="col-3" style="text-align: right;font-size: 18.00px;padding-left: 25px;padding-top:5px;font-family: 'Open Sans', Arial;">
+      Email
+    </div>
+    <div class="col-9">
+      <input type="text" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="addon-wrapping" style="font-family: Avenir, Arial;">
+    </div>
+  </div>
+
+  <div class="row row-cols-3" style="height: 50px;">
+    <div class="col-3" style="text-align: right;font-size: 18.00px;padding-left: 25px;padding-top:5px;font-family: 'Open Sans', Arial;">
+      Address
+    </div>
+    <div class="col-9">
+      <input type="text" class="form-control" placeholder="Address" aria-label="Address" aria-describedby="addon-wrapping" style="font-family: Avenir, Arial;">
+    </div>
+  </div>
+
+  <div class="row row-cols-3" style="height: 50px;">
+    <div class="col-3" style="text-align: right;font-size: 18.00px;padding-left: 25px;padding-top:5px;font-family: 'Open Sans', Arial;">
+      Phone
+    </div>
+    <div class="col-9">
+      <input type="text" class="form-control" placeholder="PhoneNumber" aria-label="PhoneNumber" aria-describedby="addon-wrapping" style="font-family: Avenir, Arial;">
+    </div>
+  </div>
+
+  <div class="row row-cols-3" style="height: 50px;">
+    <div class="col-3" style="text-align: right;font-size: 18.00px;padding-left: 25px;padding-top:5px;font-family: 'Open Sans', Arial;">
+      Gender
+    </div>
+    <div class="col-9">
+      <input type="text" class="form-control" placeholder="Gender" aria-label="Gender" aria-describedby="addon-wrapping" style="font-family: Avenir, Arial;">
+    </div>
+  </div>
+
+</form>
+</div> 
 {{ super() }}
 {% endblock %}
