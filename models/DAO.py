@@ -22,7 +22,7 @@ class DAO():
                                         cursorclass=pymysql.cursors.DictCursor)
             return self.__db
         except:
-            raise Exception('Unable to connect')
+            raise ValidationError('Unable to connect')
 
     def connection(self):
         return self.__db
@@ -36,3 +36,6 @@ class DAO():
     def __del__(self):
         if self.__db is not None:
             self.__db.close()
+
+class redisDAO():
+    pass

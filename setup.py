@@ -8,6 +8,7 @@ SECURITY_PATH = './security'
 SECURITY_KEY_PATH = './security/key.key'
 SECURITY_CONFIG_PATH = './security/config.obj'
 CONFIG_PATH = './config.json'
+LOG_PATH = './log'
 
 def y_n_choice(msg = 'Do you want to continue?'):
     choice = input(msg + ' [Y/n] ')
@@ -47,6 +48,9 @@ def setup():
     if not os.path.exists(SECURITY_PATH):
         os.mkdir(SECURITY_PATH)
 
+    # Create the path for logging
+    os.mkdir(LOG_PATH)
+
     # Generate a random key for config encryption
     key = Fernet.generate_key()
     key_file = open(SECURITY_KEY_PATH, 'wb')
@@ -73,7 +77,7 @@ def setup():
         print('The default configuration for you SSL certificate location is: ')
         print(' - Certificate Path: ./security/cert.pem')
         print(' - Private Key Path: ./security/privkey.pem')
-        print('We recommend storing the cetificates outside the project folder')
+        print('We recommend storing the TLS cetificates outside the project folder')
         print('For more information, please refer to the READEME included.')
     print('\nPlease enter the port the application will be running on')
     port = ''
@@ -83,7 +87,7 @@ def setup():
         port = input('(Default: 80): ') or '80'
     print('\nWould you like to disable debugging on your server?')
     print('NOTE: Keep it disabled in production mode.')
-    debug = not y_n_choice('Your choice ')
+    debug = not y_n_choice('Your choice')
     config = {
         'DB_URL': db_url,
         'port': port,
@@ -95,6 +99,27 @@ def setup():
 
     with open(CONFIG_PATH, 'w') as profile:
         profile.write(json.dumps(config))
+
+    print('\nWould you like to setup superuser?')
+    if y_n_choice('Your choice'):
+        finish = False
+        while not finish:
+            print('\nPlease enter the username of the superuser.')
+            username = input()
+            print('\nPlease enter an email for the superuser.')
+            email = input()
+            print('\nPlease enter the password for the superuser.')
+            password_1 = input()
+            print('\nPlease enter the password for the superuser again.')
+            password_2 = input()
+            if password_1 != password_2:
+                print('\nPasswords do not match.')
+                continue
+            result = create_superuser(username, email, password_1)
+            if 'error' in result:
+                print('ERROR: ' + result['error'])
+                continue
+            finish = True
 
     print('\nSetup complted.')
 
@@ -127,19 +152,8 @@ def init_db_tables(connection):
     cursor = connection.cursor()
 
     sqls = [
-        """CREATE TABLE IF NOT EXISTS permission (permission_name VARCHAR(32), group_name VARCHAR(32))""",
-        """CREATE TABLE IF NOT EXISTS staff (
-            staff_id INT(5) UNSIGNED AUTO_INCREMENT,
-            username VARCHAR(24) NOT NULL,
-            password_hash BINARY(60) NOT NULL,
-            permission_group_name VARCHAR(32),
-            PRIMARY KEY (staff_id),
-            UNIQUE (username)
-            )
-        """,
-        """ALTER TABLE staff AUTO_INCREMENT=10000""",
-        """CREATE TABLE IF NOT EXISTS customer (
-            customer_id INT(8) UNSIGNED AUTO_INCREMENT,
+        """CREATE TABLE IF NOT EXISTS user (
+            user_id INT AUTO_INCREMENT,
             username VARCHAR(24) NOT NULL,
             email VARCHAR(254) NOT NULL,
             password_hash BINARY(60) NOT NULL,
@@ -148,13 +162,30 @@ def init_db_tables(connection):
             gender BINARY(1),
             phone VARCHAR(32),
             balance DECIMAL(8,2) DEFAULT 0.0,
-            PRIMARY KEY (customer_id),
+            is_staff BOOLEAN DEFAULT FALSE NOT NULL,
+            PRIMARY KEY (user_id),
             UNIQUE (username)
             )
         """,
-        """ALTER TABLE customer AUTO_INCREMENT=1000000""",
+        """ALTER TABLE user AUTO_INCREMENT=10000""",
+        """CREATE TABLE IF NOT EXISTS permission (permission_id INT NOT NULL,
+            permission_name VARCHAR(32) NOT NULL,
+            PRIMARY KEY (permission_id))""",
+        """CREATE TABLE IF NOT EXISTS role (role_id INT NOT NULL,
+            role_name VARCHAR(32) NOT NULL,
+            PRIMARY KEY (role_id))""",
+        """CREATE TABLE IF NOT EXISTS role_permission (role_id INT NOT NULL,
+            permission_id INT NOT NULL,
+            FOREIGN KEY (role_id) REFERENCES role(role_id),
+            FOREIGN KEY (permission_id) REFERENCES permission(permission_id))""",
+        """CREATE TABLE IF NOT EXISTS staff (
+            user_id INT NOT NULL,
+            role_id INT NOT NULL,
+            FOREIGN KEY (user_id) REFERENCES user(user_id)
+            )
+        """,
         """CREATE TABLE IF NOT EXISTS category (
-            category_id INT UNSIGNED AUTO_INCREMENT,
+            category_id INT AUTO_INCREMENT,
             category_name VARCHAR(32),
             priority INT,
             PRIMARY KEY (category_id),
@@ -162,7 +193,7 @@ def init_db_tables(connection):
             )
         """,
         """CREATE TABLE IF NOT EXISTS product (
-            product_id INT UNSIGNED AUTO_INCREMENT,
+            product_id INT AUTO_INCREMENT,
             product_name VARCHAR(64) NOT NULL,
             description VARCHAR(140),
             price DECIMAL(8,2) DEFAULT 0.0,
@@ -175,56 +206,71 @@ def init_db_tables(connection):
             )
         """,
         """CREATE TABLE IF NOT EXISTS product_category (
-            product_id INT UNSIGNED,
-            category_id INT UNSIGNED,
+            product_id INT,
+            category_id INT,
             FOREIGN KEY (product_id) REFERENCES product(product_id),
             FOREIGN KEY (category_id) REFERENCES category(category_id)
             )
         """,
+        """CREATE TABLE IF NOT EXISTS archive (
+            archive_index INT AUTO_INCREMENT,
+            value VARCHAR(255) UNIQUE,
+            PRIMARY KEY (archive_index)
+        )
+        """,
+        """CREATE INDEX idx_arvchive_value ON archive(value)""",
         """CREATE TABLE IF NOT EXISTS `order`(
-            order_id INT UNSIGNED AUTO_INCREMENT,
+            order_id INT AUTO_INCREMENT,
+            user_id INT NOT NULL,
             total DECIMAL(8, 2),
-            discount DECIMAL(8, 2),
             actual_paid DECIMAL(8, 2),
             status INT,
-            purchased_date TIMESTAMP,
-            PRIMARY KEY (order_id)
+            created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+            PRIMARY KEY (order_id),
+            FOREIGN KEY (user_id) REFERENCES user(user_id)
             )
         """,
         """CREATE TABLE IF NOT EXISTS item (
-            item_id INT UNSIGNED AUTO_INCREMENT,
-            customer_id INT(8) UNSIGNED,
-            product_id INT UNSIGNED,
-            order_id INT UNSIGNED,
+            item_id INT AUTO_INCREMENT,
+            user_id INT NOT NULL,
+            product_id INT,
+            order_id INT,
             amount INT,
+            product_name_snapshot INT,
+            product_price_snapshot INT,
+            created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
             PRIMARY KEY (item_id),
-            FOREIGN KEY (customer_id) REFERENCES customer(customer_id),
+            FOREIGN KEY (user_id) REFERENCES user(user_id),
             FOREIGN KEY (product_id) REFERENCES product(product_id),
+            FOREIGN KEY (product_name_snapshot) REFERENCES archive(archive_index),
+            FOREIGN KEY (product_price_snapshot) REFERENCES archive(archive_index),
             FOREIGN KEY (order_id) REFERENCES `order`(order_id)
         )
         """,
         """CREATE TABLE IF NOT EXISTS coupon (
             coupon_code VARCHAR(32),
-            amount DECIMAL(8, 2),
-            threshold DECIMAL(3, 2),
-            percentage DECIMAL (3, 2),
+            value DECIMAL(8, 2) NOT NULL,
+            threshold DECIMAL(8, 2) NOT NULL,
+            activate_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+            expire_date DATETIME,
             PRIMARY KEY (coupon_code)
         )
         """,
         """CREATE TABLE IF NOT EXISTS redeem_card (
             redeem_code CHAR(16),
-            amount DECIMAL(8, 2),
+            value DECIMAL(8, 2),
             PRIMARY KEY (redeem_code)
         )
         """,
         """CREATE TABLE IF NOT EXISTS comment (
             comment_id INT AUTO_INCREMENT,
-            customer_id INT(8) UNSIGNED,
-            product_id INT UNSIGNED,
-            rating DECIMAL(2,1),
+            user_id INT,
+            product_id INT,
+            rating INT(1),
             body VARCHAR(140),
+            created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
             PRIMARY KEY (comment_id),
-            FOREIGN KEY (customer_id) REFERENCES customer(customer_id),
+            FOREIGN KEY (user_id) REFERENCES user(user_id),
             FOREIGN KEY (product_id) REFERENCES product(product_id)
         )
         """,
@@ -233,8 +279,14 @@ def init_db_tables(connection):
     for sql in sqls:
         cursor.execute(sql)
 
-    print('All tables has been correctly initialized.')
+    print('All tables have been correctly initialized.')
     connection.commit()
+
+def create_superuser(username, email, password):
+    # For the initialization of database
+    import utils.config_manager
+    from controllers.controller_user import sign_up
+    return sign_up(username = username, email = email, password = password, is_staff = True)
 
 def init_test_db():
     # Codes for performing unit testing
