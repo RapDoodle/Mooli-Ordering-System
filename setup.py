@@ -73,7 +73,7 @@ def setup():
         print('The default configuration for you SSL certificate location is: ')
         print(' - Certificate Path: ./security/cert.pem')
         print(' - Private Key Path: ./security/privkey.pem')
-        print('We recommend storing the cetificates outside the project folder')
+        print('We recommend storing the TLS cetificates outside the project folder')
         print('For more information, please refer to the READEME included.')
     print('\nPlease enter the port the application will be running on')
     port = ''
@@ -148,17 +148,6 @@ def init_db_tables(connection):
     cursor = connection.cursor()
 
     sqls = [
-        """CREATE TABLE IF NOT EXISTS permission (permission_name VARCHAR(32), group_name VARCHAR(32))""",
-        """CREATE TABLE IF NOT EXISTS staff (
-            staff_id INT(5) AUTO_INCREMENT,
-            username VARCHAR(24) NOT NULL,
-            password_hash BINARY(60) NOT NULL,
-            permission_group_name VARCHAR(32),
-            PRIMARY KEY (staff_id),
-            UNIQUE (username)
-            )
-        """,
-        """ALTER TABLE staff AUTO_INCREMENT=10000""",
         """CREATE TABLE IF NOT EXISTS user (
             user_id INT AUTO_INCREMENT,
             username VARCHAR(24) NOT NULL,
@@ -175,6 +164,22 @@ def init_db_tables(connection):
             )
         """,
         """ALTER TABLE user AUTO_INCREMENT=10000""",
+        """CREATE TABLE IF NOT EXISTS permission (permission_id INT NOT NULL,
+            permission_name VARCHAR(32) NOT NULL,
+            PRIMARY KEY (permission_id))""",
+        """CREATE TABLE IF NOT EXISTS role (role_id INT NOT NULL,
+            role_name VARCHAR(32) NOT NULL,
+            PRIMARY KEY (role_id))""",
+        """CREATE TABLE IF NOT EXISTS role_permission (role_id INT NOT NULL,
+            permission_id INT NOT NULL,
+            FOREIGN KEY (role_id) REFERENCES role(role_id),
+            FOREIGN KEY (permission_id) REFERENCES permission(permission_id))""",
+        """CREATE TABLE IF NOT EXISTS staff (
+            user_id INT NOT NULL,
+            role_id INT NOT NULL,
+            FOREIGN KEY (user_id) REFERENCES user(user_id)
+            )
+        """,
         """CREATE TABLE IF NOT EXISTS category (
             category_id INT AUTO_INCREMENT,
             category_name VARCHAR(32),
