@@ -1,5 +1,6 @@
 import utils.validation as validator
 from models.DAO import DAO
+from utils.exception import ValidationError
 from models.shared import find_user, find_product
 
 def add_item(user_id, product_id, amount):
@@ -10,13 +11,13 @@ def add_item(user_id, product_id, amount):
 
     # Check is the input valid
     if not user_id or not product_id or not amount.isdecimal():
-        raise Exception('Invalid input type.')
+        raise ValidationError('Invalid input type.')
 
     # Check for the existence of user and product
     if find_user(method = 'id', param = user_id) is None:
-        raise Exception('Invalid user id.')
+        raise ValidationError('Invalid user id.')
     if find_product(method = 'product_id', param = product_id) is None:
-        raise Exception('Invalid product.')
+        raise ValidationError('Invalid product.')
 
     # Check the user's cart. If the item already exists, perform update instead of amount
     item = find_cart_item_id(user_id, product_id)
@@ -49,14 +50,14 @@ def update_item_amount(item_id, amount):
 
     # Check is the input valid
     if not amount.isdecimal():
-        raise Exception('Invalid input type.')
+        raise ValidationError('Invalid input type.')
 
     # Check for the existence of item
     cart_item = find_cart_item_by_id(item_id)
     if cart_item is None:
-        raise Exception('Cart item not found.')
+        raise ValidationError('Cart item not found.')
     if cart_item['order_id'] is not None:
-        raise Exception('Orderd item can not be altered.')
+        raise ValidationError('Orderd item can not be altered.')
 
     # Establish db connection
     dao = DAO()
@@ -75,7 +76,7 @@ def remove_item(item_id):
 
     # Check for existence
     if find_cart_item_by_id(item_id) is None:
-        raise Exception('Item not found.')
+        raise ValidationError('Item not found.')
 
     # Establish db connection
     dao = DAO()
@@ -88,14 +89,14 @@ def remove_item(item_id):
 
 def get_items_by_user_id(user_id, scope):
     if scope not in ['cart', 'purchased', 'all']:
-        raise Exception('Unknown method.')
+        raise ValidationError('Unknown method.')
 
     # Clean the input data
     user_id = str(user_id).strip()
 
     # Check for the existence of user
     if find_user(method = 'id', param = user_id) is None:
-        raise Exception('Invalid user id.')
+        raise ValidationError('Invalid user id.')
 
     # Establish db connection
     dao = DAO()

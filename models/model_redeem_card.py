@@ -1,4 +1,5 @@
 from models.DAO import DAO
+from utils.exception import ValidationError
 from utils.validation import is_money
 from models.shared import find_user
 
@@ -22,7 +23,7 @@ def add_redeem_cards(value, batch = 1):
 
     # Check is the input valid
     if not is_money(value) or not batch.isdecimal():
-        raise Exception('Invalid input type.')
+        raise ValidationError('Invalid input type.')
 
     # Establish db connection
     dao = DAO()
@@ -52,7 +53,7 @@ def delete_redeem_card(redeem_code):
 
     # Check if the redeem card exists
     if find_redeem_card(redeem_code) is None:
-        raise Exception('The redeem card does not exists.')
+        raise ValidationError('The redeem card does not exists.')
 
     sql = """DELETE FROM redeem_card WHERE redeem_code = %(redeem_code)s"""
     cursor.execute(sql, {'redeem_code': redeem_code})
@@ -79,7 +80,7 @@ def get_redeem_cards(limit = 0, offset = 0):
     offset = str(offset).strip()
 
     if not limit.isdecimal() or not offset.isdecimal():
-        raise Exception('Invalid input.')
+        raise ValidationError('Invalid input.')
 
     # Establish db connection
     dao = DAO()
@@ -101,12 +102,12 @@ def redeem(user_id, redeem_code):
     # Find redeem card
     redeem_card = find_redeem_card(redeem_code)
     if redeem_card is None:
-        raise Exception('Invalid redeen code.')
+        raise ValidationError('Invalid redeen code.')
 
     # Find user
     user = find_user(method = 'id', param = user_id)
     if user is None:
-        raise Exception('user not found.')
+        raise ValidationError('user not found.')
 
     # Establish db connection
     dao = DAO()

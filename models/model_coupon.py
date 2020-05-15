@@ -1,5 +1,6 @@
 import datetime as dt
 from models.DAO import DAO
+from utils.exception import ValidationError
 from utils.validation import is_money
 
 def add_coupon(coupon_code, value, threshold, activate_date = None, expire_date = None):
@@ -10,14 +11,14 @@ def add_coupon(coupon_code, value, threshold, activate_date = None, expire_date 
 
     # Check is the input valid
     if not is_money(value):
-        raise Exception('Invalid value.')
+        raise ValidationError('Invalid value.')
     if not is_money(threshold):
-        raise Exception('Invalid threshold.')
+        raise ValidationError('Invalid threshold.')
     # TO-DO: Check for the validaty of time
 
     # Check the existence of the coupon
     if find_coupon(coupon_code) is not None:
-        raise Exception('The coupon code already exists.')
+        raise ValidationError('The coupon code already exists.')
 
     # Establish db connection
     dao = DAO()
@@ -53,7 +54,7 @@ def delete_coupon(coupon_code):
 
     # Check if the coupon exists
     if find_coupon(coupon_code) is None:
-        raise Exception('The coupon does not exists.')
+        raise ValidationError('The coupon does not exists.')
 
     sql = """DELETE FROM coupon WHERE coupon_code = %(coupon_code)s"""
     cursor.execute(sql, {'coupon_code': coupon_code})
@@ -79,7 +80,7 @@ def get_coupons(limit = 0, offset = 0):
     offset = str(offset).strip()
 
     if not limit.isdecimal() or not offset.isdecimal():
-        raise Exception('Invalid input.')
+        raise ValidationError('Invalid input.')
 
     # Establish db connection
     dao = DAO()
@@ -103,8 +104,8 @@ def find_coupon_and_check_validity(coupon_code):
         activate_date = coupon['activate_date'] if coupon['activate_date'] is not None else dt.datetime(1970, 1, 1)
         expire_date = coupon['expire_date'] if coupon['expire_date'] is not None else dt.datetime(9999, 12, 31)
         if (current_time - activate_date).total_seconds() < 0:
-            raise Exception('The coupon is not activate yet.')
+            raise ValidationError('The coupon is not activate yet.')
         elif (expire_date - current_time).total_seconds() < 0:
-            raise Exception('The coupon has expired.')
+            raise ValidationError('The coupon has expired.')
 
     return coupon

@@ -1,4 +1,5 @@
 from models.DAO import DAO
+from utils.exception import ValidationError
 from utils.validation import is_rating, is_valid_length
 from models.shared import find_user, find_product
 
@@ -11,23 +12,23 @@ def add_comment(user_id, product_id, rating, body = ''):
 
     # Verify the rating
     if not is_rating(rating):
-        raise Exception('Invalid rating.')
+        raise ValidationError('Invalid rating.')
 
     # Verify the length of body
     # The maximum length of the body is 140 characters (like a tweet)
     # TO-DO: Front-end must set the limit for the number of characters
     if not is_valid_length(body, 0, 140):
-        raise Exception('Invalid body length.')
+        raise ValidationError('Invalid body length.')
 
     # Verify the validity of the user_id
     user = find_user(method = 'id', param = user_id)
     if user is None:
-        raise Exception('user not found.')
+        raise ValidationError('user not found.')
 
     # Verify the product_id
     product = find_product('product_id', product_id)
     if product is None:
-        raise Exception('Product not found.')
+        raise ValidationError('Product not found.')
 
     # Establish db connection
     dao = DAO()
@@ -56,7 +57,7 @@ def remove_comment(comment_id):
 
     # Check does the comment exists
     if find_comment(comment_id) is None:
-        raise Exception('Comment not found.')
+        raise ValidationError('Comment not found.')
 
     # Establish db connection
     dao = DAO()
@@ -83,7 +84,7 @@ def find_comment(comment_id):
 
 def get_comments(method = 'product_id', param = '', limit = 0, offset = 0):
     if method not in ['product_id', 'all']:
-        raise Exception('Invalid method.')
+        raise ValidationError('Invalid method.')
 
     # Clean the input data
     param = str(param).strip()
@@ -91,7 +92,7 @@ def get_comments(method = 'product_id', param = '', limit = 0, offset = 0):
     offset = str(offset).strip()
 
     if not limit.isdecimal() or not offset.isdecimal():
-        raise Exception('Invalid input.')
+        raise ValidationError('Invalid input.')
 
     # Establish db connection
     dao = DAO()
