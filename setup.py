@@ -162,18 +162,19 @@ def init_db_tables(connection):
             gender BINARY(1),
             phone VARCHAR(32),
             balance DECIMAL(8,2) DEFAULT 0.0,
-            is_staff BOOLEAN DEFAULT FALSE NOT NULL,
             PRIMARY KEY (user_id),
             UNIQUE (username)
             )
         """,
         """ALTER TABLE user AUTO_INCREMENT=10000""",
-        """CREATE TABLE IF NOT EXISTS permission (permission_id INT NOT NULL,
+        """CREATE TABLE IF NOT EXISTS permission (permission_id INT AUTO_INCREMENT,
             permission_name VARCHAR(32) NOT NULL,
-            PRIMARY KEY (permission_id))""",
-        """CREATE TABLE IF NOT EXISTS role (role_id INT NOT NULL,
+            PRIMARY KEY (permission_id),
+            UNIQUE (permission_name))""",
+        """CREATE TABLE IF NOT EXISTS role (role_id INT NOT NULL AUTO_INCREMENT,
             role_name VARCHAR(32) NOT NULL,
-            PRIMARY KEY (role_id))""",
+            PRIMARY KEY (role_id),
+            UNIQUE (role_name))""",
         """CREATE TABLE IF NOT EXISTS role_permission (role_id INT NOT NULL,
             permission_id INT NOT NULL,
             FOREIGN KEY (role_id) REFERENCES role(role_id),
@@ -274,6 +275,23 @@ def init_db_tables(connection):
             FOREIGN KEY (product_id) REFERENCES product(product_id)
         )
         """,
+        # Triggers
+        """CREATE TRIGGER before_delete_role
+            BEFORE DELETE
+            ON role FOR EACH ROW
+            BEGIN
+                DELETE FROM role_permission WHERE
+                    role_permission.role_id = OLD.role_id;
+            END
+        """,
+        """CREATE TRIGGER before_delete_permission
+            BEFORE DELETE
+            ON permission FOR EACH ROW
+            BEGIN
+                DELETE FROM role_permission WHERE
+                    role_permission.permission_id = OLD.permission_id;
+            END
+        """
     ]
 
     for sql in sqls:
