@@ -12,7 +12,8 @@
             .list-group > .list-group {
                 display: none;
                 margin-bottom: 0;
-                }
+            }
+
             .list-group-item:focus-within + .list-group {
                 display: block;
             }
@@ -47,7 +48,7 @@
                 </ul>
                 <ul class="nav navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Logout</a>
+                        <a class="nav-link" href="{{ url_for('admin_view.logout') }}">Logout</a>
                     </li>
                 </ul>
               </div>
@@ -112,12 +113,40 @@
                 </div>
             </div>
         </div>
+
         <script src="/static/bootstrap-4.4.1/js/jquery-3.4.1.slim.min.js"></script>
         <script src="/static/bootstrap-4.4.1/js/popper.min.js"></script>
         <script src="/static/bootstrap-4.4.1/js/bootstrap.min.js"></script>
-
         {% block script %}
 
         {% endblock %}
+
+        <!-- Modal for message -->
+        <div class="modal fade" id="messageModal" tabindex="-1" role="dialog" aria-labelledby="messageModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Message</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                {% for message in messages %}
+                    <p id="returned-message">{{ message }}</p>
+                {% endfor %}
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Confirm</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <script type="text/javascript">
+            if ($('#returned-message').text().length > 0) {
+                $('#messageModal').modal('show')
+            }
+        </script>
     </body>
 </html>
