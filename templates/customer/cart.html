@@ -4,6 +4,9 @@
 
 {% block custom_css %}
 <style>
+    a:hover{
+        text-decoration: none;
+    }
     .title {
     
     text-align: center;
@@ -349,17 +352,17 @@ height: 14.14px;
 
 
 <div class="row" style="height:100px;text-align: center;">
-    <div class="card w-75" style="background-color: rgba(249, 250, 251, 1);filter: drop-shadow(0px 10px 15px rgba(27, 28, 32, 0.10196078431372549));left: 12.5%;border: 0px;">
+    <div class="card" style="background-color: rgba(249, 250, 251, 1);filter: drop-shadow(0px 10px 15px rgba(27, 28, 32, 0.10196078431372549));left: 7.5%;border: 0px; width: 85%;">
         <div class="card-body">
             <div class="row" style="height: 50px;">
                 <div class="col-5" style="text-align: left;">
                     <div><img src="../../static/customer/card.png" alt="pic lost" style="width: 100px;height: 75px; filter: drop-shadow(0px 10px 15px rgba(27, 28, 32, 0.050980392156862744));background-size: cover;"></div>
                 </div>
                 <div class="col-4" >
-                    <div class="cardTextBox">                
+                    <div class="cardTextBox">
                         <div class="bubbleMilkTea" style="text-align:left;">Bubble Milk Tea</div>
                         <div class="xd5bb8192">&nbsp;$12.99</div>
-                    </div> 
+                    </div>
                 </div>
                 <div class="col-3" style="text-align: right;top: -6px;right: -16px;">
                     <a href="#">
@@ -373,7 +376,7 @@ height: 14.14px;
                 </div>
                 <div class="col-4">
                     <div class="x2">2</div>
-                    <div class="group2548">    
+                    <div class="group2548">
                         <a href="#">
                             <div class="rectangle689"></div>
                             <svg preserveAspectRatio="none" viewBox="12.50000286102295 13 9 8.998001098632812" class="path1157"><path d="M 21.16667175292969 16.99911308288574 L 17.33333778381348 16.99911308288574 L 17.33333778381348 13.33326053619385 C 17.33333778381348 13.14897060394287 17.18400192260742 13 17.00000381469727 13 C 16.81600189208984 13 16.66666793823242 13.14896869659424 16.66666793823242 13.33326053619385 L 16.66666793823242 16.99911308288574 L 12.83333683013916 16.99911308288574 C 12.64933586120605 16.99911308288574 12.50000286102295 17.14808082580566 12.50000286102295 17.33236694335938 C 12.50000286102295 17.51666450500488 12.64933586120605 17.6656322479248 12.83333683013916 17.6656322479248 L 16.66666793823242 17.6656322479248 L 16.66666793823242 21.66473770141602 C 16.66666793823242 21.84903526306152 16.81600189208984 21.99800109863281 17.00000381469727 21.99800109863281 C 17.18400192260742 21.99800109863281 17.33333778381348 21.84903526306152 17.33333778381348 21.66473770141602 L 17.33333778381348 17.6656322479248 L 21.16667175292969 17.6656322479248 C 21.35066795349121 17.6656322479248 21.50000381469727 17.51666450500488 21.50000381469727 17.33236694335938 C 21.50000381469727 17.14808082580566 21.35066795349121 16.99911308288574 21.16667175292969 16.99911308288574 Z"  /></svg>
@@ -383,7 +386,7 @@ height: 14.14px;
                         <a href="#">
                             <div class="rectangle688"></div>
                             <svg preserveAspectRatio="none" viewBox="12 25.00000762939453 12 0.8000030517578125" class="path1626"><path d="M 23.57143020629883 25.00000762939453 L 12.42857456207275 25.00000762939453 C 12.19200325012207 25.00000762939453 12 25.17881011962891 12 25.40000534057617 C 12 25.62120819091797 12.19200325012207 25.80000686645508 12.42857456207275 25.80000686645508 L 23.57143020629883 25.80000686645508 C 23.80799674987793 25.80000686645508 24 25.62120819091797 24 25.40000534057617 C 24 25.17881011962891 23.80799674987793 25.00000762939453 23.57143020629883 25.00000762939453 Z"  /></svg>
-                        </a>                    
+                        </a>
                     </div>
                 </div>
                 <div class="col-2" style="left:-10px">
@@ -397,8 +400,8 @@ height: 14.14px;
 <div class="card fixed-bottom" style="
 background-color: rgba(249, 250, 251, 1);
 filter: drop-shadow(10px 0px 15px rgba(0, 0, 0, 0.10196078431372549));
-height: 333.00px;">
-    <div class="card-body">
+height: 333.00px;border: none;border-radius: 20px;">
+    <div class="card-body" >
         <div class="row" style="height: 20px;"></div>
         <div class="row" >
             <div class="col-12" style="text-align: left;
@@ -481,6 +484,7 @@ height: 333.00px;">
                     font-style: normal;
                     font-family: 'SF Pro Text', Arial;
                     color: rgba(255, 255, 255, 1);">
+                    
                     <a href="#">Proceed to Pay</a>
                 </div>
             </div>
