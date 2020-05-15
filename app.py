@@ -1,4 +1,5 @@
 from flask import Flask
+import utils.logger
 from flask_wtf.csrf import CSRFProtect
 import utils.config_manager as config
 
@@ -19,6 +20,6 @@ if __name__ == '__main__':
 	debug = config.get('debug')
 	if config.get('enable_https'):
 		ssl_context = (config.get('cert_path'), config.get('private_key_path'))
-		app.run(port = port, debug = debug, ssl_context = ssl_context)
+		app.run(host = '0.0.0.0', port = port, debug = debug, ssl_context = ssl_context)
 	else:
 		app.run(host = '0.0.0.0', port = port, debug = debug)
