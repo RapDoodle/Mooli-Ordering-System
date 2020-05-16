@@ -1,5 +1,6 @@
 from functools import wraps
 from utils.logger import log_error
+import sys, traceback
 
 class ValidationError(Exception):
     """The exception will be raised when a validation failed in models"""
@@ -26,6 +27,7 @@ def excpetion_handler(fn):
             return {'error': str(e)}
         except Exception as e:
             log_error(str(e))
+            traceback.print_exc(file=sys.stdout)
             return {'error': 'Internal error.'}
         return {'status': 200}
     return handler

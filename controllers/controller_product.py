@@ -21,8 +21,8 @@ def get_products_by_id(product_id):
     return return_dict
 
 @excpetion_handler
-def get_products_by_category(category_name):
-    return_dict = m.get_products('category_name', category_name)
+def get_products_by_category_id(category_id):
+    return_dict = m.get_products('category_id', category_id)
     if len(return_dict) == 0:
         return []
     return return_dict

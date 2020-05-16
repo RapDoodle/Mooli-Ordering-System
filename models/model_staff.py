@@ -34,3 +34,39 @@ def add_staff(username, email, password, role_id, first_name = '', last_name = '
     dao.commit()
 
     return user_id
+
+def find_staff(param, method):
+    """The function finds the staff according the staff's user_id or username
+
+    The return dict contains: user_id, staff_id, and username
+    """
+
+    # Check if the method is valid
+    if method not in ['staff_id', 'username']:
+        raise ValidationError('Invalid method.')
+
+    # Clean user input
+    param = str(param).strip()
+
+    # Establish db connection
+    dao = DAO()
+    cursor = dao.cursor()
+
+    # Query db for role
+    sql = ''
+    if method == 'staff_id':
+        sql = """WITH s_u (user_id, username) AS (
+                    SELECT user_id, username FROM user WHERE user_id = %(param)s
+                )
+                SELECT staff.user_id, staff.role_id, s_u.username FROM staff, s_u WHERE
+                    staff.user_id = s_u.user_id"""
+    else:
+        sql = """WITH s_u (user_id, username) AS (
+                    SELECT user_id, username FROM user WHERE username = %(param)s
+                )
+                SELECT staff.user_id, staff.role_id, s_u.username FROM staff, s_u WHERE
+                    staff.user_id = s_u.user_id"""
+    cursor.execute(sql, {'param': param})
+    result = cursor.fetchone()
+
+    return result
