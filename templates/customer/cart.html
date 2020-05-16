@@ -22,6 +22,17 @@
   
     
 }
+
+.form-control:focus{
+    border-color:#ced4da;
+    webkit-box-shadow:none;
+    box-shadow:none;
+    background-color: #cddc0000;
+}
+.button1:focus{
+    border:none;
+    box-shadow:none;
+}
 .leftArrow {
     
 
@@ -143,11 +154,11 @@ box-shadow: none;
 overflow-x: unset;
 overflow-y: unset;
 white-space: pre;
-width: 8.00px;
+width: 25.00px;
 height: 20.00px;
-left: 37.82px;
+left: 28.82px;
 top: 0.00px;
-
+text-align: center;
 }
 
 .group2548 {
@@ -356,11 +367,11 @@ height: 14.14px;
 
 
 <div class="row" style="text-align: center;">
-    <div class="card" style="background-color: rgba(249, 250, 251, 1);filter: drop-shadow(0px 10px 15px rgba(27, 28, 32, 0.10196078431372549));left: 7.5%;border: 0px; width: 85%;">
+    <div class="card" style="border-radius: 20px;background-color: rgba(249, 250, 251, 1);filter: drop-shadow(0px 10px 15px rgba(27, 28, 32, 0.10196078431372549));left: 7.5%;border: 0px; width: 85%;">
         <div class="card-body">
             <div class="row" style="height: 50px;">
                 <div class="col-5" style="text-align: left;">
-                    <div><img src="../../static/customer/card.png" alt="pic lost" style="width: 100px;height: 75px; filter: drop-shadow(0px 10px 15px rgba(27, 28, 32, 0.050980392156862744));background-size: cover;"></div>
+                    <div><img src="../../static/customer/card.png" alt="pic lost" style="width: 100px;height: 75px; filter: drop-shadow(0px 10px 15px rgba(27, 28, 32, 0.050980392156862744));background-size: cover;border-radius: 20px;"></div>
                 </div>
                 <div class="col-4" >
                     <div class="cardTextBox">
@@ -379,7 +390,7 @@ height: 14.14px;
                 <div class="col-6">
                 </div>
                 <div class="col-4">
-                    <div class="x2">2</div>
+                        <input type="text" value="2" class="x2 form-control" >
                     <div class="group2548">
                         <a href="#">
                             <div class="rectangle689"></div>
@@ -471,25 +482,26 @@ height: 333.00px;border: none;border-radius: 20px;">
         <div class="row">
             <div class="col-3"></div>
             
-            <div class="col-6" style="background-color: rgba(238, 219, 185, 1);
-                border-top-style: none;
-                border-top-width: 1.00px;
-                border-top-left-radius: 50.00px;
-                border-top-right-radius: 50.00px;
-                border-bottom-left-radius: 50.00px;
-                border-bottom-right-radius: 50.00px;
-                filter: drop-shadow(0px 3px 20px rgba(0, 0, 0, 0.08235294117647059));
-                height: 41.96px;">
+            <div class="col-6">
 
                 <div style="text-align: center;line-height: 41.96px;
-                    filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.1607843137254902));
                     font-size: 14.00px;
                     font-weight: 400;
                     font-style: normal;
                     font-family: 'SF Pro Text', Arial;
-                    color: rgba(255, 255, 255, 1);">
-                    
-                    <a href="#">Proceed to Pay</a>
+                    ">
+                    <input type="submit" class="btn btn-warning button1" value="Proceed to Pay" style="color: rgba(255, 255, 255, 1);
+                    background-color: rgba(238, 219, 185, 1);
+                    border-top-style: none;
+                    border-top-width: 1.00px;
+                    border-radius: 50.00px;
+                    filter: drop-shadow(0px 3px 20px rgba(0, 0, 0, 0.08235294117647059));
+                    height: 41.96px;
+                    border-color: rgba(249, 250, 251, 1);
+                    width: 152.67px;
+                    border-width: 0px;
+                    border-bottom: none;
+                    ">
                 </div>
             </div>
             <div class="col-3"></div>
