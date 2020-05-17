@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0 ">
+    <link rel="stylesheet" href="/static/bootstrap-4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/customer/navbar.css">
+    <link href="/static/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    {% block custom_css %}{% endblock %}
+    <title>{% block title %}{% endblock %} - Mooli</title>
+    {% block custom_style %}{% endblock %}
+    <style media="screen">
+      .list-group > .list-group {
+        display: none;
+        margin-bottom: 0;
+      }
+
+      .list-group-item:focus-within + .list-group {
+        display: block;
+      }
+
+      .list-group > .list-group-item {
+        border-radius: 0;
+        border-width: 1px 0 0 0;
+      }
+
+      .list-group > .list-group-item:first-child {
+        border-top-width: 0;
+      }
+
+      .list-group  > .list-group > .list-group-item {
+        padding-left: 2.5rem;
+      }
+    </style>
+  </head>
+  <body data-gr-c-s-loaded="true">
+    <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+      <a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3" href="#">Company name</a>
+      <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-toggle="collapse" data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+      </button>
+      <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+      <ul class="navbar-nav px-3">
+      <li class="nav-item text-nowrap">
+        <a class="nav-link" href="#">Sign out</a>
+      </li>
+      </ul>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+          <div class="sidebar-sticky pt-3">
+            <ul class="nav flex-column">
+              <li class="nav-item">
+              <a class="nav-link active" href="">
+                <i class="fa fa-dashboard"></i> Dashboard <span class="sr-only">(current)</span>
+              </a>
+              </li>
+              <li class="nav-item">
+              <a class="nav-link" href="#">
+                Orders
+              </a>
+              </li>
+              <li class="nav-item">
+              <a class="nav-link" href="">
+                Products
+              </a>
+              </li>
+              <li class="nav-item">
+              <a class="nav-link" href="">
+                Categories
+              </a>
+              </li>
+              <li class="nav-item">
+              <a class="nav-link" href="#">
+                Customers
+              </a>
+              </li>
+            </ul>
+
+            <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+              <span>Reports</span>
+              <a class="d-flex align-items-center text-muted" href="#">
+              </a>
+            </h6>
+            <ul class="nav flex-column mb-2">
+              <li class="nav-item">
+              <a class="nav-link" href="#">
+                Current month
+              </a>
+              </li>
+              <li class="nav-item">
+              <a class="nav-link" href="#">
+                Overall
+              </a>
+              </li>
+            </ul>
+            </div>
+        </nav>
+        <div class="col-md-10">
+          {% block content %}
+
+          {% endblock %}
+        </div>
+      </div>
+    </div>
+
+    <script src="/static/bootstrap-4.4.1/js/jquery-3.4.1.slim.min.js"></script>
+    <script src="/static/bootstrap-4.4.1/js/popper.min.js"></script>
+    <script src="/static/bootstrap-4.4.1/js/bootstrap.min.js"></script>
+    {% block script %}
+
+    {% endblock %}
+
+    <!-- Modal for message -->
+    <div class="modal fade" id="messageModal" tabindex="-1" role="dialog" aria-labelledby="messageModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+        <h5 class="modal-title">Message</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        </div>
+        <div class="modal-body">
+        {% for message in messages %}
+          <p id="returned-message">{{ message }}</p>
+        {% endfor %}
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Confirm</button>
+        </div>
+      </div>
+      </div>
+    </div>
+
+    <script type="text/javascript">
+      if ($('#returned-message').text().length > 0) {
+        $('#messageModal').modal('show')
+      }
+    </script>
+  </body>
+</html>

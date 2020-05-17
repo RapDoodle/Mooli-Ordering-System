@@ -41,3 +41,7 @@ def get_archive_index(*args, **kwargs):
 def find_role(*args, **kwargs):
     from models.model_role import find_role
     return find_role(*args, **kwargs)
+
+def find_staff(*args, **kwargs):
+    from models.model_staff import find_staff
+    return find_staff(*args, **kwargs)
