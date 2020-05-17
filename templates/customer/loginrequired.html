@@ -5,6 +5,19 @@
 {% block custom_css %}
 <style>
 
+a:hover{
+    text-decoration: none;
+}
+.btn:focus,.btn:active:focus,.btn.active:focus,.btn.focus,.btn:active.focus,.btn.active.focus {    outline: none;    border-color: transparent;    box-shadow:none;}
+.form-control:focus{
+    border-color:#ced4da;
+    box-shadow:none;
+    background-color: #cddc0000;
+    
+}
+.form-control{
+    display: inline-block;
+}
 
 .path663e31f9ba {
       fill: rgba(238, 219, 185, 1);
@@ -44,37 +57,33 @@
 
 <div class="row" style="text-align: center;">
     <div class="col-12" style="text-align: center;">
-        <a href="#">            
-        <svg preserveAspectRatio="none" viewBox="0 0 280 50" class="path663e31f9ba"><path d="M 26.64974212646484 0 L 253.3502349853516 0 C 268.0685119628906 0 280 11.1928825378418 280 25 C 280 38.8071174621582 268.0685119628906 50 253.3502349853516 50 L 26.64974212646484 50 C 11.93149757385254 50 0 38.8071174621582 0 25 C 0 11.1928825378418 11.93149757385254 0 26.64974212646484 0 Z"></path></svg>
-        <div style="position: relative; top: -45px;">
-            <div style="line-height: 35.00px;
-            letter-spacing: 1.40px;
-            color: rgba(255, 255, 255, 1); 
-            font-size: 14.00px;
-            font-weight: 300;
-            font-style: normal;
-            font-family: 'SF Pro Text', Arial;
-            white-space: pre;">SIGN IN</div>
-        </div>
-        </a>
-    </div>
-</div>
-
-<div class="row" style="text-align: center;">
-    <div class="col-12" style="text-align: center;">
-        <a href="#">
-            <svg preserveAspectRatio="none" viewBox="0 0 280 50" class="path66"><path d="M 26.64974212646484 0 L 253.3502349853516 0 C 268.0685119628906 0 280 11.1928825378418 280 25 C 280 38.8071174621582 268.0685119628906 50 253.3502349853516 50 L 26.64974212646484 50 C 11.93149757385254 50 0 38.8071174621582 0 25 C 0 11.1928825378418 11.93149757385254 0 26.64974212646484 0 Z"></path></svg>
-            <div style="position: relative; top: -45px;">
-                <div style="line-height: 35.00px;
+        <input type="submit" class="btn" value="SIGN IN" style="background-color: rgba(238, 219, 185, 1);width: 280px;height: 52px; border-radius: 50px;line-height: 35.00px;
                 letter-spacing: 1.40px;
-                color: rgba(249, 60, 100, 1); 
+                color: rgba(255, 255, 255, 1); 
                 font-size: 14.00px;
                 font-weight: 300;
                 font-style: normal;
                 font-family: 'SF Pro Text', Arial;
-                white-space: pre;">SIGN UP</div>
-            </div>
-        </a>
+                white-space: pre;">
+    </div>
+</div>
+
+<div class="row" style="height: 20px;">
+
+</div>
+
+<div class="row" style="text-align: center;">
+    <div class="col-12" style="text-align: center;">
+        <input type="submit" class="btn" value="SIGN UP" style="background-color: rgba(238, 218, 185, 0);width: 280px;height: 52px; border-radius: 50px;line-height: 35.00px;
+            letter-spacing: 1.40px;
+            border-color: rgba(249, 60, 100, 0.5);
+            color: rgba(249, 60, 100, 1); 
+            font-size: 14.00px;
+            font-weight: 300;
+            font-style: normal;
+            font-family: 'SF Pro Text', Arial;
+            white-space: pre;">
+        
     </div>
 </div>
 
