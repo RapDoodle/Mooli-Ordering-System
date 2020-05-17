@@ -3,6 +3,7 @@ from controllers.controller_authentication import staff_permission
 import controllers.controller_category as c_category
 import controllers.controller_product as c_product
 import controllers.controller_authentication as c_auth
+import controllers.controller_redeem_card as c_redeem_card
 
 admin_view = Blueprint('admin_view', __name__, template_folder='/templates')
 
@@ -41,7 +42,7 @@ def category():
     categories = c_category.list_categories()
     return render_template('/admin/category.html', categories = categories)
 
-@admin_view.route('/admin/dashboard/category/', methods=['GET'])
+@admin_view.route('/admin/category/', methods=['GET'])
 def category_empty():
     return redirect(url_for('.category'))
 
@@ -139,3 +140,30 @@ def delete_product():
 @admin_view.route('/admin/test/<string:template>', methods=['GET', 'GET'])
 def test_view(template):
     return render_template('/admin/' + template)
+
+# ------------------- Redeem Card -------------------
+@admin_view.route('/admin/redeem_card', methods=['GET'])
+def redeem_card():
+    redeem_cards = c_redeem_card.get_redeem_cards()
+    return render_template('/admin/redeem_card.html', redeem_cards = redeem_cards)
+
+@admin_view.route('/admin/redeem_card/', methods=['GET'])
+def redeem_card_empty():
+    return redirect(url_for('.redeem_card'))
+
+@admin_view.route('/admin/redeem_card/new', methods=['GET', 'POST'])
+def new_redeem_cards():
+    if request.method == 'POST':
+        msg = c_redeem_card.add_redeem_cards(
+                    value = request.values.get('value'),
+                    batch = request.values.get('batch'))
+        if 'error' in msg:
+            flash(msg['error'])
+    return redirect(url_for('.redeem_card'))
+
+@admin_view.route('/admin/redeem_card/delete', methods=['GET', 'POST'])
+def delete_redeem_card():
+    msg = c_redeem_card.delete_redeem_card(redeem_code = request.values.get('redeem_code'))
+    if 'error' in msg:
+        flash(msg['error'])
+    return redirect(url_for('.redeem_card'))
