@@ -81,23 +81,20 @@
             font-family: 'SF Pro Text', Arial;">
                 Please input the code of your gift card
             </div>
-            <div class="col-1"></div>
+            <div class="col-1"></div>  
         </div>
 
-        <div class="row">
-            <div class="col">
-                <hr>
-            </div>
+        <div class="row" style="height: 20px;">
         </div>
-
+        <form action="/admin/dashboard/category/edit" method="post" id="edit-form">
         <div class="row" style="height: 30px;">
             <div class="col">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
                 <input type="text" class="form-control" placeholder="Gift card code" aria-label="code" aria-describedby="addon-wrapping" style="font-style: normal;
                 font-family: 'SF Pro Text', Arial;">
-                <hr>
             </div>
         </div>
-
+        </form>
     </div>
 </body>
 
