@@ -17,7 +17,4 @@ assert c.change_password('10001', 'Testpassword12345', 'Testpassword123', 'Testp
 # When the new password and verify password don't match
 c.change_password('10001', 'Testpassword123', 'Testpassword1234', 'Testpassword123') == {'error': 'Passwords do not match.'}
 
-# Create an admin
-assert c.sign_up('mooliadmin', 'admin@repo.ink', 'Testpassword123', '', '', 'M') == {'status': 200}
-
 print(' ✓ User has passed all the tests')

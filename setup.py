@@ -49,7 +49,8 @@ def setup():
         os.mkdir(SECURITY_PATH)
 
     # Create the path for logging
-    os.mkdir(LOG_PATH)
+    if not os.path.exists(LOG_PATH):
+        os.mkdir(LOG_PATH)
 
     # Generate a random key for config encryption
     key = Fernet.generate_key()
@@ -162,18 +163,19 @@ def init_db_tables(connection):
             gender BINARY(1),
             phone VARCHAR(32),
             balance DECIMAL(8,2) DEFAULT 0.0,
-            is_staff BOOLEAN DEFAULT FALSE NOT NULL,
             PRIMARY KEY (user_id),
             UNIQUE (username)
             )
         """,
         """ALTER TABLE user AUTO_INCREMENT=10000""",
-        """CREATE TABLE IF NOT EXISTS permission (permission_id INT NOT NULL,
+        """CREATE TABLE IF NOT EXISTS permission (permission_id INT AUTO_INCREMENT,
             permission_name VARCHAR(32) NOT NULL,
-            PRIMARY KEY (permission_id))""",
-        """CREATE TABLE IF NOT EXISTS role (role_id INT NOT NULL,
+            PRIMARY KEY (permission_id),
+            UNIQUE (permission_name))""",
+        """CREATE TABLE IF NOT EXISTS role (role_id INT NOT NULL AUTO_INCREMENT,
             role_name VARCHAR(32) NOT NULL,
-            PRIMARY KEY (role_id))""",
+            PRIMARY KEY (role_id),
+            UNIQUE (role_name))""",
         """CREATE TABLE IF NOT EXISTS role_permission (role_id INT NOT NULL,
             permission_id INT NOT NULL,
             FOREIGN KEY (role_id) REFERENCES role(role_id),
@@ -274,6 +276,23 @@ def init_db_tables(connection):
             FOREIGN KEY (product_id) REFERENCES product(product_id)
         )
         """,
+        # Triggers
+        """CREATE TRIGGER before_delete_role
+            BEFORE DELETE
+            ON role FOR EACH ROW
+            BEGIN
+                DELETE FROM role_permission WHERE
+                    role_permission.role_id = OLD.role_id;
+            END
+        """,
+        """CREATE TRIGGER before_delete_permission
+            BEFORE DELETE
+            ON permission FOR EACH ROW
+            BEGIN
+                DELETE FROM role_permission WHERE
+                    role_permission.permission_id = OLD.permission_id;
+            END
+        """
     ]
 
     for sql in sqls:
@@ -285,8 +304,10 @@ def init_db_tables(connection):
 def create_superuser(username, email, password):
     # For the initialization of database
     import utils.config_manager
-    from controllers.controller_user import sign_up
-    return sign_up(username = username, email = email, password = password, is_staff = True)
+    from controllers.controller_role import add_role
+    role_id = add_role('superadmin', [])
+    from controllers.controller_staff import add_staff
+    return add_staff(username = username, email = email, password = password, role_id = role_id)
 
 def init_test_db():
     # Codes for performing unit testing
