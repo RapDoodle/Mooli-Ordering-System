@@ -49,7 +49,8 @@ def setup():
         os.mkdir(SECURITY_PATH)
 
     # Create the path for logging
-    os.mkdir(LOG_PATH)
+    if not os.path.exists(LOG_PATH):
+        os.mkdir(LOG_PATH)
 
     # Generate a random key for config encryption
     key = Fernet.generate_key()
@@ -303,8 +304,10 @@ def init_db_tables(connection):
 def create_superuser(username, email, password):
     # For the initialization of database
     import utils.config_manager
-    from controllers.controller_user import sign_up
-    return sign_up(username = username, email = email, password = password, is_staff = True)
+    from controllers.controller_role import add_role
+    role_id = add_role('superadmin', [])
+    from controllers.controller_staff import add_staff
+    return add_staff(username = username, email = email, password = password, role_id = role_id)
 
 def init_test_db():
     # Codes for performing unit testing

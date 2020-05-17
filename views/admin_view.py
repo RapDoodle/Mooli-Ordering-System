@@ -3,6 +3,7 @@ from controllers.controller_authentication import staff_permission
 import controllers.controller_category as c_category
 import controllers.controller_product as c_product
 import controllers.controller_authentication as c_auth
+import controllers.controller_redeem_card as c_redeem_card
 
 admin_view = Blueprint('admin_view', __name__, template_folder='/templates')
 
@@ -10,11 +11,14 @@ admin_view = Blueprint('admin_view', __name__, template_folder='/templates')
 @admin_view.route('/admin', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        result = c_auth.login(request.values.get('username'), request.values.get('password'))
-        if isinstance(result, int):
-            session['user_id'] = result
+        result = c_auth.staff_login(request.values.get('username'), request.values.get('password'))
+        print(result)
+        if isinstance(result, dict) and len(result) == 3:
+            session['user_id'] = result['user_id']
+            session['is_staff'] = True
+            session['username'] = result['username']
             return redirect(url_for('admin_view.dashboard'))
-        if isinstance(result, dict):
+        if isinstance(result, dict) and len(result) == 1:
             # Most likely that an exception has been thrown
             if 'error' in result:
                 flash(result['error'])
@@ -25,34 +29,36 @@ def logout():
     session.pop('user_id', None)
     return redirect(url_for('admin_view.login'))
 
+# ------------------- Dashboard -------------------
+
 @admin_view.route('/admin/dashboard', methods=['GET'])
 @staff_permission('T')
 def dashboard():
     return render_template('/admin/dashboard.html')
 
 # ------------------- Category -------------------
-@admin_view.route('/admin/dashboard/category', methods=['GET'])
+@admin_view.route('/admin/category', methods=['GET'])
 def category():
-    session['h'] = 5
     categories = c_category.list_categories()
-    return render_template('/admin/category.html', categories = categories, messages = get_flashed_messages())
+    return render_template('/admin/category.html', categories = categories)
 
-@admin_view.route('/admin/dashboard/category/', methods=['GET'])
+@admin_view.route('/admin/category/', methods=['GET'])
 def category_empty():
     return redirect(url_for('.category'))
 
 #
-@admin_view.route('/admin/dashboard/category/new', methods=['GET', 'POST'])
+@admin_view.route('/admin/category/new', methods=['GET', 'POST'])
 def new_category():
     if request.method == 'POST':
         name = request.values.get('category-name')
         priority = request.values.get('category-priority')
         msg = c_category.add_category(name, priority)
         if 'error' in msg:
+            print(msg['error'])
             flash(msg['error'])
     return redirect(url_for('.category'))
 
-@admin_view.route('/admin/dashboard/category/edit', methods=['GET', 'POST'])
+@admin_view.route('/admin/category/edit', methods=['GET', 'POST'])
 def edit_category():
     id = request.values.get('category-id')
     name = request.values.get('category-name')
@@ -62,7 +68,7 @@ def edit_category():
         flash(msg['error'])
     return redirect(url_for('.category'))
 
-@admin_view.route('/admin/dashboard/category/delete', methods=['GET', 'POST'])
+@admin_view.route('/admin/category/delete', methods=['GET', 'POST'])
 def delete_category():
     id = request.values.get('category-id')
     msg = c_category.remove_category(id)
@@ -71,21 +77,24 @@ def delete_category():
     return redirect(url_for('.category'))
 
 # ------------------- Product -------------------
-@admin_view.route('/admin/dashboard/product', methods=['GET'])
+@admin_view.route('/admin/product', methods=['GET'])
 def product():
-    print(session['h'])
+    category_id = request.args.get('category_id')
+    if category_id is None or category_id == '0':
+        products = c_product.get_all_products()
+    else:
+        products = c_product.get_products_by_category_id(category_id)
     return render_template('/admin/product.html',
-            products = c_product.get_all_products(),
+            products = products,
             categories = c_category.list_categories(),
-            messages = get_flashed_messages()
+            category_id = category_id
     )
 
-@admin_view.route('/admin/dashboard/product/', methods=['GET'])
+@admin_view.route('/admin/product/', methods=['GET'])
 def product_empty():
     return redirect(url_for('.category'))
 
-#
-@admin_view.route('/admin/dashboard/product/new', methods=['GET', 'POST'])
+@admin_view.route('/admin/product/new', methods=['GET', 'POST'])
 def new_product():
     if request.method == 'POST':
         category = request.form.getlist('categories')
@@ -102,7 +111,7 @@ def new_product():
             flash(msg['error'])
     return redirect(url_for('.product'))
 
-@admin_view.route('/admin/dashboard/product/edit', methods=['GET', 'POST'])
+@admin_view.route('/admin/product/edit', methods=['GET', 'POST'])
 def edit_product():
     if request.method == 'POST':
         category = request.form.getlist('categories')
@@ -120,7 +129,7 @@ def edit_product():
             flash(msg['error'])
     return redirect(url_for('.product'))
 
-@admin_view.route('/admin/dashboard/product/delete', methods=['GET', 'POST'])
+@admin_view.route('/admin/product/delete', methods=['GET', 'POST'])
 def delete_product():
     id = request.values.get('product-id')
     msg = c_product.remove_product(id)
@@ -128,7 +137,33 @@ def delete_product():
         flash(msg['error'])
     return redirect(url_for('.product'))
 
-
 @admin_view.route('/admin/test/<string:template>', methods=['GET', 'GET'])
 def test_view(template):
     return render_template('/admin/' + template)
+
+# ------------------- Redeem Card -------------------
+@admin_view.route('/admin/redeem_card', methods=['GET'])
+def redeem_card():
+    redeem_cards = c_redeem_card.get_redeem_cards()
+    return render_template('/admin/redeem_card.html', redeem_cards = redeem_cards)
+
+@admin_view.route('/admin/redeem_card/', methods=['GET'])
+def redeem_card_empty():
+    return redirect(url_for('.redeem_card'))
+
+@admin_view.route('/admin/redeem_card/new', methods=['GET', 'POST'])
+def new_redeem_cards():
+    if request.method == 'POST':
+        msg = c_redeem_card.add_redeem_cards(
+                    value = request.values.get('value'),
+                    batch = request.values.get('batch'))
+        if 'error' in msg:
+            flash(msg['error'])
+    return redirect(url_for('.redeem_card'))
+
+@admin_view.route('/admin/redeem_card/delete', methods=['GET', 'POST'])
+def delete_redeem_card():
+    msg = c_redeem_card.delete_redeem_card(redeem_code = request.values.get('redeem_code'))
+    if 'error' in msg:
+        flash(msg['error'])
+    return redirect(url_for('.redeem_card'))
