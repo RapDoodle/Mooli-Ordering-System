@@ -168,7 +168,7 @@
     <p id="delete-confirm-message"></p>
     <form action="{{ url_for('admin_view.delete_product') }}" method="post" id="delete-form">
       <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
-      <input type="hidden" name="delete-product-id" id="product-id">
+      <input type="hidden" name="product-id" id="delete-product-id">
     </form>
     </div>
     <div class="modal-footer">
