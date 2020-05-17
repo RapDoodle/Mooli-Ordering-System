@@ -4,7 +4,15 @@
 
 {% block custom_css %}
 <style>
-
+.form-control:focus{
+    border-color:#ced4da;
+    box-shadow:none;
+    background-color: #cddc0000;
+    
+}
+.form-control{
+    display: inline-block;
+}
 
 .path663e31f9ba {
       fill: rgba(238, 219, 185, 1);
@@ -75,8 +83,8 @@
             <svg  preserveAspectRatio="none" viewBox="0 0 300 52" class="path68">
                 <path d="M 28.55329513549805 0 L 271.4466857910156 0 C 287.2162475585938 0 300 11.64059734344482 300 26 C 300 40.35940170288086 287.2162475585938 52 271.4466857910156 52 L 28.55329513549805 52 C 12.78374671936035 52 0 40.35940170288086 0 26 C 0 11.64059734344482 12.78374671936035 0 28.55329513549805 0 Z"></path>
             </svg>
-            <div style="position:relative; text-align: center; top: -40px;"> 
-                <input type="text" class="" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" style="border: 1px solid #f8f9fa00;background-color: #f8f9fa00;color: rgba(45, 64, 87, 1);width: 280px;align-self: center;">
+            <div style="position:relative; text-align: center; top: -44px;"> 
+                <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" style="border: 1px solid #f8f9fa00;background-color: #f8f9fa00;color: rgba(45, 64, 87, 1);width: 280px;align-self: center;">
             </div>
         </div>
     </div>
@@ -85,8 +93,8 @@
         <svg preserveAspectRatio="none" viewBox="0 0 300 52" class="path68">
             <path d="M 28.55329513549805 0 L 271.4466857910156 0 C 287.2162475585938 0 300 11.64059734344482 300 26 C 300 40.35940170288086 287.2162475585938 52 271.4466857910156 52 L 28.55329513549805 52 C 12.78374671936035 52 0 40.35940170288086 0 26 C 0 11.64059734344482 12.78374671936035 0 28.55329513549805 0 Z"></path>
         </svg>
-        <div style="position:relative; text-align: center; top: -40px;"> 
-            <input type="password" class="" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1" style="border: 1px solid #f8f9fa00;background-color: #f8f9fa00;color: rgba(45, 64, 87, 1);width: 280px;align-self: center;">
+        <div style="position:relative; text-align: center; top: -44px;"> 
+            <input type="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1" style="border: 1px solid #f8f9fa00;background-color: #f8f9fa00;color: rgba(45, 64, 87, 1);width: 280px;align-self: center;">
         </div>
     </div>
     
@@ -114,7 +122,6 @@
                 </a>
             </div>
     </div>
-    
 </form>
 
 

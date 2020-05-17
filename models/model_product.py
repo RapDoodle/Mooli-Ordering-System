@@ -52,10 +52,13 @@ def add_product(product_name, categories, price, priority, description = '', pic
                         'thumbnail_uuid': thumbnail_uuid,
                         'picture_uuid': picture_uuid,
                         })
+
     # Fetch the newly added id
     cursor.execute("""SELECT product_id FROM product WHERE product_name = %(product_name)s""",
             {'product_name': product_name})
-    product_id = cursor.fetchone()['product_id']
+    cursor.execute('SELECT LAST_INSERT_ID()')
+    product_id = cursor.fetchone()['LAST_INSERT_ID()']
+
     # Create relationship between product and category
     sql = """INSERT INTO product_category(product_id, category_id) VALUES (
             %(product_id)s,
@@ -143,7 +146,7 @@ def remove_product(product_id):
     dao.commit()
 
 def get_products(method, param = ''):
-    if method not in ['category_name', 'all']:
+    if method not in ['category_id', 'all']:
         raise ValidationError('Invalid method')
     # Clean the input data
     param = str(param).strip()
@@ -154,13 +157,13 @@ def get_products(method, param = ''):
 
     # Query database
     sql = ''
-    if method == 'category_name':
+    if method == 'category_id':
         if not param:
             raise ValidationError('The parameter can not be empty.')
         sql = """SELECT * FROM product, product_category, category
                  WHERE product.product_id = product_category.product_id
                     AND product_category.category_id = category.category_id
-                    AND category.category_name = %(param)s
+                    AND category.category_id = %(param)s
                  ORDER BY product.priority DESC, product.product_name ASC"""
         cursor.execute(sql, {'param': param})
     else:
