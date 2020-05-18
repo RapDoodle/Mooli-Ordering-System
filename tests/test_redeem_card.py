@@ -2,7 +2,7 @@ import models.model_redeem_card as m
 
 print(' * Testing: Redeem Card...')
 
-m.add_redeem_cards(200, 50)
+m.add_redeem_cards(50, 50)
 coupons = m.get_redeem_cards()
 assert len(coupons) == 50
 coupon_code_1 = coupons[0]['redeem_code']

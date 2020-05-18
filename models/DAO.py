@@ -1,5 +1,4 @@
 import utils.config_manager as config
-
 import pymysql
 
 class DAO():
@@ -23,7 +22,7 @@ class DAO():
                                         cursorclass=pymysql.cursors.DictCursor)
             return self.__db
         except:
-            raise Exception('Unable to connect')
+            raise ValidationError('Unable to connect')
 
     def connection(self):
         return self.__db
