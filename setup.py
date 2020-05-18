@@ -168,18 +168,15 @@ def init_db_tables(connection):
             )
         """,
         """ALTER TABLE user AUTO_INCREMENT=10000""",
-        """CREATE TABLE IF NOT EXISTS permission (
-            permission_id INT AUTO_INCREMENT,
+        """CREATE TABLE IF NOT EXISTS permission (permission_id INT AUTO_INCREMENT,
             permission_name VARCHAR(32) NOT NULL,
             PRIMARY KEY (permission_id),
             UNIQUE (permission_name))""",
-        """CREATE TABLE IF NOT EXISTS role (
-            role_id INT NOT NULL AUTO_INCREMENT,
+        """CREATE TABLE IF NOT EXISTS role (role_id INT NOT NULL AUTO_INCREMENT,
             role_name VARCHAR(32) NOT NULL,
             PRIMARY KEY (role_id),
             UNIQUE (role_name))""",
-        """CREATE TABLE IF NOT EXISTS role_permission (
-            role_id INT NOT NULL,
+        """CREATE TABLE IF NOT EXISTS role_permission (role_id INT NOT NULL,
             permission_id INT NOT NULL,
             FOREIGN KEY (role_id) REFERENCES role(role_id),
             FOREIGN KEY (permission_id) REFERENCES permission(permission_id))""",
@@ -202,6 +199,7 @@ def init_db_tables(connection):
             product_name VARCHAR(64) NOT NULL,
             description VARCHAR(140),
             price DECIMAL(8,2) DEFAULT 0.0,
+            rating DECIMAL(2,1),
             thumbnail_uuid CHAR(36),
             picture_uuid CHAR(36),
             priority INT NOT NULL,
@@ -234,26 +232,23 @@ def init_db_tables(connection):
             FOREIGN KEY (user_id) REFERENCES user(user_id)
             )
         """,
-        """CREATE TABLE IF NOT EXISTS cart_item (
-            cart_item_id INT AUTO_INCREMENT,
+        """CREATE TABLE IF NOT EXISTS item (
+            item_id INT AUTO_INCREMENT,
             user_id INT NOT NULL,
             product_id INT,
+            order_id INT,
             amount INT,
+            product_name_snapshot INT,
+            product_price_snapshot INT,
             created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-            PRIMARY KEY (cart_item_id),
+            PRIMARY KEY (item_id),
             FOREIGN KEY (user_id) REFERENCES user(user_id),
-            FOREIGN KEY (product_id) REFERENCES product(product_id)
-        )""",
-        """CREATE TABLE IF NOT EXISTS purchased_item (
-            purchased_item_id INT AUTO_INCREMENT,
-            product_name_snapshot INT NOT NULL,
-            product_price_snapshot DECIMAL(8, 2) NOT NULL,
-            amount INT NOT NULL,
-            order_id INT NOT NULL,
-            PRIMARY KEY (purchased_item_id),
+            FOREIGN KEY (product_id) REFERENCES product(product_id),
             FOREIGN KEY (product_name_snapshot) REFERENCES archive(archive_index),
+            FOREIGN KEY (product_price_snapshot) REFERENCES archive(archive_index),
             FOREIGN KEY (order_id) REFERENCES `order`(order_id)
-        )""",
+        )
+        """,
         """CREATE TABLE IF NOT EXISTS coupon (
             coupon_code VARCHAR(32),
             value DECIMAL(8, 2) NOT NULL,

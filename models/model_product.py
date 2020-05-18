@@ -170,10 +170,6 @@ def get_products(method, param = ''):
         sql = """SELECT * FROM product ORDER BY product.priority DESC, product.product_name ASC"""
         cursor.execute(sql)
     result = cursor.fetchall()
-
-    if result is not None:
-        for entry in result:
-            entry['rating'] = 0.0
     return result
 
 def find_product(method, param):
@@ -194,6 +190,4 @@ def find_product(method, param):
         sql = """SELECT * FROM product WHERE product_id = %(param)s"""
     cursor.execute(sql, {'param': param})
     result = cursor.fetchone()
-    if result is not None:
-        result['rating'] = 0.0
     return result
