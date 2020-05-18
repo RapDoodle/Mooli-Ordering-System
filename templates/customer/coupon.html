@@ -1,4 +1,4 @@
-{% extends "/customer/shared/navbar.html" %}
+{% extends "/customer/shared/base.html" %}
 
 {% block title %}Checkout{% endblock %}
 
@@ -127,7 +127,7 @@
 <div class="row">
     <div class="col-12">
         <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Coupon code" aria-label="Coupon_code" aria-describedby="button-addon2">
+            <input type="text" class="form-control" placeholder="Coupon code" aria-label="Coupon_code" aria-describedby="button-addon2" style="border-right-color:rgba(0, 0, 0, 0)">
             <div class="input-group-append">
               <button class="btn btn-outline-secondary" type="button" id="button-addon2" style="border-color:#6c757d ">Verify</button>
             </div>

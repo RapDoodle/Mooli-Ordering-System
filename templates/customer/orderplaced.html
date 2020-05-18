@@ -2,6 +2,12 @@
 
 {% block title %}orderPlaced{% endblock %}
 
+{% block custom_css %}
+<style>
+    .btn:focus,.btn:active:focus,.btn.active:focus,.btn.focus,.btn:active.focus,.btn.active.focus {    outline: none;    border-color: transparent;    box-shadow:none;}
+</style>
+{% endblock %}
+
 {% block content %}
 
 <div class="row row-cols-3" style="height: 30px;">
@@ -43,7 +49,7 @@
 
 <div class="row row-cols-3" style="height: 25px;">
     <div class="col-3"></div>
-    <div class="col-6">
+    <div class="col-6" style="text-align: center;">
         <div class="title" style="background-color: rgba(255, 255, 255, 0);
         color: rgba(45, 64, 87, 1);
         text-align: center;
@@ -69,7 +75,7 @@
                     font-style: normal;
                     font-family: 'SF Pro Text', Arial;
                     ">
-                    <input type="submit" class="btn btn-warning button1" value="Back to home" style="color: rgba(238, 219, 185, 1);
+                    <input type="submit" class="btn" value="Back to home" style="color: rgba(238, 219, 185, 1);
                     background-color: #633b27;
                     border-top-style: none;
                     border-top-width: 1.00px;
