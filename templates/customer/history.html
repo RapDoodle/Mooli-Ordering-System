@@ -22,15 +22,7 @@
 
       .card {
       background-color: rgba(249, 250, 251, 1);
-      border-bottom-color: rgba(112, 112, 112, 1);
       border-bottom-style: none;
-      border-bottom-width: 1.00px;
-      border-left-color: rgba(112, 112, 112, 1);
-      border-left-style: none;
-      border-left-width: 1.00px;
-      border-right-color: rgba(112, 112, 112, 1);
-      border-right-style: none;
-      border-right-width: 1.00px;
       border-top-color: rgba(112, 112, 112, 1); 
       border-top-style: none;
       border-top-width: 1.00px;
@@ -40,6 +32,7 @@
       border-bottom-right-radius: 18.00px;
     filter: drop-shadow(0px 10px 15px rgba(27, 28, 32, 0.10196078431372549));
     height: 50px;
+    width: 320px;
     }
 
     .x4212020830pm {
@@ -59,6 +52,7 @@
       padding-left: 50px;
       color: rgba(249, 60, 100, 1);
     }
+
 </style>
 
     <div class="">
@@ -83,22 +77,41 @@
             </div>
         </div>
 
-        <div class="row row-cols-3" style="height: 50px;">
+        <div class="row row-cols-3" style="height: 30px;">
         </div>
 
 
-        <div class="row" style="height: 50px;">
-            <div class="col-1"></div>
-            <div class="col-12">
-            <div class="card"> 
-              <div class="x4212020830pm">4-21-2020 8:30PM &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font style="color:red;">$25.98</font></div>
-            </div>
-            </div>
-            <div class="col-1"></div>
-        </div>
-        </div>
+        <div class="row" style="margin: 10px;">
+          <div class="col-12 card">
+                  <div class="row" style="height: 45px;">
+                      <div class="col-5" style="width: 200px;
+                      text-align: center;
+                      padding-top: 12px;
+                      font-size: 18px;
+                      font-family: 'SF Pro Text', Arial;">
+                        4-21-2020
+                      </div>
+                      <div class="col-3" style="
+                      text-align: center;
+                      padding-top: 15px;
+                      font-size: 13px;
+                      font-family: 'SF Pro Text', Arial;">
+                          <span class="align-bottom">
+                            8:30PM
+                          </span>
+                      </div>
+                      <div class="col-4" style="width: 200px;
+                      text-align: center;
+                      padding-top: 12px;
+                      font-size: 18px;
+                      font-family: 'SF Pro Text', Arial;">
+                        <font style="color:red;">$25.98</font>
+                      </div>
+                  </div>
+          </div>
+      </div>
 
-    </div>
+</div>
 
 {{ super() }}
 {% endblock %}
