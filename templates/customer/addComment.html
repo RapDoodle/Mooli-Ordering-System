@@ -1,0 +1,43 @@
+{% extends "/customer/shared/base.html" %}
+
+{% block title %}AddComment{% endblock %}
+
+{% block content %}
+<div class="container">
+    <img src="/static/customer/MilkTea/MilkTeaDemo.png" class="img img-fluid" alt="Responsive image">
+</div><br/><br/>
+<div>
+    <div class="text-center">
+        <h4>Milk Tea</h4>
+        <!-- <p><img src="/static/customer/Star.png" class="img img-fluid" alt="Responsive image">4.8 (233 ratings)</p> -->
+        <!-- <div class="overflow-auto" style="width: auto; height: 100px; margin-left: 20px; margin-right: 20px;">testing content: This is season limited, made of fresh peaches and green tea, (100% ice, 70% ice, 40% ice, 10% ice, no ice / 100% sugar, 70% sugar, 40% sugar, 10% sugar, no sugar)</div> -->
+    </div>
+    <br/>
+    <form>
+        <h5>Rate and add your comment:</h5><br/>
+        <!-- <div class="row">
+            <div class="col col-2 col-sm-2 text-right">
+                <h6>1</h6>
+            </div>
+            <div class="col col-8 col-sm-8">
+                <input type="range" class="custom-range" min="1" max="5">
+            </div>
+            <div class="col col-2 col-sm-2 text-left">
+                <h6>5</h6>
+            </div>
+        </div><br/> -->
+        <h6>Rating:</h6>
+        <select class="form-control">
+            <option>5</option>
+            <option>4</option>
+            <option>3</option>
+            <option>2</option>
+            <option>1</option>
+        </select><br/>
+        <h6>Comment:</h6>
+        <textarea class="col col-12 col-sm-12" style="overflow: auto; height: 100px; border-color: wheat; border-width: 2.5px;" name="comment"></textarea><br/>
+        <button type="submit" name="submit" class="btn btn-warning col col-12 col-sm-12" style="border-radius: 20px;">Submit</button>
+    </form>
+</div>
+
+{% endblock %}
