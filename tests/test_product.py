@@ -77,14 +77,14 @@ m.update_product(product_id = '9',
                 picture_uuid = '4f192478-78b9-4f4c-bebd-196ccfa2cd67',
                 thumbnail_uuid = '927f24b3-dca8-413e-be17-639f995c785c'
                 )
-assert c.get_product_by_name('Jasmine Green Tea') == {'product_id': 9, 'product_name': 'Jasmine Green Tea', 'description': 'With Jasmine Green Tea, enjoy your afternoon.', 'price': Decimal('25.99'), 'rating': 0.0, 'thumbnail_uuid': '927f24b3-dca8-413e-be17-639f995c785c', 'picture_uuid': '4f192478-78b9-4f4c-bebd-196ccfa2cd67', 'priority': 2}
-assert c.get_product_by_product_id('9') == {'product_id': 9, 'product_name': 'Jasmine Green Tea', 'description': 'With Jasmine Green Tea, enjoy your afternoon.', 'price': Decimal('25.99'), 'rating': 0.0, 'thumbnail_uuid': '927f24b3-dca8-413e-be17-639f995c785c', 'picture_uuid': '4f192478-78b9-4f4c-bebd-196ccfa2cd67', 'priority': 2}
+assert c.get_product_by_name('Jasmine Green Tea') == {'product_id': 9, 'product_name': 'Jasmine Green Tea', 'description': 'With Jasmine Green Tea, enjoy your afternoon.', 'price': Decimal('25.99'), 'rating': None, 'thumbnail_uuid': '927f24b3-dca8-413e-be17-639f995c785c', 'picture_uuid': '4f192478-78b9-4f4c-bebd-196ccfa2cd67', 'priority': 2}
+assert c.get_product_by_product_id('9') == {'product_id': 9, 'product_name': 'Jasmine Green Tea', 'description': 'With Jasmine Green Tea, enjoy your afternoon.', 'price': Decimal('25.99'), 'rating': None, 'thumbnail_uuid': '927f24b3-dca8-413e-be17-639f995c785c', 'picture_uuid': '4f192478-78b9-4f4c-bebd-196ccfa2cd67', 'priority': 2}
 assert c.add_product(product_name = 'Dummy',
                 description = 'Dummy',
                 categories = [1],
                 price = '24.99',
                 priority = '12') == {'status': 200}
-assert m.find_product(method='product_name', param='Dummy') == {'product_id': 10, 'product_name': 'Dummy', 'description': 'Dummy', 'price': Decimal('24.99'), 'rating': 0.0, 'thumbnail_uuid': '', 'picture_uuid': '', 'priority': 12}
+assert m.find_product(method='product_name', param='Dummy') == {'product_id': 10, 'product_name': 'Dummy', 'description': 'Dummy', 'price': Decimal('24.99'), 'rating': None, 'thumbnail_uuid': '', 'picture_uuid': '', 'priority': 12}
 assert len(c.get_all_products()) == 10
 assert c.remove_product('10') == {'status': 200}
 assert len(c.get_all_products()) == 9

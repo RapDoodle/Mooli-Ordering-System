@@ -1,26 +1,9 @@
 from utils.validation import is_money
 from models.DAO import DAO
 from utils.exception import ValidationError
-from models.shared import (
-    user_pay, 
-    find_user, 
-    find_coupon_and_check_validity, 
-    create_purchased_item,
-    get_cart_items_by_user_id
-)
+from models.shared import get_items_by_user_id, find_user, find_coupon_and_check_validity, get_items_by_user_id, get_archive_index
 
-def place_order(user_id, payment, coupon_code = ''):
-    """The function places an order of all the items in the user's cart
-
-    Parameters:
-    user_id -- the user's id
-    payment -- the method the user chose to pay
-    coupon_code -- the coupon code (if any)
-    """
-    # Check the validity of the payment method
-    if payment not in ['balance', 'credit_card', 'paypal']:
-        raise ValidationError('Invalid payment method.')
-
+def place_order(user_id, coupon_code = ''):
     # Clean the input data
     user_id = str(user_id).strip()
     coupon_code = str(coupon_code).strip()
@@ -37,9 +20,9 @@ def place_order(user_id, payment, coupon_code = ''):
         raise ValidationError('Invalid user id.')
 
     # Check the user's cart. If the item already exists, perform update instead of amount
-    items = get_cart_items_by_user_id(user_id)
+    items = get_items_by_user_id(user_id = user_id, scope = 'cart')
     if len(items) == 0:
-        raise ValidationError('No item is found in cart.')
+        raise ValidationError('No item found in cart.')
 
     # Calculate the total in the user's cart
     total = 0
@@ -54,12 +37,6 @@ def place_order(user_id, payment, coupon_code = ''):
     # Establish db connection
     dao = DAO()
     cursor = dao.cursor()
-
-    # Proceed to the payment
-    if payment == 'balance':
-        user_pay(user_id, actual_paid, cursor)
-    else:
-        raise ValidationError('The payment method is not supported by the current merchant.')
 
     # Create new order
     sql = """INSERT INTO `order` (
@@ -77,21 +54,19 @@ def place_order(user_id, payment, coupon_code = ''):
                         'total': total,
                         'actual_paid': actual_paid,
                         'status': 200})
-
     # Retrive the newly inserted row
     cursor.execute('SELECT LAST_INSERT_ID()')
     order_id = cursor.fetchone()['LAST_INSERT_ID()']
-
-    for item in items:
-        create_purchased_item(
-            product_name = item['product_name'],
-            product_price = item['price'],
-            amount = item['amount'],
-            order_id = order_id,
-            cursor = cursor
-        )
-    
-    # When all the procedures are successful and no exception was raised
+    cart_items = get_items_by_user_id(user_id = user_id, scope = 'cart')
+    update_sql = """UPDATE item SET
+                    product_id = NULL,
+                    product_name_snapshot = %(product_name_snapshot)s,
+                    product_price_snapshot = %(product_price_snapshot)s
+                    WHERE item_id = %(item_id)s"""
+    for item in cart_items:
+        cursor.execute(update_sql, {'product_name_snapshot': get_archive_index(item['product_name']),
+                                    'product_price_snapshot': get_archive_index(item['price']),
+                                    'item_id': item['item_id']})
     dao.commit()
 
 def place_redeem(user_id, amount):
