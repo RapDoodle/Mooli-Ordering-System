@@ -199,7 +199,7 @@ def get_user_transaction_history(user_id):
 def get_order_details(order_id):
     # Return
     # Clean the input data
-    user_id = str(user_id).strip()
+    order_id = str(order_id).strip()
 
     # Check for the existence of order
     order = find_order_by_id(order_id)
@@ -212,8 +212,8 @@ def get_order_details(order_id):
 
     # Query database
     sql = """SELECT order.order_id, product.product_name,
-                FROM `order` WHERE user_id = %(user_id)s ORDER BY created_at DESC"""
-    cursor.execute(sql, {'user_id': user_id})
+                FROM `order` WHERE order_id = %(order_id)s ORDER BY created_at DESC"""
+    cursor.execute(sql, {'order_id': order_id})
     result = cursor.fetchall()
     return result
 
