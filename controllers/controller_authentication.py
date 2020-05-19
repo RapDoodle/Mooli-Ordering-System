@@ -26,7 +26,7 @@ def login_required(fn):
     def wrapper(*args, **kwargs):
         if not session.get('user_id'):
             flash('Login is required.')
-            return redirect(url_for('admin_view.login'))
+            return redirect(url_for('customer_view.login_redirect'))
         return fn(*args, **kwargs)
     return wrapper
 

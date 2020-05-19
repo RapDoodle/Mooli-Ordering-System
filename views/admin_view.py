@@ -15,7 +15,6 @@ admin_view = Blueprint('admin_view', __name__, template_folder='/templates')
 def login():
     if request.method == 'POST':
         result = c_auth.staff_login(request.values.get('username'), request.values.get('password'))
-        print(result)
         if isinstance(result, dict) and len(result) == 3:
             session['user_id'] = result['user_id']
             session['is_staff'] = True
@@ -30,6 +29,8 @@ def login():
 @admin_view.route('/admin/logout', methods=['GET'])
 def logout():
     session.pop('user_id', None)
+    session.pop('is_staff', None)
+    session.pop('username', None)
     return redirect(url_for('admin_view.login'))
 
 # ------------------- Dashboard -------------------
