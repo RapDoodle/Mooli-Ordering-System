@@ -78,13 +78,13 @@
     <div class="bg-light border-right" id="sidebar-wrapper">
       <div class="sidebar-heading"><img src="/static/logo_horizontal.png" alt="Logo" width="125"></div>
       <div class="list-group list-group-flush">
-        <a href="{{ url_for('admin_view.dashboard') }}" class="list-group-item list-group-item-action bg-light">Dashboard</a>
-        <a href="#" class="list-group-item list-group-item-action bg-light">Orders</a>
+        <a href="{{ url_for('admin_view.dashboard') }}" class="list-group-item list-group-item-action bg-light">Home</a>
+        <a href="{{ url_for('admin_view.order') }}" class="list-group-item list-group-item-action bg-light">Orders</a>
         <a href="{{ url_for('admin_view.product') }}" class="list-group-item list-group-item-action bg-light">Products</a>
         <a href="{{ url_for('admin_view.category') }}" class="list-group-item list-group-item-action bg-light">Categories</a>
         <a href="{{ url_for('admin_view.coupon') }}" class="list-group-item list-group-item-action bg-light">Coupons</a>
         <a href="{{ url_for('admin_view.redeem_card') }}" class="list-group-item list-group-item-action bg-light">Redeem Cards</a>
-        <a href="#" class="list-group-item list-group-item-action bg-light">Staff</a>
+        <a href="{{ url_for('admin_view.staff') }}" class="list-group-item list-group-item-action bg-light">Staff</a>
         <a href="#" class="list-group-item list-group-item-action bg-light">Customers</a>
         <a href="#" class="list-group-item list-group-item-action bg-light">Deposite</a>
       </div>

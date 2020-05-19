@@ -37,9 +37,3 @@ def is_valid_password(d):
     if is_valid_length(d, 8, 24):
         return verify_regex('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])', d)
     return False
-
-if __name__ == '__main__':
-    print(is_valid_password('Testpassword123'))
-    print(is_valid_username('1234567812345678123456789'))
-    print(is_valid_email('bowenwu@gmail.com'))
-    print(is_rating(0))

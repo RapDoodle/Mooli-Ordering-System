@@ -70,3 +70,18 @@ def find_staff(param, method):
     result = cursor.fetchone()
 
     return result
+
+def get_staff_list():
+    """The function returns all the complete table of information for staff"""
+    # Establish db connection
+    dao = DAO()
+    cursor = dao.cursor()
+
+    # Query db for role
+    sql = """SELECT * FROM staff, role, user WHERE
+                staff.user_id = user.user_id AND
+                staff.role_id = role.role_id"""
+    cursor.execute(sql)
+    result = cursor.fetchall()
+
+    return result
