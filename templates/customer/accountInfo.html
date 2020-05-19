@@ -8,7 +8,12 @@
         height: 100%;
         width: 100%;
       }
-
+      .btn1:focus,.btn1:active:focus,.btn1.active:focus,.btn1.focus,.btn1:active.focus,.btn1.active.focus {    outline: none;    border-color: transparent;    box-shadow:none; padding: 1px 6px;}
+      .form-control:focus{
+        border-color:#ced4da;
+        box-shadow:none;
+        background-color: #cddc0000;
+      }
       body {
         font-family: 'Open Sans', serif;
         margin: 0;
@@ -34,12 +39,12 @@
           color: rgba(45, 64, 87, 1);
           text-align: center;
           -webkit-text-stroke: 1.00px rgba(0, 0, 0, 0);
-          font-size: 25.00px;
+          font-size: 20.00px;
           font-style: normal;
           font-family: 'SF Pro Text', Arial;">Account info</div>
       </div>
-      <div class="col-3">
-        <button type="button" style="background-color: transparent;border: 1px solid transparent;"><font color="green" style="font-size: 20px;font-family: 'SF Pro Text', Arial;">save</font> </button>
+      <div class="col-3" style="text-align: right;">
+        <button type="button" class="btn1"style="background-color: transparent;border: 1px solid transparent;"><font color="green" style="font-size: 20px;font-family: 'SF Pro Text', Arial;">save</font> </button>
       </div>
   </div>
 
@@ -60,7 +65,7 @@
   <div class="row row-cols-3" style="height:50px;">
     <div class="col-3"></div>
     <div class="col-6" style="text-align: center;">
-      <button type="button" style="background-color: transparent;border: 1px solid transparent;font-family: Avenir, Arial;font-size: 14.00px;color: rgba(66, 202, 71, 1);">Change Avatar</button>
+      <button type="button" class="btn1" style="background-color: transparent;border: 1px solid transparent;font-family: Avenir, Arial;font-size: 14.00px;color: rgba(66, 202, 71, 1);">Change Avatar</button>
     </div>
     <div class="col-3"></div>
   </div>
@@ -72,7 +77,16 @@
     </div>
     <div class="col-9">
       <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
-      <input type="text" class="form-control" placeholder="Name" aria-label="Name" aria-describedby="addon-wrapping" style="font-family: Avenir, Arial;">
+      <input type="text" class="form-control" placeholder="First Name" aria-label="FirstName" aria-describedby="addon-wrapping" style="font-family: Avenir, Arial;">
+    </div>
+  </div>
+
+  <div class="row row-cols-3" style="height: 50px;">
+    <div class="col-3" style="text-align: right;font-size: 18.00px;padding-left: 25px;padding-top:5px;font-family: 'Open Sans', Arial;">
+      
+    </div>
+    <div class="col-9">
+      <input type="text" class="form-control" placeholder="Last Name" aria-label="LastName" aria-describedby="addon-wrapping" style="font-family: Avenir, Arial;">
     </div>
   </div>
 
@@ -105,15 +119,6 @@
 
   <div class="row row-cols-3" style="height: 50px;">
     <div class="col-3" style="text-align: right;font-size: 18.00px;padding-left: 25px;padding-top:5px;font-family: 'Open Sans', Arial;">
-      Address
-    </div>
-    <div class="col-9">
-      <input type="text" class="form-control" placeholder="Address" aria-label="Address" aria-describedby="addon-wrapping" style="font-family: Avenir, Arial;">
-    </div>
-  </div>
-
-  <div class="row row-cols-3" style="height: 50px;">
-    <div class="col-3" style="text-align: right;font-size: 18.00px;padding-left: 25px;padding-top:5px;font-family: 'Open Sans', Arial;">
       Phone
     </div>
     <div class="col-9">
@@ -125,8 +130,13 @@
     <div class="col-3" style="text-align: right;font-size: 18.00px;padding-left: 25px;padding-top:5px;font-family: 'Open Sans', Arial;">
       Gender
     </div>
-    <div class="col-9">
-      <input type="text" class="form-control" placeholder="Gender" aria-label="Gender" aria-describedby="addon-wrapping" style="font-family: Avenir, Arial;">
+    <div class="col-3" style="text-align: right;font-size: 18.00px;padding-left: 25px;padding-top:5px;font-family: 'Open Sans', Arial;">
+      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="M">
+      <label class="form-check-label" for="inlineRadio1">Male</label>
+    </div>
+    <div class="col-3"style="text-align: right;font-size: 18.00px;padding-left: 25px;padding-top:5px;font-family: 'Open Sans', Arial;">
+      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="F">
+      <label class="form-check-label" for="inlineRadio1">Female</label>
     </div>
   </div>
 
