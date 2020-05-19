@@ -158,6 +158,10 @@ def update_ratings_cache(product_id):
     cursor.execute(sql, {'product_id': product_id})
     avg_ratings = cursor.fetchone()['avg']
 
+    # When there's no comment, it is five stars by default
+    if avg_ratings is None:
+        avg_ratings = 5.00
+
     cache.set('rating_' + product_id, avg_ratings)
 
     return avg_ratings

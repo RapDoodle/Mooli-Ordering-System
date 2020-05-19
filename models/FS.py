@@ -15,14 +15,15 @@ if not os.path.exists(THUMBNAIL_PATH):
 if not os.path.exists(PICTURE_PATH):
     os.mkdir(PICTURE_PATH)
 
-def save_thumbnail(product_id, f):
-    save(os.path.join(THUMBNAIL_PATH, str(product_id)), f)
+def save_thumbnail(product_id, data):
+    save(os.path.join(THUMBNAIL_PATH, str(product_id)), data)
 
-def save_picture(product_id, f):
-    save(os.path.join(PICTURE_PATH, str(product_id)), f)
+def save_picture(product_id, data):
+    save(os.path.join(PICTURE_PATH, str(product_id)), data)
 
-def save(path, f):
-    f.save(path)
+def save(path, data):
+    with open(path, 'wb') as f:
+        f.write(data)
 
 def get_thumbnail_path(product_id):
     get_path(THUMBNAIL_PATH, product_id)
