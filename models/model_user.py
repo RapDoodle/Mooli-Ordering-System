@@ -2,6 +2,7 @@ import bcrypt
 from models.DAO import DAO
 from utils.exception import ValidationError
 import utils.validation as validator
+from decimal import Decimal
 
 def add_user(username, email, password, first_name = '', last_name = '', gender = '', phone = ''):
     """The function creates a user based on the information provided
@@ -190,11 +191,46 @@ def find_user(method, param):
     return result
 
 def verify_password(password, hashed_password):
-    passwprd = str(password).strip()
+    password = str(password).strip()
     if bcrypt.checkpw(password.encode('utf-8'), hashed_password):
         return True
     return False
 
 def hash_password(password):
-    passwprd = str(password).strip()
+    password = str(password).strip()
     return bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
+
+def user_pay(user_id, amount, cursor):
+    """The function will try to deduct given amount of moeny from the user's account
+    NOTE: A cursor must be provided
+
+    Parameters:
+    user_id -- the id of the user
+    amount -- the amount to be deducted
+    cursor -- a cursor from a DAO
+    """
+    # Clean the input data
+    user_id = str(user_id).strip()
+    amount = str(amount).strip()
+
+    # Check if the input 'amount is valid
+    if not validator.is_money(amount):
+        raise ValidationError('Invalid amount.')
+
+    # Check for the validity of the user
+    user = find_user(param = user_id, method = 'id')
+    if user is None:
+        raise ValidationError('The user does not exists.')
+
+    # Query the balance of the given user
+    sql = """SELECT balance FROM user WHERE user_id = %(user_id)s"""
+    cursor.execute(sql, {'user_id': user_id})
+    result = cursor.fetchone()
+    new_balance = result['balance'] - Decimal(amount)
+    if new_balance < 0:
+        raise ValidationError('Insufficient balance.')
+
+    # When the balance is sufficient
+    sql = """UPDATE user SET balance = %(new_balance)s WHERE
+                user_id = %(user_id)s"""
+    cursor.execute(sql, {'new_balance': new_balance, 'user_id': user_id})
