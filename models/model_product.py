@@ -213,7 +213,6 @@ def update_image(product_id, update_type, f):
     if find_product('product_id', product_id) is None:
         raise ValidationError('The product does not exists.')
 
-    print(type(f))
     if update_type == '1':
         fs.save_picture(product_id, f)
     else:
