@@ -12,47 +12,34 @@
     <div class="d-flex"> -->
 <div class="row">
     <div class="col col-4 col-sm-4 d-flex" style="padding-left: 0px; font-size: 15px;">
-        <!-- <ul class="nav flex-column">
-            <li class="nav-item">
-                <a class="nav-link active" href="#">Milk Tea</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Green Tea & Red Tea</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Juice</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-            </li>
-        </ul> -->
         <div class="bg-light border-right" id="sidebar-wrapper">
-            <!-- <div class="sidebar-heading">Start Bootstrap </div> -->
             <div class="list-group list-group-flush">
-              <a href="#" class="list-group-item list-group-item-action bg-light">Milk Tea</a>
-              <a href="#" class="list-group-item list-group-item-action bg-light">Green Tea</a>
-              <a href="#" class="list-group-item list-group-item-action bg-light">Red Tea</a>
-              <a href="#" class="list-group-item list-group-item-action bg-light">Juice</a>
-              <a href="#" class="list-group-item list-group-item-action bg-light">Ice Cream</a>
-              <a href="#" class="list-group-item list-group-item-action bg-light">Coffee</a>
+                {% for category in categories %}
+                    <a href="{{ url_for('customer_view.home') }}?category_id={{ category['category_id']}}" class="list-group-item list-group-item-action bg-light">{{ category['category_name']}}</a>
+                {% endfor %}
             </div>
           </div>
     </div>
     <!-- <div class="container-fluid overflow-auto"> -->
     <div class="col col-8 col-sm-8 overflow-auto" style="height: 545px; padding-left: 0px;">
+        {% for product in products %}
         <div class="card border-0">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col col-4 col-sm-4" style="padding: 0px;">
-                        <img src="/static/customer/MilkTea/Demo1.png" class="img img-fluid" alt="Responsive image">
-                    </div>
-                    <div class="col col-8 col-sm-8">
-                        <h6>Milk Tea</h6>
-                        <p style="font-size: 13px;">This is a demo.</p>
+            <a href="{{ url_for('customer_view.product', product_id = product['product_id']) }}">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col col-4 col-sm-4" style="padding: 0px;">
+                            <img src="./static/media/thumbnails/{{ product['product_id'] }}" class="img img-fluid" alt="Responsive image">
+                        </div>
+                        <div class="col col-8 col-sm-8">
+                            <h6>{{ product['product_name']}}</h6>
+                            <p style="font-size: 13px;">{{ product['description'] }}</p>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </a>
+            
         </div>
+        {% endfor %}
     </div>
 </div>
 {{ super() }}
