@@ -101,15 +101,22 @@ def setup():
     with open(CONFIG_PATH, 'w') as profile:
         profile.write(json.dumps(config))
 
+    init_permission_system()
+
     print('\nWould you like to setup superuser?')
     if y_n_choice('Your choice'):
         finish = False
         while not finish:
-            print('\nPlease enter the username of the superuser.')
+            print('\nPlease enter the username of the superuser. (8-24 characters)')
             username = input()
             print('\nPlease enter an email for the superuser.')
             email = input()
             print('\nPlease enter the password for the superuser.')
+            print('Requirements:')
+            print(' - The length should between 8 to 24 characters')
+            print(' - At least one upper case letter')
+            print(' - At least one lower case letter')
+            print(' - At least one digit')
             password_1 = input()
             print('\nPlease enter the password for the superuser again.')
             password_2 = input()
@@ -303,6 +310,14 @@ def init_db_tables(connection):
 
     print('All tables have been correctly initialized.')
     connection.commit()
+
+def init_permission_system():
+    # For the initialization of database
+    import utils.config_manager
+    from models.model_role import add_permission
+    permissions = ['orders', 'products', 'categories', 'coupons', 'redeem_cards', 'staff', 'roles']
+    for permission in permissions:
+        add_permission(permission)
 
 def create_superuser(username, email, password):
     # For the initialization of database

@@ -3,8 +3,12 @@ from utils.exception import excpetion_handler
 
 @excpetion_handler
 def add_staff(*args, **kwargs):
-    m.add_staff(*args, **kwargs)
+    return m.add_staff(*args, **kwargs)
 
 @excpetion_handler
 def find_staff(*args, **kwargs):
-    m.find_staff(*args, **kwargs)
+    return m.find_staff(*args, **kwargs)
+
+@excpetion_handler
+def get_staff_list(*args, **kwargs):
+    return m.get_staff_list(*args, **kwargs)
