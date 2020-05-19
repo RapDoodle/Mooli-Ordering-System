@@ -117,7 +117,7 @@ def update_product_image():
         msg = c_product.update_image(
             product_id = request.values.get('product_id'),
             update_type = request.values.get('update_type'),
-            f = request.files['file']
+            data = request.files['file'].read()
         )
         if 'error' in msg:
             flash(msg['error'])
