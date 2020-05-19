@@ -4,6 +4,7 @@ import controllers.controller_category as c_category
 import controllers.controller_product as c_product
 import controllers.controller_authentication as c_auth
 import controllers.controller_redeem_card as c_redeem_card
+import controllers.controller_coupon as c_coupon
 
 admin_view = Blueprint('admin_view', __name__, template_folder='/templates')
 
@@ -97,8 +98,6 @@ def product_empty():
 @admin_view.route('/admin/product/new', methods=['GET', 'POST'])
 def new_product():
     if request.method == 'POST':
-        category = request.form.getlist('categories')
-        print(request.values.get('productName'),request.values.get('productDescription'),request.values.get('productPriority'),request.values.get('productPrice'),request.form.getlist('categories'))
         msg = c_product.add_product(
                 product_name = request.values.get('productName'),
                 description = request.values.get('productDescription'),
@@ -106,7 +105,18 @@ def new_product():
                 price = request.values.get('productPrice'),
                 categories = request.form.getlist('categories')
         )
-        print(msg)
+        if 'error' in msg:
+            flash(msg['error'])
+    return redirect(url_for('.product'))
+
+@admin_view.route('/admin/product/update_image', methods=['GET', 'POST'])
+def update_product_image():
+    if request.method == 'POST':
+        msg = c_product.update_image(
+            product_id = request.values.get('product_id'),
+            update_type = request.values.get('update_type'),
+            f = request.files['file']
+        )
         if 'error' in msg:
             flash(msg['error'])
     return redirect(url_for('.product'))
@@ -137,10 +147,6 @@ def delete_product():
         flash(msg['error'])
     return redirect(url_for('.product'))
 
-@admin_view.route('/admin/test/<string:template>', methods=['GET', 'GET'])
-def test_view(template):
-    return render_template('/admin/' + template)
-
 # ------------------- Redeem Card -------------------
 @admin_view.route('/admin/redeem_card', methods=['GET'])
 def redeem_card():
@@ -167,3 +173,53 @@ def delete_redeem_card():
     if 'error' in msg:
         flash(msg['error'])
     return redirect(url_for('.redeem_card'))
+
+# ------------------- Coupon -------------------
+@admin_view.route('/admin/coupon', methods=['GET'])
+def coupon():
+    return render_template('/admin/coupon.html',
+            coupons = c_coupon.get_coupons()
+    )
+
+@admin_view.route('/admin/coupon/', methods=['GET'])
+def coupon_empty():
+    return redirect(url_for('.coupon'))
+
+@admin_view.route('/admin/coupon/new', methods=['GET', 'POST'])
+def new_coupon():
+    if request.method == 'POST':
+        msg = c_coupon.add_coupon(
+                coupon_code = request.values.get('coupon_code'), 
+                value = request.values.get('value'), 
+                threshold = request.values.get('threshold'), 
+                activate_date = request.values.get('activate_date'), 
+                expire_date = request.values.get('expire_date')
+        )
+        if 'error' in msg:
+            flash(msg['error'])
+    return redirect(url_for('.coupon'))
+
+@admin_view.route('/admin/coupon/edit', methods=['GET', 'POST'])
+def edit_coupon():
+    if request.method == 'POST':
+        msg = c_coupon.update_coupon(
+                coupon_code = request.values.get('coupon_code'), 
+                value = request.values.get('value'), 
+                threshold = request.values.get('threshold'), 
+                activate_date = request.values.get('activate_date'), 
+                expire_date = request.values.get('expire_date')
+        )
+        if 'error' in msg:
+            flash(msg['error'])
+    return redirect(url_for('.coupon'))
+
+@admin_view.route('/admin/coupon/delete', methods=['GET', 'POST'])
+def delete_coupon():
+    msg = c_coupon.delete_coupon(coupon_code = request.values.get('coupon-code'))
+    if 'error' in msg:
+        flash(msg['error'])
+    return redirect(url_for('.coupon'))
+
+@admin_view.route('/admin/test/<string:template>', methods=['GET', 'GET'])
+def test_view(template):
+    return render_template('/admin/' + template)
