@@ -186,7 +186,7 @@ def find_product(method, param):
 
     return result
 
-def update_image(product_id, update_type, f):
+def update_image(product_id, update_type, data):
     """The function takes in an image and save it to the file system
 
     Parameters:
@@ -194,7 +194,7 @@ def update_image(product_id, update_type, f):
     update_type -- the type of the update
                 1 - picture
                 2 - thumbnail
-    f -- the image file
+    data -- the binary of the image file
     """
     # Verify the type
     update_type = str(update_type).strip()
@@ -202,9 +202,9 @@ def update_image(product_id, update_type, f):
         raise ValidationError('Invalid update type.')
 
     # Verify the file
-    f.seek(0, os.SEEK_END)
-    if f.tell() == 0:
-        raise ValidationError('Empty file.')
+    # data.seek(0, os.SEEK_END)
+    # if f.tell() == 0:
+    #     raise ValidationError('Empty file.')
 
     # Clean the input data
     product_id = str(product_id).strip()
@@ -214,6 +214,6 @@ def update_image(product_id, update_type, f):
         raise ValidationError('The product does not exists.')
 
     if update_type == '1':
-        fs.save_picture(product_id, f)
+        fs.save_picture(product_id, data)
     else:
-        fs.save_thumbnail(product_id, f)
+        fs.save_thumbnail(product_id, data)
