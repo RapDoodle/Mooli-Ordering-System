@@ -44,6 +44,40 @@ def add_coupon(coupon_code, value, threshold, activate_date = None, expire_date 
                         'expire_date': expire_date})
     dao.commit()
 
+def update_coupon(coupon_code, value, threshold, activate_date = None, expire_date = None):
+    # Clean the input data
+    coupon_code = str(coupon_code).strip()
+    value = str(value).strip()
+    threshold = str(threshold).strip()
+
+    # Check is the input valid
+    if not is_money(value):
+        raise ValidationError('Invalid value.')
+    if not is_money(threshold):
+        raise ValidationError('Invalid threshold.')
+    # TO-DO: Check for the validaty of time
+
+    # Check the existence of the coupon
+    if find_coupon(coupon_code) is None:
+        raise ValidationError('The coupon code does not exists.')
+
+    # Establish db connection
+    dao = DAO()
+    cursor = dao.cursor()
+
+    sql = """UPDATE coupon SET 
+        value = %(value)s,
+        threshold = %(threshold)s,
+        activate_date = %(activate_date)s,
+        expire_date = %(expire_date)s WHERE
+        coupon_code = %(coupon_code)s"""
+    cursor.execute(sql, {'value': value,
+                        'threshold': threshold,
+                        'activate_date': activate_date,
+                        'expire_date': expire_date,
+                        'coupon_code': coupon_code})
+    dao.commit()
+
 def delete_coupon(coupon_code):
     # Clean the input data
     coupon_code = str(coupon_code).strip()

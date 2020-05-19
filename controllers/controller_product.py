@@ -10,6 +10,10 @@ def edit_product(*args, **kwargs):
     m.update_product(*args, **kwargs)
 
 @excpetion_handler
+def update_image(*args, **kwargs):
+    return m.update_image(*args, **kwargs)
+
+@excpetion_handler
 def remove_product(product_id):
     m.remove_product(product_id)
 

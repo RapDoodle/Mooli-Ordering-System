@@ -56,13 +56,13 @@
             <li class="page-item disabled">
               <span class="page-link">Previous</span>
             </li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
             <li class="page-item active">
               <span class="page-link">
-                2
+                1
                 <span class="sr-only">(current)</span>
               </span>
             </li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
             <li class="page-item"><a class="page-link" href="#">3</a></li>
             <li class="page-item">
               <a class="page-link" href="#">Next</a>
@@ -87,11 +87,11 @@
           <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
           <div class="form-group">
             <label for="new-value" class="col-form-label">Redeem cards value:</label>
-            <input type="text" class="form-control" id="new-value" name="value">
+            <input type="number" step="0.01" class="form-control" id="new-value" name="value">
           </div>
           <div class="form-group">
             <label for="new-batch, **kwargs" class="col-form-label">Batch:</label>
-            <input type="text" class="form-control" id="new-batch" name="batch">
+            <input type="number" class="form-control" id="new-batch" name="batch">
           </div>
         </form>
       </div>
