@@ -45,6 +45,12 @@ def product(product_id):
         product = product
     )
 
+@customer_view.route('/login', methods=['GET'])
+def login_redirect():
+    return render_template('customer/login_required.html', 
+        product = product
+    )
+
 @customer_view.route('/test/<string:template>', methods=['GET'])
 def test(template):
     return render_template('customer/' + template)
