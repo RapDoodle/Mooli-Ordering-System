@@ -2,6 +2,8 @@ import utils.validation as validator
 from models.DAO import DAO
 from utils.exception import ValidationError
 from models.shared import get_product_ratings
+import models.FS as fs
+import os
 
 def add_product(product_name, categories, price, priority, description = ''):
     # Clean the input data
@@ -183,3 +185,36 @@ def find_product(method, param):
     result = cursor.fetchone()
 
     return result
+
+def update_image(product_id, update_type, f):
+    """The function takes in an image and save it to the file system
+
+    Parameters:
+    product_id -- the id of the product
+    update_type -- the type of the update
+                1 - picture
+                2 - thumbnail
+    f -- the image file
+    """
+    # Verify the type
+    update_type = str(update_type).strip()
+    if update_type not in ['1', '2']:
+        raise ValidationError('Invalid update type.')
+
+    # Verify the file
+    f.seek(0, os.SEEK_END)
+    if f.tell() == 0:
+        raise ValidationError('Empty file.')
+
+    # Clean the input data
+    product_id = str(product_id).strip()
+
+    # Verify the existence of the file
+    if find_product('product_id', product_id) is None:
+        raise ValidationError('The product does not exists.')
+
+    print(type(f))
+    if update_type == '1':
+        fs.save_picture(product_id, f)
+    else:
+        fs.save_thumbnail(product_id, f)

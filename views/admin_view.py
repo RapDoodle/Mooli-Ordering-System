@@ -98,8 +98,6 @@ def product_empty():
 @admin_view.route('/admin/product/new', methods=['GET', 'POST'])
 def new_product():
     if request.method == 'POST':
-        category = request.form.getlist('categories')
-        print(request.values.get('productName'),request.values.get('productDescription'),request.values.get('productPriority'),request.values.get('productPrice'),request.form.getlist('categories'))
         msg = c_product.add_product(
                 product_name = request.values.get('productName'),
                 description = request.values.get('productDescription'),
@@ -107,7 +105,18 @@ def new_product():
                 price = request.values.get('productPrice'),
                 categories = request.form.getlist('categories')
         )
-        print(msg)
+        if 'error' in msg:
+            flash(msg['error'])
+    return redirect(url_for('.product'))
+
+@admin_view.route('/admin/product/update_image', methods=['GET', 'POST'])
+def update_product_image():
+    if request.method == 'POST':
+        msg = c_product.update_image(
+            product_id = request.values.get('product_id'),
+            update_type = request.values.get('update_type'),
+            f = request.files['file']
+        )
         if 'error' in msg:
             flash(msg['error'])
     return redirect(url_for('.product'))
