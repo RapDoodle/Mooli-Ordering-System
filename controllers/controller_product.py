@@ -3,11 +3,11 @@ from utils.exception import excpetion_handler
 
 @excpetion_handler
 def add_product(*args, **kwargs):
-    m.add_product(*args, **kwargs)
+    return m.add_product(*args, **kwargs)
 
 @excpetion_handler
 def edit_product(*args, **kwargs):
-    m.update_product(*args, **kwargs)
+    return m.update_product(*args, **kwargs)
 
 @excpetion_handler
 def update_image(*args, **kwargs):
@@ -15,7 +15,7 @@ def update_image(*args, **kwargs):
 
 @excpetion_handler
 def remove_product(product_id):
-    m.remove_product(product_id)
+    return m.remove_product(product_id)
 
 @excpetion_handler
 def get_products_by_id(product_id):

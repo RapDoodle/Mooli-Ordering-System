@@ -318,6 +318,7 @@ def init_permission_system():
     permissions = ['orders', 'products', 'categories', 'coupons', 'redeem_cards', 'staff', 'roles']
     for permission in permissions:
         add_permission(permission)
+    
 
 def create_superuser(username, email, password):
     # For the initialization of database
