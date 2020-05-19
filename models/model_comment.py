@@ -60,7 +60,8 @@ def remove_comment(comment_id):
     comment_id = str(comment_id).strip()
 
     # Check does the comment exists
-    if find_comment(comment_id) is None:
+    comment = find_comment(comment_id)
+    if comment is None:
         raise ValidationError('Comment not found.')
 
     # Establish db connection
@@ -73,7 +74,7 @@ def remove_comment(comment_id):
     dao.commit()
 
     # Update the ratings to the caching system
-    update_ratings_cache(product_id)
+    update_ratings_cache(comment['product_id'])
 
 def find_comment(comment_id):
     # Clean the input data
