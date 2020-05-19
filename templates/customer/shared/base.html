@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0 ">
         <link rel="stylesheet" href="/static/bootstrap-4.4.1/css/bootstrap.min.css">
         <link rel="stylesheet" href="/static/customer/navbar.css">
+        <link href="/static/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
         {% block custom_css %}{% endblock %}
         <title>{% block title %}{% endblock %} - Mooli</title>
         <style media="screen">
@@ -31,5 +32,18 @@
         <script src="/static/bootstrap-4.4.1/js/jquery-3.4.1.slim.min.js"></script>
         <script src="/static/bootstrap-4.4.1/js/popper.min.js"></script>
         <script src="/static/bootstrap-4.4.1/js/bootstrap.min.js"></script>
+        <script>
+            var errorMessage = ''
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                errorMessage += '{{ message }}'
+                {% endfor %}
+            {% endif %}
+            {% endwith %}
+            if (errorMessage.length > 0) {
+            alert(errorMessage)
+            }
+        </script>
     </body>
 </html>
