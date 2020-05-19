@@ -3,10 +3,13 @@
 from utils.exception import ValidationError
 import os
 
+MEDIA_PATH = './static/media'
 THUMBNAIL_PATH = './static/media/thumbnails'
 PICTURE_PATH = './static/media/pictures'
 
 # Initialize the paths if not exist
+if not os.path.exists(MEDIA_PATH):
+    os.mkdir(MEDIA_PATH)
 if not os.path.exists(THUMBNAIL_PATH):
     os.mkdir(THUMBNAIL_PATH)
 if not os.path.exists(PICTURE_PATH):

@@ -5,6 +5,8 @@ import controllers.controller_product as c_product
 import controllers.controller_authentication as c_auth
 import controllers.controller_redeem_card as c_redeem_card
 import controllers.controller_coupon as c_coupon
+import controllers.controller_staff as c_staff
+import controllers.controller_role as c_role
 
 admin_view = Blueprint('admin_view', __name__, template_folder='/templates')
 
@@ -219,6 +221,89 @@ def delete_coupon():
     if 'error' in msg:
         flash(msg['error'])
     return redirect(url_for('.coupon'))
+
+# ------------------- Staff -------------------
+@admin_view.route('/admin/staff', methods=['GET'])
+def staff():
+    return render_template('/admin/staff.html',
+            roles = c_role.get_all_roles(),
+            staffs = c_staff.get_staff_list()
+    )
+
+@admin_view.route('/admin/staff/', methods=['GET'])
+def staff_empty():
+    return redirect(url_for('.staff'))
+
+@admin_view.route('/admin/staff/new', methods=['GET', 'POST'])
+def new_staff():
+    if request.method == 'POST':
+        msg = c_staff.add_staff(
+                username = request.values.get('username'),
+                email = request.values.get('email'), 
+                password = request.values.get('password'), 
+                role_id = request.values.get('role_id'), 
+                first_name = request.values.get('first_name'),
+                last_name = request.values.get('last_name'),
+                gender = request.values.get('gender'),
+                phone = request.values.get('phone')
+        )
+        if 'error' in msg:
+            flash(msg['error'])
+    return redirect(url_for('.staff'))
+
+@admin_view.route('/admin/staff/edit', methods=['GET', 'POST'])
+def edit_staff():
+    if request.method == 'POST':
+        msg = c_coupon.update_coupon(
+                coupon_code = request.values.get('coupon_code'), 
+                value = request.values.get('value'), 
+                threshold = request.values.get('threshold'), 
+                activate_date = request.values.get('activate_date'), 
+                expire_date = request.values.get('expire_date')
+        )
+        if 'error' in msg:
+            flash(msg['error'])
+    return redirect(url_for('.staff'))
+
+@admin_view.route('/admin/staff/delete', methods=['GET', 'POST'])
+def delete_staff():
+    msg = c_coupon.delete_coupon(coupon_code = request.values.get('coupon-code'))
+    if 'error' in msg:
+        flash(msg['error'])
+    return redirect(url_for('.staff'))
+
+# ------------------- Orders -------------------
+@admin_view.route('/admin/order', methods=['GET'])
+def order():
+    return render_template('/admin/order.html',
+            roles = c_role.get_all_roles(),
+            staffs = c_staff.get_staff_list()
+    )
+
+@admin_view.route('/admin/order/', methods=['GET'])
+def order_empty():
+    return redirect(url_for('.order'))
+
+@admin_view.route('/admin/order/edit', methods=['GET', 'POST'])
+def edit_order():
+    if request.method == 'POST':
+        msg = c_coupon.update_coupon(
+                coupon_code = request.values.get('coupon_code'), 
+                value = request.values.get('value'), 
+                threshold = request.values.get('threshold'), 
+                activate_date = request.values.get('activate_date'), 
+                expire_date = request.values.get('expire_date')
+        )
+        if 'error' in msg:
+            flash(msg['error'])
+    return redirect(url_for('.order'))
+
+@admin_view.route('/admin/order/delete', methods=['GET', 'POST'])
+def delete_order():
+    msg = c_coupon.delete_coupon(coupon_code = request.values.get('coupon-code'))
+    if 'error' in msg:
+        flash(msg['error'])
+    return redirect(url_for('.order'))
 
 @admin_view.route('/admin/test/<string:template>', methods=['GET', 'GET'])
 def test_view(template):
