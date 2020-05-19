@@ -1,4 +1,5 @@
 # Software specific
+static/media
 security/
 log/
 config.json
