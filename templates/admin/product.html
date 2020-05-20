@@ -236,7 +236,7 @@
   $('#deleteModal').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget)
     var modal = $(this)
-    modal.find('#delete-confirm-message').text('Are you sure to delete the category named ' + button.data('product-name') + ' ?')
+    modal.find('#delete-confirm-message').text('Are you sure to delete the category named ' + button.data('product-name') + '?')
     modal.find('#delete-product-id').val(button.data('product-id'))
   })
 

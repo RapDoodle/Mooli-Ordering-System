@@ -65,18 +65,15 @@ def place_order(user_id, payment, coupon_code = ''):
     sql = """INSERT INTO `order` (
         user_id,
         total,
-        actual_paid,
-        status
+        actual_paid
     ) VALUES (
         %(user_id)s,
         %(total)s,
-        %(actual_paid)s,
-        %(status)s
+        %(actual_paid)s
     )"""
     cursor.execute(sql, {'user_id':user_id,
                         'total': total,
-                        'actual_paid': actual_paid,
-                        'status': 200})
+                        'actual_paid': actual_paid})
 
     # Retrive the newly inserted row
     cursor.execute('SELECT LAST_INSERT_ID()')
