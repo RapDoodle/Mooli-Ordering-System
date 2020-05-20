@@ -30,7 +30,7 @@
       <td>{{ staff['username'] }}</td>
       <td>{{ staff['email'] }}</td>
       <td>{{ staff['first_name'] }} {{ staff['last_name'] }}</td>
-      <td>{{ staff['role'] }}</td>
+      <td>{{ staff['role_name'] }}</td>
       <td>{{ staff['phone'] }}</td>
       <td>
         <div class="dropdown">
@@ -58,7 +58,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-      <h5 class="modal-title" id="newModalLabel">New product</h5>
+      <h5 class="modal-title" id="newModalLabel">New staff</h5>
       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button>
@@ -82,7 +82,7 @@
           <label class="col-form-label">Role:</label>
           <select class="form-control" id="new-role" name="role_id">
             {% for role in roles %}
-              <option value={{ role['role_id'] }}>{{ role['role_name'] }}</option>
+              <option value="{{ role['role_id'] }}">{{ role['role_name'] }}</option>
             {% endfor %}
           </select>
         </div>

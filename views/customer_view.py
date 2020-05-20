@@ -8,7 +8,6 @@ from flask import (
     get_flashed_messages, 
     session
 )
-from controllers.controller_authentication import staff_permission
 import controllers.controller_category as c_category
 import controllers.controller_product as c_product
 import controllers.controller_authentication as c_auth
