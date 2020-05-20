@@ -37,48 +37,18 @@
 <div>
     <div class="text-center">
         <h4>{{ product['product_name'] }}</h4>
-        <p><img src="/static/customer/Star.png" class="img img-fluid" alt="Responsive image">{{ product['rating'] }}</p>
+        <p><i class="fa fa-star" aria-hidden="true" style="color: rgb(255, 204, 0)"></i> {{ product['rating'] }}</p>
     </div>
     <div class="overflow-auto" style="width: auto; height: 100px; margin-left: 20px; margin-right: 20px;">{{ product['description'] }}</div>
     <br/>
-    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <div class="card d-block w-100 border-0" style="margin-top: 5px;">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col col-4 col-sm-4">
-                                <img src="/static/customer/Customer.jpg" class="img img-fluid rounded" alt="Responsive image">
-                            </div>
-                            <div class="col col-8 col-sm-8">
-                                <!-- <p><h6>Orianna MU</h6> Aug 26,2020</p> -->
-                                <h6>Orianna MU</h6>
-                                <div class="overflow-auto" style="width: auto; height: 50px;">
-                                    <p>testing content: abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-        </a>
-    </div>
     <div style="height: auto;">
         <ul class="nav justify-content-end fixed-bottom" style="background-color: white;">
             <li class="nav-item col-4 col-sm-4 text-right">
                 <h3 style="margin: 15px;">${{ product['price'] }}</h3>
             </li>
-            <li class="nav-item col-4 col-sm-4"></li>
-            <li class="nav-item col-4 col-sm-4">
-                <button type="button" value="" class="btn btn-outline-warning btn-lg" style="margin: 10px; border-radius: 30px;" name="order">&nbspOrder&nbsp
+            <li class="nav-item col-2 col-sm-2"></li>
+            <li class="nav-item col-6 col-sm-6 text-right" >
+                <button type="button" value="" class="btn btn-outline-warning btn-lg" style="margin: 10px; border-radius: 30px;" name="order">Add to cart
             </li>
         </ul>
     </div>

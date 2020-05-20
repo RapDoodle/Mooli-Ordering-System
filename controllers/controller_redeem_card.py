@@ -13,3 +13,7 @@ def get_redeem_cards(page = 1):
 @excpetion_handler
 def delete_redeem_card(*args, **kwargs):
     return m.delete_redeem_card(*args, **kwargs)
+
+@excpetion_handler
+def redeem(*args, **kwargs):
+    return m.redeem(*args, **kwargs)

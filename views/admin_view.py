@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash, get_flashed_messages, session
-from controllers.controller_authentication import staff_permission
+from controllers.controller_authentication import staff_permission_required
 import controllers.controller_category as c_category
 import controllers.controller_product as c_product
 import controllers.controller_authentication as c_auth
@@ -15,7 +15,6 @@ admin_view = Blueprint('admin_view', __name__, template_folder='/templates')
 def login():
     if request.method == 'POST':
         result = c_auth.staff_login(request.values.get('username'), request.values.get('password'))
-        print(result)
         if isinstance(result, dict) and len(result) == 3:
             session['user_id'] = result['user_id']
             session['is_staff'] = True
@@ -28,29 +27,35 @@ def login():
     return render_template('/admin/login.html')
 
 @admin_view.route('/admin/logout', methods=['GET'])
+@staff_permission_required()
 def logout():
     session.pop('user_id', None)
+    session.pop('is_staff', None)
+    session.pop('username', None)
     return redirect(url_for('admin_view.login'))
 
 # ------------------- Dashboard -------------------
 
 @admin_view.route('/admin/dashboard', methods=['GET'])
-@staff_permission('T')
+@staff_permission_required()
 def dashboard():
     return render_template('/admin/dashboard.html')
 
 # ------------------- Category -------------------
 @admin_view.route('/admin/category', methods=['GET'])
+@staff_permission_required('categories')
 def category():
     categories = c_category.list_categories()
     return render_template('/admin/category.html', categories = categories)
 
 @admin_view.route('/admin/category/', methods=['GET'])
+@staff_permission_required('categories')
 def category_empty():
     return redirect(url_for('.category'))
 
 #
 @admin_view.route('/admin/category/new', methods=['GET', 'POST'])
+@staff_permission_required('categories')
 def new_category():
     if request.method == 'POST':
         name = request.values.get('category-name')
@@ -62,6 +67,7 @@ def new_category():
     return redirect(url_for('.category'))
 
 @admin_view.route('/admin/category/edit', methods=['GET', 'POST'])
+@staff_permission_required('categories')
 def edit_category():
     id = request.values.get('category-id')
     name = request.values.get('category-name')
@@ -72,6 +78,7 @@ def edit_category():
     return redirect(url_for('.category'))
 
 @admin_view.route('/admin/category/delete', methods=['GET', 'POST'])
+@staff_permission_required('categories')
 def delete_category():
     id = request.values.get('category-id')
     msg = c_category.remove_category(id)
@@ -81,6 +88,7 @@ def delete_category():
 
 # ------------------- Product -------------------
 @admin_view.route('/admin/product', methods=['GET'])
+@staff_permission_required('products')
 def product():
     category_id = request.args.get('category_id')
     if category_id is None or category_id == '0':
@@ -94,10 +102,12 @@ def product():
     )
 
 @admin_view.route('/admin/product/', methods=['GET'])
+@staff_permission_required('products')
 def product_empty():
     return redirect(url_for('.category'))
 
 @admin_view.route('/admin/product/new', methods=['GET', 'POST'])
+@staff_permission_required('products')
 def new_product():
     if request.method == 'POST':
         msg = c_product.add_product(
@@ -112,6 +122,7 @@ def new_product():
     return redirect(url_for('.product'))
 
 @admin_view.route('/admin/product/update_image', methods=['GET', 'POST'])
+@staff_permission_required('products')
 def update_product_image():
     if request.method == 'POST':
         msg = c_product.update_image(
@@ -124,6 +135,7 @@ def update_product_image():
     return redirect(url_for('.product'))
 
 @admin_view.route('/admin/product/edit', methods=['GET', 'POST'])
+@staff_permission_required('products')
 def edit_product():
     if request.method == 'POST':
         category = request.form.getlist('categories')
@@ -142,6 +154,7 @@ def edit_product():
     return redirect(url_for('.product'))
 
 @admin_view.route('/admin/product/delete', methods=['GET', 'POST'])
+@staff_permission_required('products')
 def delete_product():
     id = request.values.get('product-id')
     msg = c_product.remove_product(id)
@@ -151,15 +164,18 @@ def delete_product():
 
 # ------------------- Redeem Card -------------------
 @admin_view.route('/admin/redeem_card', methods=['GET'])
+@staff_permission_required('redeem_cards')
 def redeem_card():
     redeem_cards = c_redeem_card.get_redeem_cards()
     return render_template('/admin/redeem_card.html', redeem_cards = redeem_cards)
 
 @admin_view.route('/admin/redeem_card/', methods=['GET'])
+@staff_permission_required('redeem_cards')
 def redeem_card_empty():
     return redirect(url_for('.redeem_card'))
 
 @admin_view.route('/admin/redeem_card/new', methods=['GET', 'POST'])
+@staff_permission_required('redeem_cards')
 def new_redeem_cards():
     if request.method == 'POST':
         msg = c_redeem_card.add_redeem_cards(
@@ -170,6 +186,7 @@ def new_redeem_cards():
     return redirect(url_for('.redeem_card'))
 
 @admin_view.route('/admin/redeem_card/delete', methods=['GET', 'POST'])
+@staff_permission_required('redeem_cards')
 def delete_redeem_card():
     msg = c_redeem_card.delete_redeem_card(redeem_code = request.values.get('redeem_code'))
     if 'error' in msg:
@@ -178,6 +195,7 @@ def delete_redeem_card():
 
 # ------------------- Coupon -------------------
 @admin_view.route('/admin/coupon', methods=['GET'])
+@staff_permission_required('coupons')
 def coupon():
     return render_template('/admin/coupon.html',
             coupons = c_coupon.get_coupons()
@@ -188,6 +206,7 @@ def coupon_empty():
     return redirect(url_for('.coupon'))
 
 @admin_view.route('/admin/coupon/new', methods=['GET', 'POST'])
+@staff_permission_required('coupons')
 def new_coupon():
     if request.method == 'POST':
         msg = c_coupon.add_coupon(
@@ -202,6 +221,7 @@ def new_coupon():
     return redirect(url_for('.coupon'))
 
 @admin_view.route('/admin/coupon/edit', methods=['GET', 'POST'])
+@staff_permission_required('coupons')
 def edit_coupon():
     if request.method == 'POST':
         msg = c_coupon.update_coupon(
@@ -216,6 +236,7 @@ def edit_coupon():
     return redirect(url_for('.coupon'))
 
 @admin_view.route('/admin/coupon/delete', methods=['GET', 'POST'])
+@staff_permission_required('coupons')
 def delete_coupon():
     msg = c_coupon.delete_coupon(coupon_code = request.values.get('coupon-code'))
     if 'error' in msg:
@@ -224,6 +245,7 @@ def delete_coupon():
 
 # ------------------- Staff -------------------
 @admin_view.route('/admin/staff', methods=['GET'])
+@staff_permission_required('staff')
 def staff():
     return render_template('/admin/staff.html',
             roles = c_role.get_all_roles(),
@@ -231,10 +253,12 @@ def staff():
     )
 
 @admin_view.route('/admin/staff/', methods=['GET'])
+@staff_permission_required('staff')
 def staff_empty():
     return redirect(url_for('.staff'))
 
 @admin_view.route('/admin/staff/new', methods=['GET', 'POST'])
+@staff_permission_required('staff')
 def new_staff():
     if request.method == 'POST':
         msg = c_staff.add_staff(
@@ -252,6 +276,7 @@ def new_staff():
     return redirect(url_for('.staff'))
 
 @admin_view.route('/admin/staff/edit', methods=['GET', 'POST'])
+@staff_permission_required('staff')
 def edit_staff():
     if request.method == 'POST':
         msg = c_coupon.update_coupon(
@@ -266,6 +291,7 @@ def edit_staff():
     return redirect(url_for('.staff'))
 
 @admin_view.route('/admin/staff/delete', methods=['GET', 'POST'])
+@staff_permission_required('staff')
 def delete_staff():
     msg = c_coupon.delete_coupon(coupon_code = request.values.get('coupon-code'))
     if 'error' in msg:
@@ -274,6 +300,7 @@ def delete_staff():
 
 # ------------------- Orders -------------------
 @admin_view.route('/admin/order', methods=['GET'])
+@staff_permission_required('orders')
 def order():
     return render_template('/admin/order.html',
             roles = c_role.get_all_roles(),
@@ -281,10 +308,12 @@ def order():
     )
 
 @admin_view.route('/admin/order/', methods=['GET'])
+@staff_permission_required('orders')
 def order_empty():
     return redirect(url_for('.order'))
 
 @admin_view.route('/admin/order/edit', methods=['GET', 'POST'])
+@staff_permission_required('orders')
 def edit_order():
     if request.method == 'POST':
         msg = c_coupon.update_coupon(
@@ -299,6 +328,7 @@ def edit_order():
     return redirect(url_for('.order'))
 
 @admin_view.route('/admin/order/delete', methods=['GET', 'POST'])
+@staff_permission_required('orders')
 def delete_order():
     msg = c_coupon.delete_coupon(coupon_code = request.values.get('coupon-code'))
     if 'error' in msg:
