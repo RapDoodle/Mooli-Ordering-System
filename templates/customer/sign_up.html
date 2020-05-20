@@ -49,7 +49,7 @@ a:hover{
 <div class="row" style="height: 30px;"></div>
 <div class="row">
     <div class="col-4" style="left: 1%;top: 3px;">
-        <div class="title" style="color: #caa15e; padding-left: 15px;"><a href="#">Cancel</a></div>
+        <div class="title" style="color: #caa15e; padding-left: 15px;"><a href="{{ url_for('customer_view.login_redirect') }}">Cancel</a></div>
     </div>
     <div class="col-4" style="text-align: center;top: -3px;">
         <div data-layer="a167b8fc-e7e5-4bf1-8b42-4e89eea0e2f6" class="title3a06c88c" style="color: #652d00;">Sign Up</div>
@@ -64,11 +64,12 @@ a:hover{
 </div>
 <div class="row" style="height: 60px;"></div>
 
-<form action="">
+<form action="{{ url_for('customer_view.sign_up') }}" method="POST">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
     <div class="row">
         <div class="col-12" style="text-align: center;">
             <div style="position:relative; text-align: center;"> 
-                <input type="text" class="form-control" name="username" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" style="height:52px;border: 2px solid #704b3c;background-color: #f8f9fa00;color: #dfb36a;width: 280px;align-self: center;border-radius: 50px;font-style: normal;
+                <input type="text" class="form-control" name="username" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" style="height:52px;border: 1px solid  	#dfb36a;background-color: #f8f9fa00;color: #dfb36a;width: 280px;align-self: center;border-radius: 50px;font-style: normal;
                 font-family: 'SF Pro Text', Arial;">
             </div>
         </div>
@@ -78,7 +79,7 @@ a:hover{
     <div class="row">
         <div class="col-12" style="text-align: center;top: 8px;">
             <div style="position:relative; text-align: center;"> 
-                <input type="text" class="form-control" name="email" placeholder="Email address" aria-label="Email_address" aria-describedby="basic-addon1" style="height:52px;border: 2px solid #704b3c;background-color: #f8f9fa00;color: #dfb36a;width: 280px;align-self: center;border-radius: 50px;font-style: normal;
+                <input type="text" class="form-control" name="email" placeholder="Email address" aria-label="Email_address" aria-describedby="basic-addon1" style="height:52px;border: 1px solid  	#dfb36a;background-color: #f8f9fa00;color: #dfb36a;width: 280px;align-self: center;border-radius: 50px;font-style: normal;
                 font-family: 'SF Pro Text', Arial;">
             </div>
         </div>
@@ -87,7 +88,7 @@ a:hover{
     <div class="row">
         <div class="col-12" style="text-align: center; top: 16px;">
             <div style="position:relative; text-align: center;"> 
-                <input type="password" class="form-control" name="password" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1" style="height:52px;border: 2px solid #704b3c;background-color: #f8f9fa00;color: #dfb36a;width: 280px;align-self: center;border-radius: 50px;font-style: normal;
+                <input type="password" class="form-control" name="password" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1" style="height:52px;border: 1px solid  	#dfb36a;background-color: #f8f9fa00;color: #dfb36a;width: 280px;align-self: center;border-radius: 50px;font-style: normal;
                 font-family: 'SF Pro Text', Arial;">
             </div>
         </div>
@@ -96,7 +97,7 @@ a:hover{
     <div class="row">
         <div class="col-12" style="text-align: center; top: 24px;">
             <div style="position:relative; text-align: center;"> 
-                <input type="password" class="form-control" name="password_confirm" placeholder="Confirm password" aria-label="Confirm_password" aria-describedby="basic-addon1" style="height:52px;border: 2px solid #704b3c;background-color: #f8f9fa00;color: #dfb36a;width: 280px;align-self: center;border-radius: 50px;font-style: normal;
+                <input type="password" class="form-control" name="password_confirm" placeholder="Confirm password" aria-label="Confirm_password" aria-describedby="basic-addon1" style="height:52px;border: 1px solid  	#dfb36a;background-color: #f8f9fa00;color: #dfb36a;width: 280px;align-self: center;border-radius: 50px;font-style: normal;
                 font-family: 'SF Pro Text', Arial;">
             </div>
         </div>
