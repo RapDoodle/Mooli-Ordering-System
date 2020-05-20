@@ -85,3 +85,36 @@ def get_staff_list():
     result = cursor.fetchall()
 
     return result
+
+def authorization_check(user_id, permission_name):
+    """The function verifies if the staff is authorized for the permission
+
+    Parameters:
+    user_id -- the user_id of the staff
+    permission_name -- the name of the permission
+    """
+    # Establish db connection
+    dao = DAO()
+    cursor = dao.cursor()
+
+    # Query db for role
+    # Check if the user is a superadmin
+    sql = """SELECT role_name FROM staff, role WHERE
+                staff.user_id = %(user_id)s AND
+                staff.role_id = role.role_id AND
+                role.role_name = 'superadmin'"""
+    cursor.execute(sql, {'user_id': user_id, 'permission_name': permission_name})
+    result = cursor.fetchone()
+    if result is not None:
+        return True
+
+    # The staff is not a superuser, check for permission
+    sql = """SELECT permission_name FROM staff, role_permission, permission WHERE
+                staff.user_id = %(user_id)s AND
+                staff.role_id = role_permission.role_id AND
+                role_permission.permission_id = permission.permission_id AND
+                permission.permission_name = %(permission_name)s"""
+    cursor.execute(sql, {'user_id': user_id, 'permission_name': permission_name})
+    result = cursor.fetchone()
+
+    return False if result is None else True

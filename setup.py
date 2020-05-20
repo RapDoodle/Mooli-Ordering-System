@@ -15,7 +15,6 @@ def y_n_choice(msg = 'Do you want to continue?'):
     return True if (choice == 'Y' or choice == 'y' or choice == '') else False
 
 def setup():
-
     # Check if the system has been initialized
     if os.path.exists(CONFIG_PATH):
         print('A configuration is detected, are you sure to continue?')
@@ -128,6 +127,8 @@ def setup():
                 print('ERROR: ' + result['error'])
                 continue
             finish = True
+
+    init_default_role_permission()
 
     print('\nSetup complted.')
 
@@ -324,9 +325,23 @@ def create_superuser(username, email, password):
     # For the initialization of database
     import utils.config_manager
     from controllers.controller_role import add_role
-    role_id = add_role('superadmin', [])
+    role_id = add_role('Superadmin', [])
     from controllers.controller_staff import add_staff
     return add_staff(username = username, email = email, password = password, role_id = role_id)
+
+def init_default_role_permission():
+    import utils.config_manager
+    from models.model_role import add_role
+    role_permissions = [
+        {'role_name': 'Product Manager', 'permissions': [2, 3]},
+        {'role_name': 'Financial Manager', 'permissions': [4]},
+        {'role_name': 'Shop Manager', 'permissions': [1, 2, 3, 4, 5]},
+        {'role_name': 'Cook', 'permissions': [1]}
+    ]
+    for role_permission in role_permissions:
+        add_role(
+            role_name = role_permission['role_name'],
+            permission_ids = role_permission['permissions'])
 
 def init_test_db():
     # Codes for performing unit testing
