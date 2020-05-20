@@ -347,6 +347,10 @@ height: 14.14px;
     box-shadow: none;
 }
 
+.mainBodyPart{
+            margin-bottom: 348px;
+        }
+
 </style>
 
 <style type="text/css">
@@ -365,9 +369,9 @@ height: 14.14px;
 <div class="row" style="height: 50px;">
     <div class="col-3" style="text-align: left;">
         
-        <a href="#" style="padding-left: 15px;color:#955a3f ;">
+        <!--<a href="#" style="padding-left: 15px;color:#955a3f ;">
             <svg preserveAspectRatio="none" viewBox="-0.75 -0.75 12.241260528564453 20.2650146484375" class="path1c13c5da"><path d="M 10.3725004196167 0.3675000071525574 C 9.882499694824219 -0.1225000023841858 9.092499732971191 -0.1225000023841858 8.602499961853027 0.3675000071525574 L 0.2924999892711639 8.677499771118164 C -0.09749999642372131 9.067500114440918 -0.09749999642372131 9.697500228881836 0.2924999892711639 10.08749961853027 L 8.602499961853027 18.39749908447266 C 9.092499732971191 18.88750076293945 9.882499694824219 18.88750076293945 10.3725004196167 18.39749908447266 C 10.86250019073486 17.90749931335449 10.86250019073486 17.11750030517578 10.3725004196167 16.62750053405762 L 3.132499933242798 9.377499580383301 L 10.38249969482422 2.127500057220459 C 10.86250019073486 1.647500038146973 10.86250019073486 0.8475000262260437 10.3725004196167 0.3675000071525574 Z"></path></svg>
-        </a>
+        </a>-->
         
     </div>
     <div class="col-6">
@@ -388,7 +392,7 @@ height: 14.14px;
                 <div class="col-4" >
                     <div class="cardTextBox">
                         <div class="bubbleMilkTea" style="text-align:left;color: #2d4057;"><b>Bubble Milk Tea</b></div>
-                        <div class="xd5bb8192">&nbsp;$12.99</div>
+                        <div class="xd5bb8192" id="siglePrice">&nbsp;$12.99</div>
                     </div>
                 </div>
                 <div class="col-3" style="text-align: right;top: -6px;right: -16px;">
@@ -405,22 +409,22 @@ height: 14.14px;
                 <div class="col-6">
                 </div>
                 <div class="col-4">
-                        <input type="number" id="balance" max="99" min="1" value="2" class="x2 form-control" >
+                        <input type="number" id="balance" max="99" min="1" value="2" class="x2 form-control" onchange="calculateSingle()">
                     <div class="group2548">
-                        <a href="#">
+                        <a href="#" onclick="add()">
                             <div class="rectangle689"></div>
                             <svg preserveAspectRatio="none" viewBox="12.50000286102295 13 9 8.998001098632812" class="path1157"><path d="M 21.16667175292969 16.99911308288574 L 17.33333778381348 16.99911308288574 L 17.33333778381348 13.33326053619385 C 17.33333778381348 13.14897060394287 17.18400192260742 13 17.00000381469727 13 C 16.81600189208984 13 16.66666793823242 13.14896869659424 16.66666793823242 13.33326053619385 L 16.66666793823242 16.99911308288574 L 12.83333683013916 16.99911308288574 C 12.64933586120605 16.99911308288574 12.50000286102295 17.14808082580566 12.50000286102295 17.33236694335938 C 12.50000286102295 17.51666450500488 12.64933586120605 17.6656322479248 12.83333683013916 17.6656322479248 L 16.66666793823242 17.6656322479248 L 16.66666793823242 21.66473770141602 C 16.66666793823242 21.84903526306152 16.81600189208984 21.99800109863281 17.00000381469727 21.99800109863281 C 17.18400192260742 21.99800109863281 17.33333778381348 21.84903526306152 17.33333778381348 21.66473770141602 L 17.33333778381348 17.6656322479248 L 21.16667175292969 17.6656322479248 C 21.35066795349121 17.6656322479248 21.50000381469727 17.51666450500488 21.50000381469727 17.33236694335938 C 21.50000381469727 17.14808082580566 21.35066795349121 16.99911308288574 21.16667175292969 16.99911308288574 Z"  /></svg>
                         </a>
                     </div>
                     <div class="group2547">
-                        <a href="#">
+                        <a href="#" onclick="minus()">
                             <div class="rectangle688"></div>
                             <svg preserveAspectRatio="none" viewBox="12 25.00000762939453 12 0.8000030517578125" class="path1626"><path d="M 23.57143020629883 25.00000762939453 L 12.42857456207275 25.00000762939453 C 12.19200325012207 25.00000762939453 12 25.17881011962891 12 25.40000534057617 C 12 25.62120819091797 12.19200325012207 25.80000686645508 12.42857456207275 25.80000686645508 L 23.57143020629883 25.80000686645508 C 23.80799674987793 25.80000686645508 24 25.62120819091797 24 25.40000534057617 C 24 25.17881011962891 23.80799674987793 25.00000762939453 23.57143020629883 25.00000762939453 Z"  /></svg>
                         </a>
                     </div>
                 </div>
                 <div class="col-2" style="left:-20px">
-                    <div class="x414e9323">$25.98</div>
+                    <div class="x414e9323" id="sigleTotalPrice">$25.98</div>
                 </div>
             </div>
         </div>
@@ -429,92 +433,111 @@ height: 14.14px;
 
 <script>
     var balance = 0;
-    var siglePrice = 0;
-    var sigleTotalPrice = 0;
-    balance = document.getElementsById("balance").value;
-    siglePrice = document.getElementsBy();
+    var singlePrice = 0;
+    var singleTotalPrice = 0;
+    balance = Number(document.getElementById("balance").value);
+    siglePrice = Number(document.getElementById("siglePrice").innerText);
+    sigleTotalPrice = Number(document.getElementById("sigleTotalPrice").innerText);
     function add(){
-
+        if(balance>=99){
+            document.getElementById("balance").value = Number(99).toFixed(0);
+        }
+        balance += 1;
+        document.getElementById("balance").value = Number(balance).toFixed(0);
+        calculateSingle();
     }
     function minus(){
-
+        if(balance<=1){
+            document.getElementById("balance").value = Number(1).toFixed(0);
+        }
+        balance -= 1;
+        document.getElementById("balance").value = Number(balance).toFixed(0);
+        calculateSingle();
+    }
+    function calculateSingle(){
+        document.getElementById("sigleTotalPrice").innerText = (Number(balance*singlePrice).toFixed(2)); 
     }
 
 </script>
 
-<div class="row" style="height:350px;">
-  </div>
 
-<div class="row">
-    <div class="col-5" style="text-align: left;font-style: normal;font-size: 18.00px;font-weight: 700;font-family: Roboto, Arial;padding-left: 30px;color: #351800;">
-      Your Orders
-    </div>
-    <div class="col-7"></div>
-  </div>
-  
-  <div class="row" style="height:20px;">
-  </div>
+<div class="card fixed-bottom" style="
+background-color: rgba(249, 250, 251, 1);
+filter: drop-shadow(10px 0px 15px rgba(0, 0, 0, 0.10196078431372549));
+height: 333.00px;border: none;border-radius: 20px;">
+    <div class="card-body" >
+        <div class="row" style="height: 20px;"></div>
+        <div class="row">
+            <div class="col-5" style="text-align: left;font-style: normal;font-size: 18.00px;font-weight: 700;font-family: Roboto, Arial;padding-left: 30px;color: #351800;">
+              Your Orders
+            </div>
+            <div class="col-7"></div>
+          </div>
+          
+          <div class="row" style="height:20px;">
+          </div>
+          <div class="row">
+            <div class="col-8" style="padding-left:30px;font-size: 18.00px;">
+              <div style="color:  	#652d00;"> <svg class="bi bi-bag-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1 4h14v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4zm7-2.5A2.5 2.5 0 0 0 5.5 4h-1a3.5 3.5 0 1 1 7 0h-1A2.5 2.5 0 0 0 8 1.5z"/>
+              </svg> Bill Total</div>
+            </div>
+            <div class="col-4" style="padding-left:30px;font-size: 18.00px;color: #351800;">
+              $25.98
+            </div>
+          </div>
+        
+        <div class="row" style="height:30px;">
+            <hr width="320" />
+        </div>
 
-  <div class="row">
-    <div class="col-8" style="padding-left:30px;font-size: 18.00px;">
-      <div style="color:  	#652d00;"> <svg class="bi bi-bag-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-        <path d="M1 4h14v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4zm7-2.5A2.5 2.5 0 0 0 5.5 4h-1a3.5 3.5 0 1 1 7 0h-1A2.5 2.5 0 0 0 8 1.5z"/>
-      </svg> Bill Total</div>
-    </div>
-    <div class="col-4" style="padding-left:30px;font-size: 18.00px;color: #351800;">
-      $25.98
-    </div>
-  </div>
+        <div class="row">
+            <div class="col-8" style="padding-left:30px;font-size: 18.00px;font-weight: 700;">
+              <div style="color:  	#652d00;"> 
+                Grand Total
+              </div>
+            </div>
+            <div class="col-4" style="padding-left:30px;font-size: 18.00px;font-weight: 700;color: #351800;">
+              $25.98
+            </div>
+        </div>
 
-  <div class="row" style="height:30px;">
-    <hr width="320" />
-  </div>
-
-  <div class="row">
-    <div class="col-8" style="padding-left:30px;font-size: 18.00px;font-weight: 700;">
-      <div style="color:  	#652d00;"> 
-        Grand Total
-      </div>
-    </div>
-    <div class="col-4" style="padding-left:30px;font-size: 18.00px;font-weight: 700;color: #351800;">
-      $15.98
-    </div>
-  </div>
-
-  <div class="row" style="height:30px;">
-  </div>
-
-  <div class="row">
-    <div class="col-12" style="text-align: center;">
-        <div style="text-align: center;line-height: 41.96px;
-            font-size: 14.00px;
-            font-weight: 400;
-            font-style: normal;
-            font-family: 'SF Pro Text', Arial;
-            ">
-            <input type="submit" class="btn" name="btn" value="Proceed to Pay" style="background-color: #dfb36a;width: 280px;height: 52px; border-radius: 50px;line-height: 35.00px;
-            letter-spacing: 1.40px;
-            color: #955a3f; 
-            font-size: 15.00px;
-            font-weight: 1000;
-            font-style: normal;
-            font-family: 'SF Pro Text', Arial;
-            white-space: pre;
-            width: 250px;
-            border-width: 0px;
-            border-bottom: none;
-            border-top-style: none;
-            border-top-width: 1.00px;
-            border-radius: 50.00px;
-            filter: drop-shadow(0px 3px 20px rgba(0, 0, 0, 0.08235294117647059));
-            height: 50px;">
+        <div class="row" style="height: 30px;"></div>
+        <div class="row">
+            <div class="col-12" style="text-align: center;">
+                <div style="text-align: center;line-height: 41.96px;
+                    font-size: 14.00px;
+                    font-weight: 400;
+                    font-style: normal;
+                    font-family: 'SF Pro Text', Arial;
+                    ">
+                    <input type="submit" class="btn" name="btn" value="Proceed to Pay" style="background-color: #dfb36a;width: 280px;height: 52px; border-radius: 50px;line-height: 35.00px;
+                    letter-spacing: 1.40px;
+                    color: #955a3f; 
+                    font-size: 15.00px;
+                    font-weight: 1000;
+                    font-style: normal;
+                    font-family: 'SF Pro Text', Arial;
+                    white-space: pre;
+                    width: 250px;
+                    border-width: 0px;
+                    border-bottom: none;
+                    border-top-style: none;
+                    border-top-width: 1.00px;
+                    border-radius: 50.00px;
+                    filter: drop-shadow(0px 3px 20px rgba(0, 0, 0, 0.08235294117647059));
+                    height: 50px;">
+                </div>
+            </div>
         </div>
     </div>
 </div>
 
+<script>
+    function calculateTotal(){
 
-</div>
-
+    }
+</script>
 
 
 {{ super() }}
