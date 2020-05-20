@@ -98,12 +98,36 @@ def me():
 @customer_view.route('/me/redeem', methods=['GET', 'POST'])
 @c_auth.login_required
 def redeem():
+    if request.method == 'POST':
+        result = c_redeem_card.redeem(
+            user_id = session.get('user_id'),
+            redeem_code = request.values.get('redeem_code')
+        )
+        if isinstance(result, dict):
+            if 'error' in result:
+                flash(result['error'])
+                return redirect(url_for('customer_view.redeem'))
+        return redirect(url_for('customer_view.me'))
     return render_template('customer/redeem.html')
 
 @customer_view.route('/me/account', methods=['GET', 'POST'])
 @c_auth.login_required
 def account():
-    return render_template('customer/redeem.html')
+    if request.method == 'POST':
+        result = c_user.update_user_info(
+            user_id = session.get('user_id'),
+            first_name = request.values.get('first_name'),
+            last_name = request.values.get('last_name'),
+            gender = request.values.get('gender'),
+            phone = request.values.get('phone')
+        )
+        if isinstance(result, dict):
+            if 'error' in result:
+                flash(result['error'])
+                return redirect(url_for('customer_view.account'))
+        return redirect(url_for('customer_view.me'))
+    user = c_user.find_user_by_id(session.get('user_id'))
+    return render_template('customer/account.html', user = user)
 
 @customer_view.route('/me/logout', methods=['GET', 'POST'])
 @c_auth.login_required
