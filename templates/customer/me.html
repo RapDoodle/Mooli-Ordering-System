@@ -118,7 +118,7 @@
     </div>
     <div class="row row-cols-3" style="height: 25px;">
         <div class="col-3" style="padding-left: 30px;">
-          <span class="align-middle"><svg  viewBox="-0.75 -0.75 12.2412109375 20.2650146484375" style="height: 20px; fill: 	#652d00;"><path d="M 10.3725004196167 0.3675000071525574 C 9.882499694824219 -0.1225000023841858 9.092499732971191 -0.1225000023841858 8.602499961853027 0.3675000071525574 L 0.2924999892711639 8.677499771118164 C -0.09749999642372131 9.067500114440918 -0.09749999642372131 9.697500228881836 0.2924999892711639 10.08749961853027 L 8.602499961853027 18.39749908447266 C 9.092499732971191 18.88750076293945 9.882499694824219 18.88750076293945 10.3725004196167 18.39749908447266 C 10.86250019073486 17.90749931335449 10.86250019073486 17.11750030517578 10.3725004196167 16.62750053405762 L 3.132499933242798 9.377499580383301 L 10.38249969482422 2.127500057220459 C 10.86250019073486 1.647500038146973 10.86250019073486 0.8475000262260437 10.3725004196167 0.3675000071525574 Z"  /></svg></span>
+          
         </div>
         <div class="col-6">
             <div class="title" style="background-color: rgba(255, 255, 255, 0);
@@ -167,13 +167,13 @@
                 <div class="row" style="height: 45px;">
                     <div class="col redeem" style="padding-bottom: 10px;">
                         <span class="align-bottom">
-                          <button type="button" class="btn btn-light"><font style="color:  	#dfb36a">Redeem</font></button>
+                          <a type="button" href="{{ url_for('customer_view.redeem') }}" class="btn btn-light"><font style="color:  	#dfb36a">Redeem</font></a>
                         </span>
                     </div>
                 
                     <div class="col history">
                         <span class="align-bottom">
-                          <button type="button" class="btn btn-light"><font style="color:  	#dfb36a">History</font></button>
+                          <a type="button" class="btn btn-light"><font style="color:  	#dfb36a">History</font></a>
                         </span> 
                     </div>
                 </div>
@@ -183,7 +183,7 @@
     <div class="row" style="height:50px;">
         <div class="col-1"></div>
         <div class="col-5 accountInfo" style="text-align: left;color:  	#652d00;">
-          Account info
+          <a href="{{ url_for('customer_view.account') }}">Account info</a>
         </div>
         <div class="col-5 accountInfo" style="text-align: right;">
                 <span class="align-bottom">
@@ -218,11 +218,13 @@
         </div>
         <div class="col-1"></div>
     </div>
-
+  
+  
     <div class="row" style="height:50px;">
+      
         <div class="col-1"></div>
         <div class="col-5 logout" style="text-align: left;">
-          Log out
+          <a href="{{ url_for('customer_view.logout') }}">Log out</a>
         </div>
         <div class="col-5 accountInfo" style="text-align: right;">
                 <span class="align-bottom">
@@ -230,6 +232,7 @@
                 </span>
         </div>
         <div class="col-1"></div>
+  
     </div>
  
 </div>
