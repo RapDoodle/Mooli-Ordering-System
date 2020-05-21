@@ -126,9 +126,9 @@
 <div class="row" style="height: 50px;"></div>
 <div class="row">
     <div class="col-12">
-        <form action="">
+        <form action="{{ url_for('customer_view.payment') }}" method="GET">
             <div class="input-group mb-3">
-                <input type="text" class="form-control" name="coupon" placeholder="Coupon code" aria-label="Coupon_code" aria-describedby="button-addon2" style="border-right-color:rgba(0, 0, 0, 0)">
+                <input type="text" class="form-control" name="coupon" placeholder="Coupon code" autocomplete="off" aria-label="Coupon_code" aria-describedby="button-addon2" style="border-right-color:rgba(0, 0, 0, 0)">
                 <div class="input-group-append">
                   <button class="btn btn-outline-secondary" type="submit" id="button-addon2" style="border-color:#6c757d ">Verify</button>
                 </div>

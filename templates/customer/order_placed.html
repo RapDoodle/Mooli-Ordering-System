@@ -71,7 +71,8 @@
                     font-style: normal;
                     font-family: 'SF Pro Text', Arial;
                     ">
-                    <input type="submit" class="btn" value="Back To Home" style="background-color: #dfb36a;width: 280px;height: 52px; border-radius: 50px;line-height: 35.00px;
+                    <form action="{{ url_for('customer_view.home') }}" id="test-form"></form>
+                    <input type="submit" form="test-form" class="btn" value="Back To Home" style="background-color: #dfb36a;width: 280px;height: 52px; border-radius: 50px;line-height: 35.00px;
                     letter-spacing: 1.40px;
                     color: #955a3f; 
                     border-top-style: none;

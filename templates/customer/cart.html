@@ -387,7 +387,7 @@ height: 14.14px;
         <div class="card-body">
             <div class="row" style="height: 50px;">
                 <div class="col-5" style="text-align: left;">
-                    <div><img src="../../static/customer/card.png" alt="pic lost" style="width: 100px;height: 75px; filter: drop-shadow(0px 10px 15px rgba(27, 28, 32, 0.050980392156862744));background-size: cover;border-radius: 20px;"></div>
+                    <div><img src="../../static/media/thumbnails/1" alt="pic lost" style="width: 100px;height: 75px; filter: drop-shadow(0px 10px 15px rgba(27, 28, 32, 0.050980392156862744));background-size: cover;border-radius: 20px;"></div>
                 </div>
                 <div class="col-4" >
                     <div class="cardTextBox">
@@ -409,7 +409,7 @@ height: 14.14px;
                 <div class="col-6">
                 </div>
                 <div class="col-4">
-                        <input type="number" id="balance" max="99" min="1" value="2" class="x2 form-control" onchange="calculateSingle()">
+                        <input type="number" id="balance" max="99" min="1" value="1" class="x2 form-control" onchange="calculateSingle()">
                     <div class="group2548">
                         <a href="#" onclick="add()">
                             <div class="rectangle689"></div>
@@ -424,7 +424,7 @@ height: 14.14px;
                     </div>
                 </div>
                 <div class="col-2" style="left:-20px">
-                    <div class="x414e9323" id="sigleTotalPrice">$25.98</div>
+                    <div class="x414e9323" id="sigleTotalPrice">$12.99</div>
                 </div>
             </div>
         </div>
@@ -483,7 +483,7 @@ height: 333.00px;border: none;border-radius: 20px;">
               </svg> Bill Total</div>
             </div>
             <div class="col-4" style="padding-left:30px;font-size: 18.00px;color: #351800;">
-              $25.98
+              $12.99
             </div>
           </div>
         
@@ -498,7 +498,7 @@ height: 333.00px;border: none;border-radius: 20px;">
               </div>
             </div>
             <div class="col-4" style="padding-left:30px;font-size: 18.00px;font-weight: 700;color: #351800;">
-              $25.98
+              $12.99
             </div>
         </div>
 
@@ -511,7 +511,8 @@ height: 333.00px;border: none;border-radius: 20px;">
                     font-style: normal;
                     font-family: 'SF Pro Text', Arial;
                     ">
-                    <input type="submit" class="btn" name="btn" value="Proceed to Pay" style="background-color: #dfb36a;width: 280px;height: 52px; border-radius: 50px;line-height: 35.00px;
+                    <form action="{{ url_for('customer_view.checkout_coupon') }}" id="test-form"></form>
+                    <input form="test-form" type="submit" class="btn" name="btn" value="Proceed to Pay" style="background-color: #dfb36a;width: 280px;height: 52px; border-radius: 50px;line-height: 35.00px;
                     letter-spacing: 1.40px;
                     color: #955a3f; 
                     font-size: 15.00px;

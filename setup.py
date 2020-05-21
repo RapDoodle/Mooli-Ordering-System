@@ -123,8 +123,9 @@ def setup():
                 print('\nPasswords do not match.')
                 continue
             result = create_superuser(username, email, password_1)
-            if 'error' in result:
-                print('ERROR: ' + result['error'])
+            if isinstance(result, dict):
+                if 'error' in result:
+                    print('ERROR: ' + result['error'])
                 continue
             finish = True
 

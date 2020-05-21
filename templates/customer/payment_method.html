@@ -68,7 +68,8 @@
           font-family: 'SF Pro Text', Arial;">Check out</div>
       </div>
       <div class="col-3" style="text-align: center;">
-        <button type="button" class="btn" style="background-color: transparent;border: 1px solid transparent;padding: 1px 6px;"><font style="font-size: 15px;font-family: 'SF Pro Text', Arial;padding-bottom: 1px;color: #caa15e;">Confirm</font> </button>
+        <form action="{{ url_for('customer_view.order_placed') }}" id="test-form" method="GET"></form>
+        <button type="submit" form="test-form" class="btn" style="background-color: transparent;border: 1px solid transparent;padding: 1px 6px;"><font style="font-size: 15px;font-family: 'SF Pro Text', Arial;padding-bottom: 1px;color: #caa15e;" >Confirm</font> </button>
       </div>
   </div>
 
@@ -134,7 +135,7 @@
         </svg> Bill Total</div>
       </div>
       <div class="col-4" style="padding-left:30px;font-size: 18.00px;color: #351800;">
-        $25.98
+        $12.99
       </div>
     </div>
 
@@ -151,7 +152,7 @@
         </svg> Coupon</div>
       </div>
       <div class="col-4" style="padding-left:30px;font-size: 18.00px;color: #351800;">
-        -$10.00
+        -$5.00
       </div>
     </div>
 
@@ -166,7 +167,7 @@
         </div>
       </div>
       <div class="col-4" style="padding-left:30px;font-size: 18.00px;font-weight: 700;color: #351800;">
-        $15.98
+        $7.99
       </div>
     </div>
   
