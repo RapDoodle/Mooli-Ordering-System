@@ -139,6 +139,21 @@ def logout():
 def cart():
     return render_template('customer/cart.html')
 
+@customer_view.route('/checkout/coupon', methods=['GET', 'POST'])
+@c_auth.login_required
+def checkout_coupon():
+    return render_template('customer/coupon.html')
+
+@customer_view.route('/checkout/payment', methods=['GET', 'POST'])
+@c_auth.login_required
+def payment():
+    return render_template('customer/payment_method.html')
+
+@customer_view.route('/checkout/done', methods=['GET', 'POST'])
+@c_auth.login_required
+def order_placed():
+    return render_template('customer/order_placed.html')
+
 @customer_view.route('/test/<string:template>', methods=['GET'])
 def test(template):
     return render_template('customer/' + template)
