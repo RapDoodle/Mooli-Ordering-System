@@ -4,58 +4,74 @@
 
 {% block content %}
 <style type="text/css">
-    html {
-        height: 100%;
-        width: 100%;
-      }
+	html {
+		height: 100%;
+		width: 100%;
+	}
 
-    body {
-        font-family: 'Open Sans', serif;
-        margin: 0;
-        padding: 0;
-        height: 100%;
-        width: 100%;
-        -webkit-font-smoothing: antialiased;
-        overflow: -moz-scrollbars-none;
-        -ms-overflow-style: none;
-      }
+	body {
+		font-family: 'Open Sans', serif;
+		margin: 0;
+		padding: 0;
+		height: 100%;
+		width: 100%;
+		-webkit-font-smoothing: antialiased;
+		overflow: -moz-scrollbars-none;
+		-ms-overflow-style: none;
+	}
 
-      a:hover{
-    text-decoration: none;
-    }
-    .btn:focus,.btn:active:focus,.btn.active:focus,.btn.focus,.btn:active.focus,.btn.active.focus {    outline: none;    border-color: transparent;    box-shadow:none;}
-    .form-control:focus{
-        border-color:#ced4da;
-        box-shadow:none;
-        background-color: #cddc0000;
-    
-    }   
-    .form-control{
-        display: inline-block;
-    }
+	a:hover {
+		text-decoration: none;
+	}
+
+	.btn:focus,
+	.btn:active:focus,
+	.btn.active:focus,
+	.btn.focus,
+	.btn:active.focus,
+	.btn.active.focus {
+		outline: none;
+		border-color: transparent;
+		box-shadow: none;
+	}
+
+	.form-control:focus {
+		border-color: #ced4da;
+		box-shadow: none;
+		background-color: #cddc0000;
+
+	}
+
+	.form-control {
+		display: inline-block;
+	}
 </style>
 
 <body>
-    <div class="">
-        <div class="row row-cols-3" style="height: 30px;">
-        </div>
-        <div class="row row-cols-3" style="height: 25px;">
-            <div class="col-3">
-                <a href="{{ url_for('customer_view.me') }}">
-                    <span class="align-middle"><svg  viewBox="-0.75 -0.75 12.2412109375 20.2650146484375" style="height: 20px; fill:#652d00;"><path d="M 10.3725004196167 0.3675000071525574 C 9.882499694824219 -0.1225000023841858 9.092499732971191 -0.1225000023841858 8.602499961853027 0.3675000071525574 L 0.2924999892711639 8.677499771118164 C -0.09749999642372131 9.067500114440918 -0.09749999642372131 9.697500228881836 0.2924999892711639 10.08749961853027 L 8.602499961853027 18.39749908447266 C 9.092499732971191 18.88750076293945 9.882499694824219 18.88750076293945 10.3725004196167 18.39749908447266 C 10.86250019073486 17.90749931335449 10.86250019073486 17.11750030517578 10.3725004196167 16.62750053405762 L 3.132499933242798 9.377499580383301 L 10.38249969482422 2.127500057220459 C 10.86250019073486 1.647500038146973 10.86250019073486 0.8475000262260437 10.3725004196167 0.3675000071525574 Z"  /></svg></span>
-                </a>
-            </div>
-            <div class="col-6">
-                <div class="title" style="background-color: rgba(255, 255, 255, 0);
+	<div class="">
+		<div class="row row-cols-3" style="height: 30px;">
+		</div>
+		<div class="row row-cols-3" style="height: 25px;">
+			<div class="col-3">
+				<a href="{{ url_for('customer_view.me') }}">
+					<span class="align-middle"><svg viewBox="-0.75 -0.75 12.2412109375 20.2650146484375"
+							style="height: 20px; fill:#652d00;">
+							<path
+								d="M 10.3725004196167 0.3675000071525574 C 9.882499694824219 -0.1225000023841858 9.092499732971191 -0.1225000023841858 8.602499961853027 0.3675000071525574 L 0.2924999892711639 8.677499771118164 C -0.09749999642372131 9.067500114440918 -0.09749999642372131 9.697500228881836 0.2924999892711639 10.08749961853027 L 8.602499961853027 18.39749908447266 C 9.092499732971191 18.88750076293945 9.882499694824219 18.88750076293945 10.3725004196167 18.39749908447266 C 10.86250019073486 17.90749931335449 10.86250019073486 17.11750030517578 10.3725004196167 16.62750053405762 L 3.132499933242798 9.377499580383301 L 10.38249969482422 2.127500057220459 C 10.86250019073486 1.647500038146973 10.86250019073486 0.8475000262260437 10.3725004196167 0.3675000071525574 Z" />
+							</svg></span>
+				</a>
+			</div>
+			<div class="col-6">
+				<div class="title" style="background-color: rgba(255, 255, 255, 0);
                 color:#652d00;
                 text-align: center;
                 -webkit-text-stroke: 1.00px rgba(0, 0, 0, 0);
                 font-size: 20.00px;
                 font-style: normal;
                 font-family: 'SF Pro Text', Arial;">Redeem</div>
-            </div>
-            <div class="col-3" style="text-align: right; right: 5px;">
-                <button type="submit" class="btn btn-outline-sucess" style="background-color: rgba(255, 255, 255, 0);
+			</div>
+			<div class="col-3" style="text-align: right; right: 5px;">
+				<button type="submit" class="btn btn-outline-sucess" style="background-color: rgba(255, 255, 255, 0);
                 color:  #dfb36a; 
                 padding:0px;
                 padding-top:5px;
@@ -63,55 +79,56 @@
                 font-size:16.00px;
                 font-style: normal;
                 font-family: 'SF Pro Text', Arial;" form="redeem-form">Confirm</button>
-            </div>
-        </div>
+			</div>
+		</div>
 
-        <div class="row row-cols-3" style="height: 30px;">
-        </div>
+		<div class="row row-cols-3" style="height: 30px;">
+		</div>
 
-        <div class="row">
-            <div class="col-2"></div>
-            <div class="col-8" style="background-color: rgba(255, 255, 255, 0);
+		<div class="row">
+			<div class="col-2"></div>
+			<div class="col-8" style="background-color: rgba(255, 255, 255, 0);
             color: #652d00;
             text-align: center;
             -webkit-text-stroke: 1.00px rgba(0, 0, 0, 0);
             font-size: 18.00px;
             font-style: normal;
             font-family: 'SF Pro Text', Arial;">
-                Redeem your gift card
-            </div>
-            <div class="col-2"></div>
-        </div>
+				Redeem your gift card
+			</div>
+			<div class="col-2"></div>
+		</div>
 
-        <div class="row row-cols-3" style="height: 20px;">
-        </div>
+		<div class="row row-cols-3" style="height: 20px;">
+		</div>
 
-        <div class="row">
-            <div class="col-1"></div>
-            <div class="col-10" style="background-color: rgba(255, 255, 255, 0);
+		<div class="row">
+			<div class="col-1"></div>
+			<div class="col-10" style="background-color: rgba(255, 255, 255, 0);
             color: #a18167;
             text-align: center;
             -webkit-text-stroke: 1.00px rgba(0, 0, 0, 0);
             font-size: 15.00px;
             font-style: normal;
             font-family: 'SF Pro Text', Arial;">
-                Please input the code of your gift card
-            </div>
-            <div class="col-1"></div>  
-        </div>
+				Please input the code of your gift card
+			</div>
+			<div class="col-1"></div>
+		</div>
 
-        <div class="row" style="height: 20px;">
-        </div>
-        <form action="{{ url_for('customer_view.redeem') }}" method="post" id="redeem-form">
-        <div class="row" style="height: 30px;">
-            <div class="col">
-                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
-                <input name="redeem_code" type="text" autocomplete="off" class="form-control" placeholder="Gift card code" aria-label="code" aria-describedby="addon-wrapping" style="font-style: normal;
+		<div class="row" style="height: 20px;">
+		</div>
+		<form action="{{ url_for('customer_view.redeem') }}" method="post" id="redeem-form">
+			<div class="row" style="height: 30px;">
+				<div class="col">
+					<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+					<input name="redeem_code" type="text" autocomplete="off" class="form-control" placeholder="Gift card code"
+						aria-label="code" aria-describedby="addon-wrapping" style="font-style: normal;
                 font-family: 'SF Pro Text', Arial;">
-            </div>
-        </div>
-        </form>
-    </div>
+				</div>
+			</div>
+		</form>
+	</div>
 </body>
 
 {{ super() }}
