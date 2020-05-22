@@ -17,6 +17,7 @@ import controllers.controller_staff as c_staff
 import controllers.controller_role as c_role
 import controllers.controller_comment as c_comment
 import controllers.controller_user as c_user
+import controllers.controller_cart_item as c_cart_item
 
 customer_view = Blueprint('customer_view', __name__, template_folder='/templates')
 
@@ -137,6 +138,44 @@ def logout():
 @customer_view.route('/cart', methods=['GET', 'POST'])
 @c_auth.login_required
 def cart():
+    user_cart_items = c_cart_item.get_cart_items_by_user_id(session.get('user_id'))
+    total = 0
+    for user_cart_item in user_cart_items:
+        total += user_cart_item['price'] * user_cart_item['amount']
+    print(user_cart_items)
+    return render_template('customer/cart.html', 
+        cart_items = user_cart_items,
+        total = total
+    )
+
+@customer_view.route('/cart/add', methods=['GET', 'POST'])
+@c_auth.login_required
+def add_cart_item():
+    if request.method == 'POST':
+        result = c_cart_item.create_cart_item(
+            user_id = session.get('user_id'),
+            product_id = request.values.get('product_id'),
+            amount = 1
+        )
+        if isinstance(result, dict):
+            if 'error' in result:
+                flash(result['error'])
+                return redirect(url_for('customer_view.home'))
+        return redirect(url_for('customer_view.cart'))
+    return render_template('customer/cart.html')
+
+@customer_view.route('/cart/update', methods=['GET', 'POST'])
+@c_auth.login_required
+def update_cart_items():
+    if request.method == 'POST':
+        user_cart_items = c_cart_item.get_cart_items_by_user_id(session.get('user_id'))
+        for user_cart_item in user_cart_items:
+            print(request.values.get('amount-for-' + str(user_cart_item['cart_item_id'])))
+            print(c_cart_item.update_cart_item_amount(
+                cart_item_id = user_cart_item['cart_item_id'],
+                amount = request.values.get('amount-for-' + str(user_cart_item['cart_item_id']))
+            ))
+        return redirect(url_for('customer_view.cart'))
     return render_template('customer/cart.html')
 
 @customer_view.route('/checkout/coupon', methods=['GET', 'POST'])
@@ -154,6 +193,9 @@ def payment():
 def order_placed():
     return render_template('customer/order_placed.html')
 
+
+
 @customer_view.route('/test/<string:template>', methods=['GET'])
 def test(template):
     return render_template('customer/' + template)
+

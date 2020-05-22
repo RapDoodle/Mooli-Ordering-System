@@ -1,0 +1,331 @@
+.title {
+    text-align: center;
+    line-height: 22.00px;
+    letter-spacing: -0.48px;
+    color: rgba(45, 64, 87, 1);
+    -webkit-text-stroke: 1.00px rgba(0, 0, 0, 0);
+    font-size: 20.00px;
+    font-weight: 400;
+    font-style: normal;
+    font-family: 'SF Pro Text', Arial;
+    white-space: pre;
+}
+
+.form-control:focus {
+    border-color: #ced4da;
+    webkit-box-shadow: none;
+    box-shadow: none;
+    background-color: #cddc0000;
+}
+
+.btn:focus,
+.btn:active:focus,
+.btn.active:focus,
+.btn.focus,
+.btn:active.focus,
+.btn.active.focus {
+    outline: none;
+    border-color: transparent;
+    box-shadow: none;
+}
+
+.path1c13c5da {
+    fill: rgba(0, 0, 0, 0.5411764705882353);
+    stroke: rgba(0, 0, 0, 0);
+    stroke-width: 1.00px;
+    stroke-linecap: butt;
+    /* box-shadow: none; */
+    width: 12.74px;
+    height: 20.77px;
+}
+
+.backArrow {
+    display: block;
+    position: absolute;
+    box-sizing: content-box;
+    -ms-transform: rotate(0.00deg);
+    -webkit-transform: rotate(0.00deg);
+    transform: rotate(0.00deg);
+    -ms-transform-origin: center;
+    -webkit-transform-origin: center;
+    transform-origin: center;
+    opacity: 1;
+    cursor: default;
+    margin-top: 0.00px;
+    margin-right: 0.00px;
+    margin-bottom: 0.00px;
+    margin-left: 0.00px;
+    padding-top: 0.00px;
+    padding-right: 0.00px;
+    padding-bottom: 0.00px;
+    padding-left: 0.00px;
+    overflow-x: unset;
+    overflow-y: unset;
+    background-color: transparent;
+    width: 22.00px;
+    height: 15.47px;
+    left: 16.00px;
+    top: 57.00px;
+}
+
+.cardTextBox {
+    display: block;
+    transform: rotate(0.00deg);
+    background-color: transparent;
+}
+
+.bubbleMilkTea {
+    color: rgba(45, 64, 87, 1);
+    -webkit-text-stroke: 1.00px rgba(0, 0, 0, 0);
+    font-size: 14.00px;
+    font-weight: 500;
+    font-style: normal;
+    font-family: 'SF Pro Text', Arial;
+    white-space: pre;
+}
+
+.xd5bb8192 {
+    transform: rotate(0.00deg);
+    transform-origin: center;
+    opacity: 0.6000000238418579;
+    text-align: left;
+    line-height: 5.00px;
+    color: rgba(45, 64, 87, 1);
+    font-size: 11.00px;
+    font-weight: 300;
+    font-style: normal;
+    font-family: 'SF Pro Text', Arial;
+}
+
+.x414e9323 {
+    color: #dfb36a;
+    font-size: 13.00px;
+    font-weight: 1000;
+    font-style: normal;
+    font-family: 'SF Pro Text', Arial;
+    white-space: pre;
+}
+
+.x2 {
+    position: absolute;
+    box-sizing: content-box;
+    -ms-transform: rotate(0.00deg);
+    -webkit-transform: rotate(0.00deg);
+    transform: rotate(0.00deg);
+    -ms-transform-origin: center;
+    -webkit-transform-origin: center;
+    transform-origin: center;
+    opacity: 1;
+    cursor: default;
+    margin-top: 0.00px;
+    margin-right: 0.00px;
+    margin-bottom: 0.00px;
+    margin-left: 0.00px;
+    padding-top: 0.00px;
+    padding-right: 0.00px;
+    padding-bottom: 0.00px;
+    padding-left: 0.00px;
+    background-color: rgba(255, 255, 255, 0);
+    text-align: left;
+    letter-spacing: 0.00px;
+    color: rgba(45, 64, 87, 1);
+    -webkit-text-stroke: unset;
+    font-size: 15.00px;
+    font-weight: 500;
+    font-style: normal;
+    font-family: 'SF Pro Text', Arial;
+    text-decoration: none;
+    box-shadow: none;
+    overflow-x: unset;
+    overflow-y: unset;
+    white-space: pre;
+    width: 25.00px;
+    height: 20.00px;
+    left: 28.82px;
+    top: 0.00px;
+    text-align: center;
+}
+
+.group2548 {
+    display: block;
+    position: absolute;
+    box-sizing: content-box;
+    -ms-transform: rotate(0.00deg);
+    -webkit-transform: rotate(0.00deg);
+    transform: rotate(0.00deg);
+    -ms-transform-origin: center;
+    -webkit-transform-origin: center;
+    transform-origin: center;
+    opacity: 1;
+    cursor: default;
+    margin-top: 0.00px;
+    margin-right: 0.00px;
+    margin-bottom: 0.00px;
+    margin-left: 0.00px;
+    padding-top: 0.00px;
+    padding-right: 0.00px;
+    padding-bottom: 0.00px;
+    padding-left: 0.00px;
+    overflow-x: unset;
+    overflow-y: unset;
+    background-color: transparent;
+    width: 25.00px;
+    height: 20.83px;
+    left: 60.00px;
+    top: 1.00px;
+}
+
+.rectangle689 {
+    opacity: 0.699999988079071;
+    border-bottom-color: rgba(45, 64, 87, 1);
+    border-bottom-style: solid;
+    border-bottom-width: 0.50px;
+    border-left-color: rgba(45, 64, 87, 1);
+    border-left-style: solid;
+    border-left-width: 0.50px;
+    border-right-color: rgba(45, 64, 87, 1);
+    border-right-style: solid;
+    border-right-width: 0.50px;
+    border-top-color: rgba(45, 64, 87, 1);
+    border-top-style: solid;
+    border-top-width: 0.50px;
+    border-top-left-radius: 6.00px;
+    border-top-right-radius: 6.00px;
+    border-bottom-left-radius: 6.00px;
+    border-bottom-right-radius: 6.00px;
+    width: 25.00px;
+    height: 20.83px;
+}
+
+.path1157 {
+    position: absolute;
+    box-sizing: content-box;
+    -ms-transform: rotate(0.00deg);
+    -webkit-transform: rotate(0.00deg);
+    transform: rotate(0.00deg);
+    -ms-transform-origin: center;
+    -webkit-transform-origin: center;
+    transform-origin: center;
+    opacity: 0.800000011920929;
+    cursor: default;
+    margin-top: 0.00px;
+    margin-right: 0.00px;
+    margin-bottom: 0.00px;
+    margin-left: 0.00px;
+    padding-top: 0.00px;
+    padding-right: 0.00px;
+    padding-bottom: 0.00px;
+    padding-left: 0.00px;
+    fill: rgba(45, 64, 87, 1);
+    box-shadow: none;
+    width: 9.00px;
+    height: 9.00px;
+    left: 8.38px;
+    top: 5.92px;
+}
+
+.group2547 {
+    display: block;
+    position: absolute;
+    box-sizing: content-box;
+    -ms-transform: rotate(0.00deg);
+    -webkit-transform: rotate(0.00deg);
+    transform: rotate(0.00deg);
+    -ms-transform-origin: center;
+    -webkit-transform-origin: center;
+    transform-origin: center;
+    opacity: 1;
+    cursor: default;
+    margin-top: 0.00px;
+    margin-right: 0.00px;
+    margin-bottom: 0.00px;
+    margin-left: 0.00px;
+    padding-top: 0.00px;
+    padding-right: 0.00px;
+    padding-bottom: 0.00px;
+    padding-left: 0.00px;
+    overflow-x: unset;
+    overflow-y: unset;
+    background-color: transparent;
+    width: 25.00px;
+    height: 20.83px;
+    left: 0.00px;
+    top: 1.00px;
+}
+
+.rectangle688 {
+    opacity: 0.699999988079071;
+    border-bottom-color: rgba(45, 64, 87, 1);
+    border-bottom-style: solid;
+    border-bottom-width: 0.50px;
+    border-left-color: rgba(45, 64, 87, 1);
+    border-left-style: solid;
+    border-left-width: 0.50px;
+    border-right-color: rgba(45, 64, 87, 1);
+    border-right-style: solid;
+    border-right-width: 0.50px;
+    border-top-color: rgba(45, 64, 87, 1);
+    border-top-style: solid;
+    border-top-width: 0.50px;
+    border-top-left-radius: 6.00px;
+    border-top-right-radius: 6.00px;
+    border-bottom-left-radius: 6.00px;
+    border-bottom-right-radius: 6.00px;
+    width: 25.00px;
+    height: 20.83px;
+}
+
+.path1626 {
+    position: absolute;
+    box-sizing: content-box;
+    -ms-transform: rotate(0.00deg);
+    -webkit-transform: rotate(0.00deg);
+    transform: rotate(0.00deg);
+    -ms-transform-origin: center;
+    -webkit-transform-origin: center;
+    transform-origin: center;
+    opacity: 0.800000011920929;
+    cursor: default;
+    margin-top: 0.00px;
+    margin-right: 0.00px;
+    margin-bottom: 0.00px;
+    margin-left: 0.00px;
+    padding-top: 0.00px;
+    padding-right: 0.00px;
+    padding-bottom: 0.00px;
+    padding-left: 0.00px;
+    fill: rgba(45, 64, 87, 1);
+    box-shadow: none;
+    width: 12.00px;
+    height: 0.80px;
+    left: 6.50px;
+    top: 9.93px;
+}
+
+.path1620 {
+    transform: rotate(45.00deg);
+    transform-origin: center;
+    fill: rgba(45, 64, 87, 1);
+    width: 14.14px;
+    height: 14.14px;
+}
+
+.line {
+    stroke: rgba(56, 56, 56, 1);
+    stroke-width: 0.10px;
+    stroke-linecap: butt;
+    box-shadow: none;
+}
+
+.mainBodyPart {
+    margin-bottom: 348px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
+}
