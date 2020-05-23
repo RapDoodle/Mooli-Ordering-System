@@ -13,7 +13,6 @@
     border-color: #ced4da;
     box-shadow: none;
     background-color: #cddc0000;
-
 }
 
 .form-control {
@@ -21,7 +20,6 @@
 }
 
 .title {
-
     text-align: center;
     line-height: 22.00px;
     letter-spacing: -0.48px;
@@ -32,28 +30,20 @@
     font-style: normal;
     font-family: 'SF Pro Text', Arial;
     white-space: pre;
-
-
 }
 
 .leftArrow {
-
-
     height: 15.47px;
-
 }
 
 
 .savecc751b33 {
-
     color: rgba(66, 202, 71, 1);
-
     font-size: 16.00px;
     font-weight: 500;
     font-style: normal;
     font-family: Avenir, Arial;
     text-decoration: none;
-
     white-space: pre;
 }
 
