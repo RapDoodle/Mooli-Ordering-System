@@ -5,7 +5,7 @@
 {% block content %}
 <div class="row">
 	<div class="col" id="location">
-		<span><a href="{{ url_for('admin_view.dashboard') }}">Home</a> / Staff </span>
+		<span><a href="{{ url_for('admin_dashboard.dashboard') }}">Home</a> / Staff </span>
 	</div>
 </div>
 <div class="row">
@@ -62,7 +62,7 @@
 				</button>
 			</div>
 			<div class="modal-body">
-				<form action="{{ url_for('admin_view.new_staff') }}" method="post" id="add-form">
+				<form action="{{ url_for('admin_staff.new_staff') }}" method="post" id="add-form">
 					<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
 					<div class="form-group">
 						<label class="col-form-label">Username</label>
@@ -125,7 +125,7 @@
 				</button>
 			</div>
 			<div class="modal-body">
-				<form action="{{ url_for('admin_view.edit_product') }}" method="post" id="edit-form">
+				<form action="{{ url_for('admin_staff.edit_staff') }}" method="post" id="edit-form">
 					<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
 					<input type="hidden" name="productID" id="edit-productID" value="" />
 					<div class="form-group">
@@ -176,7 +176,7 @@
 			</div>
 			<div class="modal-body">
 				<p id="delete-confirm-message"></p>
-				<form action="{{ url_for('admin_view.delete_product') }}" method="post" id="delete-form">
+				<form action="{{ url_for('admin_staff.delete_staff') }}" method="post" id="delete-form">
 					<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
 					<input type="hidden" name="product-id" id="delete-product-id">
 				</form>
@@ -235,7 +235,7 @@
 		$('#categorySelect').on('change', function () {
 			var categoryID = $(this).val(); // get selected value
 			if (categoryID) { // require a URL
-				window.location = '{{ url_for('admin_view.product') }}?category_id=' + categoryID; // redirect
+				window.location = '{{ url_for('admin_staff.staff') }}?category_id=' + categoryID; // redirect
 			}
 			return false;
 		});
