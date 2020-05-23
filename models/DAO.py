@@ -36,6 +36,3 @@ class DAO():
     def __del__(self):
         if self.__db is not None:
             self.__db.close()
-
-class redisDAO():
-    pass
