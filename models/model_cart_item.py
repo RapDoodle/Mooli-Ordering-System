@@ -79,7 +79,7 @@ def update_cart_item_amount(cart_item_id, amount):
                         'cart_item_id': cart_item_id})
     dao.commit()
 
-def delete_cart_item(cart_item_id, relay_dao = None):
+def delete_cart_item(cart_item_id, relay_cursor = None):
     """The function finds a cart item according to its id"""
     # Clean the input data
     cart_item_id = str(cart_item_id).strip()
@@ -89,17 +89,17 @@ def delete_cart_item(cart_item_id, relay_dao = None):
         raise ValidationError('The given cart item does not exists.')
 
     # Establish db connection
-    if relay_dao is None:  
+    if relay_cursor is None:  
         dao = DAO()
         cursor = dao.cursor()
     else:
-        cursor = relay_dao.cursor()
+        cursor = relay_cursor
 
     sql = """DELETE FROM cart_item WHERE cart_item_id = %(cart_item_id)s"""
     cursor.execute(sql, {'cart_item_id': cart_item_id})
 
     # Only commit when the operation is considered atomic
-    if relay_dao is None:
+    if relay_cursor is None:
         dao.commit()
 
 def find_cart_item_by_id(cart_item_id):

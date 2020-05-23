@@ -1,134 +1,22 @@
-{% extends "/customer/shared/base.html" %}
+{% extends "/customer/shared/frame.html" %}
 
 {% block title %}Checkout{% endblock %}
 
 {% block custom_css %}
-<style>
-	a:hover {
-		text-decoration: none;
-	}
-
-	.btn:focus,
-	.btn:active:focus,
-	.btn.active:focus,
-	.btn.focus,
-	.btn:active.focus,
-	.btn.active.focus {
-		outline: none;
-		border-color: transparent;
-		box-shadow: none;
-	}
-
-	.form-control:focus {
-		border-color: #ced4da;
-		box-shadow: none;
-		background-color: #cddc0000;
-
-	}
-
-	.form-control {
-		display: inline-block;
-	}
-
-	.title {
-
-		text-align: center;
-		line-height: 22.00px;
-		letter-spacing: -0.48px;
-		color: rgba(45, 64, 87, 1);
-		-webkit-text-stroke: 1.00px rgba(0, 0, 0, 0);
-		font-size: 20.00px;
-		font-weight: 400;
-		font-style: normal;
-		font-family: 'SF Pro Text', Arial;
-		white-space: pre;
-
-
-	}
-
-	.leftArrow {
-
-
-		height: 15.47px;
-
-	}
-
-
-	.savecc751b33 {
-
-		color: rgba(66, 202, 71, 1);
-
-		font-size: 16.00px;
-		font-weight: 500;
-		font-style: normal;
-		font-family: Avenir, Arial;
-		text-decoration: none;
-
-		white-space: pre;
-	}
-
-	.path1c13c5da {
-		fill: rgba(0, 0, 0, 0.5411764705882353);
-		stroke: rgba(0, 0, 0, 0);
-		stroke-width: 1.00px;
-		stroke-linecap: butt;
-		/* box-shadow: none; */
-		width: 12.74px;
-		height: 20.77px;
-
-	}
-
-	.titlea5c0fc01 {
-		line-height: 22.00px;
-		letter-spacing: -0.43px;
-		color: rgba(45, 64, 87, 1);
-		/* -webkit-text-stroke: 1.00px rgba(0, 0, 0, 0); */
-		font-size: 18.00px;
-		font-weight: 400;
-		font-style: normal;
-		font-family: Roboto, Arial;
-		text-decoration: none;
-		box-shadow: none;
-	}
-
-	.title1 {
-		line-height: 22.00px;
-		letter-spacing: -0.39px;
-		color: rgba(112, 115, 120, 1);
-		font-size: 16.00px;
-		font-weight: 400;
-		font-style: normal;
-		font-family: Roboto, Arial;
-		white-space: pre;
-
-	}
-</style>
+{{ super() }}
+<link rel="stylesheet" href="/static/css/customer/coupon.css">
 {% endblock %}
 
+{% block frame_back_link %}{{ url_for('customer_view.cart') }}{% endblock %}
+{% block frame_title %}Checkout{% endblock %}
+{% block frame_submit_form %}skip-form{% endblock %}
+{% block frame_next_btn %}Skip{% endblock %}
+
 {% block content %}
-<div class="row" style="height: 30px;"></div>
-<div class="row" style="height: 50px;">
-	<div class="col-3" style="text-align: left;">
-		<a href="#">
-			<svg preserveAspectRatio="none" viewBox="-0.75 -0.75 12.241260528564453 20.2650146484375" class="path1c13c5da">
-				<path
-					d="M 10.3725004196167 0.3675000071525574 C 9.882499694824219 -0.1225000023841858 9.092499732971191 -0.1225000023841858 8.602499961853027 0.3675000071525574 L 0.2924999892711639 8.677499771118164 C -0.09749999642372131 9.067500114440918 -0.09749999642372131 9.697500228881836 0.2924999892711639 10.08749961853027 L 8.602499961853027 18.39749908447266 C 9.092499732971191 18.88750076293945 9.882499694824219 18.88750076293945 10.3725004196167 18.39749908447266 C 10.86250019073486 17.90749931335449 10.86250019073486 17.11750030517578 10.3725004196167 16.62750053405762 L 3.132499933242798 9.377499580383301 L 10.38249969482422 2.127500057220459 C 10.86250019073486 1.647500038146973 10.86250019073486 0.8475000262260437 10.3725004196167 0.3675000071525574 Z">
-				</path>
-			</svg>
-		</a>
-
-
-	</div>
-	<div class="col-6">
-		<div class="title text-center" style="text-align: center;">Checkout</div>
-	</div>
-	<div class="col-3" style="text-align: right;right: 5px;">
-		<a href="#">
-			<div class="savecc751b33">Skip</div>
-		</a>
-	</div>
-</div>
-<div class="row" style="height: 20px;"></div>
+<form action="{{ url_for('customer_view.payment') }}" method="POST" id="skip-form">
+	<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+</form>
+<div class="row" style="height: 50px;"></div>
 <div class="row">
 	<div class="col-12" style="text-align: center;">
 		<div class="titlea5c0fc01">Do you have a coupon code?<br></div>
@@ -143,9 +31,10 @@
 <div class="row" style="height: 50px;"></div>
 <div class="row">
 	<div class="col-12">
-		<form action="{{ url_for('customer_view.payment') }}" method="GET">
+		<form action="{{ url_for('customer_view.checkout_coupon') }}" method="POST">
+			<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
 			<div class="input-group mb-3">
-				<input type="text" class="form-control" name="coupon" placeholder="Coupon code" autocomplete="off"
+				<input type="text" class="form-control" name="coupon_code" placeholder="Coupon code" autocomplete="off"
 					aria-label="Coupon_code" aria-describedby="button-addon2" style="border-right-color:rgba(0, 0, 0, 0)">
 				<div class="input-group-append">
 					<button class="btn btn-outline-secondary" type="submit" id="button-addon2"

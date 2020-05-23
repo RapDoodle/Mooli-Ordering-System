@@ -5,17 +5,17 @@ print(' * Testing: Category...')
 # The list of category should be empty
 assert len(c.list_categories()) == 0
 # Addomg a new category
-assert c.add_category('Trending', '6') == {'status': 200}
+assert c.add_category('Trending', '6') is None
 # Adding a new category with the same name
 assert c.add_category('trending', '5') == {'error': 'The category already exists.'}
 # Adding a new category with a different name
-assert c.add_category('Milk Tea', '2') == {'status': 200}
-assert c.add_category('Wrong Coffee', '3') == {'status': 200}
+assert c.add_category('Milk Tea', '2') is None
+assert c.add_category('Wrong Coffee', '3') is None
 # A new category with the same name
-assert c.add_category('Summer', '3') == {'status': 200}
+assert c.add_category('Summer', '3') is None
 # Add additional categories
-assert c.add_category('Fruity', '1') == {'status': 200}
-assert c.add_category('Black & Green', '0') == {'status': 200}
+assert c.add_category('Fruity', '1') is None
+assert c.add_category('Black & Green', '0') is None
 # Adding a category without name and priorty respectively
 assert c.add_category('', '3') == {'error': 'Invalid input type.'}
 assert c.add_category('New', '') == {'error': 'Invalid input type.'}
@@ -30,10 +30,10 @@ assert c.list_categories() == [
 ]
 
 # Test for update and delete
-assert c.update_category('3', 'Coffee', '4') == {'status': 200}
+assert c.update_category('3', 'Coffee', '4') is None
 assert c.update_category('8', 'Coffee', '4') == {'error': 'The category does not exists.'}
-assert c.add_category('Dummy', '0') == {'status': 200}
-assert c.remove_category('7') == {'status': 200}
+assert c.add_category('Dummy', '0') is None
+assert c.remove_category('7') is None
 assert c.remove_category('8') == {'error': 'The category does not exists.'}
 
 print(' ✓ Category has passed all the tests')

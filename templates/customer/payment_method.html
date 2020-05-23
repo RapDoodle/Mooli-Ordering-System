@@ -65,11 +65,15 @@
 	</div>
 	<div class="row row-cols-3" style="height: 25px;">
 		<div class="col-3" style="padding-left: 30px;">
-			<span class="align-middle"><svg viewBox="-0.75 -0.75 12.2412109375 20.2650146484375"
+			<a onclick="window.history.back()">
+				<span class="align-middle"><svg viewBox="-0.75 -0.75 12.2412109375 20.2650146484375"
 					style="height: 20px; fill: 	#652d00;">
 					<path
 						d="M 10.3725004196167 0.3675000071525574 C 9.882499694824219 -0.1225000023841858 9.092499732971191 -0.1225000023841858 8.602499961853027 0.3675000071525574 L 0.2924999892711639 8.677499771118164 C -0.09749999642372131 9.067500114440918 -0.09749999642372131 9.697500228881836 0.2924999892711639 10.08749961853027 L 8.602499961853027 18.39749908447266 C 9.092499732971191 18.88750076293945 9.882499694824219 18.88750076293945 10.3725004196167 18.39749908447266 C 10.86250019073486 17.90749931335449 10.86250019073486 17.11750030517578 10.3725004196167 16.62750053405762 L 3.132499933242798 9.377499580383301 L 10.38249969482422 2.127500057220459 C 10.86250019073486 1.647500038146973 10.86250019073486 0.8475000262260437 10.3725004196167 0.3675000071525574 Z" />
-					</svg></span>
+					</svg>
+				</span>
+			</a>
+			
 		</div>
 		<div class="col-6">
 			<div class="title" style="background-color: rgba(255, 255, 255, 0);
@@ -81,12 +85,14 @@
           font-family: 'SF Pro Text', Arial;">Check out</div>
 		</div>
 		<div class="col-3" style="text-align: center;">
-			<form action="{{ url_for('customer_view.order_placed') }}" id="test-form" method="GET"></form>
-			<button type="submit" form="test-form" class="btn"
-				style="background-color: transparent;border: 1px solid transparent;padding: 1px 6px;">
-				<font style="font-size: 15px;font-family: 'SF Pro Text', Arial;padding-bottom: 1px;color: #caa15e;">Confirm
+			<form action="{{ url_for('customer_view.place_order') }}" id="test-form" method="POST">
+				<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+				<button type="submit" form="test-form" class="btn"
+					style="background-color: transparent;border: 1px solid transparent;padding: 1px 6px;">
+					<font style="font-size: 15px;font-family: 'SF Pro Text', Arial;padding-bottom: 1px;color: #caa15e;">Confirm
 				</font>
 			</button>
+			</form>
 		</div>
 	</div>
 
@@ -114,7 +120,7 @@
 				<div class="col-3"></div>
 				<div class="col-6 x28f4b336" style="padding-top:5px;">
 					<button type="button" class="btn btn-outline-sucess">
-						<font color="#955a3f">Balance</font>
+						<font color="#955a3f">✓ Balance</font>
 					</button>
 				</div>
 				<div class="col-3"></div>
@@ -159,7 +165,7 @@
 				</svg> Bill Total</div>
 		</div>
 		<div class="col-4" style="padding-left:30px;font-size: 18.00px;color: #351800;">
-			$12.99
+			${{ total }}
 		</div>
 	</div>
 
@@ -181,7 +187,7 @@
 				</svg> Coupon</div>
 		</div>
 		<div class="col-4" style="padding-left:30px;font-size: 18.00px;color: #351800;">
-			-$5.00
+			-${{ coupon }}
 		</div>
 	</div>
 
@@ -196,7 +202,7 @@
 			</div>
 		</div>
 		<div class="col-4" style="padding-left:30px;font-size: 18.00px;font-weight: 700;color: #351800;">
-			$7.99
+			${{ grand_total }}
 		</div>
 	</div>
 
