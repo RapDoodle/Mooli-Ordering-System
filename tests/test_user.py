@@ -9,8 +9,8 @@ m.change_password('10000', 'Testpassword123')
 m.verify_credential('Bowen_WU', 'Testpassword123')
 assert c.sign_up('RyanLam', 'ryan@gmail.com', 'Testpassword12345', 'Ryan', 'Lam', 'M') == 10001
 m.verify_credential('RyanLam', 'Testpassword12345 ')
-assert c.update_user_info(10001, 'Ryan', 'Wong', 'F', '911') == {'status': 200}
-assert c.change_password('10001', 'Testpassword12345', 'Testpassword123', 'Testpassword123') == {'status': 200}
+assert c.update_user_info(10001, 'Ryan', 'Wong', 'F', '911') is None
+assert c.change_password('10001', 'Testpassword12345', 'Testpassword123', 'Testpassword123') is None
 m.verify_credential('RyanLam', 'Testpassword123')
 # When original password is wrong
 assert c.change_password('10001', 'Testpassword12345', 'Testpassword123', 'Testpassword123') == {'error': 'Invalid password'}

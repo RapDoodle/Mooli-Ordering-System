@@ -18,6 +18,7 @@ import controllers.controller_role as c_role
 import controllers.controller_comment as c_comment
 import controllers.controller_user as c_user
 import controllers.controller_cart_item as c_cart_item
+import controllers.controller_order as c_order
 
 customer_view = Blueprint('customer_view', __name__, template_folder='/templates')
 
@@ -99,13 +100,13 @@ def me():
 @c_auth.login_required
 def redeem():
     if request.method == 'POST':
-        result = c_redeem_card.redeem(
+        res = c_redeem_card.redeem(
             user_id = session.get('user_id'),
             redeem_code = request.values.get('redeem_code')
         )
-        if isinstance(result, dict):
-            if 'error' in result:
-                flash(result['error'])
+        if isinstance(res, dict):
+            if 'error' in res:
+                flash(res['error'])
                 return redirect(url_for('customer_view.redeem'))
         return redirect(url_for('customer_view.me'))
     return render_template('customer/redeem.html')
@@ -114,16 +115,16 @@ def redeem():
 @c_auth.login_required
 def account():
     if request.method == 'POST':
-        result = c_user.update_user_info(
+        res = c_user.update_user_info(
             user_id = session.get('user_id'),
             first_name = request.values.get('first_name'),
             last_name = request.values.get('last_name'),
             gender = request.values.get('gender'),
             phone = request.values.get('phone')
         )
-        if isinstance(result, dict):
-            if 'error' in result:
-                flash(result['error'])
+        if isinstance(res, dict):
+            if 'error' in res:
+                flash(res['error'])
                 return redirect(url_for('customer_view.account'))
         return redirect(url_for('customer_view.me'))
     user = c_user.find_user_by_id(session.get('user_id'))
@@ -142,7 +143,6 @@ def cart():
     total = 0
     for user_cart_item in user_cart_items:
         total += user_cart_item['price'] * user_cart_item['amount']
-    print(user_cart_items)
     return render_template('customer/cart.html', 
         cart_items = user_cart_items,
         total = total
@@ -152,14 +152,14 @@ def cart():
 @c_auth.login_required
 def add_cart_item():
     if request.method == 'POST':
-        result = c_cart_item.create_cart_item(
+        res = c_cart_item.create_cart_item(
             user_id = session.get('user_id'),
             product_id = request.values.get('product_id'),
             amount = 1
         )
-        if isinstance(result, dict):
-            if 'error' in result:
-                flash(result['error'])
+        if isinstance(res, dict):
+            if 'error' in res:
+                flash(res['error'])
                 return redirect(url_for('customer_view.home'))
         return redirect(url_for('customer_view.cart'))
     return render_template('customer/cart.html')
@@ -170,29 +170,60 @@ def update_cart_items():
     if request.method == 'POST':
         user_cart_items = c_cart_item.get_cart_items_by_user_id(session.get('user_id'))
         for user_cart_item in user_cart_items:
-            print(request.values.get('amount-for-' + str(user_cart_item['cart_item_id'])))
-            print(c_cart_item.update_cart_item_amount(
+            c_cart_item.update_cart_item_amount(
                 cart_item_id = user_cart_item['cart_item_id'],
                 amount = request.values.get('amount-for-' + str(user_cart_item['cart_item_id']))
-            ))
+            )
         return redirect(url_for('customer_view.cart'))
     return render_template('customer/cart.html')
 
 @customer_view.route('/checkout/coupon', methods=['GET', 'POST'])
 @c_auth.login_required
 def checkout_coupon():
+    if request.method == 'POST':
+        res = coupon_code = c_coupon.check_coupon_validity(
+            coupon_code = request.values.get('coupon_code'),
+            user_id = session.get('user_id')
+        )
+        print(res)
+        if isinstance(res, dict):
+            if 'error' in res:
+                flash(res['error'])
+        elif isinstance(res, bool):
+            print(res)
+            if res == True:
+                session['coupon_code'] = request.values.get('coupon_code')
+                return redirect(url_for('customer_view.payment'))
+            else:
+                flash('You are not eligible for the coupon yet.')
     return render_template('customer/coupon.html')
 
 @customer_view.route('/checkout/payment', methods=['GET', 'POST'])
 @c_auth.login_required
 def payment():
-    return render_template('customer/payment_method.html')
+    total = c_cart_item.get_user_cart_total(session.get('user_id'))
+    coupon = 0
+    if session.get('coupon_code') is not None:
+        coupon_info = c_coupon.find_coupon(session.get('coupon_code'))
+        coupon = coupon_info['value']
+    grand_total = total - coupon
+    return render_template('customer/payment_method.html',
+        total = total,
+        coupon = coupon,
+        grand_total = grand_total
+    )
 
-@customer_view.route('/checkout/done', methods=['GET', 'POST'])
+@customer_view.route('/checkout/confirm', methods=['POST'])
 @c_auth.login_required
-def order_placed():
-    return render_template('customer/order_placed.html')
-
+def place_order():
+    res = c_order.place_order(session.get('user_id'), session.get('coupon_code'))
+    if res is None:
+        session.pop('coupon_code', None)
+        return render_template('customer/order_placed.html')
+    elif isinstance(res, dict):
+        if 'error' in res:
+            flash(res['error'])
+    return redirect(url_for('customer_view.payment'))
 
 
 @customer_view.route('/test/<string:template>', methods=['GET'])

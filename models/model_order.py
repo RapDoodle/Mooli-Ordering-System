@@ -6,7 +6,8 @@ from models.shared import (
     find_user, 
     find_coupon_and_check_validity, 
     create_purchased_item,
-    get_cart_items_by_user_id
+    get_cart_items_by_user_id,
+    delete_cart_item
 )
 
 def place_order(user_id, payment, coupon_code = ''):
@@ -23,6 +24,8 @@ def place_order(user_id, payment, coupon_code = ''):
 
     # Clean the input data
     user_id = str(user_id).strip()
+    if coupon_code is None:
+        coupon_code = ''
     coupon_code = str(coupon_code).strip()
 
     # Retrive coupon data
@@ -48,8 +51,9 @@ def place_order(user_id, payment, coupon_code = ''):
     actual_paid = total
 
     # Calculate according to the given coupon
-    if total >= coupon['threshold']:
-        actual_paid -= coupon['value']
+    if coupon is not None:
+        if total >= coupon['threshold']:
+            actual_paid -= coupon['value']
 
     # Establish db connection
     dao = DAO()
@@ -86,6 +90,10 @@ def place_order(user_id, payment, coupon_code = ''):
             amount = item['amount'],
             order_id = order_id,
             cursor = cursor
+        )
+        delete_cart_item(
+            cart_item_id = item['cart_item_id'],
+            relay_cursor = cursor
         )
     
     # When all the procedures are successful and no exception was raised
