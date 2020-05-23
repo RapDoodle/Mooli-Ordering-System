@@ -234,20 +234,25 @@ def init_db_tables(connection):
         """CREATE INDEX idx_arvchive_value ON archive(value)""",
         """CREATE TABLE IF NOT EXISTS `order`(
             order_id INT AUTO_INCREMENT,
-            user_id INT NOT NULL,
             total DECIMAL(8, 2),
             actual_paid DECIMAL(8, 2),
             status VARCHAR(16) DEFAULT 'pending',
             created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
             PRIMARY KEY (order_id),
-            FOREIGN KEY (user_id) REFERENCES user(user_id),
             CHECK (status = 'cancelled' OR 
                    status = 'pending' OR
                    status = 'processing' OR
                    status = 'ready for pickup' OR
-                   status = 'done' )
+                   status = 'done')
             )
         """,
+        """CREATE TABLE IF NOT EXISTS user_order (
+            order_id INT,
+            user_id INT,
+            FOREIGN KEY (order_id) REFERENCES `order`(order_id)
+                ON DELETE CASCADE,
+            FOREIGN KEY (user_id) REFERENCES `user`(user_id)
+        )""",
         """CREATE TABLE IF NOT EXISTS cart_item (
             cart_item_id INT AUTO_INCREMENT,
             user_id INT NOT NULL,
@@ -264,11 +269,15 @@ def init_db_tables(connection):
             product_name_snapshot INT NOT NULL,
             product_price_snapshot DECIMAL(8, 2) NOT NULL,
             amount INT UNSIGNED NOT NULL,
-            order_id INT NOT NULL,
             PRIMARY KEY (purchased_item_id),
             FOREIGN KEY (product_name_snapshot) REFERENCES archive(archive_index),
-            FOREIGN KEY (order_id) REFERENCES `order`(order_id),
             CHECK (amount > 0)
+        )""",
+        """CREATE TABLE IF NOT EXISTS order_purchased_item (
+                order_id INT,
+                purchased_item_id INT,
+                FOREIGN KEY (order_id) REFERENCES `order`(order_id),
+                FOREIGN KEY (purchased_item_id) REFERENCES purchased_item(purchased_item_id)
         )""",
         """CREATE TABLE IF NOT EXISTS coupon (
             coupon_code VARCHAR(32),
@@ -297,6 +306,20 @@ def init_db_tables(connection):
             FOREIGN KEY (product_id) REFERENCES product(product_id)
         )
         """,
+        """CREATE TABLE IF NOT EXISTS user_comment (
+            user_id INT,
+            comment_id INT,
+            FOREIGN KEY (user_id) REFERENCES user(user_id),
+            FOREIGN KEY (comment_id) REFERENCES comment(comment_id)
+        )
+        """,
+        """CREATE TABLE IF NOT EXISTS product_comment (
+            comment_id INT,
+            product_id INT,
+            FOREIGN KEY (comment_id) REFERENCES comment(comment_id),
+            FOREIGN KEY (product_id) REFERENCES product(product_id)
+        )
+        """,
         # Triggers
         """CREATE TRIGGER before_delete_role
             BEFORE DELETE
@@ -320,6 +343,22 @@ def init_db_tables(connection):
             BEGIN
                 DELETE FROM product_category WHERE
                     product_category.category_id = OLD.category_id;
+            END
+        """,
+        """CREATE TRIGGER before_delete_order
+            BEFORE DELETE
+            ON `order` FOR EACH ROW
+            BEGIN
+                DELETE FROM order_purchased_item WHERE
+                    order_purchased_item.order_id = OLD.order_id;
+            END
+        """,
+        """CREATE TRIGGER before_delete_order_purchased_item
+            BEFORE DELETE
+            ON order_purchased_item FOR EACH ROW
+            BEGIN
+                DELETE FROM purchased_item WHERE
+                    purchased_item.purchased_item_id = OLD.purchased_item_id;
             END
         """
     ]
