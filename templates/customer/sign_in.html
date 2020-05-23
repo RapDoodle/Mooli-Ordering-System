@@ -4,86 +4,101 @@
 
 {% block custom_css %}
 <style>
-a:hover{
-    text-decoration: none;
-}
-.btn:focus,.btn:active:focus,.btn.active:focus,.btn.focus,.btn:active.focus,.btn.active.focus {    outline: none;    border-color: transparent;    box-shadow:none;}
-.form-control:focus{
-    border-color:#ced4da;
-    box-shadow:none;
-    background-color: #cddc0000;
-    
-}
-.form-control{
-    display: inline-block;
-}
+	a:hover {
+		text-decoration: none;
+	}
 
-.title {
-    line-height: 22.00px;
-    letter-spacing: -0.34px;
-    color: rgba(45, 64, 87, 1);
-    font-size: 14.00px;
-    font-weight: 300;
-    font-style: normal;
-    font-family: 'SF Pro Text', Arial;
-    white-space: pre;
-}
-.title3a06c88c {
-    letter-spacing: -0.48px;
-    color: rgba(45, 64, 87, 1);
-    font-size: 20.00px;
-    font-weight: 400;
-    font-style: normal;
-    font-family: 'SF Pro Text', Arial;
-    white-space: pre;
-}
+	.btn:focus,
+	.btn:active:focus,
+	.btn.active:focus,
+	.btn.focus,
+	.btn:active.focus,
+	.btn.active.focus {
+		outline: none;
+		border-color: transparent;
+		box-shadow: none;
+	}
 
+	.form-control:focus {
+		border-color: #ced4da;
+		box-shadow: none;
+		background-color: #cddc0000;
+
+	}
+
+	.form-control {
+		display: inline-block;
+	}
+
+	.title {
+		line-height: 22.00px;
+		letter-spacing: -0.34px;
+		color: rgba(45, 64, 87, 1);
+		font-size: 14.00px;
+		font-weight: 300;
+		font-style: normal;
+		font-family: 'SF Pro Text', Arial;
+		white-space: pre;
+	}
+
+	.title3a06c88c {
+		letter-spacing: -0.48px;
+		color: rgba(45, 64, 87, 1);
+		font-size: 20.00px;
+		font-weight: 400;
+		font-style: normal;
+		font-family: 'SF Pro Text', Arial;
+		white-space: pre;
+	}
 </style>
 {% endblock %}
 
 {% block content %}
 <div class="row" style="height: 30px;"></div>
 <div class="row">
-    <div class="col-4" style="left: 1%;top: 3px;">
-        <div class="title" style="color: #caa15e; padding-left: 15px;"><a href="{{ url_for('customer_view.login_redirect') }}">Cancel</a></div>
-    </div>
-    <div class="col-4" style="text-align: center;top: -3px;">
-        <div class="title3a06c88c" style="color: #652d00;">Sign In</div>
-    </div>
-    <div class="col-4"></div>
+	<div class="col-4" style="left: 1%;top: 3px;">
+		<div class="title" style="color: #caa15e; padding-left: 15px;"><a
+				href="{{ url_for('customer_view.login_redirect') }}">Cancel</a></div>
+	</div>
+	<div class="col-4" style="text-align: center;top: -3px;">
+		<div class="title3a06c88c" style="color: #652d00;">Sign In</div>
+	</div>
+	<div class="col-4"></div>
 </div>
 <div class="row" style="height: 50px;"></div>
 <div class="row">
-    <div class="col-12" style="text-align: center;">
-        <img src="../../static/customer/logo11.png" alt="pic lost" style="width:123px;height:139px;">
-    </div>
+	<div class="col-12" style="text-align: center;">
+		<img src="../../static/customer/logo11.png" alt="pic lost" style="width:123px;height:139px;">
+	</div>
 </div>
 <div class="row" style="height: 60px;"></div>
 
 <form action="{{ url_for('customer_view.sign_in') }}" method="POST">
-    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
-    <div class="row">
-        <div class="col-12" style="text-align: center;">
-            <div style="position:relative; text-align: center;">
-                <input type="text" name="username" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" style="height:52px;border: 1px solid  	#dfb36a;;background-color: #f8f9fa00;color: #dfb36a;width: 280px;align-self: center;border-radius: 50px;font-style: normal;
+	<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+	<div class="row">
+		<div class="col-12" style="text-align: center;">
+			<div style="position:relative; text-align: center;">
+				<input type="text" name="username" class="form-control" placeholder="Username" aria-label="Username"
+					aria-describedby="basic-addon1" style="height:52px;border: 1px solid  	#dfb36a;;background-color: #f8f9fa00;color: #dfb36a;width: 280px;align-self: center;border-radius: 50px;font-style: normal;
                 font-family: 'SF Pro Text', Arial;">
-            </div>
-        </div>
-    </div>
-    
-    <div class="col-12" style="text-align: center;">
-        <div style="position:relative; text-align: center; top: 20px;"> 
-            <input type="password" name="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1" style="height:52px;border: 1px solid  	#dfb36a;background-color: #f8f9fa00;color: #dfb36a;width: 280px;align-self: center;border-radius: 50px;font-style: normal;
+			</div>
+		</div>
+	</div>
+
+	<div class="col-12" style="text-align: center;">
+		<div style="position:relative; text-align: center; top: 20px;">
+			<input type="password" name="password" class="form-control" placeholder="Password" aria-label="Password"
+				aria-describedby="basic-addon1" style="height:52px;border: 1px solid  	#dfb36a;background-color: #f8f9fa00;color: #dfb36a;width: 280px;align-self: center;border-radius: 50px;font-style: normal;
             font-family: 'SF Pro Text', Arial;">
-        </div>
-    </div>
-    
-    <div class="row" style="height: 70px;"></div>
-    
-    <div class="row" style="text-align: center;">
-    
-            <div class="col-12" style="text-align: center;">
-                <input type="submit" class="btn" name="submit" value="SIGN IN" style="background-color: #dfb36a;width: 280px;height: 52px; border-radius: 50px;line-height: 35.00px;
+		</div>
+	</div>
+
+	<div class="row" style="height: 70px;"></div>
+
+	<div class="row" style="text-align: center;">
+
+		<div class="col-12" style="text-align: center;">
+			<input type="submit" class="btn" name="submit" value="SIGN IN" style="background-color: #dfb36a;width: 280px;height: 52px; border-radius: 50px;line-height: 35.00px;
                 letter-spacing: 1.40px;
                 color: #955a3f; 
                 font-size: 14.00px;
@@ -91,12 +106,10 @@ a:hover{
                 font-style: normal;
                 font-family: 'SF Pro Text', Arial;
                 white-space: pre;">
-                
-            </div>
-    </div>
+
+		</div>
+	</div>
 </form>
-
-
 
 {{ super() }}
 {% endblock %}

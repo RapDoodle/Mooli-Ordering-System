@@ -3,7 +3,7 @@ from models.DAO import DAO
 from utils.exception import ValidationError
 from models.shared import find_user, find_product
 
-def create_cart_item(user_id, product_id, amount):
+def create_cart_item(user_id, product_id, amount = 1):
     """The function creates a cart item if the cart item does not exist.
     Otherwise, the cart item will be updated in an "append" manner
     """
@@ -59,6 +59,10 @@ def update_cart_item_amount(cart_item_id, amount):
     if not amount.isdecimal():
         raise ValidationError('Invalid amount.')
 
+    # If the amount less than or equal to 0, delete the cart item
+    if int(amount) <= 0:
+        return delete_cart_item(cart_item_id)
+
     # Check for the existence of item
     cart_item = find_cart_item_by_id(cart_item_id)
     if cart_item is None:
@@ -75,7 +79,7 @@ def update_cart_item_amount(cart_item_id, amount):
                         'cart_item_id': cart_item_id})
     dao.commit()
 
-def delete_cart_item(cart_item_id, relay_dao = None):
+def delete_cart_item(cart_item_id, relay_cursor = None):
     """The function finds a cart item according to its id"""
     # Clean the input data
     cart_item_id = str(cart_item_id).strip()
@@ -85,17 +89,17 @@ def delete_cart_item(cart_item_id, relay_dao = None):
         raise ValidationError('The given cart item does not exists.')
 
     # Establish db connection
-    if relay_dao is None:  
+    if relay_cursor is None:  
         dao = DAO()
         cursor = dao.cursor()
     else:
-        cursor = relay_dao.cursor()
+        cursor = relay_cursor
 
     sql = """DELETE FROM cart_item WHERE cart_item_id = %(cart_item_id)s"""
     cursor.execute(sql, {'cart_item_id': cart_item_id})
 
     # Only commit when the operation is considered atomic
-    if relay_dao is not None:
+    if relay_cursor is None:
         dao.commit()
 
 def find_cart_item_by_id(cart_item_id):

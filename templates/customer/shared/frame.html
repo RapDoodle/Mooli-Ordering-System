@@ -1,0 +1,25 @@
+{% extends "/customer/shared/base.html" %}
+
+{% block custom_css %}
+<link rel="stylesheet" href="/static/css/customer/frame.css">
+{% endblock %}
+
+{% block content_top %}
+<div class="row row-cols-3" style="height: 30px;"></div>
+<div class="row row-cols-3" style="height: 25px;">
+    <div class="col-3">
+        <a href="{% block frame_back_link %}{% endblock %}">
+            <img src="/static/svg/back.svg" alt="back" class="frame-back-btn">
+        </a>
+    </div>
+    <div class="col-6">
+        <div class="frame-title">{% block frame_title %}{% endblock %}</div>
+    </div>
+    <div class="col-3" class="frame-next-pos-control">
+        <button type="submit" class="btn btn-outline-sucess frame-next-btn float-right"
+            form="{% block frame_submit_form %}{% endblock %}">
+            {% block frame_next_btn %}{% endblock %}
+        </button>
+    </div>
+</div>
+{% endblock %}

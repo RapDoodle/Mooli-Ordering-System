@@ -20,14 +20,11 @@ def excpetion_handler(fn):
     """
     def handler(*args, **kwargs):
         try:
-            res = fn(*args, **kwargs)
-            if res is not None:
-                return res
+            return fn(*args, **kwargs)
         except ValidationError as e:
             return {'error': str(e)}
         except Exception as e:
             log_error(str(e))
             traceback.print_exc(file=sys.stdout)
             return {'error': 'Internal error.'}
-        return {'status': 200}
     return handler

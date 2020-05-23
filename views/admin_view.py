@@ -271,8 +271,9 @@ def new_staff():
                 gender = request.values.get('gender'),
                 phone = request.values.get('phone')
         )
-        if 'error' in msg:
-            flash(msg['error'])
+        if isinstance(msg, dict):
+            if 'error' in msg:
+                flash(msg['error'])
     return redirect(url_for('.staff'))
 
 @admin_view.route('/admin/staff/edit', methods=['GET', 'POST'])

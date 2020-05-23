@@ -129,8 +129,14 @@ def get_coupons(limit = 0, offset = 0):
     return result
 
 def find_coupon_and_check_validity(coupon_code):
-    # Data clearning is guaranteened to happen within find_coupon
-    coupon = find_coupon(coupon_code)
+    # Establish db connection
+    dao = DAO()
+    cursor = dao.cursor()
+
+    # Query database
+    sql = """SELECT * FROM coupon WHERE coupon_code = %(coupon_code)s"""
+    cursor.execute(sql, {'coupon_code': coupon_code})
+    coupon = cursor.fetchone()
 
     if coupon is not None:
         # Check if the coupon is active or has expired

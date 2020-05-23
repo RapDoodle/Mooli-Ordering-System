@@ -1,0 +1,30 @@
+.frame-back-btn {
+    height: 20px; 
+    fill:#652d00;
+}
+
+.frame-title {
+    background-color: rgba(255, 255, 255, 0);
+    color:#652d00;
+    text-align: center;
+    -webkit-text-stroke: 1.00px rgba(0, 0, 0, 0);
+    font-size: 20.00px;
+    font-style: normal;
+    font-family: 'SF Pro Text', Arial;
+}
+
+.frame-next-btn {
+    background-color: rgba(255, 255, 255, 0);
+    color: #dfb36a; 
+    padding: 0px;
+    padding-top:4px;
+    font-size:16.00px;
+    font-style: normal;
+    font-family: 'SF Pro Text', Arial;
+}
+
+.frame-next-pos-control {
+    text-align: right;
+    right: 5px;
+    float:right;
+}

@@ -1,0 +1,35 @@
+.form-control:focus {
+    border-color: #ced4da;
+    box-shadow: none;
+    background-color: #cddc0000;
+
+}
+
+.form-control {
+    display: inline-block;
+}
+
+.title-1 {
+    background-color: rgba(255, 255, 255, 0);
+    color: #652d00;
+    text-align: center;
+    -webkit-text-stroke: 1.00px rgba(0, 0, 0, 0);
+    font-size: 18.00px;
+    font-style: normal;
+    font-family: 'SF Pro Text', Arial;
+}
+
+.title-2 {
+    background-color: rgba(255, 255, 255, 0);
+    color: #a18167;
+    text-align: center;
+    -webkit-text-stroke: 1.00px rgba(0, 0, 0, 0);
+    font-size: 15.00px;
+    font-style: normal;
+    font-family: 'SF Pro Text', Arial;
+}
+
+.input-redeem-code {
+    font-style: normal;
+    font-family: 'SF Pro Text', Arial;
+}
