@@ -1,0 +1,105 @@
+.me .title {
+    box-sizing: content-box;
+    opacity: 1;
+    cursor: default;
+    background-color: rgba(255, 255, 255, 0);
+    text-align: center;
+    line-height: 22.00px;
+    letter-spacing: -0.48px;
+    color: rgba(45, 64, 87, 1);
+    -webkit-text-stroke: 1.00px rgba(0, 0, 0, 0);
+    font-size: 20.00px;
+    font-weight: 400;
+    font-style: normal;
+    font-family: 'SF Pro Text', Arial;
+    text-decoration: none;
+    box-shadow: none;
+    overflow-x: unset;
+    overflow-y: unset;
+    white-space: pre;
+}
+
+.x646 {
+    background-color: rgba(249, 250, 251, 1);
+    filter: drop-shadow(0px 3px 20px rgba(0, 0, 0, 0.10196078431372549));
+    height: 160px;
+}
+
+.balance {
+    color: rgba(136, 136, 136, 1);
+    font-size: 18.00px;
+    font-style: normal;
+    font-family: Roboto, Arial;
+    text-align: center;
+    top: 10px;
+    padding: 10px;
+}
+
+.x28f4b336 {
+    color: rgba(136, 136, 136, 1);
+    font-size: 24.00px;
+    font-weight: 700;
+    font-style: normal;
+    text-align: center;
+    font-family: Roboto, Arial;
+}
+
+.redeem {
+    color: rgba(45, 64, 87, 1);
+    background-color: rgba(255, 255, 255, 0);
+    font-size: 14.00px;
+    font-weight: 400;
+    text-align: center;
+    font-style: normal;
+    font-family: Roboto, Arial;
+
+}
+
+.history {
+    color: rgba(45, 64, 87, 1);
+    background-color: rgba(255, 255, 255, 0);
+    font-size: 14.00px;
+    font-weight: 400;
+    text-align: center;
+    font-style: normal;
+    font-family: Roboto, Arial;
+}
+
+.accountInfo {
+    background-color: rgba(255, 255, 255, 0);
+    color: rgba(27, 32, 43, 1);
+    -webkit-text-stroke: 1.00px rgba(0, 0, 0, 0);
+    font-size: 16.00px;
+    font-weight: 500;
+    font-style: normal;
+    font-family: Avenir, Arial;
+    padding: 10px;
+}
+
+.logout {
+    background-color: rgba(255, 255, 255, 0);
+    text-align: left;
+    color: rgb(156, 156, 156);
+    -webkit-text-stroke: 1.00px rgba(0, 0, 0, 0);
+    font-size: 16.00px;
+    font-weight: 500;
+    font-style: normal;
+    font-family: Avenir, Arial;
+    padding: 10px;
+}
+
+#me{
+    background-color: rgba(255, 255, 255, 0);
+    color:#652d00;
+    text-align: center;
+    -webkit-text-stroke: 1.00px rgba(0, 0, 0, 0);
+    font-size: 20.00px;
+    font-style: normal;
+    font-family: 'SF Pro Text', Arial;
+}
+
+#log-out{
+    height: 25px;
+    fill: rgb(156, 156, 156);
+    padding-top: 8px;
+}
