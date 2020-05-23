@@ -5,7 +5,7 @@
 {% block content %}
 <div class="row">
   <div class="col" id="location">
-    <span><a href="{{ url_for('admin_view.dashboard') }}">Home</a> / Redeem Cards </span>
+    <span><a href="{{ url_for('admin_dashboard.dashboard') }}">Home</a> / Redeem Cards </span>
   </div>
 </div>
 <div class="row">
@@ -84,7 +84,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form action="{{ url_for('admin_view.new_redeem_cards') }}" method="post" id="add-form">
+        <form action="{{ url_for('admin_redeem_card.new_redeem_cards') }}" method="post" id="add-form">
           <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
           <div class="form-group">
             <label for="new-value" class="col-form-label">Redeem cards value:</label>
@@ -117,7 +117,7 @@
       </div>
       <div class="modal-body">
         <p id="delete-confirm-message"></p>
-        <form action="{{ url_for('admin_view.delete_redeem_card') }}" method="post" id="delete-form">
+        <form action="{{ url_for('admin_redeem_card.delete_redeem_card') }}" method="post" id="delete-form">
           <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
           <input type="hidden" id="delete-redeem-code" name="redeem_code">
         </form>
