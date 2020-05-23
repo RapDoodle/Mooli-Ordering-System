@@ -67,21 +67,26 @@ def place_order(user_id, payment, coupon_code = ''):
 
     # Create new order
     sql = """INSERT INTO `order` (
-        user_id,
-        total,
         actual_paid
     ) VALUES (
-        %(user_id)s,
-        %(total)s,
         %(actual_paid)s
     )"""
-    cursor.execute(sql, {'user_id':user_id,
-                        'total': total,
-                        'actual_paid': actual_paid})
+    cursor.execute(sql, {'actual_paid': actual_paid})
 
     # Retrive the newly inserted row
     cursor.execute('SELECT LAST_INSERT_ID()')
     order_id = cursor.fetchone()['LAST_INSERT_ID()']
+
+    # Insert into user_order
+    sql = """INSERT INTO user_order (
+        user_id,
+        order_id
+    ) VALUES (
+        %(user_id)s,
+        %(order_id)s
+    )"""
+    cursor.execute(sql, {'user_id':user_id,
+                        'order_id': order_id})
 
     for item in items:
         create_purchased_item(
@@ -233,6 +238,6 @@ def find_order_by_id(order_id):
     # Query database
     sql = """SELECT * FROM `order` WHERE
                 order_id = %(order_id)s"""
-    cursor.execute(sql, {'order_id': item_id})
+    cursor.execute(sql, {'order_id': order_id})
     result = cursor.fetchone()
     return result

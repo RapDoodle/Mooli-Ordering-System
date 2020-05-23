@@ -48,9 +48,7 @@ def add_product(product_name, categories, price, priority, description = ''):
                         'price': price
                         })
 
-    # Fetch the newly added id
-    cursor.execute("""SELECT product_id FROM product WHERE product_name = %(product_name)s""",
-            {'product_name': product_name})
+    # Fetch the newly added order's id
     cursor.execute('SELECT LAST_INSERT_ID()')
     product_id = cursor.fetchone()['LAST_INSERT_ID()']
 
