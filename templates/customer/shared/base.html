@@ -1,49 +1,66 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0 ">
-        <link rel="stylesheet" href="/static/bootstrap-4.4.1/css/bootstrap.min.css">
-        <link rel="stylesheet" href="/static/customer/navbar.css">
-        <link href="/static/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
-        {% block custom_css %}{% endblock %}
-        <title>{% block title %}{% endblock %} - Mooli</title>
-        <style media="screen">
-            a { color: inherit; }
-        </style>
-        {% block custom_style %}{% endblock %}
-    </head>
-    <body data-gr-c-s-loaded="true">
-        {% block top %}
 
-        {% endblock %}
-        <div class="container-fluid mainBodyPart">
-            <div class="row">
-                <div class="col col-sm-12">
-                    {% block content %}
+<head>
+	<meta charset="utf-8">
+	<!-- Phone Compatibility -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0 ">
+	<!-- Bootstrap -->
+	<link rel="stylesheet" href="/static/bootstrap-4.4.1/css/bootstrap.min.css">
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="/static/font-awesome-4.7.0/css/font-awesome.min.css">
+	<!-- Global CSS Control -->
+	<link rel="stylesheet" href="/static/css/customer/base.css">
+	<!-- Custom CSS -->
+	{% block custom_css %}
+	
+	{% endblock %}
+	<title>{% block title %}{% endblock %} - Mooli</title>
+	<!-- Custom Styling -->
+	{% block custom_style %}
+	
+	{% endblock %}
+</head>
 
-                    {% endblock %}
-                </div>
-            </div>
-        </div>
-        {% block bottom %}
+<body data-gr-c-s-loaded="true">
+	<div class="container-fluid mainBodyPart">
+		<div class="row">
+			<div class="col col-sm-12 col-lg-4 offset-lg-4">
+				{% block content_top %}
 
-        {% endblock %}
-        <script src="/static/bootstrap-4.4.1/js/jquery-3.4.1.slim.min.js"></script>
-        <script src="/static/bootstrap-4.4.1/js/popper.min.js"></script>
-        <script src="/static/bootstrap-4.4.1/js/bootstrap.min.js"></script>
-        <script>
-            var errorMessage = ''
-            {% with messages = get_flashed_messages() %}
-            {% if messages %}
-                {% for message in messages %}
-                errorMessage += '{{ message }}'
-                {% endfor %}
-            {% endif %}
-            {% endwith %}
-            if (errorMessage.length > 0) {
-            alert(errorMessage)
-            }
-        </script>
-    </body>
+				{% endblock %}
+				{% block content %}
+
+				{% endblock %}
+			</div>
+		</div>
+	</div>
+	{% block bottom %}
+
+	{% endblock %}
+	<!-- jQuery -->
+	<script src="/static/js/jquery-3.4.1.min.js"></script>
+	<!-- Bootstrap Related -->
+	<script src="/static/bootstrap-4.4.1/js/popper.min.js"></script>
+	<script src="/static/bootstrap-4.4.1/js/bootstrap.min.js"></script>
+	<script>
+		var errorMessage = ''
+		{% with messages = get_flashed_messages() %}
+			{% if messages %}
+				{% for message in messages %}
+					errorMessage += '{{ message }}'
+				{% endfor %}
+			{% endif %}
+		{% endwith %}
+		if (errorMessage.length > 0) {
+			alert(errorMessage)
+		}
+	</script>
+
+	{% block custom_js %}
+		
+	{% endblock %}
+
+</body>
+
 </html>

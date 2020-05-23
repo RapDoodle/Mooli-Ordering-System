@@ -9,7 +9,7 @@ assert c.add_product(product_name = 'Milk Tea',
                 description = 'The original flavor of milk tea.',
                 categories = [1, 2],
                 price = '9.99',
-                priority = '10') ==  {'status': 200}
+                priority = '10') is None
 m.add_product(product_name = 'Green Milk Tea',
                 description = 'Also known as the golden milk green.',
                 categories = [2],
@@ -62,10 +62,10 @@ assert c.add_product(product_name = 'Dummy',
                 description = 'Dummy',
                 categories = [1],
                 price = '24.99',
-                priority = '12') == {'status': 200}
+                priority = '12') is None
 assert m.find_product(method='product_name', param='Dummy') == {'product_id': 10, 'product_name': 'Dummy', 'description': 'Dummy', 'price': Decimal('24.99'), 'priority': 12}
 assert len(c.get_all_products()) == 10
-assert c.remove_product('10') == {'status': 200}
+assert c.remove_product('10') is None
 assert len(c.get_all_products()) == 9
 
 print(' ✓ Product has passed all the tests')

@@ -1,0 +1,94 @@
+.btn:focus,
+.btn:active:focus,
+.btn.active:focus,
+.btn.focus,
+.btn:active.focus,
+.btn.active.focus {
+    outline: none;
+    border-color: transparent;
+    box-shadow: none;
+}
+
+.form-control:focus {
+    border-color: #ced4da;
+    box-shadow: none;
+    background-color: #cddc0000;
+
+}
+
+.form-control {
+    display: inline-block;
+}
+
+.title {
+
+    text-align: center;
+    line-height: 22.00px;
+    letter-spacing: -0.48px;
+    color: rgba(45, 64, 87, 1);
+    -webkit-text-stroke: 1.00px rgba(0, 0, 0, 0);
+    font-size: 20.00px;
+    font-weight: 400;
+    font-style: normal;
+    font-family: 'SF Pro Text', Arial;
+    white-space: pre;
+
+
+}
+
+.leftArrow {
+
+
+    height: 15.47px;
+
+}
+
+
+.savecc751b33 {
+
+    color: rgba(66, 202, 71, 1);
+
+    font-size: 16.00px;
+    font-weight: 500;
+    font-style: normal;
+    font-family: Avenir, Arial;
+    text-decoration: none;
+
+    white-space: pre;
+}
+
+.path1c13c5da {
+    fill: rgba(0, 0, 0, 0.5411764705882353);
+    stroke: rgba(0, 0, 0, 0);
+    stroke-width: 1.00px;
+    stroke-linecap: butt;
+    /* box-shadow: none; */
+    width: 12.74px;
+    height: 20.77px;
+
+}
+
+.titlea5c0fc01 {
+    line-height: 22.00px;
+    letter-spacing: -0.43px;
+    color: rgba(45, 64, 87, 1);
+    /* -webkit-text-stroke: 1.00px rgba(0, 0, 0, 0); */
+    font-size: 18.00px;
+    font-weight: 400;
+    font-style: normal;
+    font-family: Roboto, Arial;
+    text-decoration: none;
+    box-shadow: none;
+}
+
+.title1 {
+    line-height: 22.00px;
+    letter-spacing: -0.39px;
+    color: rgba(112, 115, 120, 1);
+    font-size: 16.00px;
+    font-weight: 400;
+    font-style: normal;
+    font-family: Roboto, Arial;
+    white-space: pre;
+
+}

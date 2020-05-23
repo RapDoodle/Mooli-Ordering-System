@@ -57,3 +57,7 @@ def find_staff(*args, **kwargs):
 def get_product_ratings(*args, **kwargs):
     from models.model_comment import get_product_ratings
     return get_product_ratings(*args, **kwargs)
+
+def delete_cart_item(*args, **kwargs):
+    from models.model_cart_item import delete_cart_item
+    return delete_cart_item(*args, **kwargs)
