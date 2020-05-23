@@ -1,11 +1,3 @@
 .float-right {
     float: right;
 }
-
-a:hover,
-a:visited,
-a:link,
-a:active {
-    color: inherit;
-    text-decoration: none;
-}
