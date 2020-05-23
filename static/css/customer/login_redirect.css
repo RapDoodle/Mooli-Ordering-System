@@ -1,0 +1,60 @@
+a:hover {
+    text-decoration: none;
+}
+
+.btn:focus, .btn:active:focus, .btn.active:focus, .btn.focus, .btn:active.focus, .btn.active.focus {
+    outline: none;
+    border-color: transparent;
+    box-shadow: none;
+}
+
+.form-control:focus {
+    border-color: #ced4da;
+    box-shadow: none;
+    background-color: #cddc0000;
+}
+
+.form-control {
+    display: inline-block;
+}
+
+.back {
+    padding-left: 15px;
+    color: #955a3f;
+}
+
+.back-svg {
+    height: 20px;
+    fill: #652d00;
+}
+
+.signin-botton {
+    background-color: #dfb36a;
+    width: 280px;
+    height: 52px;
+    border-radius: 50px;
+    line-height: 40.00px;
+    letter-spacing: 1.40px;
+    color: #955a3f;
+    font-size: 14.00px;
+    font-weight: 1000;
+    font-style: normal;
+    font-family: 'SF Pro Text', Arial;
+    /* white-space: pre; */
+}
+
+.signup-botton {
+    background-color: rgba(238, 218, 185, 0);
+    width: 280px;
+    height: 52px;
+    border-radius: 50px;
+    line-height: 35.00px;
+    letter-spacing: 1.40px;
+    border: 2px solid #955a3f;
+    color: #dfb36a;
+    font-size: 14.00px;
+    font-weight: 1000;
+    font-style: normal;
+    font-family: 'SF Pro Text', Arial;
+    /*white-space: pre*/
+}
