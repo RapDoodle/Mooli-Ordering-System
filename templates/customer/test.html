@@ -1,0 +1,19 @@
+{% extends "/customer/shared/frame.html" %}
+
+{% block title %}Redeem{% endblock %}
+
+{% block custom_css %}
+{{ super() }}
+<link rel="stylesheet" href="/static/css/customer/redeem.css">
+{% endblock %}
+
+{% block frame_back_link %}{{ url_for('customer_view.me') }}{% endblock %}
+{% block frame_title %}Change password{% endblock %}
+{% block frame_submit_form %}redeem-form{% endblock %}
+{% block frame_next_btn %}Confirm{% endblock %}
+
+{% block content %}
+
+<H1>Hello</H1>
+
+{% endblock %}
