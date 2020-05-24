@@ -41,9 +41,19 @@
 				</button>
 				<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 					<a class="dropdown-item" href="#" data-toggle="modal" data-target="#editModal"
-						data-staff-id="{{ staff['staff_id'] }}">Edit</a>
+						data-user-id="{{ staff['user_id'] }}"
+						data-username="{{ staff['username'] }}"
+						data-email="{{ staff['email'] }}"
+						data-role-id="{{ staff['role_id'] }}"
+						data-first-name="{{ staff['first_name'] }}"
+						data-last-name="{{ staff['last_name'] }}"
+						data-gender="{{ staff['gender'] }}"
+						data-phone="{{ staff['phone'] }}"
+						>Edit</a>
 					<a class="dropdown-item" href="#" data-toggle="modal" data-target="#deleteModal"
-						data-staff-id="{{ staff['staff_id'] }}">Delete</a>
+						data-user-id="{{ staff['user_id'] }}"
+						data-username="{{ staff['username'] }}"
+						>Delete</a>
 				</div>
 			</div>
 		</td>
@@ -114,12 +124,12 @@
 	</div>
 </div>
 
-<!-- Modal for editing product info -->
+<!-- Modal for editing staff info -->
 <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="newproductModalLabel">Edit product</h5>
+				<h5 class="modal-title" id="editModalLabel">Edit staff</h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
@@ -127,31 +137,41 @@
 			<div class="modal-body">
 				<form action="{{ url_for('admin_staff.edit_staff') }}" method="post" id="edit-form">
 					<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-					<input type="hidden" name="productID" id="edit-productID" value="" />
+					<input type="hidden" name="user_id"/>
 					<div class="form-group">
-						<label for="product-name" class="col-form-label">Product name:</label>
-						<input type="text" class="form-control" id="edit-productName" name="productName">
+						<label class="col-form-label">Username</label>
+						<input type="text" class="form-control" id="edit-username" name="username" readonly>
 					</div>
 					<div class="form-group">
-						<label for="product-name" class="col-form-label">Description:</label>
-						<input type="text" class="form-control" id="edit-productDescription" name="productDescription">
+						<label class="col-form-label">Email:</label>
+						<input type="email" class="form-control" id="edit-email" name="email" readonly>
 					</div>
 					<div class="form-group">
-						<label for="product-name" class="col-form-label">Price:</label>
-						<input type="number" type="number" step="0.01" class="form-control" id="edit-productPrice"
-							name="productPrice">
-					</div>
-					<div class="form-group">
-						<label for="product-priority" class="col-form-label">Product priority:</label>
-						<input type="number" class="form-control" id="edit-productPriority" name="productPriority">
-					</div>
-					<div class="form-group">
-						<label for="exampleFormControlSelect1">Category:</label>
-						<select class="form-control" id="edit-category" name="categories" multiple="multiple">
-							{% for category in categories %}
-							<option value="{{ category['category_id'] }}">{{ category['category_name'] }}</option>
+						<label class="col-form-label">Role:</label>
+						<select class="form-control" id="edit-role" name="role_id">
+							{% for role in roles %}
+							<option value="{{ role['role_id'] }}">{{ role['role_name'] }}</option>
 							{% endfor %}
 						</select>
+					</div>
+					<div class="form-group">
+						<label class="col-form-label">First name:</label>
+						<input type="text" class="form-control" id="edit-first-name" name="first_name">
+					</div>
+					<div class="form-group">
+						<label class="col-form-label">Last name:</label>
+						<input type="text" class="form-control" id="edit-last-name" name="last_name">
+					</div>
+					<div class="form-group">
+						<label class="col-form-label">Gender:</label>
+						<select class="form-control" id="edit-gender" name="gender">
+							<option value='M'>Male</option>
+							<option value='F'>Female</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label class="col-form-label">Phone:</label>
+						<input type="text" class="form-control" id="edit-phone" name="phone">
 					</div>
 				</form>
 			</div>
@@ -163,13 +183,13 @@
 	</div>
 </div>
 
-<!-- Modal for deleting product -->
+<!-- Modal for removing staff -->
 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel"
 	aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="deleteCategoryModalLabel">Delete product</h5>
+				<h5 class="modal-title" id="deleteModalLabel">Delete staff</h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
@@ -178,7 +198,7 @@
 				<p id="delete-confirm-message"></p>
 				<form action="{{ url_for('admin_staff.delete_staff') }}" method="post" id="delete-form">
 					<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-					<input type="hidden" name="product-id" id="delete-product-id">
+					<input type="hidden" name="user_id" id="delete-user-id">
 				</form>
 			</div>
 			<div class="modal-footer">
@@ -195,50 +215,30 @@
 
 	$(".custom-file-input").on("change", function () {
 		var fileName = $(this).val().split("\\").pop();
-		$(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-	});
+		$(this).siblings(".custom-file-label").addClass("selected").html(fileName)
+	})
 
 	$('#editModal').on('show.bs.modal', function (event) {
 		var button = $(event.relatedTarget)
 		var modal = $(this)
-		modal.find('#edit-productID').val(button.data('product-id'))
-		modal.find('#edit-productName').val(button.data('product-name'))
-		modal.find('#edit-productDescription').val(button.data('product-description'))
-		modal.find('#edit-productPrice').val(button.data('product-price'))
-		modal.find('#edit-productPriority').val(button.data('product-priority'))
+		modal.find('#edit-user-id').val(button.data('user-id'))
+		modal.find('#edit-username').val(button.data('username'))
+		modal.find('#edit-email').val(button.data('email'))
+		modal.find('#edit-role').val(button.data('role-id'))
+		modal.find('#edit-first-name').val(button.data('first-name'))
+		modal.find('#edit-last-name').val(button.data('last-name'))
+		modal.find('#edit-gender').val(button.data('gender')[2])
+		modal.find('#edit-phone').val(button.data('phone'))
 	})
 
 	$('#deleteModal').on('show.bs.modal', function (event) {
 		var button = $(event.relatedTarget)
 		var modal = $(this)
-		modal.find('#delete-confirm-message').text('Are you sure to delete the category named ' + button.data('product-name') + ' ?')
-		modal.find('#delete-product-id').val(button.data('product-id'))
+		modal.find('#delete-confirm-message').text('Are you sure to delete the staff named ' + 
+			button.data('username') + '?\n\The operation will only remove the user from the staff list.\n' + 
+			'The user will be able to access the system as a customer.')
+		modal.find('#delete-user-id').val(button.data('user-id'))
 	})
 
-	$('#updatePictureModal').on('show.bs.modal', function (event) {
-		var button = $(event.relatedTarget)
-		var modal = $(this)
-		modal.find('#update-type').val(button.data('update-type'))
-		modal.find('#product-id').val(button.data('product-id'))
-	})
-
-	// Set the value of the category select
-	var categoryID = '{{ category_id }}'
-	if (categoryID !== 'None') {
-		$("#categorySelect").val(categoryID);
-	} else {
-		$("#categorySelect").val('0');
-	}
-
-	$(function () {
-		// bind change event to select
-		$('#categorySelect').on('change', function () {
-			var categoryID = $(this).val(); // get selected value
-			if (categoryID) { // require a URL
-				window.location = '{{ url_for('admin_staff.staff') }}?category_id=' + categoryID; // redirect
-			}
-			return false;
-		});
-	});
 </script>
 {% endblock %}
