@@ -20,41 +20,69 @@
   </div>
 </div>
 
-  <table class="table table-bordered table-striped table-hover">
-    <tr>
-      <th>Order ID</th>
-      <th>User</th>
-      <th>Total</th>
-      <th>Actual paid</th>
-      <th>Order time</th>
-      <th>Status</th>
-      <th>Manage</th>
-    </tr>
-    {% for order in orders %}
-    <tr>
-      <td>{{ order['order_id'] }}</td>
-      <td>{{ order['first_name'] }} {{ order['last_name'] }} ({{ order['username'] }})</td>
-      <td>{{ order['total'] }}</td>
-      <td>{{ order['actual_paid'] }}</td>
-      <td>{{ order['created_at'] }}</td>
-      <td>{{ interpreter(order['status'], True) }}</td>
-      <td>
-        <div class="dropdown">
-          <button class="btn btn-light dropdown-toggle" type="button" id="maangeButton" 
-            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fa fa-gear"></i>
-          </button>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a href="{{ url_for('admin_order.details', order_id = order['order_id']) }}"
-              class="dropdown-item" >Details</a>
-            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#refundModal"
-						data-order-id="{{ order['order_id'] }}">Refund</a>
-          </div>
+<table class="table table-bordered table-striped table-hover">
+  <tr>
+    <th>Order ID</th>
+    <th>User</th>
+    <th>Total</th>
+    <th>Actual paid</th>
+    <th>Order time</th>
+    <th>Status</th>
+    <th>Manage</th>
+  </tr>
+  {% for order in orders %}
+  <tr>
+    <td>{{ order['order_id'] }}</td>
+    <td>{{ order['first_name'] }} {{ order['last_name'] }} ({{ order['username'] }})</td>
+    <td>{{ order['total'] }}</td>
+    <td>{{ order['actual_paid'] }}</td>
+    <td>{{ order['created_at'] }}</td>
+    <td>{{ interpreter(order['status'], True) }}</td>
+    <td>
+      <div class="dropdown">
+        <button class="btn btn-light dropdown-toggle" type="button" id="maangeButton" 
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fa fa-gear"></i>
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a href="{{ url_for('admin_order.details', order_id = order['order_id']) }}"
+            class="dropdown-item" >Details</a>
+          <a class="dropdown-item" href="#" data-toggle="modal" data-target="#refundModal"
+          data-order-id="{{ order['order_id'] }}">Refund</a>
         </div>
-      </td>
-    </tr>
-    {% endfor %}
-  </table>
+      </div>
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+
+<div class="row">
+  <div class="col-12">
+    <nav aria-label="pagination">
+      <ul class="pagination justify-content-center">
+        {% for page in pages %}
+          {% if page == 'None' %}
+            <li class="page-item disabled">
+              <span class="page-link">
+                ...
+                <span class="sr-only">(current)</span>
+              </span>
+            </li>
+          {% elif page == current_page %}
+            <li class="page-item active">
+              <span class="page-link">
+                {{ page }}
+                <span class="sr-only">(current)</span>
+              </span>
+            </li>
+          {% else %}
+            <li class="page-item"><a class="page-link" href="{{ url_for('admin_order.order') }}?scope_id=1&page={{ page }}">{{ page }}</a></li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    </nav>
+  </div>
+</div>
 
 <form action="{{ url_for('admin_order.update_status') }}" method="POST" id="update-form">
   <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>

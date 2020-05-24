@@ -147,19 +147,30 @@
 		</div>
 	</div>
 
-	<!-- Message Modal Script -->
 	<script type="text/javascript">
+
+		// Message Modal Script
 		if ($('#returned-message').text().length > 0) {
 			$('#messageModal').modal('show')
 		}
-	</script>
 
-	<!-- Menu Toggle Script -->
-	<script>
+		// Menu Toggle Script
 		$("#menu-toggle").click(function (e) {
 			e.preventDefault();
-			$("#wrapper").toggleClass("toggled");
-		});
+			$("#wrapper").toggleClass("toggled")
+		})
+
+		// Tooltip for changing password
+		$('#password-new-password').tooltip({'trigger':'focus', 'title': 'The password should be 8-24 characters long, containing upper and lower case letters, and digits.'})
+	</script>
+	<!-- Message Modal Script -->
+	
+		
+
+	<!--  -->
+		
+
+		
 	</script>
 
 </body>

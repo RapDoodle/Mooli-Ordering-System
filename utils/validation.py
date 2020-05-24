@@ -26,7 +26,7 @@ def is_valid_length(d, min, max):
     return False
 
 def is_valid_username(d):
-    # The current system is desgined to accept username in the range between 8 and 24
+    # The current system is desgined to accept username in the range between 6 and 24
     return verify_regex('^[a-zA-Z0-9_-]{6,24}$', d)
 
 def is_valid_password(d):

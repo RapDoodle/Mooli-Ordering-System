@@ -12,6 +12,7 @@ from controllers.controller_authentication import staff_permission_required
 import controllers.controller_order as c
 from utils.exception import ErrorMessage
 from utils.interpreter import interprete_order_status
+from utils.pagination import get_page_numbers
 
 admin_order = Blueprint('admin_order', __name__, template_folder='/templates')
 
@@ -19,6 +20,7 @@ admin_order = Blueprint('admin_order', __name__, template_folder='/templates')
 @staff_permission_required('orders')
 def order():
     scope_id = request.args.get('scope_id')
+    scope_id = str(scope_id).strip()
     if scope_id == '0' or scope_id == 'None':
         # On going orders
         orders = c.get_on_going_orders()
@@ -32,12 +34,20 @@ def order():
         )
     else:
         # All orders
-        orders = c.get_all_orders()
+        page = request.args.get('page')
+        if page is None:
+            page = 1
+        orders = c.get_all_orders(page)
+        pages = get_page_numbers(c.count_records_length(), page)
         if isinstance(orders, ErrorMessage):
             flash(orders.get())
+            # Empty the results with a dict
+            orders = {}
         return render_template('/admin/order_all.html',
             orders = orders,
-            interpreter = interprete_order_status
+            interpreter = interprete_order_status,
+            pages = pages, 
+            current_page = str(page)
         )
 
 @admin_order.route('/admin/order/', methods=['GET'])

@@ -240,5 +240,8 @@
 		modal.find('#delete-user-id').val(button.data('user-id'))
 	})
 
+	$('#new-username').tooltip({'trigger':'focus', 'title': 'The length of a username must be between 6 and 24 characters.'});
+	$('#new-password').tooltip({'trigger':'focus', 'title': 'The password should be 8-24 characters long, containing upper and lower case letters, and digits.'});
+
 </script>
 {% endblock %}

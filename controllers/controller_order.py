@@ -26,9 +26,18 @@ def get_order(*args, **kwargs):
     return m.get_order(*args, **kwargs)
 
 @excpetion_handler
-def get_all_orders():
-    return m.get_orders(scope = 'all')
+def get_all_orders(page):
+    # Each page contains 20 records
+    try:
+        page = int(page)
+    except:
+        page = 1
+    return m.get_orders(scope = 'all', limit = 20, offset = (page - 1) * 20)
 
 @excpetion_handler
 def order_refund(*args, **kwargs):
     return m.order_refund(*args, **kwargs)
+
+@excpetion_handler
+def count_records_length():
+    return m.count_records_length()
