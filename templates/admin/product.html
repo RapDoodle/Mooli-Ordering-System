@@ -247,20 +247,22 @@
   // Set the value of the category select
   var categoryID = '{{ category_id }}'
   if (categoryID !== 'None') {
-    $("#categorySelect").val(categoryID);
+    $("#categorySelect").val(categoryID)
   } else {
-    $("#categorySelect").val('0');
+    $("#categorySelect").val('0')
   }
 
   $(function () {
-    // bind change event to select
+    // Bind change event to select
     $('#categorySelect').on('change', function () {
-      var categoryID = $(this).val(); // get selected value
-      if (categoryID) { // require a URL
-        window.location = '{{ url_for('admin_product.product') }}?category_id=' + categoryID; // redirect
+      // Get the selected value
+      var categoryID = $(this).val(); 
+      if (categoryID) {
+        // Redirect
+        window.location = '{{ url_for('admin_product.product') }}?category_id=' + categoryID;
       }
       return false;
-    });
-  });
+    })
+  })
 </script>
 {% endblock %}

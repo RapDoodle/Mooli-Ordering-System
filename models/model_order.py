@@ -146,19 +146,13 @@ def update_order_status(order_id, status):
     order_id = str(order_id).strip()
     status = str(status).strip()
 
-    # Check is the input valid
-    if not status.isdecimal():
-        raise ValidationError('Invalid input type.')
+    if status not in ['CANC', 'PEND', 'PROC', 'REDY', 'DONE', 'REDD']:
+        raise ValidationError('Invalid status code.')
 
     # Check for the existence of order
     order = find_order_by_id(order_id)
     if order is None:
         raise ValidationError('Order not found.')
-
-    # Status code above or equal to 200 are normal orders
-    # Status code below 200 are for deposites
-    if (order['status'] - 200) * (int(status) - 200) < 0:
-        raise ValidationError('Invalid status update.')
 
     # Establish db connection
     dao = DAO()
@@ -206,8 +200,7 @@ def get_user_transaction_history(user_id):
     result = cursor.fetchall()
     return result
 
-def get_order_details(order_id):
-    # Return
+def get_order_purchased_items(order_id):
     # Clean the input data
     order_id = str(order_id).strip()
 
@@ -221,8 +214,10 @@ def get_order_details(order_id):
     cursor = dao.cursor()
 
     # Query database
-    sql = """SELECT order.order_id, product.product_name,
-                FROM `order` WHERE order_id = %(order_id)s ORDER BY created_at DESC"""
+    sql = """SELECT * FROM purchased_item, archive WHERE 
+                purchased_item.order_id = %(order_id)s AND
+                purchased_item.product_name_snapshot = archive.archive_index
+                ORDER BY archive.value ASC"""
     cursor.execute(sql, {'order_id': order_id})
     result = cursor.fetchall()
     return result
@@ -240,4 +235,47 @@ def find_order_by_id(order_id):
                 order_id = %(order_id)s"""
     cursor.execute(sql, {'order_id': order_id})
     result = cursor.fetchone()
+    return result
+
+def get_orders(scope):
+    # Verify is the scope valid
+    if scope not in ['all', 'on_going']:
+        raise ValidationError('Invalid scope.')
+
+    # Establish db connection
+    dao = DAO()
+    cursor = dao.cursor()
+
+    # Query database
+    if scope == 'on_going':
+        sql = """WITH s_order AS (
+                    SELECT * FROM `order` WHERE status >= 2 AND 
+                        status <= 4
+                ) SELECT user.user_id, 
+                    user.username,
+                    user.first_name,
+                    user.last_name,
+                    s_order.order_id,
+                    s_order.actual_paid,
+                    s_order.status,
+                    s_order.created_at
+                FROM s_order, user_order, user WHERE
+                    s_order.order_id = user_order.order_id AND
+                    user_order.user_id = user.user_id
+                ORDER BY s_order.created_at ASC"""
+    elif scope == 'all':
+        sql = """SELECT user.user_id, 
+                    user.username,
+                    user.first_name,
+                    user.last_name,
+                    `order`.order_id,
+                    `order`.actual_paid,
+                    `order`.status,
+                    `order`.created_at
+                FROM `order`, user_order, user WHERE
+                    `order`.order_id = user_order.order_id AND
+                    user_order.user_id = user.user_id
+                ORDER BY `order`.created_at ASC"""
+    cursor.execute(sql)
+    result = cursor.fetchall()
     return result

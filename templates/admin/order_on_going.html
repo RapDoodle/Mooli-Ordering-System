@@ -1,0 +1,122 @@
+{% extends "/admin/shared/base.html" %}
+
+{% block title %}Product{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col" id="location">
+    <span><a href="{{ url_for('admin_dashboard.dashboard') }}">Home</a> / Orders </span>
+  </div>
+</div>
+<div class="row">
+  <div class="col-9">
+    Total number of on going orders: {{ orders_len }}<br><br>
+  </div>
+  <div class="col-3">
+    <select class="form-control" id="scope-type">
+      <option value=0>On going</option>
+      <option value=1>All</option>
+    </select>
+  </div>
+</div>
+
+<div class="row">
+  {% for order in orders %}
+  <div class="col col-sm-12 col-md-6 col-lg-4" style="margin-bottom: 15px;">
+    <div class="card">
+      <div class="card-header">
+        Order #{{ order['order_id'] }}
+      </div>
+      <div class="card-body">
+        <p class="card-text">{{ order['first_name'] }} {{ order['last_name'] }} ({{ order['username'] }}):</p>
+        <table class="table">
+          {% for purchased_item in order['items'] %}
+          <tr>
+            <td>{{ purchased_item['value'] }}</td>
+            <td>×{{ purchased_item['amount'] }}</td>
+          </tr>
+          {% endfor %}
+        </table>
+        <div class="text-center">
+          <p>Status: {{ interpreter(order['status']) }}</p>
+        </div>
+        {% if order['status'] == 'PEND' %}
+        <div class="text-center">
+          <div class="btn-group" role="group" aria-label="Basic example">
+            <button type="button" class="btn btn-warning status-update-btn"
+              data-order-id="{{order['order_id']}}"
+              data-status-code="CANC">Cancel</button>
+            <button type="button" class="btn btn-primary status-update-btn"
+              data-order-id="{{order['order_id']}}"
+              data-status-code="PROC">Accept</button>
+          </div>
+        </div>
+        {% elif order['status'] == 'PROC' %}
+        <div class="text-center">
+          <div class="btn-group" role="group" aria-label="Basic example">
+            <button type="button" class="btn btn-warning status-update-btn"
+              data-order-id="{{order['order_id']}}"
+              data-status-code="PEND">Back</button>
+            <button type="button" class="btn btn-primary status-update-btn"
+              data-order-id="{{order['order_id']}}"
+              data-status-code="REDY">Ready</button>
+          </div>
+        </div>
+        {% elif order['status'] == 'REDY' %}
+        <div class="text-center">
+          <div class="btn-group" role="group" aria-label="Basic example">
+            <button type="button" class="btn btn-primary status-update-btn"
+              data-order-id="{{order['order_id']}}"
+              data-status-code="DONE">Done</button>
+          </div>
+        </div>
+        {% else %}
+        <div class="text-center">
+          Error
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+<form action="{{ url_for('admin_order.update_status') }}" method="POST" id="update-form">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+  <input type="hidden" id="update-form-order-id" name="order_id" />
+  <input type="hidden" id="update-form-status" name="status" />
+</form>
+
+  {% endblock %}
+
+  {% block script %}
+
+  <script>
+    $('.status-update-btn').click(function() {
+      var currBtn = $(this)
+      $('#update-form-order-id').val(currBtn.data('order-id'))
+      $('#update-form-status').val(currBtn.data('status-code'))
+      $('#update-form').submit()
+    })
+
+    function autoRefresh(t) {
+      setTimeout("location.reload(true);", t);
+    }
+
+    autoRefresh(5000)
+
+    $(function () {
+      // Bind change event to select
+      $('#scope-type').on('change', function () {
+        // Get selected value
+        var scopeID = $(this).val()
+        if (scopeID) {
+          // Redirect
+          window.location = '{{ url_for('admin_order.order') }}?scope_id=' + scopeID
+        }
+        return false
+      })
+    })
+  </script>
+
+  {% endblock %}
