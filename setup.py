@@ -240,6 +240,7 @@ def init_db_tables(connection):
             PRIMARY KEY (order_id)
             )
         """,
+        """ALTER TABLE `order` AUTO_INCREMENT=10000""",
         """CREATE TABLE IF NOT EXISTS user_order (
             order_id INT,
             user_id INT,

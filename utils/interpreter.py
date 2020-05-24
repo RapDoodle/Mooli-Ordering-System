@@ -4,7 +4,8 @@ order_status_dictionary = {
     'PROC': 'processing',
     'REDY': 'ready for pickup',
     'DONE': 'done',
-    'REDD': 'redeemed'
+    'REDD': 'redeemed',
+    'REFN': 'refunded'
 }
 
 def interprete_order_status(status, capitalize = False):

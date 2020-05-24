@@ -20,11 +20,13 @@ admin_order = Blueprint('admin_order', __name__, template_folder='/templates')
 def order():
     scope_id = request.args.get('scope_id')
     scope_id = str(scope_id).strip()
-    if scope_id == '0' or scope_id is None:
+    print(scope_id)
+    if scope_id == '0' or scope_id == 'None':
         # On going orders
         orders = c.get_on_going_orders()
         if isinstance(orders, ErrorMessage):
             flash(orders.get())
+            return render_template('/admin/order_on_going.html')
         return render_template('/admin/order_on_going.html',
             orders = orders,
             interpreter = interprete_order_status,
@@ -57,15 +59,22 @@ def update_status():
             flash(res.get())
     return redirect(url_for('.order'))
 
-@admin_order.route('/admin/order/delete', methods=['GET', 'POST'])
-@staff_permission_required('orders')
-def delete_order():
-    # msg = c_coupon.delete_coupon(coupon_code = request.values.get('coupon-code'))
-    # if 'error' in msg:
-    #     flash(msg['error'])
-    return redirect(url_for('.order'))
-
 @admin_order.route('/admin/order/refund', methods=['GET', 'POST'])
 @staff_permission_required('orders')
 def refund():
+    if request.method == 'POST':
+        res = c.order_refund(
+            order_id = request.values.get('order_id')
+        )
+        if isinstance(res, ErrorMessage):
+            flash(res.get())
     return redirect(url_for('.order'))
+
+@admin_order.route('/admin/order/details/<int:order_id>', methods=['GET'])
+@staff_permission_required('orders')
+def details(order_id):
+    order = c.get_order(order_id = order_id)
+    return render_template('/admin/order_details.html',
+        order = order,
+        interpreter = interprete_order_status
+    )
