@@ -13,13 +13,13 @@
     <button class="btn btn-light" type="button" name="button" data-toggle="modal" data-target="#newModal"><i
         class="fa fa-plus"></i></button><br><br>
   </div>
-  <div class="col-3" align="right" style="margin-top: 5px;">
-    <p>Order by:</p>
+  <div class="col-3" style="margin-top: 5px;">
+    <p class="text-right">Order by:</p>
   </div>
   <div class="col-3">
-    <select class="form-control" id="orderBy">
+    <select class="form-control" id="order_by">
       <option value=0>Redeem Code</option>
-      <option value=0>Value</option>
+      <option value=1>Value</option>
     </select>
   </div>
 </div>
@@ -53,21 +53,26 @@
 <div class="row">
   <div class="col-12">
     <nav aria-label="pagination">
-      <ul class="pagination justify-content-center" align="center">
-        <li class="page-item disabled">
-          <span class="page-link">Previous</span>
-        </li>
-        <li class="page-item active">
-          <span class="page-link">
-            1
-            <span class="sr-only">(current)</span>
-          </span>
-        </li>
-        <!-- <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li> -->
-        <li class="page-item">
-          <a class="page-link" href="#">Next</a>
-        </li>
+      <ul class="pagination justify-content-center">
+        {% for page in pages %}
+          {% if page == 'None' %}
+            <li class="page-item disabled">
+              <span class="page-link">
+                ...
+                <span class="sr-only">(current)</span>
+              </span>
+            </li>
+          {% elif page == current_page %}
+            <li class="page-item active">
+              <span class="page-link">
+                {{ page }}
+                <span class="sr-only">(current)</span>
+              </span>
+            </li>
+          {% else %}
+            <li class="page-item"><a class="page-link" href="{{ url_for('admin_redeem_card.redeem_card') }}?page={{ page }}">{{ page }}</a></li>
+          {% endif %}
+        {% endfor %}
       </ul>
     </nav>
   </div>
@@ -142,19 +147,21 @@
   })
 
   // Set the value of the category select
-  var categoryID = '{{ category_id }}'
-  if (categoryID !== 'None') {
-    $("#categorySelect").val(categoryID);
+  var order_by_id = '{{ order_by_id }}'
+  if (order_by_id !== 'None') {
+    $("#order_by").val(order_by_id);
   } else {
-    $("#categorySelect").val('0');
+    $("#order_by").val('0');
   }
 
   $(function () {
-    // bind change event to select
+    // Bind change event to select
     $('#categorySelect').on('change', function () {
-      var categoryID = $(this).val(); // get selected value
+      // Get selected value
+      var categoryID = $(this).val()
       if (categoryID) { // require a URL
-        window.location = '?category_id=' + categoryID; // redirect
+        // Redirect
+        window.location = '?category_id=' + categoryID
       }
       return false;
     });

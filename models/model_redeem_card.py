@@ -119,3 +119,14 @@ def redeem(user_id, redeem_code):
     sql = """DELETE FROM redeem_card WHERE redeem_code = %(redeem_code)s"""
     cursor.execute(sql, {'redeem_code': redeem_code})
     dao.commit()
+
+def count_records_length():
+    # Establish db connection
+    dao = DAO()
+    cursor = dao.cursor()
+
+    # Query database
+    sql = """SELECT count(redeem_code) as len FROM redeem_card"""
+    cursor.execute(sql)
+    length = cursor.fetchone()['len']
+    return length
