@@ -33,7 +33,7 @@
           {% for purchased_item in order['items'] %}
           <tr>
             <td>{{ purchased_item['value'] }}</td>
-            <td>×{{ purchased_item['amount'] }}</td>
+            <td class="text-right">×{{ purchased_item['amount'] }}</td>
           </tr>
           {% endfor %}
         </table>

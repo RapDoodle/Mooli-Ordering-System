@@ -234,3 +234,37 @@ def user_pay(user_id, amount, cursor):
     sql = """UPDATE user SET balance = %(new_balance)s WHERE
                 user_id = %(user_id)s"""
     cursor.execute(sql, {'new_balance': new_balance, 'user_id': user_id})
+
+def user_refund(user_id, amount, cursor):
+    """The function will try to refund the given amount of moeny from 
+    the user's account
+    NOTE: A cursor must be provided
+
+    Parameters:
+    user_id -- the id of the user
+    amount -- the amount to be refunded
+    cursor -- a cursor from a DAO or a connection
+    """
+    # Clean the input data
+    user_id = str(user_id).strip()
+    amount = str(amount).strip()
+
+    # Check if the input 'amount is valid
+    if not validator.is_money(amount):
+        raise ValidationError('Invalid amount.')
+
+    # Check for the validity of the user
+    user = find_user(param = user_id, method = 'id')
+    if user is None:
+        raise ValidationError('The user does not exists.')
+
+    # Query the balance of the given user
+    sql = """SELECT balance FROM user WHERE user_id = %(user_id)s"""
+    cursor.execute(sql, {'user_id': user_id})
+    result = cursor.fetchone()
+    new_balance = result['balance'] + Decimal(amount)
+
+    # Refund
+    sql = """UPDATE user SET balance = %(new_balance)s WHERE
+                user_id = %(user_id)s"""
+    cursor.execute(sql, {'new_balance': new_balance, 'user_id': user_id})

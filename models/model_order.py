@@ -237,6 +237,44 @@ def find_order_by_id(order_id):
     result = cursor.fetchone()
     return result
 
+def get_order(order_id):
+    # Clean the input data
+    order_id = str(order_id).strip()
+
+    # Establish db connection
+    dao = DAO()
+    cursor = dao.cursor()
+
+    # Query database
+    sql = """WITH s_order AS (
+                SELECT * FROM `order` WHERE
+                order_id = %(order_id)s
+            ) SELECT user.user_id, 
+                user.username,
+                user.first_name,
+                user.last_name,
+                s_order.order_id,
+                s_order.actual_paid,
+                s_order.status,
+                s_order.created_at
+            FROM s_order, user_order, user WHERE
+                s_order.order_id = user_order.order_id AND
+                user_order.user_id = user.user_id
+            ORDER BY s_order.created_at ASC"""
+    cursor.execute(sql, {'order_id': order_id})
+    order = cursor.fetchone()
+
+    if order is None:
+        return None
+    total = 0
+    order_items = get_order_purchased_items(order['order_id'])
+    for order_item in order_items:
+        total += order_item['product_price_snapshot'] * order_item['amount']
+    order['items'] = order_items
+    order['total'] = total
+
+    return order
+
 def get_orders(scope):
     # Verify is the scope valid
     if scope not in ['all', 'on_going']:
@@ -277,5 +315,53 @@ def get_orders(scope):
                     user_order.user_id = user.user_id
                 ORDER BY `order`.created_at ASC"""
     cursor.execute(sql)
-    result = cursor.fetchall()
-    return result
+    orders = cursor.fetchall()
+
+    for order in orders:
+        total = 0
+        order_items = get_order_purchased_items(order['order_id'])
+        order['items'] = order_items
+        for order_item in order_items:
+            total += order_item['product_price_snapshot'] * order_item['amount']
+        order['total'] = total
+    return orders
+
+def order_refund(order_id):
+    # Clean the input data
+    order_id = str(order_id).strip()
+
+    # Find the order
+    order = get_order(order_id)
+
+    # Check the existence of the order
+    if order is None:
+        raise ValidationError('Order not found.')
+
+    if order['status'] == 'REFN':
+        raise ValidationError('The order has been refunded.')
+    if order['status'] == '':
+        raise ValidationError('The order has an invalid order status')
+
+    # Establish db connection
+    dao = DAO()
+    cursor = dao.cursor()
+
+    # Refund
+    from models.model_user import user_refund
+    user_refund(
+        user_id = order['user_id'], 
+        amount = order['actual_paid'], 
+        cursor = cursor
+    )
+
+    # Update the status
+    sql = """UPDATE `order` SET
+            status = %(status)s
+            WHERE order_id = %(order_id)s"""
+    cursor.execute(sql, {'status': 'REFN',
+                        'order_id': order_id})
+
+    # Commit all changes
+    dao.commit()
+
+    return order
