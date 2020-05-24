@@ -166,7 +166,7 @@ def verify_credential(param, password, method = 'username'):
     if result is None:
         raise ValidationError('Invalid username')
     if not verify_password(password, result['password_hash']):
-        raise ValidationError('Invalid password')
+        raise ValidationError('Incorrect password')
     return result['user_id']
 
 def find_user(method, param):

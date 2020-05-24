@@ -19,8 +19,7 @@ admin_order = Blueprint('admin_order', __name__, template_folder='/templates')
 @staff_permission_required('orders')
 def order():
     scope_id = request.args.get('scope_id')
-    print(scope_id)
-    if scope_id == 0 or scope_id is None:
+    if scope_id == '0' or scope_id == 'None':
         # On going orders
         orders = c.get_on_going_orders()
         if isinstance(orders, ErrorMessage):

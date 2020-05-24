@@ -49,22 +49,23 @@ def new_staff():
 @admin_staff.route('/admin/staff/edit', methods=['GET', 'POST'])
 @staff_permission_required('staff')
 def edit_staff():
-    # if request.method == 'POST':
-    #     res = c_coupon.update_coupon(
-    #             coupon_code = request.values.get('coupon_code'), 
-    #             value = request.values.get('value'), 
-    #             threshold = request.values.get('threshold'), 
-    #             activate_date = request.values.get('activate_date'), 
-    #             expire_date = request.values.get('expire_date')
-    #     )
-    #     if 'error' in res:
-    #         flash(res['error'])
+    if request.method == 'POST':
+        res = c.update_staff(
+            user_id = session.get('user_id'),
+            role_id = request.values.get('role_id'),
+            first_name = request.values.get('first_name'),
+            last_name = request.values.get('last_name'),
+            gender = request.values.get('gender'),
+            phone = request.values.get('phone')
+        )
+        if isinstance(res, ErrorMessage):
+            flash(res.get())
     return redirect(url_for('.staff'))
 
 @admin_staff.route('/admin/staff/delete', methods=['GET', 'POST'])
 @staff_permission_required('staff')
 def delete_staff():
-    # res = c_coupon.delete_coupon(coupon_code = request.values.get('coupon-code'))
-    # if 'error' in res:
-    #     flash(res['error'])
+    res = c.delete_staff(user_id = request.values.get('user_id'))
+    if isinstance(res, ErrorMessage):
+        flash(res.get())
     return redirect(url_for('.staff'))

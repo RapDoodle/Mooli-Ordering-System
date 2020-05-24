@@ -14,11 +14,6 @@ def add_staff(username, email, password, role_id, first_name = '', last_name = '
     if find_role(role_id, 'role_id') is None:
         raise ValidationError('Invalid role.')
 
-    # Check for the existence of the role
-    role = find_role(role_id, 'role_id')
-    if role is None:
-        raise ValidationError('Invalid role.')
-
     # Establish db connection
     dao = DAO()
     cursor = dao.cursor()
@@ -35,14 +30,69 @@ def add_staff(username, email, password, role_id, first_name = '', last_name = '
 
     return user_id
 
+def update_staff(user_id, role_id, first_name = '', last_name = '', gender = '', phone = ''):
+    # Call the add staff function
+    from models.model_user import update_user_info
+    update_user_info(
+        user_id = user_id,
+        first_name = first_name,
+        last_name = last_name,
+        gender = gender,
+        phone = phone
+    )
+
+    # Clean user input
+    role_id = str(role_id).strip()
+
+    # Check if the staff exists
+    if find_staff(user_id, 'user_id') is None:
+        raise ValidationError('Staff not found.')
+
+    # Check if the role exists
+    if find_role(role_id, 'role_id') is None:
+        raise ValidationError('Invalid role.')
+
+    # Establish db connection
+    dao = DAO()
+    cursor = dao.cursor()
+
+    sql = """UPDATE staff SET role_id = %(role_id)s WHERE user_id = %(user_id)s"""
+    cursor.execute(sql, {'role_id': role_id, 'user_id': user_id})
+    
+    dao.commit()
+
+def delete_staff(user_id):
+    # Clean user input
+    user_id = str(user_id).strip()
+
+    # Check if the staff exists
+    if find_staff(user_id, 'user_id') is None:
+        raise ValidationError('Staff not found.')
+
+    # Establish db connection
+    dao = DAO()
+    cursor = dao.cursor()
+
+    # Check the number of staff in the system
+    sql = """SELECT COUNT(user_id) AS cnt FROM staff"""
+    cursor.execute(sql)
+    result = cursor.fetchone()['cnt']
+
+    if result <= 1:
+        raise ValidationError('The system only has one staff. Deleting the staff will result in the system inaccessible from the staff end.')
+
+    sql = """UPDATE staff SET role_id = %(role_id)s WHERE user_id = %(user_id)s"""
+    cursor.execute(sql, {'role_id': role_id, 'user_id': user_id})
+    
+    dao.commit()
+
 def find_staff(param, method):
     """The function finds the staff according the staff's user_id or username
 
-    The return dict contains: user_id, staff_id, and username
+    The return dict contains: user_id and username
     """
-
     # Check if the method is valid
-    if method not in ['staff_id', 'username']:
+    if method not in ['user_id', 'username']:
         raise ValidationError('Invalid method.')
 
     # Clean user input
@@ -54,7 +104,7 @@ def find_staff(param, method):
 
     # Query db for role
     sql = ''
-    if method == 'staff_id':
+    if method == 'user_id':
         sql = """WITH s_u (user_id, username) AS (
                     SELECT user_id, username FROM user WHERE user_id = %(param)s
                 )
