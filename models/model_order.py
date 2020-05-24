@@ -313,7 +313,7 @@ def get_orders(scope):
                 FROM `order`, user_order, user WHERE
                     `order`.order_id = user_order.order_id AND
                     user_order.user_id = user.user_id
-                ORDER BY `order`.created_at ASC"""
+                ORDER BY `order`.created_at DESC"""
     cursor.execute(sql)
     orders = cursor.fetchall()
 
