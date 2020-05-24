@@ -42,3 +42,13 @@
     white-space: pre;
     height: 50px;
 }
+
+#me{
+    background-color: rgba(255, 255, 255, 0);
+    color:#652d00;
+    text-align: center;
+    -webkit-text-stroke: 1.00px rgba(0, 0, 0, 0);
+    font-size: 20.00px;
+    font-style: normal;
+    font-family: 'SF Pro Text', Arial;
+}
