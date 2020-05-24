@@ -1,0 +1,52 @@
+{% extends "/customer/shared/frame.html" %}
+
+{% block title %}ChangePassword{% endblock %}
+
+{% block custom_css %}
+{{ super() }}
+<link rel="stylesheet" href="/static/css/customer/changePic.css">
+{% endblock %}
+
+{% block frame_back_link %}{{ url_for('customer_view.me') }}{% endblock %}
+
+{% block content %}
+<div class="">
+	<div class="row row-cols-3" style="height: 30px;">
+	</div>
+
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="col-10 old">
+            Change you picture
+        </div>
+        <div class="col-1"></div>
+    </div>
+
+    <div class="row row-cols-3" style="height: 30px;">
+	</div>
+
+	<div class="row row-cols-3" style="height: 80px;">
+		<div class="col-3"></div>
+		<div class="col-6" style="text-align: center;">
+			<img class="mb-4" src="/static/customer/test.jpg" alt="" width="130px" height="130px" style="border-radius:100%">
+		</div>
+		<div class="col-3"></div>
+    </div>
+
+    <div class="row row-cols-3" style="height: 80px;">
+	</div>
+
+    <div class="row">
+        <div class="col-3"></div>
+        <div class="col-6">
+            <div class="custom-file">
+                <input type="file" class="custom-file-input" id="customFile">
+                <label class="custom-file-label" for="customFile">Choose file</label>
+              </div>
+        </div>
+        <div class="col-3"></div>
+    </div>
+</div>
+
+{{ super() }}
+{% endblock %}
