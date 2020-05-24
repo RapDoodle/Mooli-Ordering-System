@@ -1,0 +1,89 @@
+{% extends "/customer/shared/frame.html" %}
+
+{% block title %}ChangePassword{% endblock %}
+
+{% block custom_css %}
+{{ super() }}
+<link rel="stylesheet" href="/static/css/customer/changepwd.css">
+{% endblock %}
+
+{% block frame_back_link %}{{ url_for('customer_view.me') }}{% endblock %}
+{% block frame_submit_form %}redeem-form{% endblock %}
+{% block frame_next_btn %}Confirm{% endblock %}
+
+{% block content %}
+<style type="text/css">
+</style>
+
+<div class="">
+    <div class="row" style="height: 40px;"></div>
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="col-10 change">
+            Change you password
+        </div>
+        <div class="col-1"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="col-10 old">
+            Your old password:
+        </div>
+        <div class="col-1"></div>
+    </div>
+
+<form action="{{ url_for('customer_view.account') }}" method="post" id="edit-form">
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="col-11">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+            <input name="first_name" type="text" class="form-control old-input" placeholder="Old Passward" aria-label="FirstName"
+                aria-describedby="addon-wrapping" value="">
+        </div>
+    </div>
+
+    <div class="row" style="height: 15px;"></div>
+
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="col-10 old">
+            Your new password:
+        </div>
+        <div class="col-1"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="col-11">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+            <input name="first_name" type="text" class="form-control old-input" placeholder="New Passward" aria-label="FirstName"
+                aria-describedby="addon-wrapping" value="">
+        </div>
+    </div>
+
+    <div class="row" style="height: 15px;"></div>
+
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="col-10 old">
+            Type again:
+        </div>
+        <div class="col-1"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="col-11">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+            <input name="first_name" type="text" class="form-control old-input" placeholder="New Passward" aria-label="FirstName"
+                aria-describedby="addon-wrapping" value="">
+        </div>
+    </div>
+
+</form>
+
+</div>
+
+{{ super() }}
+{% endblock %}
