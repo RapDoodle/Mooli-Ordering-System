@@ -1,0 +1,21 @@
+.svg-style {
+    fill: #652d00;
+    stroke: rgba(0, 0, 0, 0);
+    stroke-width: 1.00px;
+    stroke-linecap: butt;
+    /* box-shadow: none; */
+    width: 12.74px;
+    height: 20px;
+}
+
+.right-1 {
+    text-align: right;
+    right: 5px;
+}
+
+.input-comment {
+    overflow: auto;
+    height: 100px;
+    border-color: wheat;
+    border-width: 2.5px;
+}
