@@ -275,10 +275,17 @@ def get_order(order_id):
 
     return order
 
-def get_orders(scope):
+def get_orders(scope, limit = 0, offset = 0):
     # Verify is the scope valid
     if scope not in ['all', 'on_going']:
         raise ValidationError('Invalid scope.')
+
+    # Verify parameters for pagination
+    limit = str(limit).strip()
+    offset = str(offset).strip()
+
+    if not limit.isdecimal() or not offset.isdecimal():
+        raise ValidationError('Invalid pagination parameters.')
 
     # Establish db connection
     dao = DAO()
@@ -314,6 +321,8 @@ def get_orders(scope):
                     `order`.order_id = user_order.order_id AND
                     user_order.user_id = user.user_id
                 ORDER BY `order`.created_at DESC"""
+        if not int(limit) == 0:
+            sql += ' LIMIT ' + limit + ' OFFSET ' + offset
     cursor.execute(sql)
     orders = cursor.fetchall()
 
@@ -365,3 +374,14 @@ def order_refund(order_id):
     dao.commit()
 
     return order
+
+def count_records_length():
+    # Establish db connection
+    dao = DAO()
+    cursor = dao.cursor()
+
+    # Query database
+    sql = """SELECT count(order_id) as len FROM `order`"""
+    cursor.execute(sql)
+    length = cursor.fetchone()['len']
+    return length

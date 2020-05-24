@@ -80,7 +80,7 @@ def get_redeem_cards(limit = 0, offset = 0):
     offset = str(offset).strip()
 
     if not limit.isdecimal() or not offset.isdecimal():
-        raise ValidationError('Invalid input.')
+        raise ValidationError('IInvalid pagination parameters.')
 
     # Establish db connection
     dao = DAO()
