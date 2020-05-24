@@ -1,0 +1,111 @@
+.card {
+    background-color: rgba(249, 250, 251, 1);
+    filter: drop-shadow(0px 3px 20px rgba(0, 0, 0, 0.10196078431372549));
+    height: 200px;
+}
+
+.select {
+    color: rgb(73, 73, 73);
+    font-size: 17.00px;
+    font-style: normal;
+    font-family: Roboto, Arial;
+    text-align: center;
+    padding: 10px;
+}
+
+.balance {
+    color: rgba(136, 136, 136, 1);
+    font-size: 15.00px;
+    font-weight: 700;
+    text-align: center;
+    font-family: Roboto, Arial;
+}
+
+.redeem {
+    color: rgba(45, 64, 87, 1);
+    background-color: rgba(255, 255, 255, 0);
+    font-size: 14.00px;
+    font-weight: 400;
+    text-align: center;
+    font-style: normal;
+    font-family: Roboto, Arial;
+
+}
+
+.history {
+    color: rgba(45, 64, 87, 1);
+    background-color: rgba(255, 255, 255, 0);
+    font-size: 14.00px;
+    font-weight: 400;
+    text-align: center;
+    font-style: normal;
+    font-family: Roboto, Arial;
+}
+
+.btn:focus,
+.btn:active:focus,
+.btn.active:focus,
+.btn.focus,
+.btn:active.focus,
+.btn.active.focus {
+    outline: none;
+    border-color: transparent;
+    box-shadow: none;
+}
+
+.check{
+    background-color: rgba(255, 255, 255, 0);
+    color:#652d00;
+    text-align: center;
+    -webkit-text-stroke: 1.00px rgba(0, 0, 0, 0);
+    font-size: 20.00px;
+    font-style: normal;
+    font-family: 'SF Pro Text', Arial;
+}
+
+.confirm{
+    font-size: 15px;
+    font-family: 'SF Pro Text', Arial;
+    padding-bottom: 1px;
+    color: #caa15e;
+}
+
+.order{
+    text-align: left;
+    font-style: normal;
+    font-size: 18.00px;
+    font-weight: 700;
+    font-family: Roboto, Arial;
+    padding-left: 30px;
+    color: #351800;
+}
+
+.bill{
+    padding-left:30px;
+    font-size: 18.00px;
+}
+
+.total{
+    padding-left:30px;
+    font-size: 18.00px;
+    color: #351800;
+}
+
+.coupon{
+    padding-left:30px;
+    font-size: 18.00px;
+    color: #351800;
+}
+
+.grand{
+    padding-left:30px;
+    font-size: 18.00px;
+    font-weight: 700;
+}
+
+.grand-total{
+    padding-left:30px;
+    font-size: 18.00px;
+    font-weight: 700;
+    color: #351800;
+}

@@ -2,62 +2,18 @@
 
 {% block title %}paymentMethod{% endblock %}
 
+{% block custom_css %}
+{{ super() }}
+<link rel="stylesheet" href="/static/css/customer/payment_method.css">
+{% endblock %}
+
+{% block frame_back_link %}{{ url_for('customer_view.me') }}{% endblock %}
+{% block frame_title %}Check Out{% endblock %}
+{% block frame_submit_form %}redeem-form{% endblock %}
+{% block frame_next_btn %}Confirm{% endblock %}
+
 {% block content %}
 <style type="text/css">
-	.x646 {
-		background-color: rgba(249, 250, 251, 1);
-		filter: drop-shadow(0px 3px 20px rgba(0, 0, 0, 0.10196078431372549));
-		height: 200px;
-	}
-
-	.select {
-		color: rgb(73, 73, 73);
-		font-size: 17.00px;
-		font-style: normal;
-		font-family: Roboto, Arial;
-		text-align: center;
-		padding: 10px;
-	}
-
-	.x28f4b336 {
-		color: rgba(136, 136, 136, 1);
-		font-size: 15.00px;
-		font-weight: 700;
-		text-align: center;
-		font-family: Roboto, Arial;
-	}
-
-	.redeem {
-		color: rgba(45, 64, 87, 1);
-		background-color: rgba(255, 255, 255, 0);
-		font-size: 14.00px;
-		font-weight: 400;
-		text-align: center;
-		font-style: normal;
-		font-family: Roboto, Arial;
-
-	}
-
-	.history {
-		color: rgba(45, 64, 87, 1);
-		background-color: rgba(255, 255, 255, 0);
-		font-size: 14.00px;
-		font-weight: 400;
-		text-align: center;
-		font-style: normal;
-		font-family: Roboto, Arial;
-	}
-
-	.btn:focus,
-	.btn:active:focus,
-	.btn.active:focus,
-	.btn.focus,
-	.btn:active.focus,
-	.btn.active.focus {
-		outline: none;
-		border-color: transparent;
-		box-shadow: none;
-	}
 </style>
 
 <div class="">
@@ -76,20 +32,14 @@
 			
 		</div>
 		<div class="col-6">
-			<div class="title" style="background-color: rgba(255, 255, 255, 0);
-          color:#652d00;
-          text-align: center;
-          -webkit-text-stroke: 1.00px rgba(0, 0, 0, 0);
-          font-size: 20.00px;
-          font-style: normal;
-          font-family: 'SF Pro Text', Arial;">Check out</div>
+			<div class="title check">Check out</div>
 		</div>
 		<div class="col-3" style="text-align: center;">
 			<form action="{{ url_for('customer_view.place_order') }}" id="test-form" method="POST">
 				<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
 				<button type="submit" form="test-form" class="btn"
 					style="background-color: transparent;border: 1px solid transparent;padding: 1px 6px;">
-					<font style="font-size: 15px;font-family: 'SF Pro Text', Arial;padding-bottom: 1px;color: #caa15e;">Confirm
+					<font class="confirm">Confirm
 				</font>
 			</button>
 			</form>
@@ -101,12 +51,12 @@
 
 
 	<div class="row" style="margin: 10px;">
-		<div class="col-12 x646">
+		<div class="col-12 card">
 			<div class="row" style="height: 20px; padding-top: 5px;"></div>
 			<div class="row" style="height: 45px; padding-top: 5px;">
 				<div class="col-1"></div>
 				<div class="col-10 select">
-					<span class="align-bottom" style="color:  	#351800;">
+					<span class="align-bottom" style="color:#351800;">
 						<b>Select Payment Options</b>
 					</span>
 				</div>
@@ -118,7 +68,7 @@
 
 			<div class="row" style="height: 45px;">
 				<div class="col-3"></div>
-				<div class="col-6 x28f4b336" style="padding-top:5px;">
+				<div class="col-6 balance" style="padding-top:5px;">
 					<button type="button" class="btn btn-outline-sucess">
 						<font color="#955a3f">✓ Balance</font>
 					</button>
@@ -131,7 +81,7 @@
 
 			<div class="row" style="height: 45px;">
 				<div class="col-1"></div>
-				<div class="col-10 x28f4b336" style="padding-top:5px;text-align: center;">
+				<div class="col-10 balance" style="padding-top:5px;text-align: center;">
 					<button type="button" class="btn btn-outline-sucess">
 						<font color="#955a3f">Credit Card</font>
 					</button>
@@ -145,9 +95,8 @@
 	<div class="row" style="height:180px;">
 	</div>
 
-	<div class="row">
-		<div class="col-5"
-			style="text-align: left;font-style: normal;font-size: 18.00px;font-weight: 700;font-family: Roboto, Arial;padding-left: 30px;color: #351800;">
+	<div class="row order">
+		<div class="col-5">
 			Your Orders
 		</div>
 		<div class="col-7"></div>
@@ -157,14 +106,14 @@
 	</div>
 
 	<div class="row">
-		<div class="col-8" style="padding-left:30px;font-size: 18.00px;">
-			<div style="color:  	#652d00;"> <svg class="bi bi-bag-fill" width="1em" height="1em" viewBox="0 0 16 16"
+		<div class="col-8 bill">
+			<div style="color:#652d00;"> <svg class="bi bi-bag-fill" width="1em" height="1em" viewBox="0 0 16 16"
 					fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 					<path
 						d="M1 4h14v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4zm7-2.5A2.5 2.5 0 0 0 5.5 4h-1a3.5 3.5 0 1 1 7 0h-1A2.5 2.5 0 0 0 8 1.5z" />
 				</svg> Bill Total</div>
 		</div>
-		<div class="col-4" style="padding-left:30px;font-size: 18.00px;color: #351800;">
+		<div class="col-4 total">
 			${{ total }}
 		</div>
 	</div>
@@ -175,7 +124,7 @@
 
 	<div class="row">
 		<div class="col-8" style="padding-left:30px;font-size: 18.00px;">
-			<div style="color:  	#652d00;"> <svg class="bi bi-gift-fill" width="1em" height="1em" viewBox="0 0 16 16"
+			<div style="color:#652d00;"> <svg class="bi bi-gift-fill" width="1em" height="1em" viewBox="0 0 16 16"
 					fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 					<path fill-rule="evenodd"
 						d="M10 1a1.5 1.5 0 0 0-1.5 1.5c0 .098.033.16.12.227.103.081.272.15.49.2A3.44 3.44 0 0 0 9.96 3h.015L10 2.999l.025.002h.014A2.569 2.569 0 0 0 10.293 3c.17-.006.387-.026.598-.073.217-.048.386-.118.49-.199.086-.066.119-.13.119-.227A1.5 1.5 0 0 0 10 1zm0 3h-.006a3.535 3.535 0 0 1-.326 0 4.435 4.435 0 0 1-.777-.097c-.283-.063-.614-.175-.885-.385A1.255 1.255 0 0 1 7.5 2.5a2.5 2.5 0 0 1 5 0c0 .454-.217.793-.506 1.017-.27.21-.602.322-.885.385a4.434 4.434 0 0 1-1.104.099H10z"
@@ -186,7 +135,7 @@
 					<path d="M0 4a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V4z" />
 				</svg> Coupon</div>
 		</div>
-		<div class="col-4" style="padding-left:30px;font-size: 18.00px;color: #351800;">
+		<div class="col-4 coupon">
 			-${{ coupon }}
 		</div>
 	</div>
@@ -196,12 +145,12 @@
 	</div>
 
 	<div class="row">
-		<div class="col-8" style="padding-left:30px;font-size: 18.00px;font-weight: 700;">
-			<div style="color:  	#652d00;">
+		<div class="col-8 grand">
+			<div style="color:#652d00;">
 				Grand Total
 			</div>
 		</div>
-		<div class="col-4" style="padding-left:30px;font-size: 18.00px;font-weight: 700;color: #351800;">
+		<div class="col-4 grand-total">
 			${{ grand_total }}
 		</div>
 	</div>
