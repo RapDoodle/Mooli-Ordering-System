@@ -1,11 +1,15 @@
-{% extends "/customer/shared/navbar.html" %} {% block title %}Home{% endblock %} {% block content %}
+{% extends "/customer/shared/navbar.html" %} {% block title %}Home{% endblock %} 
+{% block custom_css %}
+<link rel="stylesheet" href="/static/css/customer/home.css">
+{% endblock %}
+{% block content %}
 <div class="row">
-    <div class="col col-sm-12" style="width: 100%; padding-left: 0; padding-right: 0;">
+    <div class="col col-sm-12 home-pic">
         <img src="/static/customer/HomePagePic.png" class="img img-fluid" alt="Responsive image" style="width: 100%;">
     </div>
 </div>
 <div class="row">
-    <div class="col col-4 col-sm-4 d-flex" style="padding-left: 0px; font-size: 15px;">
+    <div class="col col-4 col-sm-4 d-flex sidebar">
         <div class="bg-light border-right" id="sidebar-wrapper">
             <div class="list-group list-group-flush">
                 {% for category in categories %}
@@ -13,8 +17,7 @@
             </div>
         </div>
     </div>
-    <!-- <div class="container-fluid overflow-auto"> -->
-    <div class="col col-8 col-sm-8 overflow-auto" style="height: 545px; padding-left: 0px;">
+    <div class="col col-8 col-sm-8 overflow-auto maindiv">
         {% for product in products %}
         <div class="card border-0">
             <a href="{{ url_for('customer_view.product', product_id = product['product_id']) }}">
