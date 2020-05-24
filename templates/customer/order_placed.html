@@ -1,4 +1,4 @@
-{% extends "/customer/shared/frame.html" %}
+{% extends "/customer/shared/base.html" %}
 
 {% block title %}orderPlaced{% endblock %}
 
@@ -7,10 +7,18 @@
 <link rel="stylesheet" href="/static/css/customer/order_placed.css">
 {% endblock %}
 
-{% block frame_title %}Completed{% endblock %}
-
 {% block content %}
-
+<div class="row row-cols-3" style="height: 30px;;"></div>
+<div class="row row-cols-3">
+	<div class="col-3" style="padding-left: 30px;">
+	</div>
+	
+	<div class="col-6">
+		<div class="title" id="me">Completed</div>
+	</div>
+	<div class="col-3">
+	</div>
+</div>
 
 <div class="row row-cols-3" style="height:150px;">
 </div>
