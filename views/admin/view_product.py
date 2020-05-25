@@ -67,7 +67,6 @@ def update_product_image():
 def edit_product():
     if request.method == 'POST':
         category = request.form.getlist('categories')
-        print(request.values.get('productName'),request.values.get('productDescription'),request.values.get('productPriority'),request.values.get('productPrice'),request.form.getlist('categories'))
         res = edit_product(
             product_id = request.values.get('productID'),
             product_name = request.values.get('productName'),

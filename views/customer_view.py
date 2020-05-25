@@ -20,6 +20,8 @@ import controllers.controller_user as c_user
 import controllers.controller_cart_item as c_cart_item
 import controllers.controller_order as c_order
 
+from utils.exception import ErrorMessage
+
 customer_view = Blueprint('customer_view', __name__, template_folder='/templates')
 
 @customer_view.route('/', methods=['GET'])
@@ -127,8 +129,39 @@ def account():
                 flash(res['error'])
                 return redirect(url_for('customer_view.account'))
         return redirect(url_for('customer_view.me'))
-    user = c_user.find_user_by_id(session.get('user_id'))
+    user = c_user.find_user_by_id(session.get('user_id'), decode_avatar=True)
     return render_template('customer/account.html', user = user)
+
+@customer_view.route('/me/change_password', methods=['GET', 'POST'])
+@c_auth.login_required
+def change_password():
+    if request.method == 'POST':
+        res = c_user.change_password (
+            user_id = session.get('user_id'),
+            old_password = request.values.get('old_password'),
+            new_password = request.values.get('new_password'),
+            verify_new_password = request.values.get('new_password_confirm')
+        )
+        if isinstance(res, ErrorMessage):
+            flash(res.get())
+        else:
+            return redirect(url_for('customer_view.account'))
+    user = c_user.find_user_by_id(session.get('user_id'))
+    return render_template('customer/change_password.html', user = user)
+
+@customer_view.route('/me/change_avatar', methods=['GET', 'POST'])
+@c_auth.login_required
+def change_avatar():
+    if request.method == 'POST':
+        avatar = request.files['avatar'].read()
+        res = c_user.update_user_avatar(
+            user_id = session.get('user_id'),
+            avatar = avatar
+        )
+        if isinstance(res, ErrorMessage):
+            flash(res.get())
+    user = c_user.find_user_by_id(session.get('user_id'), decode_avatar = True)
+    return render_template('customer/change_avatar.html', user = user)
 
 @customer_view.route('/me/logout', methods=['GET', 'POST'])
 @c_auth.login_required

@@ -1,0 +1,73 @@
+{% extends "/customer/shared/frame.html" %}
+
+{% block title %}Change avatar{% endblock %}
+
+{% block custom_css %}
+{{ super() }}
+<link rel="stylesheet" href="/static/css/customer/changePic.css">
+{% endblock %}
+
+{% block frame_back_link %}{{ url_for('customer_view.account') }}{% endblock %}
+{% block frame_title %}Account{% endblock %}
+{% block frame_submit_form %}upload-form{% endblock %}
+{% block frame_next_btn %}Confirm{% endblock %}
+
+{% block content %}
+<div class="">
+	<div class="row row-cols-3" style="height: 50px;">
+	</div>
+
+	<div class="row">
+		<div class="col-1"></div>
+		<div class="col-10 old">
+			Change you avatar
+		</div>
+		<div class="col-1"></div>
+	</div>
+
+	<div class="row row-col-12" style="height: 30px;"></div>
+
+	<div class="row row-col-3" style="height: 80px;">
+		<div class="col-3"></div>
+		<div class="col-6" style="text-align: center;">
+			{% if user['avatar'] == 'None' %}
+				<img class="mb-4" src="/static/customer/default_avatar.png" alt="" width="130px" height="130px"
+				style="border-radius:100%">
+			{% else %}
+				<img class="mb-4" src="data:image/png;base64,{{ user['avatar'] }}" alt="" width="130px" height="130px"
+				style="border-radius:100%">
+			{% endif %}
+		</div>
+		<div class="col-3"></div>
+	</div>
+
+	<div class="row row-col-12" style="height: 80px;"></div>
+
+	<form action="{{ url_for('customer_view.change_avatar') }}" method="POST" id="upload-form"
+		enctype="multipart/form-data">
+		<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+		<div class="row">
+			<div class="col-1"></div>
+			<div class="col-10">
+				<div class="custom-file">
+					<input type="file" class="custom-file-input" id="customFile" name="avatar">
+					<label class="custom-file-label" for="customFile">Choose file</label>
+				</div>
+			</div>
+			<div class="col-1"></div>
+		</div>
+	</form>
+</div>
+
+{{ super() }}
+{% endblock %}
+
+{% block custom_js %}
+<script>
+	// Add the following code if you want the name of the file appear on select
+	$(".custom-file-input").on("change", function () {
+		var fileName = $(this).val().split("\\").pop()
+		$(this).siblings(".custom-file-label").addClass("selected").html(fileName)
+	})
+</script>
+{% endblock %}

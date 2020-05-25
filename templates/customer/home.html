@@ -1,15 +1,11 @@
-{% extends "/customer/shared/navbar.html" %} {% block title %}Home{% endblock %} 
-{% block custom_css %}
-<link rel="stylesheet" href="/static/css/customer/home.css">
-{% endblock %}
-{% block content %}
+{% extends "/customer/shared/navbar.html" %} {% block title %}Home{% endblock %} {% block content %}
 <div class="row">
-    <div class="col col-sm-12 home-pic">
-        <img src="/static/customer/HomePagePic.png" class="img img-fluid" alt="Responsive image" style="width: 100%;">
+    <div class="col col-sm-12" style="width: 100%; padding-left: 0; padding-right: 0;">
+        <img src="/static/customer/HomePagePic.png" class="img img-fluid" alt="banner" style="width: 100%;">
     </div>
 </div>
 <div class="row">
-    <div class="col col-4 col-sm-4 d-flex sidebar">
+    <div class="col col-4 col-sm-4 d-flex" style="padding-left: 0px; font-size: 15px;">
         <div class="bg-light border-right" id="sidebar-wrapper">
             <div class="list-group list-group-flush">
                 {% for category in categories %}
@@ -17,14 +13,15 @@
             </div>
         </div>
     </div>
-    <div class="col col-8 col-sm-8 overflow-auto maindiv">
+    <!-- <div class="container-fluid overflow-auto"> -->
+    <div class="col col-8 col-sm-8 overflow-auto" style="height: 545px; padding-left: 0px;">
         {% for product in products %}
         <div class="card border-0">
             <a href="{{ url_for('customer_view.product', product_id = product['product_id']) }}">
                 <div class="card-body">
                     <div class="row">
                         <div class="col col-4 col-sm-4" style="padding: 0px;">
-                            <img src="./static/media/thumbnails/{{ product['product_id'] }}" class="img img-fluid" alt="Responsive image">
+                            <img src="./static/media/thumbnails/{{ product['product_id'] }}" class="img img-fluid" alt="thumbnails">
                         </div>
                         <div class="col col-8 col-sm-8">
                             <h6>{{ product['product_name']}}</h6>

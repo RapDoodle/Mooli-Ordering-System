@@ -172,7 +172,7 @@ def init_db_tables(connection):
             gender BINARY(1),
             phone VARCHAR(32),
             balance DECIMAL(8,2) DEFAULT 0.0,
-            avatar BLOB,
+            avatar MEDIUMBLOB,
             PRIMARY KEY (user_id),
             UNIQUE (username)
             )
