@@ -268,3 +268,27 @@ def user_refund(user_id, amount, cursor):
     sql = """UPDATE user SET balance = %(new_balance)s WHERE
                 user_id = %(user_id)s"""
     cursor.execute(sql, {'new_balance': new_balance, 'user_id': user_id})
+
+def update_user_avatar(user_id, avatar):
+    # Clean user input
+    user_id = str(user_id).strip()
+
+    # Establish db connection
+    dao = DAO()
+    cursor = dao.cursor()
+
+    # Check the existence of the user
+    sql = """SELECT * FROM user WHERE user_id = %(user_id)s"""
+    cursor.execute(sql, {'user_id': user_id})
+    result = cursor.fetchone()
+
+    if result is None:
+        raise ValidationError('User not found.')
+
+    # Update information in the database
+    sql = """UPDATE user SET
+             avatar = %(avatar)s
+             WHERE user_id = %(user_id)s"""
+    cursor.execute(sql, {'avatar': avatar,
+                        'user_id': user_id})
+    dao.commit()

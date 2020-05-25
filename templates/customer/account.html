@@ -9,7 +9,7 @@
 
 {% block frame_back_link %}{{ url_for('customer_view.me') }}{% endblock %}
 {% block frame_title %}Account{% endblock %}
-{% block frame_submit_form %}redeem-form{% endblock %}
+{% block frame_submit_form %}edit-form{% endblock %}
 {% block frame_next_btn %}Confirm{% endblock %}
 
 {% block content %}
@@ -24,7 +24,13 @@
 	<div class="row row-cols-3" style="height: 80px;">
 		<div class="col-3"></div>
 		<div class="col-6" style="text-align: center;">
-			<img class="mb-4" src="/static/customer/test.jpg" alt="" width="130px" height="130px" style="border-radius:100%">
+			{% if user['avatar'] == 'None' %}
+				<img class="mb-4" src="/static/customer/default_avatar.png" alt="" width="130px" height="130px"
+				style="border-radius:100%">
+			{% else %}
+				<img class="mb-4" src="data:image/png;base64,{{ user['avatar'] }}" alt="" width="130px" height="130px"
+				style="border-radius:100%">
+			{% endif %}
 		</div>
 		<div class="col-3"></div>
 	</div>
@@ -35,9 +41,7 @@
 	<div class="row row-cols-3" style="height:30px;">
 		<div class="col-3"></div>
 		<div class="col-6" style="text-align: center;">
-			<button type="button" class="btn1 change">
-				Change Avatar 
-			</button>
+			<a href="{{ url_for('customer_view.change_avatar') }}" class="btn1 change">Change Avatar</a>
 		</div>
 		<div class="col-3"></div>
 	</div>
@@ -45,9 +49,7 @@
 	<div class="row row-cols-3" style="height:50px;">
 		<div class="col-3"></div>
 		<div class="col-6" style="text-align: center;">
-			<button type="button" class="btn1 change">
-				Update Password 
-			</button>
+			<a href="{{ url_for('customer_view.change_password') }}" class="btn1 change">Change Password</a>
 		</div>
 		<div class="col-3"></div>
 	</div>
@@ -59,7 +61,7 @@
 			</div>
 			<div class="col-8">
 				<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-				<input name="first_name" type="text" class="form-control" placeholder="First Name" aria-label="FirstName"
+				<input name="first_name" type="text" class="form-control" placeholder="First name" aria-label="FirstName"
 					aria-describedby="addon-wrapping" style="font-family: Avenir, Arial;width:70%;" value="{{ user['first_name'] }}">
 			</div>
 		</div>
@@ -68,7 +70,7 @@
 			<div class="col-4">
 			</div>
 			<div class="col-8">
-				<input name="last_name" type="text" class="form-control" placeholder="Last Name" aria-label="LastName"
+				<input name="last_name" type="text" class="form-control" placeholder="Last name" aria-label="Last name"
 					aria-describedby="addon-wrapping" style="font-family: Avenir, Arial;width:70%;" value="{{ user['last_name'] }}">
 			</div>
 		</div>
@@ -83,11 +85,11 @@
 		</div>
 
 		<div class="row row-cols-3" style="height: 50px;">
-			<div class="col-4" style="text-align: right;padding-left: 25px;padding-top:5px;font-family: 'Open Sans', Arial;color:#652d00;" value="{{ user['phone'] }}">
+			<div class="col-4" style="text-align: right;padding-left: 25px;padding-top:5px;font-family: 'Open Sans', Arial;color:#652d00;">
 				Phone
 			</div>
 			<div class="col-8">
-				<input name="phone" type="text" class="form-control" placeholder="PhoneNumber" aria-label="PhoneNumber"
+				<input name="phone" type="text" class="form-control" placeholder="Phone number" aria-label="Phone number" value="{{ user['phone'] }}"
 					aria-describedby="addon-wrapping" style="font-family: Avenir, Arial;width:75%;">
 			</div>
 		</div>
@@ -97,9 +99,15 @@
 				Gender
 			</div>
 			<div class="col-8" style="font-family: 'Open Sans', Arial;">
-				<select class="form-control" id="new-gender" name="gender" style="width:75%;" value="{{ user['gender'] }}">
-					<option value='M'>Male</option>
+				<select class="form-control" id="new-gender" name="gender" style="width:75%;">
+					{% if user['gender'] == 'F' %}
+						<option value='M'>Male</option>
+						<option value='F' selected>Female</option>
+					{% else %}
+					<option value='M' selected>Male</option>
 					<option value='F'>Female</option>
+					{% endif %}
+					
 				</select>
 			</div>
 		</div>
