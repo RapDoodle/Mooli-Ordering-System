@@ -1,0 +1,57 @@
+.svg-style{
+    fill: 	#652d00;
+	stroke: rgba(0, 0, 0, 0);
+	stroke-width: 1.00px;
+	stroke-linecap: butt;
+	/* box-shadow: none; */
+	width: 12.74px;
+	height: 20px;
+}
+
+.right-1{
+    text-align: right;
+    right: 5px;
+}
+
+.detailed-info{
+    width: auto; 
+    height: 100px; 
+    margin-left: 20px; 
+    margin-right: 20px;
+    color: #351800;
+}
+
+.comment-info{
+    width: auto; 
+    height: 50px;
+    color:  	#652d00;
+}
+
+.pic-demo{
+    width: 100px; 
+    height: 100px; 
+    margin-left: 20px;
+}
+
+.order-name{
+    color: #351800;
+    padding-left: 5px;
+}
+
+.order-price{
+    color:	#652d00;
+    padding-left: 5px;
+}
+
+.order-button{
+    margin-bottom: 20px; 
+    border-radius: 20px;
+    background-color: #dfb36a;
+    color:  	#652d00;
+}
+
+.button-plus-minus{
+    border-radius: 50px;
+    background-color: #652d00;
+    color:  	#dfb36a;
+}

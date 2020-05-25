@@ -3,102 +3,12 @@
 {% block title %}Me{% endblock %}
 
 {% block custom_css %}
-	{{ super() }}
+{{ super() }}
+<link rel="stylesheet" href="/static/css/customer/me.css">
 {% endblock %}
 
 {% block content %}
 <style type="text/css">
-
-	.me .title {
-		box-sizing: content-box;
-		opacity: 1;
-		cursor: default;
-		background-color: rgba(255, 255, 255, 0);
-		text-align: center;
-		line-height: 22.00px;
-		letter-spacing: -0.48px;
-		color: rgba(45, 64, 87, 1);
-		-webkit-text-stroke: 1.00px rgba(0, 0, 0, 0);
-		font-size: 20.00px;
-		font-weight: 400;
-		font-style: normal;
-		font-family: 'SF Pro Text', Arial;
-		text-decoration: none;
-		box-shadow: none;
-		overflow-x: unset;
-		overflow-y: unset;
-		white-space: pre;
-
-	}
-
-	.x646 {
-		background-color: rgba(249, 250, 251, 1);
-		filter: drop-shadow(0px 3px 20px rgba(0, 0, 0, 0.10196078431372549));
-		height: 160px;
-	}
-
-	.balance {
-		color: rgba(136, 136, 136, 1);
-		font-size: 18.00px;
-		font-style: normal;
-		font-family: Roboto, Arial;
-		text-align: center;
-		top: 10px;
-		padding: 10px;
-	}
-
-	.x28f4b336 {
-		color: rgba(136, 136, 136, 1);
-		font-size: 24.00px;
-		font-weight: 700;
-		font-style: normal;
-		text-align: center;
-		font-family: Roboto, Arial;
-	}
-
-	.redeem {
-		color: rgba(45, 64, 87, 1);
-		background-color: rgba(255, 255, 255, 0);
-		font-size: 14.00px;
-		font-weight: 400;
-		text-align: center;
-		font-style: normal;
-		font-family: Roboto, Arial;
-
-	}
-
-	.history {
-		color: rgba(45, 64, 87, 1);
-		background-color: rgba(255, 255, 255, 0);
-		font-size: 14.00px;
-		font-weight: 400;
-		text-align: center;
-		font-style: normal;
-		font-family: Roboto, Arial;
-	}
-
-	.accountInfo {
-		background-color: rgba(255, 255, 255, 0);
-		color: rgba(27, 32, 43, 1);
-		-webkit-text-stroke: 1.00px rgba(0, 0, 0, 0);
-		font-size: 16.00px;
-		font-weight: 500;
-		font-style: normal;
-		font-family: Avenir, Arial;
-		padding: 10px;
-	}
-
-	.logout {
-		background-color: rgba(255, 255, 255, 0);
-		text-align: left;
-		color: rgb(156, 156, 156);
-		-webkit-text-stroke: 1.00px rgba(0, 0, 0, 0);
-		font-size: 16.00px;
-		font-weight: 500;
-		font-style: normal;
-		font-family: Avenir, Arial;
-		padding: 10px;
-	}
 </style>
 
 
@@ -110,13 +20,7 @@
 
 		</div>
 		<div class="col-6">
-			<div class="title" style="background-color: rgba(255, 255, 255, 0);
-            color:#652d00;
-            text-align: center;
-            -webkit-text-stroke: 1.00px rgba(0, 0, 0, 0);
-            font-size: 20.00px;
-            font-style: normal;
-            font-family: 'SF Pro Text', Arial;">Me</div>
+			<div class="title" id="me">Me</div>
 		</div>
 		<div class="col-3">
 		</div>
@@ -142,7 +46,7 @@
 
 			<div class="row" style="height: 45px;">
 				<div class="col-3"></div>
-				<div class="col-6 x28f4b336" style="padding-top:5px;color:  	#955a3f;">
+				<div class="col-6 x28f4b336" style="padding-top:5px;color:#955a3f;">
 					<span class="align-bottom">
 						${{ balance }}
 					</span>
@@ -157,7 +61,7 @@
 				<div class="col redeem" style="padding-bottom: 10px;">
 					<span class="align-bottom">
 						<a type="button" href="{{ url_for('customer_view.redeem') }}" class="btn btn-light">
-							<font style="color:  	#dfb36a">Redeem</font>
+							<font style="color:#dfb36a">Redeem</font>
 						</a>
 					</span>
 				</div>
@@ -165,7 +69,7 @@
 				<div class="col history">
 					<span class="align-bottom">
 						<a type="button" class="btn btn-light">
-							<font style="color:  	#dfb36a">History</font>
+							<font style="color:#dfb36a">History</font>
 						</a>
 					</span>
 				</div>
@@ -175,7 +79,7 @@
 
 	<div class="row" style="height:50px;">
 		<div class="col-1"></div>
-		<div class="col-5 accountInfo" style="text-align: left;color:  	#652d00;">
+		<div class="col-5 accountInfo" style="text-align: left;color:#652d00;">
 			<a href="{{ url_for('customer_view.account') }}">Account info</a>
 		</div>
 		<div class="col-5 accountInfo" style="text-align: right;">
@@ -191,7 +95,7 @@
 
 	<div class="row" style="height:50px;">
 		<div class="col-1"></div>
-		<div class="col-5 accountInfo" style="text-align: left;color:  	#652d00;">
+		<div class="col-5 accountInfo" style="text-align:left;color:#652d00;">
 			Orders
 		</div>
 		<div class="col-5 accountInfo" style="text-align: right;">
@@ -230,8 +134,7 @@
 		</div>
 		<div class="col-5 accountInfo" style="text-align: right;">
 			<span class="align-bottom">
-				<svg viewBox="-0.75 -0.75 12.2412109375 20.2650146484375"
-					style="height: 25px; fill: rgb(156, 156, 156);padding-top: 8px;">
+				<svg viewBox="-0.75 -0.75 12.2412109375 20.2650146484375" id="log-out">
 					<path
 						d="M 0.2919999957084656 1.712499976158142 L 4.171999931335449 5.59250020980835 L 0.2919999957084656 9.472499847412109 C 0.1049999967217445 9.659500122070313 0 9.912500381469727 0 10.17749977111816 C 0 10.44250011444092 0.1049999967217445 10.69550037384033 0.2919999957084656 10.88249969482422 C 0.6819999814033508 11.27250003814697 1.312000036239624 11.27250003814697 1.702000021934509 10.88249969482422 L 6.291999816894531 6.292500019073486 C 6.682000160217285 5.902500152587891 6.682000160217285 5.272500038146973 6.291999816894531 4.882500171661377 L 1.702000021934509 0.2924999892711639 C 1.312000036239624 -0.09749999642372131 0.6819999814033508 -0.09749999642372131 0.2919999957084656 0.2924999892711639 C -0.08799999952316284 0.6825000047683716 -0.09799999743700027 1.322499990463257 0.2919999957084656 1.712499976158142 Z" />
 					</svg>

@@ -3,65 +3,18 @@
 {% block title %}Please Login{% endblock %}
 
 {% block custom_css %}
-<style>
-	a:hover {
-		text-decoration: none;
-	}
-
-	.btn:focus,
-	.btn:active:focus,
-	.btn.active:focus,
-	.btn.focus,
-	.btn:active.focus,
-	.btn.active.focus {
-		outline: none;
-		border-color: transparent;
-		box-shadow: none;
-	}
-
-	.form-control:focus {
-		border-color: #ced4da;
-		box-shadow: none;
-		background-color: #cddc0000;
-
-	}
-
-	.form-control {
-		display: inline-block;
-	}
-
-	.title {
-		line-height: 22.00px;
-		letter-spacing: -0.34px;
-		color: rgba(45, 64, 87, 1);
-		font-size: 14.00px;
-		font-weight: 300;
-		font-style: normal;
-		font-family: 'SF Pro Text', Arial;
-		white-space: pre;
-	}
-
-	.title3a06c88c {
-		letter-spacing: -0.48px;
-		color: rgba(45, 64, 87, 1);
-		font-size: 20.00px;
-		font-weight: 400;
-		font-style: normal;
-		font-family: 'SF Pro Text', Arial;
-		white-space: pre;
-	}
-</style>
+{{ super() }}
+<link rel="stylesheet" href="/static/css/customer/sign_in.css">
 {% endblock %}
 
 {% block content %}
 <div class="row" style="height: 30px;"></div>
 <div class="row">
 	<div class="col-4" style="left: 1%;top: 3px;">
-		<div class="title" style="color: #caa15e; padding-left: 15px;"><a
-				href="{{ url_for('customer_view.login_redirect') }}">Cancel</a></div>
+		<div class="Cancel"><a class="a1" href="{{ url_for('customer_view.login_redirect') }}">Cancel</a></div>
 	</div>
 	<div class="col-4" style="text-align: center;top: -3px;">
-		<div class="title3a06c88c" style="color: #652d00;">Sign In</div>
+		<div class="title">Sign In</div>
 	</div>
 	<div class="col-4"></div>
 </div>
@@ -77,19 +30,17 @@
 	<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
 	<div class="row">
 		<div class="col-12" style="text-align: center;">
-			<div style="position:relative; text-align: center;">
-				<input type="text" name="username" class="form-control" placeholder="Username" aria-label="Username"
-					aria-describedby="basic-addon1" style="height:52px;border: 1px solid  	#dfb36a;;background-color: #f8f9fa00;color: #dfb36a;width: 280px;align-self: center;border-radius: 50px;font-style: normal;
-                font-family: 'SF Pro Text', Arial;">
+			<div style="text-align: center;">
+				<input type="text" name="username" class="form-control username" placeholder="Username"
+					aria-label="Username" aria-describedby="basic-addon1">
 			</div>
 		</div>
 	</div>
 
 	<div class="col-12" style="text-align: center;">
-		<div style="position:relative; text-align: center; top: 20px;">
-			<input type="password" name="password" class="form-control" placeholder="Password" aria-label="Password"
-				aria-describedby="basic-addon1" style="height:52px;border: 1px solid  	#dfb36a;background-color: #f8f9fa00;color: #dfb36a;width: 280px;align-self: center;border-radius: 50px;font-style: normal;
-            font-family: 'SF Pro Text', Arial;">
+		<div class="password-input-container">
+			<input type="password" name="password" class="form-control password" placeholder="Password"
+				aria-label="Password" aria-describedby="basic-addon1">
 		</div>
 	</div>
 
@@ -98,14 +49,7 @@
 	<div class="row" style="text-align: center;">
 
 		<div class="col-12" style="text-align: center;">
-			<input type="submit" class="btn" name="submit" value="SIGN IN" style="background-color: #dfb36a;width: 280px;height: 52px; border-radius: 50px;line-height: 35.00px;
-                letter-spacing: 1.40px;
-                color: #955a3f; 
-                font-size: 14.00px;
-                font-weight: 1000;
-                font-style: normal;
-                font-family: 'SF Pro Text', Arial;
-                white-space: pre;">
+			<input type="submit" class="btn signin-botton" name="submit" value="SIGN IN">
 
 		</div>
 	</div>

@@ -38,6 +38,18 @@
     font-size: 12px;
 }
 
+<<<<<<< HEAD
 .main-body {
+=======
+a:hover,
+a:visited,
+a:link,
+a:active {
+    color: inherit;
+    text-decoration: none;
+}
+
+.main-body-part {
+>>>>>>> 0db6fa2cdf100ba37c652fadf7cd7b40fdd239a1
     margin-bottom: 54px;
 }

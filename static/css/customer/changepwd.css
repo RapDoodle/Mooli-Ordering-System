@@ -1,0 +1,26 @@
+.change{
+    background-color: rgba(255, 255, 255, 0);
+    color:#652d00;
+    -webkit-text-stroke: 1.00px rgba(0, 0, 0, 0);
+    font-size: 20px;
+    font-style: normal;
+    font-family: 'SF Pro Text', Arial;
+    height: 50px;
+
+}
+
+.old{
+    background-color: rgba(255, 255, 255, 0);
+    color:#652d00;
+    -webkit-text-stroke: 1.00px rgba(0, 0, 0, 0);
+    font-size: 20px;
+    font-style: normal;
+    font-family: 'SF Pro Text', Arial;
+    padding-right: 40px;
+    height: 40px;
+}
+
+.old-input{
+    font-family: Avenir, Arial;
+    width: 250px;
+}

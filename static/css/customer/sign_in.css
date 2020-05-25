@@ -1,0 +1,92 @@
+a:hover {
+    text-decoration: none;
+}
+
+.btn:focus, .btn:active:focus, .btn.active:focus, .btn.focus, .btn:active.focus, .btn.active.focus {
+    outline: none;
+    border-color: transparent;
+    box-shadow: none;
+}
+
+.form-control:focus {
+    border-color: #ced4da;
+    box-shadow: none;
+    background-color: #cddc0000;
+}
+
+.form-control {
+    display: inline-block;
+}
+
+.Cancel {
+    line-height: 22.00px;
+    letter-spacing: -0.34px;
+    color: rgba(45, 64, 87, 1);
+    font-size: 14.00px;
+    font-weight: 300;
+    font-style: normal;
+    font-family: 'SF Pro Text', Arial;
+    white-space: pre;
+    padding-left: 15px;
+}
+
+.title {
+    letter-spacing: -0.48px;
+    /*color: rgba(45, 64, 87, 1);*/
+    font-size: 20.00px;
+    font-weight: 400;
+    font-style: normal;
+    font-family: 'SF Pro Text', Arial;
+    white-space: pre;
+    color: #652d00;
+}
+
+.a1 {
+    color: #caa15e;
+}
+
+.username {
+    height: 52px;
+    border: 1px solid #dfb36a;
+    ;
+    background-color: #f8f9fa00;
+    color: #dfb36a;
+    width: 280px;
+    align-self: center;
+    border-radius: 50px;
+    font-style: normal;
+    font-family: 'SF Pro Text', Arial;
+}
+
+.password-input-container {
+    position: relative;
+    text-align: center;
+    top: 20px;
+}
+
+.password {
+    height: 52px;
+    border: 1px solid #dfb36a;
+    background-color: #f8f9fa00;
+    color: #dfb36a;
+    width: 280px;
+    align-self: center;
+    border-radius: 50px;
+    font-style: normal;
+    font-family: 'SF Pro Text', Arial;
+}
+
+.signin-botton {
+    background-color: #dfb36a;
+    width: 280px;
+    height: 52px;
+    border-radius: 50px;
+    line-height: 35.00px;
+    letter-spacing: 1.40px;
+    color: #955a3f;
+    font-size: 14.00px;
+    font-weight: 1000;
+    font-style: normal;
+    font-family: 'SF Pro Text', Arial;
+    white-space: pre;
+}

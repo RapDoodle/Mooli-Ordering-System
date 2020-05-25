@@ -18,63 +18,19 @@
     background-color: #cddc0000;
 }
 
-.btn:focus,
-.btn:active:focus,
-.btn.active:focus,
-.btn.focus,
-.btn:active.focus,
-.btn.active.focus {
+.btn:focus, .btn:active:focus, .btn.active:focus, .btn.focus, .btn:active.focus, .btn.active.focus {
     outline: none;
     border-color: transparent;
     box-shadow: none;
 }
 
-.path1c13c5da {
-    fill: rgba(0, 0, 0, 0.5411764705882353);
-    stroke: rgba(0, 0, 0, 0);
-    stroke-width: 1.00px;
-    stroke-linecap: butt;
-    /* box-shadow: none; */
-    width: 12.74px;
-    height: 20.77px;
-}
-
-.backArrow {
-    display: block;
-    position: absolute;
-    box-sizing: content-box;
-    -ms-transform: rotate(0.00deg);
-    -webkit-transform: rotate(0.00deg);
-    transform: rotate(0.00deg);
-    -ms-transform-origin: center;
-    -webkit-transform-origin: center;
-    transform-origin: center;
-    opacity: 1;
-    cursor: default;
-    margin-top: 0.00px;
-    margin-right: 0.00px;
-    margin-bottom: 0.00px;
-    margin-left: 0.00px;
-    padding-top: 0.00px;
-    padding-right: 0.00px;
-    padding-bottom: 0.00px;
-    padding-left: 0.00px;
-    overflow-x: unset;
-    overflow-y: unset;
-    background-color: transparent;
-    width: 22.00px;
-    height: 15.47px;
-    left: 16.00px;
-    top: 57.00px;
-}
-
-.cardTextBox {
+.card-text-box {
     display: block;
     transform: rotate(0.00deg);
     background-color: transparent;
 }
 
-.bubbleMilkTea {
+.bubble-milk-tea {
     color: rgba(45, 64, 87, 1);
     -webkit-text-stroke: 1.00px rgba(0, 0, 0, 0);
     font-size: 14.00px;
@@ -82,9 +38,10 @@
     font-style: normal;
     font-family: 'SF Pro Text', Arial;
     white-space: pre;
+    text-align: left;
 }
 
-.xd5bb8192 {
+.price {
     transform: rotate(0.00deg);
     transform-origin: center;
     opacity: 0.6000000238418579;
@@ -97,7 +54,7 @@
     font-family: 'SF Pro Text', Arial;
 }
 
-.x414e9323 {
+.single-total-price {
     color: #dfb36a;
     font-size: 13.00px;
     font-weight: 1000;
@@ -106,7 +63,7 @@
     white-space: pre;
 }
 
-.x2 {
+.drink-amount {
     position: absolute;
     box-sizing: content-box;
     -ms-transform: rotate(0.00deg);
@@ -144,9 +101,10 @@
     left: 28.82px;
     top: 0.00px;
     text-align: center;
+    background-color: rgba(249, 250, 251, 1);
 }
 
-.group2548 {
+.plus-container {
     display: block;
     position: absolute;
     box-sizing: content-box;
@@ -175,7 +133,7 @@
     top: 1.00px;
 }
 
-.rectangle689 {
+.plus-border {
     opacity: 0.699999988079071;
     border-bottom-color: rgba(45, 64, 87, 1);
     border-bottom-style: solid;
@@ -197,7 +155,7 @@
     height: 20.83px;
 }
 
-.path1157 {
+.plus {
     position: absolute;
     box-sizing: content-box;
     -ms-transform: rotate(0.00deg);
@@ -224,7 +182,7 @@
     top: 5.92px;
 }
 
-.group2547 {
+.minus-container {
     display: block;
     position: absolute;
     box-sizing: content-box;
@@ -253,7 +211,7 @@
     top: 1.00px;
 }
 
-.rectangle688 {
+.minus-border {
     opacity: 0.699999988079071;
     border-bottom-color: rgba(45, 64, 87, 1);
     border-bottom-style: solid;
@@ -275,7 +233,7 @@
     height: 20.83px;
 }
 
-.path1626 {
+.minus {
     position: absolute;
     box-sizing: content-box;
     -ms-transform: rotate(0.00deg);
@@ -302,7 +260,7 @@
     top: 9.93px;
 }
 
-.path1620 {
+.close {
     transform: rotate(45.00deg);
     transform-origin: center;
     fill: rgba(45, 64, 87, 1);
@@ -317,15 +275,82 @@
     box-shadow: none;
 }
 
-.mainBodyPart {
+.main-body-part {
     margin-bottom: 348px;
 }
 
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
+input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
     -webkit-appearance: none;
 }
 
 input[type="number"] {
     -moz-appearance: textfield;
+}
+
+.single-item-card {
+    border-radius: 20px;
+    background-color: rgba(249, 250, 251, 1);
+    filter: drop-shadow(0px 10px 15px rgba(27, 28, 32, 0.10196078431372549));
+    left: 7.5%;
+    border: 0px;
+    width: 85%;
+    margin-bottom: 15px;
+}
+
+.milktea-picture {
+    width: 100px;
+    height: 75px;
+    filter: drop-shadow(0px 10px 15px rgba(27, 28, 32, 0.050980392156862744));
+    background-size: cover;
+    border-radius: 20px;
+}
+
+.bottom-card {
+    background-color: rgba(249, 250, 251, 1);
+    filter: drop-shadow(10px 0px 15px rgba(0, 0, 0, 0.10196078431372549));
+    height: 333.00px;
+    border: none;
+    border-radius: 20px;
+}
+
+.your-order {
+    text-align: left;
+    font-style: normal;
+    font-size: 18.00px;
+    font-weight: 700;
+    font-family: Roboto, Arial;
+    padding-left: 30px;
+    color: #351800;
+}
+
+.pay-button-container {
+    text-align: center;
+    line-height: 41.96px;
+    font-size: 14.00px;
+    font-weight: 400;
+    font-style: normal;
+    font-family: 'SF Pro Text', Arial;
+}
+
+.pay-button {
+    background-color: #dfb36a;
+    width: 280px;
+    height: 52px;
+    border-radius: 50px;
+    line-height: 35.00px;
+    letter-spacing: 1.40px;
+    color: #955a3f;
+    font-size: 15.00px;
+    font-weight: 1000;
+    font-style: normal;
+    font-family: 'SF Pro Text', Arial;
+    white-space: pre;
+    width: 250px;
+    border-width: 0px;
+    border-bottom: none;
+    border-top-style: none;
+    border-top-width: 1.00px;
+    border-radius: 50.00px;
+    filter: drop-shadow(0px 3px 20px rgba(0, 0, 0, 0.08235294117647059));
+    height: 50px;
 }
