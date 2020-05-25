@@ -93,26 +93,6 @@ a:hover {
     font-family: 'SF Pro Text', Arial;
 }
 
-.not-registered {
-    color: rgba(45, 64, 87, 1);
-    font-weight: 300;
-    font-style: normal;
-    font-size: 14.00px;
-    font-family: 'SF Pro Text', Arial;
-    letter-spacing: 0;
-    text-decoration: none;
-}
-
-.a-signup {
-    color: #c29571;
-    font-weight: 300;
-    font-style: normal;
-    font-size: 14.00px;
-    font-family: 'SF Pro Text', Arial;
-    letter-spacing: 0;
-    text-decoration: none;
-}
-
 .signup-botton {
     background-color: #dfb36a;
     width: 280px;
