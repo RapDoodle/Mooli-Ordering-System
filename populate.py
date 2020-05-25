@@ -113,10 +113,10 @@ faker = Faker()
 # cursor = dao.cursor()
 # cursor.execute('UPDATE user SET balance = 50000')
 
-print('Placing orders...')
-from controllers.controller_order import place_order
-for i in range(10000, 55000):
-    place_order(user_id=i)
+# print('Placing orders...')
+# from controllers.controller_order import place_order
+# for i in range(10000, 55000):
+#     place_order(user_id=i)
 
 # from models.model_archive import get_archive_index
 # print('Populating archive...')
