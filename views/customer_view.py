@@ -258,6 +258,16 @@ def place_order():
             flash(res['error'])
     return redirect(url_for('customer_view.payment'))
 
+@customer_view.route('/comments/<int:product_id>', methods=['GET'])
+@c_auth.login_required
+def comment(product_id):
+    return render_template('customer/comment.html')
+
+@customer_view.route('/comments/<int:product_id>/add', methods=['GET'])
+@c_auth.login_required
+def add_comment(product_id):
+    return render_template('customer/add_comment.html')
+
 
 @customer_view.route('/test/<string:template>', methods=['GET'])
 def test(template):
