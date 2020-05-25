@@ -8,6 +8,18 @@ class ValidationError(Exception):
     def __init__(self, message):
         super().__init__(message)
 
+class ErrorMessage:
+    """The class is used to identify the status in the views"""
+
+    def __init__(self, message):
+        self.message = message
+
+    def get(self):
+        return self.message
+
+    def __str__(self):
+        return self.message
+
 def excpetion_handler(fn):
     """The decorator handles exceptions within the framework.
 
@@ -22,9 +34,9 @@ def excpetion_handler(fn):
         try:
             return fn(*args, **kwargs)
         except ValidationError as e:
-            return {'error': str(e)}
+            return ErrorMessage(str(e))
         except Exception as e:
             log_error(str(e))
             traceback.print_exc(file=sys.stdout)
-            return {'error': 'Internal error.'}
+            return ErrorMessage('Internal error.')
     return handler

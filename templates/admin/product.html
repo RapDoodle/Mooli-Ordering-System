@@ -5,7 +5,7 @@
 {% block content %}
 <div class="row">
   <div class="col" id="location">
-    <span><a href="{{ url_for('admin_view.dashboard') }}">Home</a> / Products </span>
+    <span><a href="{{ url_for('admin_dashboard.dashboard') }}">Home</a> / Products </span>
   </div>
 </div>
 <div class="row">
@@ -69,7 +69,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form id="img-update-form" action="{{ url_for('admin_view.update_product_image') }}" method="POST"
+        <form id="img-update-form" action="{{ url_for('admin_product.update_product_image') }}" method="POST"
           enctype="multipart/form-data">
           <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
           <input type="hidden" name="update_type" id="update-type" />
@@ -99,7 +99,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form action="{{ url_for('admin_view.new_product') }}" method="post" id="add-form">
+        <form action="{{ url_for('admin_product.new_product') }}" method="post" id="add-form">
           <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
           <div class="form-group">
             <label for="new-product-name" class="col-form-label">Product name:</label>
@@ -147,7 +147,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form action="{{ url_for('admin_view.edit_product') }}" method="post" id="edit-form">
+        <form action="{{ url_for('admin_product.edit_product') }}" method="post" id="edit-form">
           <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
           <input type="hidden" name="productID" id="edit-productID" value="" />
           <div class="form-group">
@@ -198,7 +198,7 @@
       </div>
       <div class="modal-body">
         <p id="delete-confirm-message"></p>
-        <form action="{{ url_for('admin_view.delete_product') }}" method="post" id="delete-form">
+        <form action="{{ url_for('admin_product.delete_product') }}" method="post" id="delete-form">
           <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
           <input type="hidden" name="product-id" id="delete-product-id">
         </form>
@@ -247,20 +247,22 @@
   // Set the value of the category select
   var categoryID = '{{ category_id }}'
   if (categoryID !== 'None') {
-    $("#categorySelect").val(categoryID);
+    $("#categorySelect").val(categoryID)
   } else {
-    $("#categorySelect").val('0');
+    $("#categorySelect").val('0')
   }
 
   $(function () {
-    // bind change event to select
+    // Bind change event to select
     $('#categorySelect').on('change', function () {
-      var categoryID = $(this).val(); // get selected value
-      if (categoryID) { // require a URL
-        window.location = '{{ url_for('admin_view.product') }}?category_id=' + categoryID; // redirect
+      // Get the selected value
+      var categoryID = $(this).val(); 
+      if (categoryID) {
+        // Redirect
+        window.location = '{{ url_for('admin_product.product') }}?category_id=' + categoryID;
       }
       return false;
-    });
-  });
+    })
+  })
 </script>
 {% endblock %}

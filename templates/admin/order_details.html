@@ -1,0 +1,41 @@
+{% extends "/admin/shared/base.html" %}
+
+{% block title %}Product{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col col-sm-12 col-md-6 offset-md-3" style="margin-top:30px;">
+    <div class="card">
+      <div class="card-header">
+        Order #{{ order['order_id'] }}
+      </div>
+      <div class="card-body">
+        <p>Username: {{ order['first_name'] }}</p>
+        <p class="card-text">Name: {{ order['last_name'] }} ({{ order['username'] }}):</p>
+        <table class="table">
+          {% for purchased_item in order['items'] %}
+          <tr>
+            <td>{{ purchased_item['value'] }}</td>
+            <td class="text-right">×{{ purchased_item['amount'] }}</td>
+          </tr>
+          {% endfor %}
+        </table>
+        <p class="card-text">Total: ${{ order['total'] }}</p>
+        <p class="card-text">Discount: -${{ order['total'] - order['actual_paid'] }}</p>
+        <p class="card-text">Actual Paid: ${{ order['actual_paid'] }}</p>
+        <hr>
+        <div class="text-center">
+          <p>Status: {{ interpreter(order['status']) }}</p>
+        </div>
+        <div class="text-center">
+          <div class="btn-group" role="group" aria-label="Basic example">
+            <button type="button" class="btn btn-primary status-update-btn"
+              onclick="window.history.back()">Back</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

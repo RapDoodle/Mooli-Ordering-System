@@ -12,15 +12,15 @@ def staff_permission_required(permission = ''):
             # No login credential found
             if not session.get('user_id'):
                 flash('Login is required.')
-                return redirect(url_for('admin_view.login'))
+                return redirect(url_for('admin_auth.login'))
             # The user is logged in but not logged in as a saff
             if not session.get('is_staff'):
                 flash('Please login as a staff first.')
-                return redirect(url_for('admin_view.login'))
+                return redirect(url_for('admin_auth.login'))
             # The user is logged in as a staff
             if permission and not authorization_check(session.get('user_id'), permission):
                 flash('You do not have permission for the action.')
-                return redirect(url_for('admin_view.dashboard'))
+                return redirect(url_for('admin_dashboard.dashboard'))
             return fn(*args, **kwargs)
         return wrapper
     return verify_staff_validity

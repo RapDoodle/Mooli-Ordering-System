@@ -234,20 +234,20 @@ def init_db_tables(connection):
         """CREATE INDEX idx_arvchive_value ON archive(value)""",
         """CREATE TABLE IF NOT EXISTS `order`(
             order_id INT AUTO_INCREMENT,
-            user_id INT NOT NULL,
-            total DECIMAL(8, 2),
             actual_paid DECIMAL(8, 2),
-            status VARCHAR(16) DEFAULT 'pending',
+            status ENUM('CANC', 'PEND', 'PROC', 'REDY', 'DONE', 'REDD', 'REFN) DEFAULT 'PEND',
             created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-            PRIMARY KEY (order_id),
-            FOREIGN KEY (user_id) REFERENCES user(user_id),
-            CHECK (status = 'cancelled' OR 
-                   status = 'pending' OR
-                   status = 'processing' OR
-                   status = 'ready for pickup' OR
-                   status = 'done' )
+            PRIMARY KEY (order_id)
             )
         """,
+        """ALTER TABLE `order` AUTO_INCREMENT=10000""",
+        """CREATE TABLE IF NOT EXISTS user_order (
+            order_id INT,
+            user_id INT,
+            FOREIGN KEY (order_id) REFERENCES `order`(order_id)
+                ON DELETE CASCADE,
+            FOREIGN KEY (user_id) REFERENCES `user`(user_id)
+        )""",
         """CREATE TABLE IF NOT EXISTS cart_item (
             cart_item_id INT AUTO_INCREMENT,
             user_id INT NOT NULL,
@@ -260,12 +260,10 @@ def init_db_tables(connection):
             CHECK (amount > 0)
         )""",
         """CREATE TABLE IF NOT EXISTS purchased_item (
-            purchased_item_id INT AUTO_INCREMENT,
             product_name_snapshot INT NOT NULL,
             product_price_snapshot DECIMAL(8, 2) NOT NULL,
             amount INT UNSIGNED NOT NULL,
             order_id INT NOT NULL,
-            PRIMARY KEY (purchased_item_id),
             FOREIGN KEY (product_name_snapshot) REFERENCES archive(archive_index),
             FOREIGN KEY (order_id) REFERENCES `order`(order_id),
             CHECK (amount > 0)
@@ -315,6 +313,14 @@ def init_db_tables(connection):
             END
         """,
         """CREATE TRIGGER before_delete_category
+            BEFORE DELETE
+            ON category FOR EACH ROW
+            BEGIN
+                DELETE FROM product_category WHERE
+                    product_category.category_id = OLD.category_id;
+            END
+        """,
+        """CREATE TRIGGER after_order_cancelled
             BEFORE DELETE
             ON category FOR EACH ROW
             BEGIN
