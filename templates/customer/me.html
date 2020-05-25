@@ -77,11 +77,10 @@
 		</div>
 	</div>
 
-	<div class="row" style="height:50px;">
-		<div>
+	<a href="{{ url_for('customer_view.account') }}"><div class="row" style="height:50px;">
 		<div class="col-1"></div>
 		<div class="col-5 accountInfo" style="text-align: left;color:#652d00;">
-			<a href="{{ url_for('customer_view.account') }}">Account info</a>
+			Account info
 		</div>
 		<div class="col-5 accountInfo" style="text-align: right;">
 			<span class="align-bottom">
@@ -92,11 +91,9 @@
 			</span>
 		</div>
 		<div class="col-1"></div>
-		</div>
-	</div>
+	</div></a>
 
 	<div class="row" style="height:50px;">
-		<div>
 		<div class="col-1"></div>
 		<div class="col-5 accountInfo" style="text-align:left;color:#652d00;">
 			Orders
@@ -110,11 +107,9 @@
 			</span>
 		</div>
 		<div class="col-1"></div>
-		</div>
 	</div>
 
 	<div class="row" style="height:50px;">
-		<div>
 		<div class="col-1"></div>
 		<div class="col-5 accountInfo" style="text-align: left;color:  	#652d00;">
 			About
@@ -128,15 +123,13 @@
 			</span>
 		</div>
 		<div class="col-1"></div>
-		</div>
 	</div>
 
 
-	<div class="row" style="height:50px;">
-		<div>
+	<a href="{{ url_for('customer_view.logout') }}"><div class="row" style="height:50px;">
 		<div class="col-1"></div>
 		<div class="col-5 logout" style="text-align: left;">
-			<a href="{{ url_for('customer_view.logout') }}">Log out</a>
+			Log out
 		</div>
 		<div class="col-5 accountInfo" style="text-align: right;">
 			<span class="align-bottom">
@@ -147,8 +140,7 @@
 			</span>
 		</div>
 		<div class="col-1"></div>
-		</div>
-	</div>
+	</div></a>
 
 </div>
 
