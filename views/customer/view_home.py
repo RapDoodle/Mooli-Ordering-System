@@ -32,7 +32,7 @@ def product(product_id):
     product = c_product.get_product_by_product_id(product_id)
     if isinstance(product, ErrorMessage):
         flash(product.get())
-        return redirect(url_for('.home'))
+        return redirect(url_for('customer_home.home'))
     return render_template('customer/product.html', 
         product = product
     )

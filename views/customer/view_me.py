@@ -90,4 +90,4 @@ def change_avatar():
 @login_required
 def logout():
     session.clear()
-    return redirect(url_for('customer_me.home'))
+    return redirect(url_for('customer_home.home'))
