@@ -1,0 +1,30 @@
+.svg-style {
+    fill: #652d00;
+    stroke: rgba(0, 0, 0, 0);
+    stroke-width: 1.00px;
+    stroke-linecap: butt;
+    /* box-shadow: none; */
+    width: 12.74px;
+    height: 20px;
+}
+
+.right-1 {
+    text-align: right;
+    right: 5px;
+}
+
+.button-label {
+    margin-bottom: 20px;
+    border-radius: 20px;
+}
+
+.pic-cus {
+    border-radius: 20px;
+    width: 40px;
+    height: 40px;
+}
+
+.pic-star {
+    width: 20px;
+    height: 20px;
+}

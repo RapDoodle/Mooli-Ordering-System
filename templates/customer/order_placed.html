@@ -3,35 +3,18 @@
 {% block title %}orderPlaced{% endblock %}
 
 {% block custom_css %}
-<style>
-	.btn:focus,
-	.btn:active:focus,
-	.btn.active:focus,
-	.btn.focus,
-	.btn:active.focus,
-	.btn.active.focus {
-		outline: none;
-		border-color: transparent;
-		box-shadow: none;
-	}
-</style>
+{{ super() }}
+<link rel="stylesheet" href="/static/css/customer/order_placed.css">
 {% endblock %}
 
 {% block content %}
-
-<div class="row row-cols-3" style="height: 30px;">
-</div>
-
-<div class="row row-cols-3" style="height: 25px;">
-	<div class="col-3"></div>
+<div class="row row-cols-3" style="height: 30px;;"></div>
+<div class="row row-cols-3">
+	<div class="col-3" style="padding-left: 30px;">
+	</div>
+	
 	<div class="col-6">
-		<div class="title" style="background-color: rgba(255, 255, 255, 0);
-        color:  	#652d00;
-        text-align: center;
-        -webkit-text-stroke: 1.00px rgba(0, 0, 0, 0);
-        font-size: 20px;
-        font-style: normal;
-        font-family: 'SF Pro Text', Arial;">Completed</div>
+		<div class="title" id="me">Completed</div>
 	</div>
 	<div class="col-3">
 	</div>
@@ -61,13 +44,7 @@
 <div class="row row-cols-3" style="height: 25px;">
 	<div class="col-3"></div>
 	<div class="col-6" style="text-align: center;">
-		<div class="title" style="background-color: rgba(255, 255, 255, 0);
-        color:  	#955a3f;
-        text-align: center;
-        -webkit-text-stroke: 1.00px rgba(0, 0, 0, 0);
-        font-size: 20px;
-        font-style: normal;
-        font-family: 'SF Pro Text', Arial;">Order Placed!</div>
+		<div class="title order">Order Placed!</div>
 	</div>
 	<div class="col-3">
 	</div>
@@ -79,26 +56,9 @@
 
 <div class="row row-cols-3" style="height: 25px;">
 	<div class="col-12">
-		<div style="text-align: center;line-height: 41.96px;
-                    font-size: 14.00px;
-                    font-weight: 400;
-                    font-style: normal;
-                    font-family: 'SF Pro Text', Arial;
-                    ">
+		<div class="text">
 			<form action="{{ url_for('customer_view.home') }}" id="test-form"></form>
-			<input type="submit" form="test-form" class="btn" value="Back To Home" style="background-color: #dfb36a;width: 280px;height: 52px; border-radius: 50px;line-height: 35.00px;
-                    letter-spacing: 1.40px;
-                    color: #955a3f; 
-                    border-top-style: none;
-                    border-top-width: 1.00px;
-                    border-radius: 50.00px;
-                    filter: drop-shadow(0px 3px 20px rgba(0, 0, 0, 0.08235294117647059));
-                    font-size: 15.00px;
-                    font-weight: 1000;
-                    font-style: normal;
-                    font-family: 'SF Pro Text', Arial;
-                    white-space: pre;
-                    height: 50px;">
+			<input type="submit" form="test-form" class="btn button" value="Back To Home">
 		</div>
 	</div>
 </div>
