@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="/static/css/customer/account.css">
 {% endblock %}
 
-{% block frame_back_link %}{{ url_for('customer_view.me') }}{% endblock %}
+{% block frame_back_link %}{{ url_for('customer_me.me') }}{% endblock %}
 {% block frame_title %}Account{% endblock %}
 {% block frame_submit_form %}edit-form{% endblock %}
 {% block frame_next_btn %}Confirm{% endblock %}
@@ -41,7 +41,7 @@
 	<div class="row row-cols-3" style="height:30px;">
 		<div class="col-3"></div>
 		<div class="col-6" style="text-align: center;">
-			<a href="{{ url_for('customer_view.change_avatar') }}" class="btn1 change">Change Avatar</a>
+			<a href="{{ url_for('customer_me.change_avatar') }}" class="btn1 change">Change Avatar</a>
 		</div>
 		<div class="col-3"></div>
 	</div>
@@ -49,12 +49,12 @@
 	<div class="row row-cols-3" style="height:50px;">
 		<div class="col-3"></div>
 		<div class="col-6" style="text-align: center;">
-			<a href="{{ url_for('customer_view.change_password') }}" class="btn1 change">Change Password</a>
+			<a href="{{ url_for('customer_me.change_password') }}" class="btn1 change">Change Password</a>
 		</div>
 		<div class="col-3"></div>
 	</div>
 
-	<form action="{{ url_for('customer_view.account') }}" method="post" id="edit-form">
+	<form action="{{ url_for('customer_me.account') }}" method="post" id="edit-form">
 		<div class="row row-cols-3" style="height: 50px;">
 			<div class="col-4 name">
 				Name

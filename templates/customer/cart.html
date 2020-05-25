@@ -1,13 +1,5 @@
-{% extends "/customer/shared/navbar.html" %}
-
-{% block title %}Cart{% endblock %}
-
-{% block custom_css %}
-{{ super() }}
-<link rel="stylesheet" href="/static/css/customer/cart.css">
-{% endblock %}
-
-{% block content %}
+{% extends "/customer/shared/navbar.html" %} {% block title %}Cart{% endblock %} {% block custom_css %} {{ super() }}
+<link rel="stylesheet" href="/static/css/customer/cart.css"> {% endblock %} {% block content %}
 <div class="row" style="height: 30px;"></div>
 <div class="row" style="height: 50px;">
   <div class="col-3" style="text-align: left;">
@@ -19,27 +11,25 @@
   <div class="col-3"></div>
 
 </div>
-<form action="{{ url_for('customer_view.update_cart_items') }}" id="update-form" method="POST">
+<form action="{{ url_for('customer_cart.update_cart_items') }}" id="update-form" method="POST">
   <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
   {% for cart_item in cart_items %}
   <div class="row" style="text-align: center;">
-    <div class="card single-item-card">
+    <div class="card" style="border-radius: 20px;background-color: rgba(249, 250, 251, 1);filter: drop-shadow(0px 10px 15px rgba(27, 28, 32, 0.10196078431372549));left: 7.5%;border: 0px; width: 85%; margin-bottom: 15px;">
       <div class="card-body cart-item">
         <div class="row" style="height: 50px;">
           <div class="col-5" style="text-align: left;">
-            <div><img src="/static/media/thumbnails/{{ cart_item['product_id'] }}" alt="thumbnail"
-                class="milktea-picture"></div>
+            <div><img src="/static/media/thumbnails/{{ cart_item['product_id'] }}" alt="pic lost" style="width: 100px;height: 75px; filter: drop-shadow(0px 10px 15px rgba(27, 28, 32, 0.050980392156862744));background-size: cover;border-radius: 20px;"></div>
           </div>
           <div class="col-4">
-            <div class="card-text-box">
-              <div class="bubble-milk-tea"><b>{{ cart_item['product_name'] }}</b>
-              </div>
-              <div class="price">${{ cart_item['price'] }}</div>
+            <div class="cardTextBox">
+              <div class="bubbleMilkTea" style="text-align:left;color:#2d4057;"><b>{{ cart_item['product_name'] }}</b></div>
+              <div class="xd5bb8192" class="price" style="margin-top: 8px;;">${{ cart_item['price'] }}</div>
             </div>
           </div>
           <div class="col-3" style="text-align: right;top: -6px;right: -16px;">
             <a class="delete-cart-item-btn" data-item-id={{ cart_item['cart_item_id'] }}>
-              <img src="/static/svg/cross.svg" alt="delete" class="close">
+              <img src="/static/svg/cross.svg" alt="delete" class="path1620">
             </a>
           </div>
         </div>
@@ -47,28 +37,22 @@
           <div class="col-6">
           </div>
           <div class="col-4">
-            <input type="number" id="amount-for-{{ cart_item['cart_item_id'] }}"
-              name="amount-for-{{ cart_item['cart_item_id'] }}" value="{{ cart_item['amount'] }}"
-              class="drink-amount form-control" readonly style="background-color: rgba(249, 250, 251, 1);">
-            <div class="plus-container">
-              <a class="adjust-amount-btn" data-item-id={{ cart_item['cart_item_id'] }}
-                data-price-delta={{ cart_item['price'] }}>
-                <div class="plus-border"></div>
-                <img src="/static/svg/plus.svg" alt="plus" class="plus">
+            <input type="number" id="amount-for-{{ cart_item['cart_item_id'] }}" name="amount-for-{{ cart_item['cart_item_id'] }}" value="{{ cart_item['amount'] }}" class="x2 form-control" readonly style="background-color: rgba(249, 250, 251, 1);;">
+            <div class="group2548">
+              <a class="adjust-amount-btn" data-item-id={{ cart_item['cart_item_id'] }} data-price-delta={{ cart_item['price'] }}>
+                <div class="rectangle689"></div>
+                <img src="/static/svg/plus.svg" alt="plus" class="path1157">
               </a>
             </div>
-            <div class="minus-container">
-              <a class="adjust-amount-btn" data-item-id={{ cart_item['cart_item_id'] }}
-                data-price-delta=-{{ cart_item['price'] }}>
-                <div class="minus-border"></div>
-                <img src="/static/svg/minus.svg" alt="minus" class="minus">
+            <div class="group2547">
+              <a class="adjust-amount-btn" data-item-id={{ cart_item['cart_item_id'] }} data-price-delta=-{{ cart_item['price'] }}>
+                <div class="rectangle688"></div>
+                <img src="/static/svg/minus.svg" alt="minus" class="path1626">
               </a>
             </div>
           </div>
           <div class="col-2" style="left:-20px">
-            <div class="single-total-price">$<span
-                id="subtotal-for-{{ cart_item['cart_item_id'] }}">{{ cart_item['price'] * cart_item['amount'] }}</span>
-            </div>
+            <div class="x414e9323">$<span id="subtotal-for-{{ cart_item['cart_item_id'] }}">{{ cart_item['price'] * cart_item['amount'] }}</span></div>
           </div>
         </div>
       </div>
@@ -77,11 +61,14 @@
   {% endfor %}
 </form>
 
-<div class="card fixed-bottom bottom-card">
+<div class="card fixed-bottom" style="
+background-color: rgba(249, 250, 251, 1);
+filter: drop-shadow(10px 0px 15px rgba(0, 0, 0, 0.10196078431372549));
+height: 333.00px;border: none;border-radius: 20px;">
   <div class="card-body">
     <div class="row" style="height: 20px;"></div>
     <div class="row">
-      <div class="col-5 your-order">
+      <div class="col-5" style="text-align: left;font-style: normal;font-size: 18.00px;font-weight: 700;font-family: Roboto, Arial;padding-left: 30px;color: #351800;">
         Your Orders
       </div>
       <div class="col-7"></div>
@@ -92,7 +79,7 @@
     </div>
     <div class="row">
       <div class="col-8" style="padding-left:30px;font-size: 18.00px;">
-        <div style="color:#652d00;">Bill Total</div>
+        <div style="color:  	#652d00;">Bill Total</div>
       </div>
       <div class="col-4" class="pull-right" style="padding-right:30px;font-size: 18.00px;color: #351800;">
         <div class="float-right">$<span id="bill-total">{{ total }}</span></div>
@@ -106,7 +93,7 @@
     <!-- Grand Total -->
     <div class="row">
       <div class="col-8" style="padding-left:30px;font-size: 18.00px;font-weight: 700;">
-        <div style="color:#652d00;">
+        <div style="color#652d00;">
           Grand Total
         </div>
       </div>
@@ -118,9 +105,29 @@
     <div class="row" style="height: 30px;"></div>
     <div class="row">
       <div class="col-12" style="text-align: center;">
-        <div class="pay-button-container">
-          <form action="{{ url_for('customer_view.checkout_coupon') }}" id="test-form"></form>
-          <input form="test-form" type="submit" class="btn pay-button" name="btn" value="Proceed to Pay">
+        <div style="text-align: center;line-height: 41.96px;
+                    font-size: 14.00px;
+                    font-weight: 400;
+                    font-style: normal;
+                    font-family: 'SF Pro Text', Arial;
+                    ">
+          <form action="{{ url_for('customer_checkout.checkout_coupon') }}" id="test-form"></form>
+          <input form="test-form" type="submit" class="btn" name="btn" value="Proceed to Pay" style="background-color: #dfb36a;width: 280px;height: 52px; border-radius: 50px;line-height: 35.00px;
+                    letter-spacing: 1.40px;
+                    color: #955a3f; 
+                    font-size: 15.00px;
+                    font-weight: 1000;
+                    font-style: normal;
+                    font-family: 'SF Pro Text', Arial;
+                    white-space: pre;
+                    width: 250px;
+                    border-width: 0px;
+                    border-bottom: none;
+                    border-top-style: none;
+                    border-top-width: 1.00px;
+                    border-radius: 50.00px;
+                    filter: drop-shadow(0px 3px 20px rgba(0, 0, 0, 0.08235294117647059));
+                    height: 50px;">
         </div>
       </div>
     </div>
@@ -134,12 +141,12 @@
 </script>
 
 
-{{ super() }}
+{{ super() }} 
 {% endblock %}
 
 {% block custom_js %}
 <script>
-  $('.adjust-amount-btn').click(function () {
+  $('.adjust-amount-btn').click(function() {
     var currentBtn = $(this)
     var amountField = $(`#amount-for-${currentBtn.data('item-id')}`)
     var subTotal = $(`#subtotal-for-${currentBtn.data('item-id')}`)
@@ -159,19 +166,18 @@
     grandTotal.html(newPrice)
   })
 
-  $('.delete-cart-item-btn').click(function () {
+  $('.delete-cart-item-btn').click(function() {
     var currentBtn = $(this)
     var amountField = $(`#amount-for-${currentBtn.data('item-id')}`)
     amountField.val(0)
     $('#update-form').submit()
   })
 
-  $(window).bind('beforeunload', function () {
-    $.ajax('{{ url_for('customer_view.update_cart_items') }}', {
+  $(window).bind('beforeunload', function() {
+    $.ajax('{{ url_for('customer_cart.update_cart_items') }}',{
       type: 'POST',
       data: $('#update-form').serialize()
-    })
-  })
-
+  })})
+  
 </script>
 {% endblock %}
