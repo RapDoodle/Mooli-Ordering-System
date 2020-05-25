@@ -49,5 +49,5 @@ def sign_in():
             return redirect(url_for('.sign_in'))
         else:
             session['user_id'] = user_id
-            return redirect(url_for('.home'))
+            return redirect(url_for('customer_home.home'))
     return render_template('customer/sign_in.html')

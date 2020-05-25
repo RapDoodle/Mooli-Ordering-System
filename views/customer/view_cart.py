@@ -37,7 +37,7 @@ def add_cart_item():
         )
         if isinstance(res, ErrorMessage):
             flash(res.get())
-            return redirect(url_for('.home'))
+            return redirect(url_for('customer_home.home'))
     return redirect(url_for('.cart'))
 
 @cart_view.route('/cart/update', methods=['GET', 'POST'])
