@@ -1,7 +1,7 @@
 from models.DAO import DAO
 from utils.exception import ValidationError
 
-from utils.validation import is_rating, is_valid_length
+from utils.validation import is_valid_length
 
 def get_archive_index(value):
     # Clean input data

@@ -12,7 +12,7 @@
 <div class="row" style="height: 30px;"></div>
 <div class="row" style="height: 50px;">
 	<div class="col-3" style="text-align: left;">
-		<a href="{{ url_for('customer_view.home') }}" class="bcak">
+		<a href="{{ url_for('customer_home.home') }}" class="bcak">
 			<span class="align-middle">
 				<svg viewBox="-0.75 -0.75 12.2412109375 20.2650146484375" class="back-svg">
 					<path
@@ -37,7 +37,7 @@
 
 <div class="row" style="text-align: center;">
 	<div class="col-12" style="text-align: center;">
-		<a href="{{ url_for('customer_view.sign_in') }}">
+		<a href="{{ url_for('customer_auth.sign_in') }}">
 			<div class="btn signin-botton">
 				SIGN IN
 			</div>
@@ -52,7 +52,7 @@
 
 <div class="row" style="text-align: center;">
 	<div class="col-12" style="text-align: center;">
-		<a href="{{ url_for('customer_view.sign_up') }}">
+		<a href="{{ url_for('customer_auth.sign_up') }}">
 			<div class="btn signup-botton">
 				SIGN UP
 			</div>
