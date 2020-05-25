@@ -44,7 +44,30 @@
 		</div>
 	</div>
 
+	<!-- Error Message -->
+	<div class="alert alert-primary" role="alert" style="display: none;" id="flash-box">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for message in messages %}
+        <span class="message">{{ message }}</span>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
 	<div class="row" style="height: 70px;"></div>
+
+	<div class="row" style="height: 30px; ">
+		<div class="col-12" style="text-align: center;top: -19px;">
+			<span class="not-registered">Not registered? </span>
+			<a href="{{ url_for('customer_view.sign_up') }}">
+				<span class="a-signup">Sign up<br></span>
+			</a>
+		</div>
+	</div>
 
 	<div class="row" style="text-align: center;">
 
