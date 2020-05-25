@@ -28,12 +28,12 @@ def place_order(user_id, payment, coupon_code = ''):
         coupon_code = ''
     coupon_code = str(coupon_code).strip()
 
-    # Retrive coupon data
-    coupon = find_coupon_and_check_validity(coupon_code)
-
     # If the user did input a coupon but the coupon is invalid
-    if len(coupon_code) > 0 and coupon is None:
-        raise ValidationError('Invalid coupon code.')
+    coupon = None
+    if len(coupon_code) > 0:
+        coupon = find_coupon_and_check_validity(coupon_code)
+        if coupon is None:
+            raise ValidationError('Invalid coupon code.')
 
     # Check for the existence of user
     if find_user(method = 'id', param = user_id) is None:
