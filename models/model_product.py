@@ -1,7 +1,6 @@
 import utils.validation as validator
 from models.DAO import DAO
 from utils.exception import ValidationError
-from models.shared import get_product_ratings
 import models.FS as fs
 import os
 
@@ -157,9 +156,6 @@ def get_products(method, param = ''):
         sql = """SELECT * FROM product ORDER BY product.priority DESC, product.product_name ASC"""
         cursor.execute(sql)
     result = cursor.fetchall()
-
-    for product in result:
-        product['rating'] = get_product_ratings(product['product_id'])
 
     return result
 

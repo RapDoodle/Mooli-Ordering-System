@@ -7,14 +7,12 @@
 <link rel="stylesheet" href="/static/css/customer/comment.css">
 {% endblock %}
 
-{% block frame_back_link %}{{ url_for('customer_view.home') }}{% endblock %}
+{% block frame_back_link %}{{ url_for('customer_home.home') }}{% endblock %}
 {% block frame_title %}Comments{% endblock %}
 {% block frame_submit_form %}link-form{% endblock %}
 {% block frame_next_btn %}Add{% endblock %}
 
 {% block content %}
-<form method="GET" action="{{ url_for('customer_view.add_comment', product_id = product['product_id']) }}" id="link-form">
-</form>
 <br />
 <div>
     <button type="button" class="btn btn-outline-success btn-sm button-label" value="" name="all"> All </button>
@@ -55,7 +53,7 @@
                 </p>
                 <h6>Aug 26,2020</h6>
                 <div class="overflow-auto" style="height: 100px;">
-                    <p>testing content: abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz</p>
+                    <p>Test content.</p>
                 </div>
             </div>
         </div>

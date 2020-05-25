@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="/static/css/customer/changePic.css">
 {% endblock %}
 
-{% block frame_back_link %}{{ url_for('customer_view.account') }}{% endblock %}
+{% block frame_back_link %}{{ url_for('customer_me.account') }}{% endblock %}
 {% block frame_title %}Account{% endblock %}
 {% block frame_submit_form %}upload-form{% endblock %}
 {% block frame_next_btn %}Confirm{% endblock %}
@@ -43,7 +43,7 @@
 
 	<div class="row row-col-12" style="height: 80px;"></div>
 
-	<form action="{{ url_for('customer_view.change_avatar') }}" method="POST" id="upload-form"
+	<form action="{{ url_for('customer_me.change_avatar') }}" method="POST" id="upload-form"
 		enctype="multipart/form-data">
 		<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
 		<div class="row">

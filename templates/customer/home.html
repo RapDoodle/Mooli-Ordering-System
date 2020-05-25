@@ -9,7 +9,7 @@
         <div class="bg-light border-right" id="sidebar-wrapper">
             <div class="list-group list-group-flush">
                 {% for category in categories %}
-                <a href="{{ url_for('customer_view.home') }}?category_id={{ category['category_id']}}" class="list-group-item list-group-item-action bg-light">{{ category['category_name']}}</a> {% endfor %}
+                <a href="{{ url_for('customer_home.home') }}?category_id={{ category['category_id']}}" class="list-group-item list-group-item-action bg-light">{{ category['category_name']}}</a> {% endfor %}
             </div>
         </div>
     </div>
@@ -17,7 +17,7 @@
     <div class="col col-8 col-sm-8 overflow-auto" style="height: 545px; padding-left: 0px;">
         {% for product in products %}
         <div class="card border-0">
-            <a href="{{ url_for('customer_view.product', product_id = product['product_id']) }}">
+            <a href="{{ url_for('customer_home.product', product_id = product['product_id']) }}">
                 <div class="card-body">
                     <div class="row">
                         <div class="col col-4 col-sm-4" style="padding: 0px;">
