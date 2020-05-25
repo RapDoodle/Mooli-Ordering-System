@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="/static/css/customer/redeem.css">
 {% endblock %}
 
-{% block frame_back_link %}{{ url_for('customer_view.me') }}{% endblock %}
+{% block frame_back_link %}{{ url_for('customer_me.me') }}{% endblock %}
 {% block frame_title %}Redeem{% endblock %}
 {% block frame_submit_form %}redeem-form{% endblock %}
 {% block frame_next_btn %}Confirm{% endblock %}
@@ -40,7 +40,7 @@
 
 	<div class="row" style="height: 20px;">
 	</div>
-	<form action="{{ url_for('customer_view.redeem') }}" method="post" id="redeem-form">
+	<form action="{{ url_for('customer_me.redeem') }}" method="post" id="redeem-form">
 		<div class="row" style="height: 30px;">
 			<div class="col">
 				<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />

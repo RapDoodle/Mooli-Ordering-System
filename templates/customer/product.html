@@ -7,15 +7,16 @@
 <link rel="stylesheet" href="/static/css/customer/product.css">
 {% endblock %}
 
-{% block frame_back_link %}{{ url_for('customer_view.home') }}{% endblock %}
+{% block frame_back_link %}{{ url_for('customer_home.home') }}{% endblock %}
 {% block frame_title %}{% endblock %}
 {% block frame_submit_form %}{% endblock %}
 {% block frame_next_btn %}{% endblock %}
 
 {% block content %}
-<form action="{{ url_for('customer_view.add_cart_item') }}" method="POST" id="product-info-form">
+<form action="{{ url_for('customer_cart.add_cart_item') }}" method="POST" id="product-info-form">
 	<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
 	<input type="hidden" name="product_id" value="{{ product['product_id'] }}">
+</form>
 </form>
 <div class="container">
 	<img src="/static/media/pictures/{{ product['product_id'] }}" class="img img-fluid" alt="Responsive image"
@@ -24,7 +25,6 @@
 <div>
 	<div class="text-center">
 		<h4>{{ product['product_name'] }}</h4>
-		<p><i class="fa fa-star" aria-hidden="true" style="color: rgb(255, 204, 0)"></i> {{ product['rating'] }}</p>
 	</div>
 	<div class="product-des" align="center">
 		{{ product['description'] }}</div>
@@ -37,22 +37,9 @@
 			<li class="nav-item col-2 col-sm-2"></li>
 			<li class="nav-item col-6 col-sm-6 text-right">
 				<button type="submit" class="btn btn-outline-warning btn-lg order-button" name="order"
-					form="product-info-form"><i class="fa fa-comment" aria-hidden="true"></i></button>
-				<button type="submit" class="btn btn-outline-warning btn-lg order-button" name="order"
 					form="product-info-form"><i class="fa fa-shopping-cart" aria-hidden="true"></i></button>
 			</li>
 		</ul>
 	</div>
 </div>
-<div>
-
-</div>
-
-</div>
-
-</div>
-
-<style>
-
-</style>
 {% endblock %}

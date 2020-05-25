@@ -7,13 +7,13 @@
 <link rel="stylesheet" href="/static/css/customer/coupon.css">
 {% endblock %}
 
-{% block frame_back_link %}{{ url_for('customer_view.cart') }}{% endblock %}
+{% block frame_back_link %}{{ url_for('customer_cart.cart') }}{% endblock %}
 {% block frame_title %}Checkout{% endblock %}
 {% block frame_submit_form %}skip-form{% endblock %}
 {% block frame_next_btn %}Skip{% endblock %}
 
 {% block content %}
-<form action="{{ url_for('customer_view.payment') }}" method="POST" id="skip-form">
+<form action="{{ url_for('customer_checkout.payment') }}" method="POST" id="skip-form">
 	<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
 </form>
 <div class="row" style="height: 50px;"></div>
@@ -31,7 +31,7 @@
 <div class="row" style="height: 50px;"></div>
 <div class="row">
 	<div class="col-12">
-		<form action="{{ url_for('customer_view.checkout_coupon') }}" method="POST">
+		<form action="{{ url_for('customer_checkout.checkout_coupon') }}" method="POST">
 			<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
 			<div class="input-group mb-3">
 				<input type="text" class="form-control" name="coupon_code" placeholder="Coupon code" autocomplete="off"

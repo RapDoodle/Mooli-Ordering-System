@@ -11,7 +11,7 @@
 <div class="row" style="height: 30px;"></div>
 <div class="row">
 	<div class="col-4" style="left: 1%;top: 3px;">
-		<div class="Cancel"><a class="a1" href="{{ url_for('customer_view.login_redirect') }}">Cancel</a></div>
+		<div class="Cancel"><a class="a1" href="{{ url_for('customer_auth.login_redirect') }}">Cancel</a></div>
 	</div>
 	<div class="col-4" style="text-align: center;top: -3px;">
 		<div data-layer="a167b8fc-e7e5-4bf1-8b42-4e89eea0e2f6" class="title">Sign Up</div>
@@ -26,13 +26,13 @@
 </div>
 <div class="row" style="height: 60px;"></div>
 
-<form action="{{ url_for('customer_view.sign_up') }}" method="POST">
+<form action="{{ url_for('customer_auth.sign_up') }}" method="POST">
 	<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
 	<div class="row">
 		<div class="col-12" style="text-align: center;">
 			<div style="position:relative; text-align: center;">
 				<input type="text" class="form-control username" name="username" placeholder="Username"
-					aria-label="Username" aria-describedby="basic-addon1">
+					aria-label="Username" aria-describedby="basic-addon1" id="username">
 			</div>
 		</div>
 	</div>
@@ -51,7 +51,7 @@
 		<div class="col-12" style="text-align: center; top: 16px;">
 			<div style="position:relative; text-align: center;">
 				<input type="password" class="form-control password" name="password" placeholder="Password"
-					aria-label="Password" aria-describedby="basic-addon1">
+					aria-label="Password" aria-describedby="basic-addon1" id="password">
 			</div>
 		</div>
 	</div>
@@ -81,4 +81,11 @@
 
 
 {{ super() }}
+{% endblock %}
+
+{% block custom_js %}
+<script type="text/javascript">
+	$('#username').tooltip({'trigger':'focus', 'title': 'The length of a username must be between 6 and 24 characters.'})
+	$('#password').tooltip({'trigger':'focus', 'title': 'The password should be 8-24 characters long, containing upper and lower case letters, and digits.'})
+</script>
 {% endblock %}

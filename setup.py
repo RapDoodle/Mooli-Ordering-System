@@ -283,18 +283,6 @@ def init_db_tables(connection):
             PRIMARY KEY (redeem_code)
         )
         """,
-        """CREATE TABLE IF NOT EXISTS comment (
-            comment_id INT AUTO_INCREMENT,
-            user_id INT,
-            product_id INT,
-            rating INT(1),
-            body VARCHAR(140),
-            created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-            PRIMARY KEY (comment_id),
-            FOREIGN KEY (user_id) REFERENCES user(user_id),
-            FOREIGN KEY (product_id) REFERENCES product(product_id)
-        )
-        """,
         # Triggers
         """CREATE TRIGGER before_delete_role
             BEFORE DELETE
