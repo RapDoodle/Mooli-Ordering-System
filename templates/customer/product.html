@@ -17,6 +17,8 @@
 	<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
 	<input type="hidden" name="product_id" value="{{ product['product_id'] }}">
 </form>
+<form method="GET" action="{{ url_for('customer_view.comment', product_id = product['product_id']) }}" id="link-form">
+</form>
 <div class="container">
 	<img src="/static/media/pictures/{{ product['product_id'] }}" class="img img-fluid" alt="Responsive image"
 		style="width: 100%">
@@ -37,22 +39,11 @@
 			<li class="nav-item col-2 col-sm-2"></li>
 			<li class="nav-item col-6 col-sm-6 text-right">
 				<button type="submit" class="btn btn-outline-warning btn-lg order-button" name="order"
-					form="product-info-form"><i class="fa fa-comment" aria-hidden="true"></i></button>
-				<button type="submit" class="btn btn-outline-warning btn-lg order-button" name="order"
+					form="link-form"><i class="fa fa-comment" aria-hidden="true"></i></button>
+				<button type="button" class="btn btn-outline-warning btn-lg order-button" name="order"
 					form="product-info-form"><i class="fa fa-shopping-cart" aria-hidden="true"></i></button>
 			</li>
 		</ul>
 	</div>
 </div>
-<div>
-
-</div>
-
-</div>
-
-</div>
-
-<style>
-
-</style>
 {% endblock %}
