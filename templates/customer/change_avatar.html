@@ -4,7 +4,7 @@
 
 {% block custom_css %}
 {{ super() }}
-<link rel="stylesheet" href="/static/css/customer/changePic.css">
+<link rel="stylesheet" href="/static/css/customer/change_avatar.css">
 {% endblock %}
 
 {% block frame_back_link %}{{ url_for('customer_me.account') }}{% endblock %}
@@ -20,7 +20,8 @@
 	<div class="row">
 		<div class="col-1"></div>
 		<div class="col-10 old">
-			Change you avatar
+			Please upload an image <br>
+			(file size &#8804 4M)
 		</div>
 		<div class="col-1"></div>
 	</div>

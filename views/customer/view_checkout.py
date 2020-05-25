@@ -32,7 +32,7 @@ def checkout_coupon():
                 return redirect(url_for('.payment'))
             else:
                 flash('You are not eligible for the coupon yet.')
-    return render_template('customer/coupon.html', coupon_code = session.get('coupon_code'))
+    return render_template('customer/coupon.html', coupon_code = str(session.get('coupon_code')))
 
 @checkout_view.route('/checkout/payment', methods=['GET', 'POST'])
 @login_required

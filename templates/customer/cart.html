@@ -1,5 +1,11 @@
-{% extends "/customer/shared/navbar.html" %} {% block title %}Cart{% endblock %} {% block custom_css %} {{ super() }}
-<link rel="stylesheet" href="/static/css/customer/cart.css"> {% endblock %} {% block content %}
+{% extends "/customer/shared/navbar.html" %} 
+{% block title %}Cart{% endblock %} 
+{% block custom_css %} 
+{{ super() }}
+<link rel="stylesheet" href="/static/css/customer/cart.css"> 
+{% endblock %} 
+
+{% block content %}
 <div class="row" style="height: 30px;"></div>
 <div class="row" style="height: 50px;">
   <div class="col-3" style="text-align: left;">
@@ -61,8 +67,7 @@
   {% endfor %}
 </form>
 
-<div class="card fixed-bottom" style="
-background-color: rgba(249, 250, 251, 1);
+<div class="card fixed-bottom" style="background-color: rgba(249, 250, 251, 1);
 filter: drop-shadow(10px 0px 15px rgba(0, 0, 0, 0.10196078431372549));
 height: 333.00px;border: none;border-radius: 20px;">
   <div class="card-body">

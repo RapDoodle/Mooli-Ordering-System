@@ -13,8 +13,8 @@ assert c.update_user_info(10001, 'Ryan', 'Wong', 'F', '911') is None
 assert c.change_password('10001', 'Testpassword12345', 'Testpassword123', 'Testpassword123') is None
 m.verify_credential('RyanLam', 'Testpassword123')
 # When original password is wrong
-assert c.change_password('10001', 'Testpassword12345', 'Testpassword123', 'Testpassword123') == {'error': 'Invalid password'}
+assert c.change_password('10001', 'Testpassword12345', 'Testpassword123', 'Testpassword123').get() == 'Incorrect password'
 # When the new password and verify password don't match
-c.change_password('10001', 'Testpassword123', 'Testpassword1234', 'Testpassword123') == {'error': 'Passwords do not match.'}
+c.change_password('10001', 'Testpassword123', 'Testpassword1234', 'Testpassword123').get() == 'Passwords do not match.'
 
 print(' ✓ User has passed all the tests')

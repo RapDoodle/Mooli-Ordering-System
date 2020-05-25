@@ -144,7 +144,7 @@
     $('#refundModal').on('show.bs.modal', function (event) {
       var button = $(event.relatedTarget)
       var modal = $(this)
-      modal.find('#refund-confirm-message').text('Are you sure to delete order #' + button.data('order-id') + '?')
+      modal.find('#refund-confirm-message').text('Are you sure to refund order #' + button.data('order-id') + '?')
       modal.find('#refund-order-id').val(button.data('order-id'))
     })
   </script>
