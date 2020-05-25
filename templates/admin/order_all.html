@@ -1,0 +1,152 @@
+{% extends "/admin/shared/base.html" %}
+
+{% block title %}Product{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col" id="location">
+    <span><a href="{{ url_for('admin_dashboard.dashboard') }}">Home</a> / Orders </span>
+  </div>
+</div>
+<div class="row">
+  <div class="col-9">
+    Total number of on orders: {{ all_orders_len }}<br><br>
+  </div>
+  <div class="col-3">
+    <select class="form-control" id="scope-type">
+      <option value=0>On going</option>
+      <option value=1 selected>All</option>
+    </select>
+  </div>
+</div>
+
+<table class="table table-bordered table-striped table-hover">
+  <tr>
+    <th>Order ID</th>
+    <th>User</th>
+    <th>Total</th>
+    <th>Actual paid</th>
+    <th>Order time</th>
+    <th>Status</th>
+    <th>Manage</th>
+  </tr>
+  {% for order in orders %}
+  <tr>
+    <td>{{ order['order_id'] }}</td>
+    <td>{{ order['first_name'] }} {{ order['last_name'] }} ({{ order['username'] }})</td>
+    <td>{{ order['total'] }}</td>
+    <td>{{ order['actual_paid'] }}</td>
+    <td>{{ order['created_at'] }}</td>
+    <td>{{ interpreter(order['status'], True) }}</td>
+    <td>
+      <div class="dropdown">
+        <button class="btn btn-light dropdown-toggle" type="button" id="maangeButton" 
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fa fa-gear"></i>
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a href="{{ url_for('admin_order.details', order_id = order['order_id']) }}"
+            class="dropdown-item" >Details</a>
+          <a class="dropdown-item" href="#" data-toggle="modal" data-target="#refundModal"
+          data-order-id="{{ order['order_id'] }}">Refund</a>
+        </div>
+      </div>
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+
+<div class="row">
+  <div class="col-12">
+    <nav aria-label="pagination">
+      <ul class="pagination justify-content-center">
+        {% for page in pages %}
+          {% if page == 'None' %}
+            <li class="page-item disabled">
+              <span class="page-link">
+                ...
+                <span class="sr-only">(current)</span>
+              </span>
+            </li>
+          {% elif page == current_page %}
+            <li class="page-item active">
+              <span class="page-link">
+                {{ page }}
+                <span class="sr-only">(current)</span>
+              </span>
+            </li>
+          {% else %}
+            <li class="page-item"><a class="page-link" href="{{ url_for('admin_order.order') }}?scope_id=1&page={{ page }}">{{ page }}</a></li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    </nav>
+  </div>
+</div>
+
+<form action="{{ url_for('admin_order.update_status') }}" method="POST" id="update-form">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+  <input type="hidden" id="update-form-order-id" name="order_id" />
+  <input type="hidden" id="update-form-status" name="status" />
+</form>
+
+<!-- Modal for refunding orders -->
+<div class="modal fade" id="refundModal" tabindex="-1" role="dialog" aria-labelledby="refundModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="refundOrderModalLabel">Refund the order</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<p id="refund-confirm-message"></p>
+				<form action="{{ url_for('admin_order.refund') }}" method="post" id="refund-form">
+					<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+					<input type="hidden" name="order_id" id="refund-order-id">
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+				<button type="submit" class="btn btn-danger" form="refund-form">Confirm</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock %}
+
+{% block script %}
+
+  <script>
+    $('.status-update-btn').click(function() {
+      var currBtn = $(this)
+      $('#update-form-order-id').val(currBtn.data('order-id'))
+      $('#update-form-status').val(currBtn.data('status-code'))
+      $('#update-form').submit()
+    })
+
+    $(function () {
+      // Bind change event to select
+      $('#scope-type').on('change', function () {
+        // Get selected value
+        var scopeID = $(this).val()
+        if (scopeID) {
+          // Redirect
+          window.location = '{{ url_for('admin_order.order') }}?scope_id=' + scopeID
+        }
+        return false
+      })
+    })
+
+    $('#refundModal').on('show.bs.modal', function (event) {
+      var button = $(event.relatedTarget)
+      var modal = $(this)
+      modal.find('#refund-confirm-message').text('Are you sure to delete order #' + button.data('order-id') + '?')
+      modal.find('#refund-order-id').val(button.data('order-id'))
+    })
+  </script>
+
+  {% endblock %}

@@ -5,7 +5,7 @@
 {% block content %}
 <div class="row">
 	<div class="col" id="location">
-		<span><a href="{{ url_for('admin_view.dashboard') }}">Home</a> / Coupon </span>
+		<span><a href="{{ url_for('admin_dashboard.dashboard') }}">Home</a> / Coupon </span>
 	</div>
 </div>
 <div class="row">
@@ -65,7 +65,7 @@
 				</button>
 			</div>
 			<div class="modal-body">
-				<form action="{{ url_for('admin_view.new_coupon') }}" method="post" id="add-form">
+				<form action="{{ url_for('admin_coupon.new_coupon') }}" method="post" id="add-form">
 					<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
 					<div class="form-group">
 						<label for="new-value" class="col-form-label">Coupon code:</label>
@@ -108,7 +108,7 @@
 				</button>
 			</div>
 			<div class="modal-body">
-				<form action="{{ url_for('admin_view.edit_coupon') }}" method="post" id="edit-form">
+				<form action="{{ url_for('admin_coupon.edit_coupon') }}" method="post" id="edit-form">
 					<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
 					<input type="hidden" class="form-control" id="edit-coupon-code" name="coupon_code">
 					<div class="form-group">
@@ -154,7 +154,7 @@
 			</div>
 			<div class="modal-body">
 				<p id="delete-confirm-message"></p>
-				<form action="{{ url_for('admin_view.delete_coupon') }}" method="post" id="delete-form">
+				<form action="{{ url_for('admin_coupon.delete_coupon') }}" method="post" id="delete-form">
 					<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
 					<input type="hidden" id="delete-coupon-code" name="coupon_code">
 				</form>

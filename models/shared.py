@@ -22,9 +22,9 @@ def find_product(*args, **kwargs):
     from models.model_product import find_product
     return find_product(*args, **kwargs)
 
-def get_items_by_user_id(*args, **kwargs):
-    from models.model_item import get_items_by_user_id
-    return get_items_by_user_id(*args, **kwargs)
+# def get_items_by_user_id(*args, **kwargs):
+#     from models.model_item import get_items_by_user_id
+#     return get_items_by_user_id(*args, **kwargs)
 
 def find_coupon(*args, **kwargs):
     from models.model_coupon import find_coupon

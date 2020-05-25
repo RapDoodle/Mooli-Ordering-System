@@ -5,7 +5,7 @@
 {% block content %}
 <div class="row">
 	<div class="col" id="location">
-		<span><a href="{{ url_for('admin_view.dashboard') }}">Home</a> / Categories </span>
+		<span><a href="{{ url_for('admin_dashboard.dashboard') }}">Home</a> / Categories </span>
 	</div>
 </div>
 <!-- Button trigger modal -->
@@ -54,7 +54,7 @@
 				</button>
 			</div>
 			<div class="modal-body">
-				<form action="{{ url_for('admin_view.new_category') }}" method="post" id="add-form">
+				<form action="{{ url_for('admin_category.new_category') }}" method="post" id="add-form">
 					<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
 					<div class="form-group">
 						<label for="category-name" class="col-form-label">Category name:</label>
@@ -85,7 +85,7 @@
 				</button>
 			</div>
 			<div class="modal-body">
-				<form action="{{ url_for('admin_view.edit_category') }}" method="post" id="edit-form">
+				<form action="{{ url_for('admin_category.edit_category') }}" method="post" id="edit-form">
 					<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
 					<input type="hidden" id="category-id" name="category-id">
 					<div class="form-group">
@@ -119,7 +119,7 @@
 			</div>
 			<div class="modal-body">
 				<p id="delete-confirm-message"></p>
-				<form action="{{ url_for('admin_view.delete_category') }}" method="post" id="delete-form">
+				<form action="{{ url_for('admin_category.delete_category') }}" method="post" id="delete-form">
 					<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
 					<input type="hidden" name="category-id" id="category-id">
 				</form>
