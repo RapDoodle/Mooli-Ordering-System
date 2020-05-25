@@ -32,6 +32,7 @@ def add_staff(username, email, password, role_id, first_name = '', last_name = '
 
 def update_staff(user_id, role_id, first_name = '', last_name = '', gender = '', phone = ''):
     # Call the add staff function
+    print(user_id)
     from models.model_user import update_user_info
     update_user_info(
         user_id = user_id,

@@ -6,14 +6,10 @@
 - MySQL
 - Installed Python3
 
-## Current Progress
+## Given staff acount
 
-- Finished all UI design for customer (Only compatible with iPhone X using Chrome at the stage)
-- A user can add / remove / update categories in the dashboard via http://localhost:8000/admin/dashboard/category (Logged is not required at the stage of development)
-- Controllers and models for category, customer, product
-- All models are functioning in the way that the front-end expects. **(NEW)**
-- Unit testing on the models and controllers mentioned above via `python test.py`
-- Some views for the admin
+username: mooliadmin
+password: Testpassword123
 
 ## Instructions
 

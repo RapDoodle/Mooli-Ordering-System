@@ -51,7 +51,7 @@ def new_staff():
 def edit_staff():
     if request.method == 'POST':
         res = c.update_staff(
-            user_id = request.values.get('role_id'),
+            user_id = request.values.get('user_id'),
             role_id = request.values.get('role_id'),
             first_name = request.values.get('first_name'),
             last_name = request.values.get('last_name'),
