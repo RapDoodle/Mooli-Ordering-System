@@ -100,7 +100,12 @@ def setup():
     with open(CONFIG_PATH, 'w') as profile:
         profile.write(json.dumps(config))
 
-    init_permission_system()
+    try:
+        init_permission_system()
+        init_default_role_permission()
+    except:
+        print('\nAn error ocurred while initializing the permission system.')
+        print('It is likely that the system has already been initialized.')
 
     print('\nWould you like to setup superuser?')
     if y_n_choice('Your choice'):
@@ -128,8 +133,6 @@ def setup():
                     print('ERROR: ' + result['error'])
                 continue
             finish = True
-
-    init_default_role_permission()
 
     print('\nSetup complted.')
 
@@ -235,7 +238,7 @@ def init_db_tables(connection):
         """CREATE TABLE IF NOT EXISTS `order`(
             order_id INT AUTO_INCREMENT,
             actual_paid DECIMAL(8, 2),
-            status ENUM('CANC', 'PEND', 'PROC', 'REDY', 'DONE', 'REDD', 'REFN) DEFAULT 'PEND',
+            status ENUM('CANC', 'PEND', 'PROC', 'REDY', 'DONE', 'REDD', 'REFN') DEFAULT 'PEND',
             created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
             PRIMARY KEY (order_id)
             )
@@ -248,6 +251,7 @@ def init_db_tables(connection):
                 ON DELETE CASCADE,
             FOREIGN KEY (user_id) REFERENCES `user`(user_id)
         )""",
+        """CREATE INDEX idx_user_order ON user_order(order_id, user_id)""",
         """CREATE TABLE IF NOT EXISTS cart_item (
             cart_item_id INT AUTO_INCREMENT,
             user_id INT NOT NULL,
@@ -259,6 +263,7 @@ def init_db_tables(connection):
             FOREIGN KEY (product_id) REFERENCES product(product_id),
             CHECK (amount > 0)
         )""",
+        """CREATE INDEX idx_user_cart ON user_order(user_id)""",
         """CREATE TABLE IF NOT EXISTS purchased_item (
             product_name_snapshot INT NOT NULL,
             product_price_snapshot DECIMAL(8, 2) NOT NULL,
@@ -268,13 +273,15 @@ def init_db_tables(connection):
             FOREIGN KEY (order_id) REFERENCES `order`(order_id),
             CHECK (amount > 0)
         )""",
+        """CREATE INDEX idx_purchased_item ON user_order(order_id)""",
         """CREATE TABLE IF NOT EXISTS coupon (
             coupon_code VARCHAR(32),
             value DECIMAL(8, 2) NOT NULL,
             threshold DECIMAL(8, 2) NOT NULL,
             activate_date DATETIME DEFAULT CURRENT_TIMESTAMP,
             expire_date DATETIME,
-            PRIMARY KEY (coupon_code)
+            PRIMARY KEY (coupon_code),
+            CHECK (value <= threshold)
         )
         """,
         """CREATE TABLE IF NOT EXISTS redeem_card (
@@ -328,7 +335,7 @@ def init_permission_system():
     # For the initialization of database
     import utils.config_manager
     from models.model_role import add_permission
-    permissions = ['orders', 'products', 'categories', 'coupons', 'redeem_cards', 'staff', 'roles']
+    permissions = ['orders', 'products', 'categories', 'coupons', 'redeem_cards', 'staff']
     for permission in permissions:
         add_permission(permission)
     
@@ -336,17 +343,16 @@ def init_permission_system():
 def create_superuser(username, email, password):
     # For the initialization of database
     import utils.config_manager
-    from controllers.controller_role import add_role
-    role_id = add_role('Superadmin', [])
     from controllers.controller_staff import add_staff
-    return add_staff(username = username, email = email, password = password, role_id = role_id)
+    return add_staff(username = username, email = email, password = password, role_id = 1)
 
 def init_default_role_permission():
     import utils.config_manager
     from models.model_role import add_role
     role_permissions = [
+        {'role_name': 'Superadmin', 'permissions': [1, 2, 3, 4, 5, 6]},
         {'role_name': 'Product Manager', 'permissions': [2, 3]},
-        {'role_name': 'Financial Manager', 'permissions': [4]},
+        {'role_name': 'Financial Manager', 'permissions': [4, 5]},
         {'role_name': 'Shop Manager', 'permissions': [1, 2, 3, 4, 5]},
         {'role_name': 'Cook', 'permissions': [1]}
     ]

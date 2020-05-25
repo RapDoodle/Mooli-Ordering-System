@@ -317,7 +317,7 @@
     box-shadow: none;
 }
 
-.mainBodyPart {
+.main-body-part {
     margin-bottom: 348px;
 }
 
@@ -325,6 +325,3 @@ input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
 }
-
-input[type="number"] {
-    -moz-a

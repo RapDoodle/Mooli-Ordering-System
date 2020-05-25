@@ -14,7 +14,10 @@ def add_coupon(coupon_code, value, threshold, activate_date = None, expire_date 
         raise ValidationError('Invalid value.')
     if not is_money(threshold):
         raise ValidationError('Invalid threshold.')
-    # TO-DO: Check for the validaty of time
+    
+    # Check if the threshold is less than the value the coupon can deduct
+    if float(value) > float(threshold):
+        raise ValidationError('The value should be greater than the threshold.')
 
     # Check the existence of the coupon
     if find_coupon(coupon_code) is not None:
@@ -55,7 +58,10 @@ def update_coupon(coupon_code, value, threshold, activate_date = None, expire_da
         raise ValidationError('Invalid value.')
     if not is_money(threshold):
         raise ValidationError('Invalid threshold.')
-    # TO-DO: Check for the validaty of time
+    
+    # Check if the threshold is less than the value the coupon can deduct
+    if float(value) > float(threshold):
+        raise ValidationError('The value should be greater than the threshold.')
 
     # Check the existence of the coupon
     if find_coupon(coupon_code) is None:
@@ -138,14 +144,16 @@ def find_coupon_and_check_validity(coupon_code):
     cursor.execute(sql, {'coupon_code': coupon_code})
     coupon = cursor.fetchone()
 
-    if coupon is not None:
-        # Check if the coupon is active or has expired
-        current_time = dt.datetime.now()
-        activate_date = coupon['activate_date'] if coupon['activate_date'] is not None else dt.datetime(1970, 1, 1)
-        expire_date = coupon['expire_date'] if coupon['expire_date'] is not None else dt.datetime(9999, 12, 31)
-        if (current_time - activate_date).total_seconds() < 0:
-            raise ValidationError('The coupon is not activate yet.')
-        elif (expire_date - current_time).total_seconds() < 0:
-            raise ValidationError('The coupon has expired.')
+    if coupon is None:
+        raise ValidationError('The coupon does not exists.')
+
+    # Check if the coupon is active or has expired
+    current_time = dt.datetime.now()
+    activate_date = coupon['activate_date'] if coupon['activate_date'] is not None else dt.datetime(1970, 1, 1)
+    expire_date = coupon['expire_date'] if coupon['expire_date'] is not None else dt.datetime(9999, 12, 31)
+    if (current_time - activate_date).total_seconds() < 0:
+        raise ValidationError('The coupon is not activate yet.')
+    elif (expire_date - current_time).total_seconds() < 0:
+        raise ValidationError('The coupon has expired.')
 
     return coupon

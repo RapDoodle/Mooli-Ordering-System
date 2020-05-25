@@ -1,2 +1,0 @@
-1. A product can belong to multiple categories.
-2. Staff could also be users

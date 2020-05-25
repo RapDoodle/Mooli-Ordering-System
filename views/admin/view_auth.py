@@ -26,6 +26,10 @@ def login():
             flash(res.get())
     return render_template('/admin/login.html')
 
+@admin_auth.route('/admin/', methods=['GET', 'POST'])
+def login_empty():
+    return redirect(url_for('admin_auth.login'))
+
 @admin_auth.route('/admin/logout', methods=['GET'])
 @staff_permission_required()
 def logout():
