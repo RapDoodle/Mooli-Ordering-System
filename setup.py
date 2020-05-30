@@ -177,7 +177,8 @@ def init_db_tables(connection):
             balance DECIMAL(8,2) DEFAULT 0.0,
             avatar MEDIUMBLOB,
             PRIMARY KEY (user_id),
-            UNIQUE (username)
+            UNIQUE (username),
+            UNIQUE (email)
             )
         """,
         """ALTER TABLE user AUTO_INCREMENT=10000""",
@@ -238,7 +239,7 @@ def init_db_tables(connection):
         """CREATE TABLE IF NOT EXISTS `order`(
             order_id INT AUTO_INCREMENT,
             actual_paid DECIMAL(8, 2),
-            status ENUM('CANC', 'PEND', 'PROC', 'REDY', 'DONE', 'REDD', 'REFN') DEFAULT 'PEND',
+            status ENUM('CANC', 'PEND', 'PROC', 'REDY', 'DONE', 'REFN') DEFAULT 'PEND',
             created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
             PRIMARY KEY (order_id)
             )
