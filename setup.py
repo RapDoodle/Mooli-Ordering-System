@@ -178,7 +178,8 @@ def init_db_tables(connection):
             avatar MEDIUMBLOB,
             PRIMARY KEY (user_id),
             UNIQUE (username),
-            UNIQUE (email)
+            UNIQUE (email),
+            UNIQUE (phone)
             )
         """,
         """ALTER TABLE user AUTO_INCREMENT=10000""",
