@@ -4,6 +4,9 @@ security/
 log/
 config.json
 
+# Editor specific
+.vscode/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
