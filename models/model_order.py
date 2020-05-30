@@ -320,7 +320,7 @@ def get_orders(scope, limit = 0, offset = 0):
                 FROM `order`, user_order, user WHERE
                     `order`.order_id = user_order.order_id AND
                     user_order.user_id = user.user_id
-                ORDER BY `order`.created_at DESC"""
+                ORDER BY `order`.created_at DESC, order_id DESC"""
         if not int(limit) == 0:
             sql += ' LIMIT ' + limit + ' OFFSET ' + offset
     cursor.execute(sql)
