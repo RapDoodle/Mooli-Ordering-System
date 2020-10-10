@@ -1,5 +1,5 @@
 # Mooli Ordering System
-![](./documents/assets/logo_horizontal_2.png =250x)
+![](./documents/assets/logo_horizontal_2.png | width=250)
 
 ## System Requirements
 
@@ -8,14 +8,14 @@
 - Installed Python3
 
 ## Screenshots
-![](./documents/screenshots/01.png =250x)
-![](./documents/screenshots/02.png =250x)
-![](./documents/screenshots/03.png =250x)
-![](./documents/screenshots/04.png =250x)
-![](./documents/screenshots/05.png =250x)
-![](./documents/screenshots/06.png =250x)
-![](./documents/screenshots/07.png =250x)
-![](./documents/screenshots/08.png =250x)
+![](./documents/screenshots/01.png | width=250)
+![](./documents/screenshots/02.png | width=250)
+![](./documents/screenshots/03.png | width=250)
+![](./documents/screenshots/04.png | width=250)
+![](./documents/screenshots/05.png | width=250)
+![](./documents/screenshots/06.png | width=250)
+![](./documents/screenshots/07.png | width=250)
+![](./documents/screenshots/08.png | width=250)
 
 ## Instructions
 
