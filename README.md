@@ -1,4 +1,5 @@
-# Mooli Milk Tea Management System
+# Mooli Ordering System
+![](./documents/assets/logo_horizontal_2.png =250x)
 
 ## System Requirements
 
@@ -6,10 +7,15 @@
 - MySQL
 - Installed Python3
 
-## Given staff acount
-
-username: mooliadmin
-password: Testpassword123
+## Screenshots
+![](./documents/screenshots/01.png =250x)
+![](./documents/screenshots/02.png =250x)
+![](./documents/screenshots/03.png =250x)
+![](./documents/screenshots/04.png =250x)
+![](./documents/screenshots/05.png =250x)
+![](./documents/screenshots/06.png =250x)
+![](./documents/screenshots/07.png =250x)
+![](./documents/screenshots/08.png =250x)
 
 ## Instructions
 
