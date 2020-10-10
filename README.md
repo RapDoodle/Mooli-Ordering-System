@@ -1,5 +1,5 @@
 # Mooli Ordering System
-![](./documents/assets/logo_horizontal_2.png | width=250)
+![](https://github.com/RapDoodle/mooli-ordering-system/tree/master/documents/assets/logo_horizontal_2.png | width=250)
 
 ## System Requirements
 
@@ -8,14 +8,14 @@
 - Installed Python3
 
 ## Screenshots
-![](./documents/screenshots/01.png | width=250)
-![](./documents/screenshots/02.png | width=250)
-![](./documents/screenshots/03.png | width=250)
-![](./documents/screenshots/04.png | width=250)
-![](./documents/screenshots/05.png | width=250)
-![](./documents/screenshots/06.png | width=250)
-![](./documents/screenshots/07.png | width=250)
-![](./documents/screenshots/08.png | width=250)
+![](https://github.com/RapDoodle/mooli-ordering-system/tree/master/documents/screenshots/01.png | width=250)
+![](https://github.com/RapDoodle/mooli-ordering-system/tree/master/documents/screenshots/02.png | width=250)
+![](https://github.com/RapDoodle/mooli-ordering-system/tree/master/documents/screenshots/03.png | width=250)
+![](https://github.com/RapDoodle/mooli-ordering-system/tree/master/documents/screenshots/04.png | width=250)
+![](https://github.com/RapDoodle/mooli-ordering-system/tree/master/documents/screenshots/05.png | width=250)
+![](https://github.com/RapDoodle/mooli-ordering-system/tree/master/documents/screenshots/06.png | width=250)
+![](https://github.com/RapDoodle/mooli-ordering-system/tree/master/documents/screenshots/07.png | width=250)
+![](https://github.com/RapDoodle/mooli-ordering-system/tree/master/documents/screenshots/08.png | width=250)
 
 ## Instructions
 
