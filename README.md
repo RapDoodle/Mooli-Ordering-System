@@ -8,16 +8,16 @@
 - Installed Python3
 
 ## Screenshots
-<img src="https://raw.githubusercontent.com/RapDoodle/mooli-ordering-system/master/documents/screenshots/01.png" height="200"/><img src="https://raw.githubusercontent.com/RapDoodle/mooli-ordering-system/master/documents/screenshots/02.png" height="200"/><img src="https://raw.githubusercontent.com/RapDoodle/mooli-ordering-system/master/documents/screenshots/03.png" height="200"/><br>
-<img src="https://raw.githubusercontent.com/RapDoodle/mooli-ordering-system/master/documents/screenshots/04.png" height="200"/>
+<img src="https://raw.githubusercontent.com/RapDoodle/mooli-ordering-system/master/documents/screenshots/01.png" height="350"/><img src="https://raw.githubusercontent.com/RapDoodle/mooli-ordering-system/master/documents/screenshots/02.png" height="350"/><img src="https://raw.githubusercontent.com/RapDoodle/mooli-ordering-system/master/documents/screenshots/03.png" height="350"/><br>
+<img src="https://raw.githubusercontent.com/RapDoodle/mooli-ordering-system/master/documents/screenshots/04.png" height="300"/>
 <br>
-<img src="https://raw.githubusercontent.com/RapDoodle/mooli-ordering-system/master/documents/screenshots/05.png" height="200"/>
+<img src="https://raw.githubusercontent.com/RapDoodle/mooli-ordering-system/master/documents/screenshots/05.png" height="300"/>
 <br>
-<img src="https://raw.githubusercontent.com/RapDoodle/mooli-ordering-system/master/documents/screenshots/06.png" height="200"/>
+<img src="https://raw.githubusercontent.com/RapDoodle/mooli-ordering-system/master/documents/screenshots/06.png" height="300"/>
 <br>
-<img src="https://raw.githubusercontent.com/RapDoodle/mooli-ordering-system/master/documents/screenshots/07.png" height="200"/>
+<img src="https://raw.githubusercontent.com/RapDoodle/mooli-ordering-system/master/documents/screenshots/07.png" height="300"/>
 <br>
-<img src="https://raw.githubusercontent.com/RapDoodle/mooli-ordering-system/master/documents/screenshots/08.png" height="200"/>
+<img src="https://raw.githubusercontent.com/RapDoodle/mooli-ordering-system/master/documents/screenshots/08.png" height="300"/>
 
 ## Instructions
 
